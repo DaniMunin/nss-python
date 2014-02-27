@@ -44,7 +44,7 @@ RETARDO_ANIMACION_SNIPER = 1 / VELOCIDAD_SNIPER
 #  Si se especifica -1, el color de transparencia sera el del pixel (0,0)
 #  Si se especifica un color, ese sera la transparencia
 def load_image(name, colorkey=None):
-    fullname = os.path.join('imagenes', name)
+    fullname = os.path.join('', name)
     try:
         image = pygame.image.load(fullname)
     except pygame.error, message:

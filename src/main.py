@@ -3,7 +3,7 @@
 import director
 import fase
 from director import *
-from fase import *
+from intro import *
 from EscenaMenu import *
 from animacion import *
 
@@ -34,23 +34,23 @@ class AplicacionJuego():
 
            
             # Creamos la escena con la animacion antes de jugar
-            escena = EscenaAnimacion(self.director)
+            #escena = EscenaAnimacion(self.director)
             # Le decimos al director en que escena estamos
-            self.director.cambiarEscena(escena)
+            #self.director.cambiarEscena(escena)
             # Y ejecutamos el bucle
-            salir_programa = self.director.ejecutar()
-            if (salir_programa):
+            #salir_programa = self.director.ejecutar()
+            #if (salir_programa):
                 # Si ademas de salir de la escena, se quiere salir del programa, se finaliza
-                sys.exit()
+             #   sys.exit()
             
             # En este punto, hay que iniciar el juego en sí
        
             # Creamos los jugadores
-            jugador1 = Jugador()
-            jugador2 = Jugador()
+            #jugador1 = Jugador()
+            #jugador2 = Jugador()
 
             # Creamos la escena con la fase
-            escena = Fase(self.director, jugador1, jugador2)
+            escena = Intro(self.director)
             # Le decimos al director en que escena estamos
             self.director.cambiarEscena(escena)
             # Y ejecutamos el bucle
