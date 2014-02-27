@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Importar modulos
 import director
 import fase

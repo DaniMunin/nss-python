@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-
+#wehe
 # Modulos
 import pygame, pyglet
 import sys
