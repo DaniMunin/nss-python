@@ -45,7 +45,7 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
         pyglet.window.Window.__init__(self, ANCHO_PANTALLA, ALTO_PANTALLA)
 
         # La imagen de fondo
-        self.imagen = pyglet.image.load('imagenes/campo.jpg')
+        self.imagen = pyglet.image.load('../res/maps/mapa.png')
         self.imagen = pyglet.sprite.Sprite(self.imagen)
         self.imagen.scale = float(ANCHO_PANTALLA) / self.imagen.width
 
@@ -62,63 +62,75 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
 
 
         # La animacion del tanque la creamos a partir de un gif animado
-        self.tanque = pyglet.sprite.Sprite(pyglet.resource.animation('imagenes/tanque.gif'), batch=self.batch, group=self.grupoMedio)
-        # Esta si que se crea porque estara desde el principio
-        self.tanque.scale = 1.2
-        self.tanque.rotation = -4
-        self.tanque.set_position(0,80)
+#         self.tanque = pyglet.sprite.Sprite(pyglet.resource.animation('/res/d.gif'), batch=self.batch, group=self.grupoMedio)
+#         # Esta si que se crea porque estara desde el principio
+#         self.tanque.scale = 1.2
+#         self.tanque.rotation = -4
+#         self.tanque.set_position(0,80)
 
 
         # La animacion del humo
-        self.animacionHumoFrames = [
-            pyglet.image.AnimationFrame(pyglet.image.load('imagenes/smoke_puff_0001.png'), 0.1),
-            pyglet.image.AnimationFrame(pyglet.image.load('imagenes/smoke_puff_0002.png'), 0.1),
-            pyglet.image.AnimationFrame(pyglet.image.load('imagenes/smoke_puff_0003.png'), 0.1),
-            pyglet.image.AnimationFrame(pyglet.image.load('imagenes/smoke_puff_0004.png'), 0.1),
-            pyglet.image.AnimationFrame(pyglet.image.load('imagenes/smoke_puff_0005.png'), 0.1),
-            pyglet.image.AnimationFrame(pyglet.image.load('imagenes/smoke_puff_0006.png'), 0.1),
-            pyglet.image.AnimationFrame(pyglet.image.load('imagenes/smoke_puff_0007.png'), 0.1),
-            pyglet.image.AnimationFrame(pyglet.image.load('imagenes/smoke_puff_0008.png'), 0.1),
-            pyglet.image.AnimationFrame(pyglet.image.load('imagenes/smoke_puff_0009.png'), 0.1),
-            pyglet.image.AnimationFrame(pyglet.image.load('imagenes/smoke_puff_0010.png'), None),
-            ]
+        #=======================================================================
+        # self.animacionHumoFrames = [
+        #     pyglet.image.AnimationFrame(pyglet.image.load('imagenes/smoke_puff_0001.png'), 0.1),
+        #     pyglet.image.AnimationFrame(pyglet.image.load('imagenes/smoke_puff_0002.png'), 0.1),
+        #     pyglet.image.AnimationFrame(pyglet.image.load('imagenes/smoke_puff_0003.png'), 0.1),
+        #     pyglet.image.AnimationFrame(pyglet.image.load('imagenes/smoke_puff_0004.png'), 0.1),
+        #     pyglet.image.AnimationFrame(pyglet.image.load('imagenes/smoke_puff_0005.png'), 0.1),
+        #     pyglet.image.AnimationFrame(pyglet.image.load('imagenes/smoke_puff_0006.png'), 0.1),
+        #     pyglet.image.AnimationFrame(pyglet.image.load('imagenes/smoke_puff_0007.png'), 0.1),
+        #     pyglet.image.AnimationFrame(pyglet.image.load('imagenes/smoke_puff_0008.png'), 0.1),
+        #     pyglet.image.AnimationFrame(pyglet.image.load('imagenes/smoke_puff_0009.png'), 0.1),
+        #     pyglet.image.AnimationFrame(pyglet.image.load('imagenes/smoke_puff_0010.png'), None),
+        #     ]
+        #=======================================================================
         # El ultimo frame se pone con una duracion de None, porque el humo no se reproduce en bucle,
         #  sino solo una vez
         # Por ahora no creamos la animacion, porque se empezaria a reproducir,
         #  solo cargamos los frames de disco
         # Esta animacion aparecera en el segundo determinado
-        pyglet.clock.schedule_once(self.aparecerHumo, 3.5)
+        #=======================================================================
+        # pyglet.clock.schedule_once(self.aparecerHumo, 3.5)
+        #=======================================================================
 
 
         # La animacion de la explosion
-        self.animacionExplosionFrames = crearFramesAnimacion('imagenes/fuego.png', 9, 5)
-        self.animacionExplosion = None
+        #=======================================================================
+        # self.animacionExplosionFrames = crearFramesAnimacion('imagenes/fuego.png', 9, 5)
+        # self.animacionExplosion = None
+        #=======================================================================
         # Esta animacion aparecera en el segundo determinado
-        pyglet.clock.schedule_once(self.aparecerExplosion, 4)
+        #=======================================================================
+        # pyglet.clock.schedule_once(self.aparecerExplosion, 4)
+        #=======================================================================
         # Esta animacion la tenemos que guardar como variable porque hay que mover su posicion
 
 
         # La animacion del fuego: creamos los frames
-        self.animacionFuegoFrames = [
-            pyglet.image.AnimationFrame(pyglet.image.load('imagenes/flame_a_0001.png'), 0.1),
-            pyglet.image.AnimationFrame(pyglet.image.load('imagenes/flame_a_0002.png'), 0.1),
-            pyglet.image.AnimationFrame(pyglet.image.load('imagenes/flame_a_0003.png'), 0.1),
-            pyglet.image.AnimationFrame(pyglet.image.load('imagenes/flame_a_0004.png'), 0.1),
-            pyglet.image.AnimationFrame(pyglet.image.load('imagenes/flame_a_0005.png'), 0.1),
-            pyglet.image.AnimationFrame(pyglet.image.load('imagenes/flame_a_0006.png'), 0.1) ]
+        #=======================================================================
+        # self.animacionFuegoFrames = [
+        #     pyglet.image.AnimationFrame(pyglet.image.load('imagenes/flame_a_0001.png'), 0.1),
+        #     pyglet.image.AnimationFrame(pyglet.image.load('imagenes/flame_a_0002.png'), 0.1),
+        #     pyglet.image.AnimationFrame(pyglet.image.load('imagenes/flame_a_0003.png'), 0.1),
+        #     pyglet.image.AnimationFrame(pyglet.image.load('imagenes/flame_a_0004.png'), 0.1),
+        #     pyglet.image.AnimationFrame(pyglet.image.load('imagenes/flame_a_0005.png'), 0.1),
+        #     pyglet.image.AnimationFrame(pyglet.image.load('imagenes/flame_a_0006.png'), 0.1) ]
+        #=======================================================================
         # Esta animacion aparecera cuando termine la del fuego, asi que se programa su aparicion
         #  cuando empiece esa
 
 
         # Registramos que aparezcan animaciones de humo por pantalla cada 0.8 segundos
         #  para dar la impresion de un bombardeo
-        pyglet.clock.schedule_interval(self.aparecerHumoCielo, 0.4)
+        #=======================================================================
+        # pyglet.clock.schedule_interval(self.aparecerHumoCielo, 0.4)
+        #=======================================================================
 
 
         # La animacion del corredor: hay que leerlo de la hoja de Sprite
 
         # Leemos la hoja del Sprite del fichero
-        hoja = pyglet.image.load('imagenes/Jugador.png')
+        hoja = pyglet.image.load('../res/Sprites/bolio.png')
 
         # Introducimos manualmente el valor del canal alpha:
         #  Aquellos pixels cuyo RGB sea igual al pixel de la posicion (0, 0) no se veran
@@ -138,8 +150,8 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
         hoja.set_data('RGBA', pitch, "".join(pixels))
 
         # Leemos las coordenadas de un archivo de texto
-        numImagenes = [6, 12, 6]
-        pfile=open('imagenes/coordJugador.txt','r')
+        numImagenes = [6, 6, 6, 6]
+        pfile=open('../res/coordJugador.txt','r')
         datos=pfile.read()
         pfile.close()
         datos = datos.split()
@@ -153,7 +165,7 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
         # Se podria, igual que las anteriores, no haberla creado, sino haberlo hecho
         #  cuando fuese necesario que apareciera, pero en este caso se crea aqui y se
         #  pone como invisible hasta cuandos ea necesario que aparezca
-        self.animacionCorredor.visible = False
+        self.animacionCorredor.visible = True
 
 
 
@@ -164,43 +176,51 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
         animacion.delete()
 
     # Metodo que hace aparecer una animacion de humo en el cielo
-    def aparecerHumoCielo(self, tiempo):
-        animacionHumo = pyglet.sprite.Sprite(pyglet.image.Animation(self.animacionHumoFrames), batch=self.batch, group=self.grupoDetras)
-        # La escalamos un factor aleatorio para dar sensacion de profundidad
-        animacionHumo.scale = random.uniform(0.2, 1)
-        # Decimos que aparezca en un sitio aleatorio del cielo
-        animacionHumo.set_position(random.uniform(0, ANCHO_PANTALLA), random.uniform(ALTO_PANTALLA/4, ALTO_PANTALLA))
-        # Programamos que se elimine la animacion cuando termine
-        pyglet.clock.schedule_once(self.eliminarAnimacion, animacionHumo.image.get_duration(), animacionHumo)
+#     def aparecerHumoCielo(self, tiempo):
+        #=======================================================================
+        # animacionHumo = pyglet.sprite.Sprite(pyglet.image.Animation(self.animacionHumoFrames), batch=self.batch, group=self.grupoDetras)
+        # # La escalamos un factor aleatorio para dar sensacion de profundidad
+        # animacionHumo.scale = random.uniform(0.2, 1)
+        # # Decimos que aparezca en un sitio aleatorio del cielo
+        # animacionHumo.set_position(random.uniform(0, ANCHO_PANTALLA), random.uniform(ALTO_PANTALLA/4, ALTO_PANTALLA))
+        # # Programamos que se elimine la animacion cuando termine
+        # pyglet.clock.schedule_once(self.eliminarAnimacion, animacionHumo.image.get_duration(), animacionHumo)
+        #=======================================================================
 
     # Metodo para hacer aparecer la animacion del humo en el tanque
-    def aparecerHumo(self, tiempo):
-        animacionHumo = pyglet.sprite.Sprite(pyglet.image.Animation(self.animacionHumoFrames), batch=self.batch, group=self.grupoDelante)
-        animacionHumo.scale = 1.2
-        animacionHumo.set_position(self.tanque.x, self.tanque.y)
-        # Programamos que se elimine la animacion cuando termine
-        pyglet.clock.schedule_once(self.eliminarAnimacion, animacionHumo.image.get_duration(), animacionHumo)
+#     def aparecerHumo(self, tiempo):
+        #=======================================================================
+        # animacionHumo = pyglet.sprite.Sprite(pyglet.image.Animation(self.animacionHumoFrames), batch=self.batch, group=self.grupoDelante)
+        # animacionHumo.scale = 1.2
+        # animacionHumo.set_position(self.tanque.x, self.tanque.y)
+        # # Programamos que se elimine la animacion cuando termine
+        # pyglet.clock.schedule_once(self.eliminarAnimacion, animacionHumo.image.get_duration(), animacionHumo)
+        #=======================================================================
 
     # Metodo para hacer aparecer la animacion de la explosion en el tanque
-    def aparecerExplosion(self, tiempo):
+#     def aparecerExplosion(self, tiempo):
         # Creamos la animacion de la explosion
-        self.animacionExplosion = pyglet.sprite.Sprite(pyglet.image.Animation(self.animacionExplosionFrames), batch=self.batch, group=self.grupoDelante)
-        self.animacionExplosion.scale = 1
-        self.animacionExplosion.set_position(self.tanque.x-10, self.tanque.y-15)
-        # Programamos para que aparezca el fuego cuando esta termine
-        pyglet.clock.schedule_once(self.aparecerFuegoYCorredor, self.animacionExplosion.image.get_duration())
+        #=======================================================================
+        # self.animacionExplosion = pyglet.sprite.Sprite(pyglet.image.Animation(self.animacionExplosionFrames), batch=self.batch, group=self.grupoDelante)
+        # self.animacionExplosion.scale = 1
+        # self.animacionExplosion.set_position(self.tanque.x-10, self.tanque.y-15)
+        # # Programamos para que aparezca el fuego cuando esta termine
+        # pyglet.clock.schedule_once(self.aparecerFuegoYCorredor, self.animacionExplosion.image.get_duration())
+        #=======================================================================
 
     # Metodo para hacer aparecer la animacion del fuego y del corredor
-    def aparecerFuegoYCorredor(self, tiempo):
+#     def aparecerFuegoYCorredor(self, tiempo):
         # Creamos la animacion del fuego
-        animacionFuego = pyglet.sprite.Sprite(pyglet.image.Animation( self.animacionFuegoFrames ), batch=self.batch, group=self.grupoDelante)
-        animacionFuego.scale = 2
-        animacionFuego.set_position(self.tanque.x-50, self.tanque.y-20)
-        # Eliminamos la variable de la animacion de la explosion
-        self.animacionExplosion.delete()
-        self.animacionExplosion = None
-        # Y decimos que el corredor ya es visible
-        self.animacionCorredor.visible = True
+        #=======================================================================
+        # animacionFuego = pyglet.sprite.Sprite(pyglet.image.Animation( self.animacionFuegoFrames ), batch=self.batch, group=self.grupoDelante)
+        # animacionFuego.scale = 2
+        # animacionFuego.set_position(self.tanque.x-50, self.tanque.y-20)
+        # # Eliminamos la variable de la animacion de la explosion
+        # self.animacionExplosion.delete()
+        # self.animacionExplosion = None
+        # # Y decimos que el corredor ya es visible
+        # self.animacionCorredor.visible = True
+        #=======================================================================
 
 
     
@@ -248,22 +268,24 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
     # El evento que sera llamado periodicamente
     def update(self, tiempo):
         # Moveremos el tanque a la derecha hasta llegar al pixel 800
-        if self.tanque.x<650:
-            self.tanque.x = self.tanque.x + tiempo*VELOCIDAD_TANQUE
-            if self.tanque.x>200 and self.tanque.x<300:
-                self.tanque.rotation += VELOCIDAD_ROTACION_TANQUE*tiempo
-            elif self.tanque.x>=300 and self.tanque.x<=600:
-                self.tanque.y = self.tanque.y - tiempo*20
-        else:
-            # Si el tanque ya ha pasado ese pixel, paramos la animacion
-            # Paramos la animacion: le ponemos al frame en el que este una duracion de None
-            # Como no se sabe en cual esta, se ponen todos
-            for frame in self.tanque.image.frames:
-                frame.duration = None
+#         if self.tanque.x<650:
+#             self.tanque.x = self.tanque.x + tiempo*VELOCIDAD_TANQUE
+#             if self.tanque.x>200 and self.tanque.x<300:
+#                 self.tanque.rotation += VELOCIDAD_ROTACION_TANQUE*tiempo
+#             elif self.tanque.x>=300 and self.tanque.x<=600:
+#                 self.tanque.y = self.tanque.y - tiempo*20
+#         else:
+#             # Si el tanque ya ha pasado ese pixel, paramos la animacion
+#             # Paramos la animacion: le ponemos al frame en el que este una duracion de None
+#             # Como no se sabe en cual esta, se ponen todos
+#             for frame in self.tanque.image.frames:
+#                 frame.duration = None
 
         # Ademas, si existe la animacion de la explosion, hacemos que de desplace con el tanque
-        if self.animacionExplosion!=None:
-            self.animacionExplosion.set_position(self.tanque.x-10, self.tanque.y-15)
+        #=======================================================================
+        # if self.animacionExplosion!=None:
+        #     self.animacionExplosion.set_position(self.tanque.x-10, self.tanque.y-15)
+        #=======================================================================
 
         # Y si la animacion del corredor es visible, la movemos hacia la izquierda
         if self.animacionCorredor.visible:
