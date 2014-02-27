@@ -4,7 +4,7 @@ import director
 import fase
 from director import *
 from fase import *
-from inicial import *
+from EscenaMenu import *
 from animacion import *
 
 

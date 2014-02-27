@@ -7,6 +7,7 @@ from escena import *
 from pygame.locals import *
 
 FPS = 60
+a=[]
 
 class Director():
 
@@ -72,6 +73,8 @@ class Director():
     def cambiarEscena(self, escena):
         self.salir_escena = False
         self.salir_programa = False
+        if self.escena != None:
+            a.append(self.escena)
         self.escena = escena
 
     def salirEscena(self):
@@ -82,7 +85,10 @@ class Director():
             pyglet.clock.unschedule(self.escena.update)
             # Salimos del bucle de pyglet
             pyglet.app.exit()
-        self.salir_escena = True
+        if(len(a)==0):
+            self.salir_escena = True
+        else:
+            self.escena = a.pop()
 
     def salirPrograma(self):
         self.salirEscena()
