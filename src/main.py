@@ -43,7 +43,7 @@ class AplicacionJuego():
             if (salir_programa):
                 # Si ademas de salir de la escena, se quiere salir del programa, se finaliza
                 sys.exit()
-
+            
             # En este punto, hay que iniciar el juego en sí
        
             # Creamos los jugadores

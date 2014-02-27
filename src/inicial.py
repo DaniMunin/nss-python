@@ -31,12 +31,12 @@ class EscenaMenu(EscenaPyglet, pyglet.window.Window):
         # El texto para cada boton
         
         #Si borramos esto el programa no funciona, así que por ahora son etiquetas vacías
-        self.etiquetaJugar = pyglet.text.Label('',
-                          font_name='Times New Roman', bold=True, color=(255,255,255,255),
-                          font_size=20, x=630, y=100)
-        self.etiquetaSalir = pyglet.text.Label('',
-                          font_name='Times New Roman', bold=True, color=(255,255,255,255),
-                          font_size=20, x=630, y=50)
+        #self.etiquetaJugar = pyglet.text.Label('',
+        #                  font_name='Times New Roman', bold=True, color=(255,255,255,255),
+        #                  font_size=20, x=630, y=100)
+        #self.etiquetaSalir = pyglet.text.Label('',
+        #                  font_name='Times New Roman', bold=True, color=(255,255,255,255),
+        #                  font_size=20, x=630, y=50)
 
         # Las animaciones en esta imagen inicial
         # Estas animaciones las cargamos a partir de imagenes sueltas
@@ -108,8 +108,8 @@ class EscenaMenu(EscenaPyglet, pyglet.window.Window):
             self.botonJugar.draw()
             self.botonSalir.draw()
             # Ponemos el texto para cada boton
-            self.etiquetaJugar.draw()
-            self.etiquetaSalir.draw()
+            #self.etiquetaJugar.draw()
+            #self.etiquetaSalir.draw()
             # Ponemos las animaciones
             self.batch.draw()
 
