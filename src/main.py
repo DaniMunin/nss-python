@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-<<<<<<< HEAD
-#prueba2222
-=======
-#prueba2
->>>>>>> 7675ae2ac14133b9c86c126a4a5285e92fd03afa
 # Importar modulos
 import director
 import fase
@@ -47,7 +42,7 @@ class AplicacionJuego():
             if (salir_programa):
                 # Si ademas de salir de la escena, se quiere salir del programa, se finaliza
                 sys.exit()
-
+            
             # En este punto, hay que iniciar el juego en sí
        
             # Creamos los jugadores
