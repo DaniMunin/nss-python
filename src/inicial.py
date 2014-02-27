@@ -43,7 +43,7 @@ class EscenaMenu(EscenaPyglet, pyglet.window.Window):
 
         # Creamos el batch de las animaciones
         self.batch = pyglet.graphics.Batch()
-
+ 
         # La animacion del fuego
         #self.animacionFuego = pyglet.sprite.Sprite(pyglet.image.Animation([
          #   pyglet.image.AnimationFrame(pyglet.image.load('imagenes/flame_a_0001.png'), 0.1),
