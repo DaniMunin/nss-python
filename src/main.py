@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
+<<<<<<< HEAD
 #prueba2222
+=======
+#prueba2
+>>>>>>> 7675ae2ac14133b9c86c126a4a5285e92fd03afa
 # Importar modulos
 import director
 import fase
