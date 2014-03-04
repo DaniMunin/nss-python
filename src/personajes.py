@@ -86,10 +86,10 @@ class Personaje(pygame.sprite.Sprite):
         # El movimiento que esta realizando
         self.movimiento = QUIETO
         # Lado hacia el que esta mirando
-        self.mirando = IZQUIERDA
+        self.mirando = ARRIBA
 
         # Leemos las coordenadas de un archivo de texto
-        fullname = os.path.join('imagenes', archivoCoordenadas)
+        fullname = os.path.join('', archivoCoordenadas)
         pfile=open(fullname,'r')
         datos=pfile.read()
         pfile.close()
@@ -121,11 +121,11 @@ class Personaje(pygame.sprite.Sprite):
         self.rect.bottom = 0
         # Velocidad en el eje y (para los saltos)
         #  En el eje x se utilizaria si hubiese algun tipo de inercia
-        self.velocidady = 0
+        #self.velocidady = 0
 
         # Las velocidades de caminar y salto
         self.velocidad = velocidad
-        self.velocidadSalto = velocidadSalto
+        #self.velocidadSalto = velocidadSalto
 
         # El retardo en la animacion del personaje (podria y deberia ser distinto para cada postura)
         self.retardoAnimacion = retardoAnimacion
@@ -142,13 +142,13 @@ class Personaje(pygame.sprite.Sprite):
 
     # Metodo base para realizar el movimiento: simplemente se le indica cual va a hacer, y lo almacena
     def mover(self, movimiento):
-        if movimiento == ARRIBA:
+        #if movimiento == ARRIBA:
             # Si estamos en el aire y el personaje quiere saltar, ignoramos este movimiento
-            if self.numPostura == SPRITE_SALTANDO:
-                self.movimiento = QUIETO
-            else:
-                self.movimiento = ARRIBA
-        else:
+         #   if self.numPostura == SPRITE_SALTANDO:
+          #      self.movimiento = QUIETO
+           # else:
+            #    self.movimiento = ARRIBA
+        #else:
             self.movimiento = movimiento
 
 
@@ -252,7 +252,7 @@ class Jugador(Personaje):
     "Cualquier personaje del juego"
     def __init__(self):
         # Invocamos al constructor de la clase padre con la configuracion de este personaje concreto
-        Personaje.__init__(self,'Jugador.png','coordJugador.txt', [6, 12, 6], VELOCIDAD_JUGADOR, VELOCIDAD_SALTO_JUGADOR, RETARDO_ANIMACION_JUGADOR);
+        Personaje.__init__(self,'../res/Sprites/badass.png','../res/BadassCoordJugador.txt', [8, 12, 12], VELOCIDAD_JUGADOR, VELOCIDAD_SALTO_JUGADOR, RETARDO_ANIMACION_JUGADOR);
 
 
     def mover(self, teclasPulsadas, arriba, abajo, izquierda, derecha):
@@ -270,49 +270,49 @@ class Jugador(Personaje):
 # -------------------------------------------------
 # Clase NoJugador
 
-class NoJugador(Personaje):
-    "El resto de personajes no jugadores"
-    def __init__(self, archivoImagen, archivoCoordenadas, numImagenes, velocidad, velocidadSalto, retardoAnimacion):
-        # Primero invocamos al constructor de la clase padre con los parametros pasados
-        Personaje.__init__(self, archivoImagen, archivoCoordenadas, numImagenes, velocidad, velocidadSalto, retardoAnimacion);
+#class NoJugador(Personaje):
+ #   "El resto de personajes no jugadores"
+  #  def __init__(self, archivoImagen, archivoCoordenadas, numImagenes, velocidad, velocidadSalto, retardoAnimacion):
+   #     # Primero invocamos al constructor de la clase padre con los parametros pasados
+    #    Personaje.__init__(self, archivoImagen, archivoCoordenadas, numImagenes, velocidad, velocidadSalto, retardoAnimacion);
 
     # Aqui vendria la implementacion de la IA segun las posiciones de los jugadores
     # La implementacion por defecto, este metodo deberia de ser implementado en las clases inferiores
     #  mostrando la personalidad de cada enemigo
-    def mover_cpu(self, jugador1, jugador2):
+    #def mover_cpu(self, jugador1, jugador2):
         # Por defecto un enemigo no hace nada
         #  (se podria programar, por ejemplo, que disparase al jugador por defecto)
-        return
+     #   return
 
 # -------------------------------------------------
 # Clase Sniper
 
-class Sniper(NoJugador):
-    "El enemigo 'Sniper'"
-    def __init__(self):
+#class Sniper(NoJugador):
+ #   "El enemigo 'Sniper'"
+  #  def __init__(self):
         # Invocamos al constructor de la clase padre con la configuracion de este personaje concreto
-        NoJugador.__init__(self,'Sniper.png','coordSniper.txt', [5, 10, 6], VELOCIDAD_SNIPER, VELOCIDAD_SALTO_SNIPER, RETARDO_ANIMACION_SNIPER);
+   #     NoJugador.__init__(self,'Sniper.png','coordSniper.txt', [5, 10, 6], VELOCIDAD_SNIPER, VELOCIDAD_SALTO_SNIPER, RETARDO_ANIMACION_SNIPER);
 
     # Aqui vendria la implementacion de la IA segun las posiciones de los jugadores
     # La implementacion de la inteligencia segun este personaje particular
-    def mover_cpu(self, jugador1, jugador2):
+    #def mover_cpu(self, jugador1, jugador2):
 
         # Movemos solo a los enemigos que esten en la pantalla
-        if self.posicionx>0 and self.posicionx<ANCHO_PANTALLA and self.posiciony>0 and self.posiciony<ALTO_PANTALLA:
+     #   if self.posicionx>0 and self.posicionx<ANCHO_PANTALLA and self.posiciony>0 and self.posiciony<ALTO_PANTALLA:
 
             # Por ejemplo, intentara acercarse al jugador mas cercano en el eje x
             # Miramos cual es el jugador mas cercano
-            if abs(jugador1.posicionx-self.posicionx)<abs(jugador2.posicionx-self.posicionx):
-                jugadorMasCercano = jugador1
-            else:
-                jugadorMasCercano = jugador2
+      #      if abs(jugador1.posicionx-self.posicionx)<abs(jugador2.posicionx-self.posicionx):
+       #         jugadorMasCercano = jugador1
+        #    else:
+         #       jugadorMasCercano = jugador2
             # Y nos movemos andando hacia el
-            if jugadorMasCercano.posicionx<self.posicionx:
-                Personaje.mover(self,IZQUIERDA)
-            else:
-                Personaje.mover(self,DERECHA)
+          #  if jugadorMasCercano.posicionx<self.posicionx:
+          #      Personaje.mover(self,IZQUIERDA)
+           # else:
+            #    Personaje.mover(self,DERECHA)
 
         # Si este personaje no esta en pantalla, no hara nada
-        else:
-            Personaje.mover(self,QUIETO)
+        #else:
+         #   Personaje.mover(self,QUIETO)
 

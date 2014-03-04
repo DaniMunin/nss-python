@@ -18,7 +18,7 @@ MINIMO_X_JUGADOR = 50
 MAXIMO_X_JUGADOR = ANCHO_PANTALLA - 100
 
 class Intro(EscenaPygame):
-    def __init__(self, director):
+    def __init__(self, director, jugador1):
 
         # Primero invocamos al constructor de la clase padre
         EscenaPygame.__init__(self, director)
@@ -28,6 +28,14 @@ class Intro(EscenaPygame):
         pygame.display.set_caption("Al diablo el cafe")
 
 
+        self.jugador1 = jugador1
+        self.grupoJugadores = pygame.sprite.Group(jugador1)
+        
+        jugador1.establecerPosicion(100, 100)
+        
+        jugador1.numPostura = QUIETO
+        
+        plataformaSuelo = Plataforma(pygame.Rect(0, 550, 1200, 15))
         # Habria que pasarle como parámetro el número de fase, a partir del cual se cargue
         #  un fichero donde este la configuracion de esa fase en concreto, con cosas como
         #   - Nombre del archivo con el decorado
@@ -39,7 +47,7 @@ class Intro(EscenaPygame):
         # De esta forma, se podrian tener muchas fases distintas con esta clase
 
         # Cargamos el decorado
-        self.image = load_image('../res/maps/gransalon.png', -1)
+        self.image = load_image('../res/maps/primerinterior.png', -1)
         self.image = pygame.transform.scale(self.image, (ANCHO_PANTALLA, ALTO_PANTALLA))
 
         self.rect = self.image.get_rect()
@@ -53,7 +61,16 @@ class Intro(EscenaPygame):
         self.rectSubimagen = pygame.Rect(0, 0, ANCHO_PANTALLA, ALTO_PANTALLA)
         self.rectSubimagen.left = self.posicionx
 
+        # Creamos las plataformas del decorado
+        # La plataforma que conforma todo el suelo
+        plataformaSuelo = Plataforma(pygame.Rect(0, 550, 1200, 15))
+        # La plataforma del techo del edificio
+        plataformaCasa = Plataforma(pygame.Rect(870, 417, 200, 10))
+        # y el grupo con las mismas
+        self.grupoPlataformas = pygame.sprite.Group( plataformaSuelo, plataformaCasa )
 
+    def posicionesInicioJugadores(self):
+        return self.inicioJugador1
     # Se actualiza el decorado, realizando las siguientes acciones:
     #  Se actualizan los jugadores con los movimientos a realizar
     #  Se actualiza la posicion del sol y el color del cielo
@@ -61,6 +78,10 @@ class Intro(EscenaPygame):
     #  Se comprueba si hay colision entre algun jugador y algun enemigo
     #  Se actualiza el scroll del decorado y los objetos en el
     def update(self, tiempo):
+        
+        self.grupoJugadores.update(self.grupoPlataformas, tiempo)
+        
+        
         # Actualizamos la posicion del sol y el color del cielo
         #self.sol.update(tiempo)
         print("updatevacio")
@@ -70,11 +91,33 @@ class Intro(EscenaPygame):
         # Ponemos primero el sol y cielo
         #self.sol.dibujar(self.pantalla)
         # Después la imagen de fondo
+        self.grupoJugadores.draw(self.pantalla)
         self.pantalla.blit(self.image, self.rect, self.rectSubimagen)
 
     def evento(self, event):
         # Indicamos la acción a realizar segun la tecla pulsada para cada jugador
         teclasPulsadas = pygame.key.get_pressed()
+        self.jugador1.mover(teclasPulsadas, K_UP, K_DOWN, K_LEFT, K_RIGHT)
+
+# -------------------------------------------------
+# Clase Plataforma
+
+class Plataforma(pygame.sprite.Sprite):
+    def __init__(self,rectangulo):
+        # Primero invocamos al constructor de la clase padre
+        pygame.sprite.Sprite.__init__(self);
+        # Rectangulo con las coordenadas que ocupara
+        self.rect = rectangulo
+        # Posicion en el eje x (en el eje y no hace falta, no hay scroll vertical)
+        self.posx = self.rect.left
+
+        # En el caso particular de este juego, las plataformas no se van a ver, asi que no se carga ninguna imagen
+        self.image = None
+
+
+    def update(self,desplazamiento):
+        self.posx += desplazamiento
+        self.rect.left = self.posx
 
 
 # -------------------------------------------------
