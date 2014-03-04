@@ -107,7 +107,30 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
         #=======================================================================
         # Esta animacion la tenemos que guardar como variable porque hay que mover su posicion
 
+        # La animacion del rayo
+        #=======================================================================
+        self.animacionRayoFrames = [
+            pyglet.image.AnimationFrame(pyglet.image.load('../res/Sprites/bolt_strike_0001.png'), 0.1),
+            pyglet.image.AnimationFrame(pyglet.image.load('../res/Sprites/bolt_strike_0002.png'), 0.1),
+            pyglet.image.AnimationFrame(pyglet.image.load('../res/Sprites/bolt_strike_0003.png'), 0.1),
+            pyglet.image.AnimationFrame(pyglet.image.load('../res/Sprites/bolt_strike_0004.png'), 0.1),
+            pyglet.image.AnimationFrame(pyglet.image.load('../res/Sprites/bolt_strike_0005.png'), 0.1),
+            pyglet.image.AnimationFrame(pyglet.image.load('../res/Sprites/bolt_strike_0006.png'), 0.1),
+            pyglet.image.AnimationFrame(pyglet.image.load('../res/Sprites/bolt_strike_0007.png'), 0.1),
+            pyglet.image.AnimationFrame(pyglet.image.load('../res/Sprites/bolt_strike_0008.png'), 0.1),
+            pyglet.image.AnimationFrame(pyglet.image.load('../res/Sprites/bolt_strike_0009.png'), 0.1),
+            pyglet.image.AnimationFrame(pyglet.image.load('../res/Sprites/bolt_strike_0010.png'), None),
+            ]
+#         self.animacionRayoFrames.scale = 1
+#         self.animacionRayoFrames.rotation = 90
 
+        # Esta animacion aparecera en el segundo determinado
+        #=======================================================================
+        pyglet.clock.schedule_interval(self.aparecerRayo, 1.5)
+        #=======================================================================
+        
+        
+        
         # La animacion de la lluvia: creamos los frames
         #=======================================================================
         self.animacionLluviaFrames = [
@@ -167,7 +190,7 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
         # A partir de los frames, se crea la animacion
         self.animacionCorredor = pyglet.sprite.Sprite(pyglet.image.Animation(corredorFrames), batch=self.batch, group=self.grupoDetras)
         self.animacionCorredor.set_position(700,40)
-        self.animacionCorredor.scale = 1.2
+        self.animacionCorredor.scale = 1
         # Se podria, igual que las anteriores, no haberla creado, sino haberlo hecho
         #  cuando fuese necesario que apareciera, pero en este caso se crea aqui y se
         #  pone como invisible hasta cuandos ea necesario que aparezca
@@ -180,7 +203,21 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
     # El metodo para eliminar una animacion determinada
     def eliminarAnimacion(self, tiempo, animacion):
         animacion.delete()
-
+        
+        
+        # Metodo que hace aparecer una animacion de humo en el cielo
+    def aparecerRayo(self, tiempo):
+        #=======================================================================
+        animacionRayo = pyglet.sprite.Sprite(pyglet.image.Animation(self.animacionRayoFrames), batch=self.batch, group=self.grupoDetras)
+        # La escalamos un factor aleatorio para dar sensacion de profundidad
+        animacionRayo.scale = 1
+        animacionRayo.rotation = 45
+        # Decimos que aparezca en un sitio aleatorio del cielo
+        animacionRayo.set_position(random.uniform(20, ANCHO_PANTALLA-20), random.uniform(20, ALTO_PANTALLA-20))
+        # Programamos que se elimine la animacion cuando termine
+        pyglet.clock.schedule_once(self.eliminarAnimacion, animacionRayo.image.get_duration(), animacionRayo)
+        #=======================================================================
+        
     # Metodo que hace aparecer una animacion de humo en el cielo
 #     def aparecerHumoCielo(self, tiempo):
         #=======================================================================
