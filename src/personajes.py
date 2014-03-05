@@ -20,7 +20,8 @@ ABAJO = 4
 #Posturas
 SPRITE_QUIETO = 0
 SPRITE_ANDANDO = 1
-SPRITE_SALTANDO = 2
+SPRITE_SUBIENDO = 2
+SPRITE_BAJANDO = 3
 
 # Velocidades de los distintos personajes
 VELOCIDAD_JUGADOR = 0.1 # Pixeles por milisegundo
@@ -115,9 +116,6 @@ class Personaje(pygame.sprite.Sprite):
         self.posiciony = 0
         self.rect.left = 0
         self.rect.bottom = 0
-        # Velocidad en el eje y (para los saltos)
-        #  En el eje x se utilizaria si hubiese algun tipo de inercia
-        self.velocidady = 0
 
         # Las velocidades de caminar y salto
         self.velocidad = velocidad
@@ -161,6 +159,12 @@ class Personaje(pygame.sprite.Sprite):
             elif self.mirando == DERECHA:
                 self.image = pygame.transform.flip(self.hoja.subsurface(self.coordenadasHoja[self.numPostura][self.numImagenPostura]), 1, 0)
             
+            elif self.mirando == ARRIBA:
+                self.image = self.hoja.subsurface(self.coordenadasHoja[self.numPostura][self.numImagenPostura])
+
+            elif self.mirando == ABAJO:
+                self.image = self.hoja.subsurface(self.coordenadasHoja[self.numPostura][self.numImagenPostura])
+
 
     def movimientoHorizontal(self, incrementox, grupoPlataformas):
         # Esta mirando hacia ese lado
@@ -168,13 +172,7 @@ class Personaje(pygame.sprite.Sprite):
         # Actualizamos la posicion
         self.posicionx += incrementox
         self.rect.left = self.posicionx
-        # Si no estamos en el aire
-        if self.numPostura != SPRITE_SALTANDO:
-            # La postura actual sera estar caminando
-            self.numPostura = SPRITE_ANDANDO
-            # Ademas, si no estamos encima de ninguna plataforma, caeremos
-            if pygame.sprite.spritecollideany(self, grupoPlataformas) == None:
-                self.numPostura = SPRITE_SALTANDO
+        self.numPostura = SPRITE_ANDANDO
                 
     def movimientoVertical(self, incrementoy, grupoPlataformas):
         # Esta mirando hacia ese lado
@@ -182,6 +180,10 @@ class Personaje(pygame.sprite.Sprite):
         # Actualizamos la posicion
         self.posiciony += incrementoy
         self.rect.bottom = self.posiciony
+#         if (incrementoy>0):
+#             self.numPostura = SPRITE_SUBIENDO
+#         else:
+#             self.numPostura = SPRITE_BAJANDO
 
     def update(self, grupoPlataformas, tiempo):
         # Si vamos a la izquierda
@@ -204,8 +206,6 @@ class Personaje(pygame.sprite.Sprite):
             
         # Si no se ha pulsado ninguna tecla
         elif self.movimiento == QUIETO:
-            # Si no estamos saltando, la postura actual será estar quieto
-            if not self.numPostura == SPRITE_SALTANDO:
                 self.numPostura = SPRITE_QUIETO
 
         # Actualizamos la imagen a mostrar
