@@ -23,14 +23,9 @@ SPRITE_ANDANDO = 1
 SPRITE_SALTANDO = 2
 
 # Velocidades de los distintos personajes
-VELOCIDAD_JUGADOR = 0.2 # Pixeles por milisegundo
+VELOCIDAD_JUGADOR = 0.1 # Pixeles por milisegundo
 VELOCIDAD_SALTO_JUGADOR = 0.3 # Pixeles por milisegundo
 RETARDO_ANIMACION_JUGADOR = 1 / VELOCIDAD_JUGADOR
-
-VELOCIDAD_SNIPER = 0.12 # Pixeles por milisegundo
-VELOCIDAD_SALTO_SNIPER = 0.27 # Pixeles por milisegundo
-RETARDO_ANIMACION_SNIPER = 1 / VELOCIDAD_SNIPER
-# El Sniper camina un poco más lento que el jugador, y salta menos
 
 
 # -------------------------------------------------
@@ -50,7 +45,7 @@ def load_image(name, colorkey=None):
     except pygame.error, message:
         print 'Cannot load image:', fullname
         raise SystemExit, message
-#    image = image.convert()
+#     image = image.convert()
     if colorkey is not None:
         if colorkey is -1:
             colorkey = image.get_at((0,0))
@@ -81,8 +76,9 @@ class Personaje(pygame.sprite.Sprite):
         # Primero invocamos al constructor de la clase padre
         pygame.sprite.Sprite.__init__(self);
         # Se carga la hoja
+        
         self.hoja = load_image(archivoImagen,-1)
-#        self.hoja = self.hoja.convert_alpha()
+#         self.hoja = self.hoja.convert_alpha()
         # El movimiento que esta realizando
         self.movimiento = QUIETO
         # Lado hacia el que esta mirando
@@ -121,11 +117,11 @@ class Personaje(pygame.sprite.Sprite):
         self.rect.bottom = 0
         # Velocidad en el eje y (para los saltos)
         #  En el eje x se utilizaria si hubiese algun tipo de inercia
-        #self.velocidady = 0
+        self.velocidady = 0
 
         # Las velocidades de caminar y salto
         self.velocidad = velocidad
-        #self.velocidadSalto = velocidadSalto
+        self.velocidadSalto = velocidadSalto
 
         # El retardo en la animacion del personaje (podria y deberia ser distinto para cada postura)
         self.retardoAnimacion = retardoAnimacion
@@ -142,13 +138,6 @@ class Personaje(pygame.sprite.Sprite):
 
     # Metodo base para realizar el movimiento: simplemente se le indica cual va a hacer, y lo almacena
     def mover(self, movimiento):
-        #if movimiento == ARRIBA:
-            # Si estamos en el aire y el personaje quiere saltar, ignoramos este movimiento
-         #   if self.numPostura == SPRITE_SALTANDO:
-          #      self.movimiento = QUIETO
-           # else:
-            #    self.movimiento = ARRIBA
-        #else:
             self.movimiento = movimiento
 
 
@@ -171,8 +160,7 @@ class Personaje(pygame.sprite.Sprite):
             #  Si no, si mira a la derecha, invertimos esa imagen
             elif self.mirando == DERECHA:
                 self.image = pygame.transform.flip(self.hoja.subsurface(self.coordenadasHoja[self.numPostura][self.numImagenPostura]), 1, 0)
-
-
+            
 
     def movimientoHorizontal(self, incrementox, grupoPlataformas):
         # Esta mirando hacia ese lado
@@ -187,7 +175,13 @@ class Personaje(pygame.sprite.Sprite):
             # Ademas, si no estamos encima de ninguna plataforma, caeremos
             if pygame.sprite.spritecollideany(self, grupoPlataformas) == None:
                 self.numPostura = SPRITE_SALTANDO
-
+                
+    def movimientoVertical(self, incrementoy, grupoPlataformas):
+        # Esta mirando hacia ese lado
+        self.mirando = self.movimiento
+        # Actualizamos la posicion
+        self.posiciony += incrementoy
+        self.rect.bottom = self.posiciony
 
     def update(self, grupoPlataformas, tiempo):
         # Si vamos a la izquierda
@@ -202,42 +196,17 @@ class Personaje(pygame.sprite.Sprite):
 
         # Si estamos saltando
         elif self.movimiento == ARRIBA:
-            # La postura actual sera estar saltando
-            self.numPostura = SPRITE_SALTANDO
-            # Le imprimimos una velocidad en el eje y
-            self.velocidady = self.velocidadSalto
+            self.movimientoVertical( -self.velocidad*tiempo, grupoPlataformas)
 
+        # Si estamos saltando
+        elif self.movimiento == ABAJO:
+            self.movimientoVertical( self.velocidad*tiempo, grupoPlataformas)
+            
         # Si no se ha pulsado ninguna tecla
         elif self.movimiento == QUIETO:
             # Si no estamos saltando, la postura actual será estar quieto
             if not self.numPostura == SPRITE_SALTANDO:
                 self.numPostura = SPRITE_QUIETO
-
-        # Si estamos en el aire
-        if self.numPostura == SPRITE_SALTANDO:
-            # Actualizamos la posicion
-            self.posiciony -= self.velocidady * tiempo
-            # Nos ponemos en esa posicion en el eje y
-            self.rect.bottom = self.posiciony
-
-            # Miramos a ver si hay que parar de caer: si hemos llegado a una plataforma
-            #  Para ello, miramos si hay colision con alguna plataforma del grupo
-            plataforma = pygame.sprite.spritecollideany(self, grupoPlataformas)
-            #  Ademas, esa colision solo nos interesa cuando estamos cayendo
-            #  y solo es efectiva cuando caemos encima, no de lado, es decir,
-            #  cuando nuestra posicion inferior esta por encima de la parte de abajo de la plataforma
-            if (plataforma != None) and (self.velocidady<0) and (plataforma.rect.bottom>self.rect.bottom):
-                # Lo situamos con la parte de abajo un pixel colisionando con la plataforma
-                #  para poder detectar cuando se cae de ella
-                self.posiciony = plataforma.rect.top + 1
-                self.numPostura = SPRITE_QUIETO
-                self.velocidady = 0
-                # Nos ponemos en esa posicion en el eje y
-                self.rect.bottom = self.posiciony
-
-            # Si no caemos en una plataforma, aplicamos el efecto de la gravedad
-            else:
-                self.velocidady -= 0.004
 
         # Actualizamos la imagen a mostrar
         self.actualizarPostura()
@@ -263,56 +232,9 @@ class Jugador(Personaje):
             Personaje.mover(self,IZQUIERDA)
         elif teclasPulsadas[derecha]:
             Personaje.mover(self,DERECHA)
+        elif teclasPulsadas[abajo]:
+            Personaje.mover(self,ABAJO)
         else:
             Personaje.mover(self,QUIETO)
 
-
-# -------------------------------------------------
-# Clase NoJugador
-
-#class NoJugador(Personaje):
- #   "El resto de personajes no jugadores"
-  #  def __init__(self, archivoImagen, archivoCoordenadas, numImagenes, velocidad, velocidadSalto, retardoAnimacion):
-   #     # Primero invocamos al constructor de la clase padre con los parametros pasados
-    #    Personaje.__init__(self, archivoImagen, archivoCoordenadas, numImagenes, velocidad, velocidadSalto, retardoAnimacion);
-
-    # Aqui vendria la implementacion de la IA segun las posiciones de los jugadores
-    # La implementacion por defecto, este metodo deberia de ser implementado en las clases inferiores
-    #  mostrando la personalidad de cada enemigo
-    #def mover_cpu(self, jugador1, jugador2):
-        # Por defecto un enemigo no hace nada
-        #  (se podria programar, por ejemplo, que disparase al jugador por defecto)
-     #   return
-
-# -------------------------------------------------
-# Clase Sniper
-
-#class Sniper(NoJugador):
- #   "El enemigo 'Sniper'"
-  #  def __init__(self):
-        # Invocamos al constructor de la clase padre con la configuracion de este personaje concreto
-   #     NoJugador.__init__(self,'Sniper.png','coordSniper.txt', [5, 10, 6], VELOCIDAD_SNIPER, VELOCIDAD_SALTO_SNIPER, RETARDO_ANIMACION_SNIPER);
-
-    # Aqui vendria la implementacion de la IA segun las posiciones de los jugadores
-    # La implementacion de la inteligencia segun este personaje particular
-    #def mover_cpu(self, jugador1, jugador2):
-
-        # Movemos solo a los enemigos que esten en la pantalla
-     #   if self.posicionx>0 and self.posicionx<ANCHO_PANTALLA and self.posiciony>0 and self.posiciony<ALTO_PANTALLA:
-
-            # Por ejemplo, intentara acercarse al jugador mas cercano en el eje x
-            # Miramos cual es el jugador mas cercano
-      #      if abs(jugador1.posicionx-self.posicionx)<abs(jugador2.posicionx-self.posicionx):
-       #         jugadorMasCercano = jugador1
-        #    else:
-         #       jugadorMasCercano = jugador2
-            # Y nos movemos andando hacia el
-          #  if jugadorMasCercano.posicionx<self.posicionx:
-          #      Personaje.mover(self,IZQUIERDA)
-           # else:
-            #    Personaje.mover(self,DERECHA)
-
-        # Si este personaje no esta en pantalla, no hara nada
-        #else:
-         #   Personaje.mover(self,QUIETO)
 
