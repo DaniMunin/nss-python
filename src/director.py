@@ -17,7 +17,9 @@ class Director():
         # Flag que nos indica cuando quieren salir de la escena o del programa
         self.salir_escena = False
         self.salir_programa = False
-        
+        self.quiere_salir_escena = False
+        self.quiere_cambiar_escena = None
+        self.quiere_apilar_escena = None
         # Reloj
         self.reloj = pygame.time.Clock()
 
@@ -50,10 +52,21 @@ class Director():
                 # Se dibuja en pantalla
                 self.escena.dibujar()
                 pygame.display.flip()
+                
+                #Comprobamos si quiere abandonar la escena
+                if(self.quiere_salir_escena):
+                    self.ejecutarSalirEscena();
+                    
+                #Comprobamos si quiere cambiar de escena
+                if(self.quiere_cambiar_escena != None):
+                    self.ejecutarCambiarEscena()
+                    
+                #Comprobamos si quiere cambiar de escena
+                if(self.quiere_apilar_escena != None):
+                    self.ejecutarApilarEscena()
 
             # Si hemos salido del bucle, finalizamos pygame
             pygame.quit()
-            self.escena = None
             
         # Si no, si la escena es de animacion con pyglet, la ejecutamos de esa manera
         elif isinstance(self.escena, EscenaPyglet):
@@ -76,9 +89,20 @@ class Director():
     def cambiarEscena(self, escena):
         self.salir_escena = False
         self.salir_programa = False
-        if self.escena != None:
-            pilaEscenas.append(self.escena)
-        self.escena = escena
+        if self.escena == None:
+            self.escena = escena
+        else:
+            self.quiere_cambiar_escena = escena
+        
+    def ejecutarCambiarEscena(self):
+        self.escena = self.quiere_cambiar_escena
+
+    def apilarEscena(self, escena):
+        self.quiere_apilar_escena = escena
+        
+    def ejecutarApilarEscena(self):
+        pilaEscenas.append(self.escena)
+        self.escena = self.quiere_apilar_escena
 
     def salirEscena(self):
         # Si es una escena de pyglet
@@ -88,8 +112,14 @@ class Director():
             pyglet.clock.unschedule(self.escena.update)
             # Salimos del bucle de pyglet
             pyglet.app.exit()
+        else:
+            self.quiere_salir_escena = True
+        
+    def ejecutarSalirEscena(self):
+        self.quiere_salir_escena = False
         if(len(pilaEscenas)==0):
             self.salir_escena = True
+            self.escena = None
         else:
             self.escena = pilaEscenas.pop()
 
