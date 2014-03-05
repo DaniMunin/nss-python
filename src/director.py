@@ -7,7 +7,7 @@ from escena import *
 from pygame.locals import *
 
 FPS = 60
-a=[]
+pilaEscenas=[]
 
 class Director():
 
@@ -17,6 +17,7 @@ class Director():
         # Flag que nos indica cuando quieren salir de la escena o del programa
         self.salir_escena = False
         self.salir_programa = False
+        
         # Reloj
         self.reloj = pygame.time.Clock()
 
@@ -52,8 +53,8 @@ class Director():
 
             # Si hemos salido del bucle, finalizamos pygame
             pygame.quit()
-
-
+            self.escena = None
+            
         # Si no, si la escena es de animacion con pyglet, la ejecutamos de esa manera
         elif isinstance(self.escena, EscenaPyglet):
             # Registramos que se actualice segun la frecuencia de frames por segundo
@@ -64,7 +65,9 @@ class Director():
 
             # Cuando hayamos terminado la animacion con pyglet, cerramos la ventana
             self.escena.close()
+            self.escena = None
         else:
+            self.escena = None
             raise Exception('No se que tipo de escena es')
         
         # Al final se devuelve si se quiere salir del programa, ademas de salir de la escena
@@ -74,7 +77,7 @@ class Director():
         self.salir_escena = False
         self.salir_programa = False
         if self.escena != None:
-            a.append(self.escena)
+            pilaEscenas.append(self.escena)
         self.escena = escena
 
     def salirEscena(self):
@@ -85,10 +88,10 @@ class Director():
             pyglet.clock.unschedule(self.escena.update)
             # Salimos del bucle de pyglet
             pyglet.app.exit()
-        if(len(a)==0):
+        if(len(pilaEscenas)==0):
             self.salir_escena = True
         else:
-            self.escena = a.pop()
+            self.escena = pilaEscenas.pop()
 
     def salirPrograma(self):
         self.salirEscena()
