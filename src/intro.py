@@ -31,11 +31,10 @@ class Intro(EscenaPygame):
         self.jugador1 = jugador1
         self.grupoJugadores = pygame.sprite.Group(jugador1)
         
-        jugador1.establecerPosicion(100, 100)
+        jugador1.establecerPosicion(ANCHO_PANTALLA/2, ALTO_PANTALLA*6/7)
         
         jugador1.numPostura = QUIETO
         
-        plataformaSuelo = Plataforma(pygame.Rect(0, 550, 1200, 15))
         # Habria que pasarle como parámetro el número de fase, a partir del cual se cargue
         #  un fichero donde este la configuracion de esa fase en concreto, con cosas como
         #   - Nombre del archivo con el decorado
@@ -81,6 +80,8 @@ class Intro(EscenaPygame):
         
         self.grupoJugadores.update(self.grupoPlataformas, tiempo)
         
+        self.grupoJugadores.update(self.grupoPlataformas, tiempo)
+        
         
         # Actualizamos la posicion del sol y el color del cielo
         #self.sol.update(tiempo)
@@ -92,7 +93,10 @@ class Intro(EscenaPygame):
         #self.sol.dibujar(self.pantalla)
         # Después la imagen de fondo
         self.grupoJugadores.draw(self.pantalla)
+        
         self.pantalla.blit(self.image, self.rect, self.rectSubimagen)
+        
+        self.grupoJugadores.draw(self.pantalla)
 
     def evento(self, event):
         # Indicamos la acción a realizar segun la tecla pulsada para cada jugador
