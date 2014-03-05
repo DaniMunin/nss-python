@@ -85,7 +85,6 @@ class Intro(EscenaPygame):
         
         # Actualizamos la posicion del sol y el color del cielo
         #self.sol.update(tiempo)
-        print("updatevacio")
 
         
     def dibujar(self):
