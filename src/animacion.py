@@ -66,7 +66,7 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
 
         pyglet.font.add_file('../res/XFILES.TTF')
         xfiles = pyglet.font.load('X-Files')
-        lluviaSon = pyglet.resource.media('rain.wav', streaming=False)
+        self.lluviaSon = pyglet.resource.media('rain.wav', streaming=False)
         self.rayoSon = pyglet.resource.media("thunder.wav", streaming=False)
         # La animacion del tanque la creamos a partir de un gif animado
 #         self.tanque = pyglet.sprite.Sprite(pyglet.resource.animation('/res/d.gif'), batch=self.batch, group=self.grupoMedio)
@@ -149,12 +149,22 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
             pyglet.image.AnimationFrame(pyglet.image.load('../res/Sprites/rain7.png'), 0.1),
             pyglet.image.AnimationFrame(pyglet.image.load('../res/Sprites/rain8.png'), 0.1),
             pyglet.image.AnimationFrame(pyglet.image.load('../res/Sprites/rain9.png'), 0.1),
+            pyglet.image.AnimationFrame(pyglet.image.load('../res/Sprites/rain10.png'), 0.1),
+            pyglet.image.AnimationFrame(pyglet.image.load('../res/Sprites/rain1.png'), 0.1),
+            pyglet.image.AnimationFrame(pyglet.image.load('../res/Sprites/rain1.png'), 0.1),
+            pyglet.image.AnimationFrame(pyglet.image.load('../res/Sprites/rain3.png'), 0.1),
+            pyglet.image.AnimationFrame(pyglet.image.load('../res/Sprites/rain4.png'), 0.1),
+            pyglet.image.AnimationFrame(pyglet.image.load('../res/Sprites/rain5.png'), 0.1),
+            pyglet.image.AnimationFrame(pyglet.image.load('../res/Sprites/rain6.png'), 0.1),
+            pyglet.image.AnimationFrame(pyglet.image.load('../res/Sprites/rain7.png'), 0.1),
+            pyglet.image.AnimationFrame(pyglet.image.load('../res/Sprites/rain8.png'), 0.1),
+            pyglet.image.AnimationFrame(pyglet.image.load('../res/Sprites/rain9.png'), 0.1),
             pyglet.image.AnimationFrame(pyglet.image.load('../res/Sprites/rain10.png'), 0.1)]
         #=======================================================================
         # Registramos para que llueva siempre en la escena
-#         pyglet.clock.schedule_once(self.aparecerLluvia, 0)
-        pyglet.clock.schedule_interval(self.aparecerLluvia, 1.1)
-        lluviaSon.play()
+        pyglet.clock.schedule_once(self.aparecerLluvia, 0.1)
+        pyglet.clock.schedule_interval(self.aparecerLluvia, 2.0)
+        
 
         # Registramos que aparezcan animaciones de humo por pantalla cada 0.8 segundos
         #  para dar la impresion de un bombardeo
@@ -281,48 +291,78 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
         # Creamos la animacion del fuego
         #=======================================================================
         animacionLluvia = pyglet.sprite.Sprite(pyglet.image.Animation( self.animacionLluviaFrames ), batch=self.batch, group=self.grupoDelante)
-        animacionLluvia.scale = 3.5
-#         animacionLluvia.scale = 1
+#         animacionLluvia.scale = 3.5
+        animacionLluvia.scale = 1
         animacionLluvia.set_position(0, 0)
-#         animacionLluvia2 = pyglet.sprite.Sprite(pyglet.image.Animation( self.animacionLluviaFrames ), batch=self.batch, group=self.grupoDelante)
-# #         animacionLluvia.scale = 3.5
-#         animacionLluvia2.scale = 1
-#         animacionLluvia2.set_position(animacionLluvia.width, animacionLluvia.height-5)
-#         
-#         animacionLluvia3 = pyglet.sprite.Sprite(pyglet.image.Animation( self.animacionLluviaFrames ), batch=self.batch, group=self.grupoDelante)
-# #         animacionLluvia.scale = 3.5
-#         animacionLluvia3.scale = 1
-#         animacionLluvia3.set_position(animacionLluvia.width, 0)
-#         
-#         animacionLluvia4 = pyglet.sprite.Sprite(pyglet.image.Animation( self.animacionLluviaFrames ), batch=self.batch, group=self.grupoDelante)
-# #         animacionLluvia.scale = 3.5
-#         animacionLluvia4.scale = 1
-#         animacionLluvia4.set_position(0, animacionLluvia.height-5)
-#         
-#         animacionLluvia5 = pyglet.sprite.Sprite(pyglet.image.Animation( self.animacionLluviaFrames ), batch=self.batch, group=self.grupoDelante)
-# #         animacionLluvia.scale = 3.5
-#         animacionLluvia5.scale = 1
-#         animacionLluvia5.set_position(2*animacionLluvia.width, 0)
-#         
-#         animacionLluvia6 = pyglet.sprite.Sprite(pyglet.image.Animation( self.animacionLluviaFrames ), batch=self.batch, group=self.grupoDelante)
-# #         animacionLluvia.scale = 3.5
-#         animacionLluvia6.scale = 1
-#         animacionLluvia6.set_position(0, 2*(animacionLluvia.height-5))
-#         
-#         animacionLluvia7 = pyglet.sprite.Sprite(pyglet.image.Animation( self.animacionLluviaFrames ), batch=self.batch, group=self.grupoDelante)
-# #         animacionLluvia.scale = 3.5
-#         animacionLluvia7.scale = 1
-#         animacionLluvia7.set_position(2*animacionLluvia.width, 2*(animacionLluvia.height-5))
-#         
-#         animacionLluvia8 = pyglet.sprite.Sprite(pyglet.image.Animation( self.animacionLluviaFrames ), batch=self.batch, group=self.grupoDelante)
-# #         animacionLluvia.scale = 3.5
-#         animacionLluvia8.scale = 1
-#         animacionLluvia8.set_position(2*animacionLluvia.width, animacionLluvia.height-5)
-#         
-#         animacionLluvia9 = pyglet.sprite.Sprite(pyglet.image.Animation( self.animacionLluviaFrames ), batch=self.batch, group=self.grupoDelante)
-# #         animacionLluvia.scale = 3.5
-#         animacionLluvia9.scale = 1
-#         animacionLluvia9.set_position(animacionLluvia.width, 2*(animacionLluvia.height-5))
+        animacionLluvia2 = pyglet.sprite.Sprite(pyglet.image.Animation( self.animacionLluviaFrames ), batch=self.batch, group=self.grupoDelante)
+#         animacionLluvia.scale = 3.5
+        animacionLluvia2.scale = 1
+        animacionLluvia2.set_position(animacionLluvia.width, animacionLluvia.height-5)
+         
+        animacionLluvia3 = pyglet.sprite.Sprite(pyglet.image.Animation( self.animacionLluviaFrames ), batch=self.batch, group=self.grupoDelante)
+#         animacionLluvia.scale = 3.5
+        animacionLluvia3.scale = 1
+        animacionLluvia3.set_position(animacionLluvia.width, 0)
+         
+        animacionLluvia4 = pyglet.sprite.Sprite(pyglet.image.Animation( self.animacionLluviaFrames ), batch=self.batch, group=self.grupoDelante)
+#         animacionLluvia.scale = 3.5
+        animacionLluvia4.scale = 1
+        animacionLluvia4.set_position(0, animacionLluvia.height-5)
+         
+        animacionLluvia5 = pyglet.sprite.Sprite(pyglet.image.Animation( self.animacionLluviaFrames ), batch=self.batch, group=self.grupoDelante)
+#         animacionLluvia.scale = 3.5
+        animacionLluvia5.scale = 1
+        animacionLluvia5.set_position(2*animacionLluvia.width, 0)
+         
+        animacionLluvia6 = pyglet.sprite.Sprite(pyglet.image.Animation( self.animacionLluviaFrames ), batch=self.batch, group=self.grupoDelante)
+#         animacionLluvia.scale = 3.5
+        animacionLluvia6.scale = 1
+        animacionLluvia6.set_position(0, 2*(animacionLluvia.height-5))
+         
+        animacionLluvia7 = pyglet.sprite.Sprite(pyglet.image.Animation( self.animacionLluviaFrames ), batch=self.batch, group=self.grupoDelante)
+#         animacionLluvia.scale = 3.5
+        animacionLluvia7.scale = 1
+        animacionLluvia7.set_position(2*animacionLluvia.width, 2*(animacionLluvia.height-5))
+         
+        animacionLluvia8 = pyglet.sprite.Sprite(pyglet.image.Animation( self.animacionLluviaFrames ), batch=self.batch, group=self.grupoDelante)
+#         animacionLluvia.scale = 3.5
+        animacionLluvia8.scale = 1
+        animacionLluvia8.set_position(2*animacionLluvia.width, animacionLluvia.height-5)
+         
+        animacionLluvia9 = pyglet.sprite.Sprite(pyglet.image.Animation( self.animacionLluviaFrames ), batch=self.batch, group=self.grupoDelante)
+#         animacionLluvia.scale = 3.5
+        animacionLluvia9.scale = 1
+        animacionLluvia9.set_position(animacionLluvia.width, 2*(animacionLluvia.height-5))
+        
+        
+        animacionLluvia10 = pyglet.sprite.Sprite(pyglet.image.Animation( self.animacionLluviaFrames ), batch=self.batch, group=self.grupoDelante)
+#         animacionLluvia.scale = 3.5
+        animacionLluvia10.scale = 1
+        animacionLluvia10.set_position(3*animacionLluvia.width, 0)
+         
+        animacionLluvia11 = pyglet.sprite.Sprite(pyglet.image.Animation( self.animacionLluviaFrames ), batch=self.batch, group=self.grupoDelante)
+#         animacionLluvia.scale = 3.5
+        animacionLluvia11.scale = 1
+        animacionLluvia11.set_position(3*animacionLluvia.width, animacionLluvia.height-5)
+         
+        animacionLluvia12 = pyglet.sprite.Sprite(pyglet.image.Animation( self.animacionLluviaFrames ), batch=self.batch, group=self.grupoDelante)
+#         animacionLluvia.scale = 3.5
+        animacionLluvia12.scale = 1
+        animacionLluvia12.set_position(3*animacionLluvia.width, 2*(animacionLluvia.height-5))
+        self.lluviaSon.play()
+        
+        pyglet.clock.schedule_once(self.eliminarAnimacion, animacionLluvia.image.get_duration(), animacionLluvia)
+        pyglet.clock.schedule_once(self.eliminarAnimacion, animacionLluvia2.image.get_duration(), animacionLluvia2)
+        pyglet.clock.schedule_once(self.eliminarAnimacion, animacionLluvia3.image.get_duration(), animacionLluvia3)
+        pyglet.clock.schedule_once(self.eliminarAnimacion, animacionLluvia4.image.get_duration(), animacionLluvia4)
+        pyglet.clock.schedule_once(self.eliminarAnimacion, animacionLluvia5.image.get_duration(), animacionLluvia5)
+        pyglet.clock.schedule_once(self.eliminarAnimacion, animacionLluvia6.image.get_duration(), animacionLluvia6)
+        pyglet.clock.schedule_once(self.eliminarAnimacion, animacionLluvia7.image.get_duration(), animacionLluvia7)
+        pyglet.clock.schedule_once(self.eliminarAnimacion, animacionLluvia8.image.get_duration(), animacionLluvia8)
+        pyglet.clock.schedule_once(self.eliminarAnimacion, animacionLluvia9.image.get_duration(), animacionLluvia9)
+        pyglet.clock.schedule_once(self.eliminarAnimacion, animacionLluvia10.image.get_duration(), animacionLluvia10)
+        pyglet.clock.schedule_once(self.eliminarAnimacion, animacionLluvia11.image.get_duration(), animacionLluvia11)
+        pyglet.clock.schedule_once(self.eliminarAnimacion, animacionLluvia12.image.get_duration(), animacionLluvia12)
         #=======================================================================
 
 
@@ -363,8 +403,8 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
 
     def close(self):
         # Restablecemos la duracion de cada frame del tanque
-        for frame in self.tanque.image.frames:
-            frame.duration = 0.05
+#         for frame in self.tanque.image.frames:
+#             frame.duration = 0.05
         pyglet.window.Window.close(self);
 
 
