@@ -95,7 +95,6 @@ class Fase(EscenaPygame):
         self.posicionx = 0
         self.rectSubimagen = pygame.Rect(0, 0, ANCHO_PANTALLA, ALTO_PANTALLA)
         self.rectSubimagen.left = self.posicionx
-
         # Creamos las plataformas del decorado
         # La plataforma que conforma todo el suelo
         plataformaSuelo = Plataforma(pygame.Rect(0, 550, 1200, 15))

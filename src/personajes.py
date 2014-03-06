@@ -18,13 +18,13 @@ ARRIBA = 3
 ABAJO = 4
 
 #Posturas
-SPRITE_QUIETO = 0
+SPRITE_QUIETO = 3
 SPRITE_ANDANDO = 1
-SPRITE_SUBIENDO = 2
-SPRITE_BAJANDO = 3
+SPRITE_SUBIENDO = 0
+SPRITE_BAJANDO = 2
 
 # Velocidades de los distintos personajes
-VELOCIDAD_JUGADOR = 0.1 # Pixeles por milisegundo
+VELOCIDAD_JUGADOR = 0.05 # Pixeles por milisegundo
 VELOCIDAD_SALTO_JUGADOR = 0.3 # Pixeles por milisegundo
 RETARDO_ANIMACION_JUGADOR = 1 / VELOCIDAD_JUGADOR
 
@@ -50,7 +50,9 @@ def load_image(name, colorkey=None):
     if colorkey is not None:
         if colorkey is -1:
             colorkey = image.get_at((0,0))
+            print colorkey
         image.set_colorkey(colorkey, RLEACCEL)
+        print image.get_at((0,0))
     return image
 
 # -------------------------------------------------
@@ -95,7 +97,7 @@ class Personaje(pygame.sprite.Sprite):
         self.numImagenPostura = 0;
         cont = 0;
         self.coordenadasHoja = [];
-        for linea in range(0, 3):
+        for linea in range(0, 4):
             self.coordenadasHoja.append([])
             tmp = self.coordenadasHoja[linea]
             for postura in range(1, numImagenes[linea]+1):
@@ -180,10 +182,10 @@ class Personaje(pygame.sprite.Sprite):
         # Actualizamos la posicion
         self.posiciony += incrementoy
         self.rect.bottom = self.posiciony
-#         if (incrementoy>0):
-#             self.numPostura = SPRITE_SUBIENDO
-#         else:
-#             self.numPostura = SPRITE_BAJANDO
+        if (incrementoy<0):
+            self.numPostura = SPRITE_SUBIENDO
+        else:
+            self.numPostura = SPRITE_BAJANDO
 
     def update(self, grupoPlataformas, tiempo):
         # Si vamos a la izquierda
@@ -221,7 +223,7 @@ class Jugador(Personaje):
     "Cualquier personaje del juego"
     def __init__(self):
         # Invocamos al constructor de la clase padre con la configuracion de este personaje concreto
-        Personaje.__init__(self,'../res/Sprites/badass.png','../res/BadassCoordJugador.txt', [6, 12, 12], VELOCIDAD_JUGADOR, VELOCIDAD_SALTO_JUGADOR, RETARDO_ANIMACION_JUGADOR);
+        Personaje.__init__(self,'../res/Sprites/badass.png','../res/BadassCoordJugador.txt', [6, 6, 6, 1], VELOCIDAD_JUGADOR, VELOCIDAD_SALTO_JUGADOR, RETARDO_ANIMACION_JUGADOR);
 
 
     def mover(self, teclasPulsadas, arriba, abajo, izquierda, derecha):

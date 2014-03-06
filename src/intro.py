@@ -14,8 +14,11 @@ from pygame.locals import *
 VELOCIDAD_SOL = 0.1 # Pixeles por milisegundo
 
 
-MINIMO_X_JUGADOR = 50
+MINIMO_X_JUGADOR = 100
 MAXIMO_X_JUGADOR = ANCHO_PANTALLA - 100
+
+MINIMO_Y_JUGADOR = 100
+MAXIMO_Y_JUGADOR = ALTO_PANTALLA - 100
 
 class Intro(EscenaPygame):
     def __init__(self, director, jugador1):
@@ -46,20 +49,24 @@ class Intro(EscenaPygame):
         # De esta forma, se podrian tener muchas fases distintas con esta clase
 
         # Cargamos el decorado
-        self.image = load_image('../res/maps/primerinterior.png', -1)
-        self.image = pygame.transform.scale(self.image, (ANCHO_PANTALLA, ALTO_PANTALLA))
-
+#         self.image = load_image('../res/maps/primerinterior.png', -1)
+        self.image = load_image('../res/maps/mapa.png', -1)
+#         self.image = pygame.transform.scale(self.image, (ANCHO_PANTALLA, ALTO_PANTALLA))
+        self.image = pygame.transform.scale(self.image, (ANCHO_PANTALLA*2, ALTO_PANTALLA))
         self.rect = self.image.get_rect()
         self.rect.bottom = ALTO_PANTALLA
-
+        
         # Creamos el fondo
         #self.sol = Fondo('../res/maps/gransalon.png')
 
         # Que parte del decorado estamos visualizando
         self.posicionx = 0
+        self.posiciony = 0
         self.rectSubimagen = pygame.Rect(0, 0, ANCHO_PANTALLA, ALTO_PANTALLA)
-        self.rectSubimagen.left = self.posicionx
-
+#         self.rectSubimagen.left = self.posicionx
+#         self.rectSubimagen.bottom = self.posiciony
+        self.rectSubimagen.topleft = (self.posicionx, self.posiciony)
+        
         # Creamos las plataformas del decorado
         # La plataforma que conforma todo el suelo
         plataformaSuelo = Plataforma(pygame.Rect(0, 550, 1200, 15))
@@ -70,6 +77,97 @@ class Intro(EscenaPygame):
 
     def posicionesInicioJugadores(self):
         return self.inicioJugador1
+    
+    
+    # Desplaza todo el decorado y los objetos (plataformas, enemigos) que hay en el
+    def desplazarDecoradox(self, desplazamiento, jugadorAMover):
+        # Desplazamos el jugador a mover hacia el lado contrario
+        jugadorAMover.posicionx -= desplazamiento
+        jugadorAMover.rect.left = jugadorAMover.posicionx
+        # La imagen que se muestra hacia ese lado
+        self.posicionx += desplazamiento
+
+        # Actualizamos el grupo de plataformas para que tambien se desplacen al lado contrario
+        self.grupoPlataformas.update(-desplazamiento)
+
+        # Actualizamos cual es la parte de la imagen del decorado que se muestra en pantalla
+        self.rectSubimagen.left = self.posicionx
+        
+        # Desplaza todo el decorado y los objetos (plataformas, enemigos) que hay en el
+    def desplazarDecoradoy(self, desplazamiento, jugadorAMover):
+        # Desplazamos el jugador a mover hacia el lado contrario
+        jugadorAMover.posiciony -= desplazamiento
+        jugadorAMover.rect.top = jugadorAMover.posiciony
+        # La imagen que se muestra hacia ese lado
+        self.posiciony += desplazamiento
+
+        # Actualizamos el grupo de plataformas para que tambien se desplacen al lado contrario
+        self.grupoPlataformas.update(-desplazamiento)
+
+        # Actualizamos cual es la parte de la imagen del decorado que se muestra en pantalla
+        self.rectSubimagen.topleft = (self.posicionx, self.posiciony)
+    
+    def actualizarScroll(self, jugador1):
+#         if (jugador1.posicionx<=MINIMO_X_JUGADOR):
+#             jugador1.posicionx = MINIMO_X_JUGADOR
+#             return
+        # Si el jugador de la izquierda quiere moverse mas a la izquierda
+        if (jugador1.posicionx<MINIMO_X_JUGADOR):
+            desplazamiento = MINIMO_X_JUGADOR - jugador1.posicionx
+            jugador1.posicionx = MINIMO_X_JUGADOR
+
+            # Si el escenario ya está a la izquierda del todo, no lo movemos mas
+            if self.posicionx <= 0:
+                self.posicionx = 0
+
+            # Si se puede hacer scroll a la izquierda
+            else:
+                # Desplazamos todo el decorado a la izquierda, incluyendo el jugador que este en la derecha
+                self.desplazarDecoradox(-desplazamiento, jugador1)
+
+        # Si el jugador de la derecha quiere moverse mas a la derecha
+        if (jugador1.posicionx>MAXIMO_X_JUGADOR):
+            desplazamiento = jugador1.posicionx - MAXIMO_X_JUGADOR
+            jugador1.posicionx = MAXIMO_X_JUGADOR
+ 
+            # Si el escenario ya está a la derecha del todo, no lo movemos mas
+            if self.posicionx + ANCHO_PANTALLA >= self.image.get_rect().right:
+                self.posicionx = self.image.get_rect().right - ANCHO_PANTALLA
+ 
+            # Si se puede hacer scroll a la derecha
+            else:
+                # Desplazamos todo el decorado a la derecha, incluyendo el jugador que este en la izquierda
+                self.desplazarDecoradox(desplazamiento, jugador1)
+        
+        
+        # Si el jugador de la izquierda quiere moverse mas a la izquierda
+        if (jugador1.posiciony<MINIMO_Y_JUGADOR):
+            desplazamiento = MINIMO_Y_JUGADOR - jugador1.posiciony
+            jugador1.posiciony = MINIMO_Y_JUGADOR
+
+            # Si el escenario ya está a abajo del todo, no lo movemos mas
+            if self.posiciony <= 0:
+                self.posiciony = 0
+
+            # Si se puede hacer scroll a la izquierda
+            else:
+                # Desplazamos todo el decorado a la izquierda, incluyendo el jugador que este en la derecha
+                self.desplazarDecoradoy(-desplazamiento, jugador1)
+
+        # Si el jugador de la derecha quiere moverse mas a la derecha
+        if (jugador1.posiciony>MAXIMO_Y_JUGADOR):
+            desplazamiento = jugador1.posiciony - MAXIMO_Y_JUGADOR
+            jugador1.posiciony = MAXIMO_Y_JUGADOR
+ 
+            # Si el escenario ya está a la derecha del todo, no lo movemos mas
+            if self.posiciony + ALTO_PANTALLA >= self.image.get_rect().right:
+                self.posiciony = self.image.get_rect().right - ALTO_PANTALLA
+ 
+            # Si se puede hacer scroll a la derecha
+            else:
+                # Desplazamos todo el decorado a la derecha, incluyendo el jugador que este en la izquierda
+                self.desplazarDecoradoy(desplazamiento, jugador1)
+                
     # Se actualiza el decorado, realizando las siguientes acciones:
     #  Se actualizan los jugadores con los movimientos a realizar
     #  Se actualiza la posicion del sol y el color del cielo
@@ -82,10 +180,9 @@ class Intro(EscenaPygame):
         
         self.grupoJugadores.update(self.grupoPlataformas, tiempo)
         
-        
         # Actualizamos la posicion del sol y el color del cielo
         #self.sol.update(tiempo)
-
+        self.actualizarScroll(self.jugador1)
         
     def dibujar(self):
         # Ponemos primero el sol y cielo
