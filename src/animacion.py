@@ -43,7 +43,7 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
     def __init__(self, director):
         # Constructores de las clases padres
         EscenaPyglet.__init__(self, director)
-        pyglet.window.Window.__init__(self, ANCHO_PANTALLA, ALTO_PANTALLA)
+        self.window = pyglet.window.Window.__init__(self, ANCHO_PANTALLA, ALTO_PANTALLA)
         
         pyglet.resource.path = ['.', '../res', '../res/maps', '../res/Sounds', '../res/Sprites']
         pyglet.resource.reindex()
@@ -196,14 +196,14 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
         hoja.set_data('RGBA', pitch, "".join(pixels))
 
         # Leemos las coordenadas de un archivo de texto
-        numImagenes = [6, 12, 12]
+        numImagenes = [6, 6, 6]
         pfile=open('../res/BadassCoordJugador.txt','r')
         datos=pfile.read()
         pfile.close()
         datos = datos.split()
         corredorFrames = []
         espaldasFrames = []
-        for coord in range(12):
+        for coord in range(6):
             corredorFrames.append(pyglet.image.AnimationFrame(hoja.get_region(int(datos[24 + coord*4]), hoja.height-int(datos[24 + coord*4 + 1])-int(datos[24 + coord*4 + 3]), int(datos[24 + coord*4 + 2]), int(datos[24 + coord*4 + 3])), 0.1))
         for coord in range(6):
             espaldasFrames.append(pyglet.image.AnimationFrame(hoja.get_region(int(datos[coord*4]), hoja.height-int(datos[coord*4 + 1])-int(datos[coord*4 + 3]), int(datos[coord*4 + 2]), int(datos[coord*4 + 3])), 0.1))
@@ -390,6 +390,7 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
 
     # Si intentan cerrar esta ventana, saldremos de la escena
     def on_close(self):
+        pyglet.window.Window.dispatch_events()
         self.director.salirEscena()
 
 
@@ -405,6 +406,7 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
         # Restablecemos la duracion de cada frame del tanque
 #         for frame in self.tanque.image.frames:
 #             frame.duration = 0.05
+#         pyglet.window.Window.dispatch_events()
         pyglet.window.Window.close(self);
 
 
