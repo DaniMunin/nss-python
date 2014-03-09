@@ -14,11 +14,11 @@ from pygame.locals import *
 VELOCIDAD_SOL = 0.1 # Pixeles por milisegundo
 
 
-MINIMO_X_JUGADOR = 100
-MAXIMO_X_JUGADOR = ANCHO_PANTALLA - 100
+MINIMO_X_JUGADOR = 75
+MAXIMO_X_JUGADOR = ANCHO_PANTALLA - 75
 
-MINIMO_Y_JUGADOR = 100
-MAXIMO_Y_JUGADOR = ALTO_PANTALLA - 100
+MINIMO_Y_JUGADOR = 75
+MAXIMO_Y_JUGADOR = ALTO_PANTALLA - 75
 
 class Intro(EscenaPygame):
     def __init__(self, director, jugador1):
@@ -34,8 +34,8 @@ class Intro(EscenaPygame):
         self.jugador1 = jugador1
         self.grupoJugadores = pygame.sprite.Group(jugador1)
         
-        jugador1.establecerPosicion(ANCHO_PANTALLA/2, ALTO_PANTALLA*6/7)
-        
+#         jugador1.establecerPosicion(ANCHO_PANTALLA/2, ALTO_PANTALLA*6/7)
+        jugador1.establecerPosicion(ANCHO_PANTALLA*5/7, ALTO_PANTALLA*6)
         jugador1.numPostura = QUIETO
         
         # Habria que pasarle como parámetro el número de fase, a partir del cual se cargue
@@ -50,11 +50,12 @@ class Intro(EscenaPygame):
 
         # Cargamos el decorado
 #         self.image = load_image('../res/maps/primerinterior.png', -1)
-        self.image = load_image('../res/maps/mapa.png', -1)
+        self.image = load_image('../res/maps/mapa2.png', -1)
 #         self.image = pygame.transform.scale(self.image, (ANCHO_PANTALLA, ALTO_PANTALLA))
-        self.image = pygame.transform.scale(self.image, (ANCHO_PANTALLA*2, ALTO_PANTALLA))
+#         self.image = pygame.transform.scale(self.image, (ANCHO_PANTALLA*2, ALTO_PANTALLA))
+        self.image = pygame.transform.scale(self.image, (ANCHO_PANTALLA*4, ALTO_PANTALLA*4))
         self.rect = self.image.get_rect()
-        self.rect.bottom = ALTO_PANTALLA
+        self.rect.bottom = ALTO_PANTALLA*4
         
         # Creamos el fondo
         #self.sol = Fondo('../res/maps/gransalon.png')
@@ -72,8 +73,12 @@ class Intro(EscenaPygame):
         plataformaSuelo = Plataforma(pygame.Rect(0, 550, 1200, 15))
         # La plataforma del techo del edificio
         plataformaCasa = Plataforma(pygame.Rect(870, 417, 200, 10))
+        
+#         mask = load_image('../res/maps/maskmap.png', -1)
+#         self.mascaraPrueba = pygame.mask.from_surface(mask)
+#         self.image
         # y el grupo con las mismas
-        self.grupoPlataformas = pygame.sprite.Group( plataformaSuelo, plataformaCasa )
+        self.grupoPlataformas = pygame.sprite.Group( plataformaSuelo, plataformaCasa)
 
     def posicionesInicioJugadores(self):
         return self.inicioJugador1
@@ -176,9 +181,10 @@ class Intro(EscenaPygame):
     #  Se actualiza el scroll del decorado y los objetos en el
     def update(self, tiempo):
         
+# #         if pygame.sprite.spritecollide(self.grupoJugadores,self.grupoMascaras,False,pygame.sprite.collide_mask):
         self.grupoJugadores.update(self.grupoPlataformas, tiempo)
         
-        self.grupoJugadores.update(self.grupoPlataformas, tiempo)
+        #self.grupoJugadores.update(self.grupoPlataformas, tiempo)
         
         # Actualizamos la posicion del sol y el color del cielo
         #self.sol.update(tiempo)

@@ -24,7 +24,7 @@ SPRITE_SUBIENDO = 0
 SPRITE_BAJANDO = 2
 
 # Velocidades de los distintos personajes
-VELOCIDAD_JUGADOR = 0.05 # Pixeles por milisegundo
+VELOCIDAD_JUGADOR = 0.1 # Pixeles por milisegundo
 VELOCIDAD_SALTO_JUGADOR = 0.3 # Pixeles por milisegundo
 RETARDO_ANIMACION_JUGADOR = 1 / VELOCIDAD_JUGADOR
 
