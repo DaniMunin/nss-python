@@ -70,7 +70,7 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
         xfiles = pyglet.font.load('X-Files')
         self.lluviaSon = pyglet.resource.media('rain.wav', streaming=False)
         self.rayoSon = pyglet.resource.media("thunder.wav", streaming=False)
-        
+        self.playerR = self.rayoSon.play()
         
         
         # La animacion del tanque la creamos a partir de un gif animado
@@ -234,7 +234,7 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
         
         self.text = pyglet.text.Label('Es una tarde de tormenta en la ciudad.\n Me han enviado a un caso típico de asesinato que los inútiles de la policía no saben resolver.\n Como siempre VINCENT BADASS a resolver los problemas.',
                       font_name='X-Files', multiline=True,
-                      font_size=26, color=(0, 0, 0, 255), width = ANCHO_PANTALLA/2 - 20, 
+                      font_size=26, color=(255, 255, 255, 255), width = ANCHO_PANTALLA/2 - 20, 
                       x=ANCHO_PANTALLA/4, y=ALTO_PANTALLA/2, batch = self.batch,
                       anchor_x='center', anchor_y='center',
                       group = self.grupoDelante)
@@ -264,7 +264,7 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
         # Decimos que aparezca en un sitio aleatorio del cielo
         animacionRayo.set_position(random.uniform(20, ANCHO_PANTALLA-20), random.uniform(20, ALTO_PANTALLA-20))
 
-        self.rayoSon.play()
+        self.playerR = self.rayoSon.play()
         # Programamos que se elimine la animacion cuando termine
         pyglet.clock.schedule_once(self.eliminarAnimacion, animacionRayo.image.get_duration(), animacionRayo)
         
@@ -384,7 +384,7 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
         
     # Metodo para hacer aparecer el sonido de lluvia
     def sonidoLluvia(self, tiempo):
-        self.player = self.lluviaSon.play()
+        self.playerL = self.lluviaSon.play()
 
     
     # El evento relativo a la pulsacion de una tecla
@@ -435,7 +435,8 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
         pyglet.clock.unschedule(self.aparecerRayo)
         pyglet.clock.unschedule(self.aparecerLluvia)
         pyglet.clock.unschedule(self.sonidoLluvia)
-        self.player.pause()
+        self.playerL.pause()
+        self.playerR.pause()
 #         self.player.stop()
 #         stop = time()+6
 #         while time() < stop:
@@ -475,14 +476,14 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
                 self.text.delete()
                 self.text = pyglet.text.Label('El muerto es Fanuel Mraga, hombre rico y con poder.\n Un conjunto de sospechosos ricos y con poder más un mayordomo.',
                       font_name='X-Files', multiline=True,
-                      font_size=26, color=(0, 0, 0, 255), width = ANCHO_PANTALLA/2 - 50, 
+                      font_size=26, color=(255, 255, 255, 255), width = ANCHO_PANTALLA/2 - 50, 
                       x=ANCHO_PANTALLA/4, y=ALTO_PANTALLA/2, batch = self.batch,
                       anchor_x='center', anchor_y='center',
                       group = self.grupoDelante)
                 self.text.draw()
                 self.text2 = pyglet.text.Label('\nEl mayordomo ... me sorprendería que no hubiera sido él.\n Dicen que tenían una sociedad secreta que realizaba ritos de diferente tipo.',
                       font_name='X-Files', multiline=True,
-                      font_size=26, color=(0, 0, 0, 255), width = ANCHO_PANTALLA/2 - 50, 
+                      font_size=26, color=(255, 255, 255, 255), width = ANCHO_PANTALLA/2 - 50, 
                       x=3.1*ANCHO_PANTALLA/4, y=ALTO_PANTALLA/2, batch = self.batch,
                       anchor_x='center', anchor_y='center',
                       group = self.grupoDelante)
@@ -500,7 +501,7 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
                 self.text2.delete()
                 self.text = pyglet.text.Label('Tonterías...\n Centrémonos en el mayordomo.\n Quiero salir de aqui pronto o no podré llegar a...',
                       font_name='X-Files', multiline=True,
-                      font_size=26, color=(0, 0, 0, 255), width = ANCHO_PANTALLA/2 - 50, 
+                      font_size=26, color=(255, 255, 255, 255), width = ANCHO_PANTALLA/2 - 50, 
                       x=3.1*ANCHO_PANTALLA/4, y=ALTO_PANTALLA/2, batch = self.batch,
                       anchor_x='center', anchor_y='center',
                       group = self.grupoDelante)
