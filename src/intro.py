@@ -10,9 +10,6 @@ from pygame.locals import *
 # -------------------------------------------------
 # -------------------------------------------------
 
-VELOCIDAD_SOL = 0.1 # Pixeles por milisegundo
-
-
 MINIMO_X_JUGADOR = 50
 MAXIMO_X_JUGADOR = ANCHO_PANTALLA - 50
 
@@ -175,7 +172,11 @@ class Intro(EscenaPygame):
         
             if(pygame.sprite.collide_mask(self.imagemask, self.jugador1)==None):
                self.grupoJugadores.update(tiempo)
-#                print self.imagemask.mask.get_at((self.jugador1.posicionx, self.jugador1.posiciony))
+#                print pygame.sprite.collide_mask(self.imagemask, self.jugador1)
+               print "uhahsd"
+               print (int(self.jugador1.posicionx))
+               print (int(self.jugador1.posiciony))
+#                print self.imagemask.mask.get_at((int(self.jugador1.posicionx), int(self.jugador1.posiciony)))
             else: print "Algoooooo"   
             self.actualizarScroll(self.jugador1)
         
