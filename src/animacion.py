@@ -4,10 +4,10 @@ import pyglet
 from escena import *
 import random
 
-
 VELOCIDAD_TANQUE = 100 # Pixels por segundo
 VELOCIDAD_ROTACION_TANQUE = 10 # Grados por segundo
 VELOCIDAD_CORREDOR = 50 # Pixels por segundo
+VELOCIDAD_ARRIBA = 30 # Pixels por segundo
 
 # Funcion auxiliar que crea una animacion a partir de una imagen que contiene la animacion
 #  dividida en filas y columnas
@@ -56,6 +56,8 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
         # Las animaciones que habra en esta escena
         # No se crean aqui las animaciones en si, porque se empiezan a reproducir cuando se crean
         # Lo que se hace es cargar los frames de disco para que cuando se creen ya esten en memoria
+        
+        
 
         # Creamos el batch de las animaciones
         self.batch = pyglet.graphics.Batch()
@@ -68,6 +70,9 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
         xfiles = pyglet.font.load('X-Files')
         self.lluviaSon = pyglet.resource.media('rain.wav', streaming=False)
         self.rayoSon = pyglet.resource.media("thunder.wav", streaming=False)
+        self.playerR = self.rayoSon.play()
+        
+        
         # La animacion del tanque la creamos a partir de un gif animado
 #         self.tanque = pyglet.sprite.Sprite(pyglet.resource.animation('/res/d.gif'), batch=self.batch, group=self.grupoMedio)
 #         # Esta si que se crea porque estara desde el principio
@@ -164,6 +169,8 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
         # Registramos para que llueva siempre en la escena
         pyglet.clock.schedule_once(self.aparecerLluvia, 0.1)
         pyglet.clock.schedule_interval(self.aparecerLluvia, 2.0)
+        pyglet.clock.schedule_once(self.sonidoLluvia, 0)
+        pyglet.clock.schedule_interval(self.sonidoLluvia, 6.0)
         
 
         # Registramos que aparezcan animaciones de humo por pantalla cada 0.8 segundos
@@ -217,12 +224,21 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
         self.animacionCorredor.visible = True
         # A partir de los frames, se crea la animacion
         self.animacionEspaldas = pyglet.sprite.Sprite(pyglet.image.Animation(espaldasFrames), batch=self.batch, group=self.grupoDetras)
-        self.animacionEspaldas.set_position(ANCHO_PANTALLA/2,40)
+        self.animacionEspaldas.set_position(ANCHO_PANTALLA/2-20,40)
         self.animacionEspaldas.scale = 1
         # Se podria, igual que las anteriores, no haberla creado, sino haberlo hecho
         #  cuando fuese necesario que apareciera, pero en este caso se crea aqui y se
         #  pone como invisible hasta cuandos ea necesario que aparezca
         self.animacionEspaldas.visible = False
+        
+        
+        self.text = pyglet.text.Label('Es una tarde de tormenta en la ciudad.\n Me han enviado a un caso típico de asesinato que los inútiles de la policía no saben resolver.\n Como siempre VINCENT BADASS a resolver los problemas.',
+                      font_name='X-Files', multiline=True,
+                      font_size=26, color=(255, 255, 255, 255), width = ANCHO_PANTALLA/2 - 20, 
+                      x=ANCHO_PANTALLA/4, y=ALTO_PANTALLA/2, batch = self.batch,
+                      anchor_x='center', anchor_y='center',
+                      group = self.grupoDelante)
+        self.text.draw()
 
 
 
@@ -230,7 +246,7 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
     # Metodo que hace aparecer una animacion de humo en el cielo
     def moverMapa(self, tiempo):
         #=======================================================================
-        self.imagen.set_position(self.imagen.x, self.imagen.y -10)
+        self.imagen.set_position(self.imagen.x, self.imagen.y -7)
         #=======================================================================
 
     # El metodo para eliminar una animacion determinada
@@ -248,9 +264,10 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
         # Decimos que aparezca en un sitio aleatorio del cielo
         animacionRayo.set_position(random.uniform(20, ANCHO_PANTALLA-20), random.uniform(20, ALTO_PANTALLA-20))
 
-        self.rayoSon.play()
+        self.playerR = self.rayoSon.play()
         # Programamos que se elimine la animacion cuando termine
         pyglet.clock.schedule_once(self.eliminarAnimacion, animacionRayo.image.get_duration(), animacionRayo)
+        
         #=======================================================================
         
     # Metodo que hace aparecer una animacion de humo en el cielo
@@ -349,7 +366,6 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
 #         animacionLluvia.scale = 3.5
         animacionLluvia12.scale = 1
         animacionLluvia12.set_position(3*animacionLluvia.width, 2*(animacionLluvia.height-5))
-        self.lluviaSon.play()
         
         pyglet.clock.schedule_once(self.eliminarAnimacion, animacionLluvia.image.get_duration(), animacionLluvia)
         pyglet.clock.schedule_once(self.eliminarAnimacion, animacionLluvia2.image.get_duration(), animacionLluvia2)
@@ -363,8 +379,12 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
         pyglet.clock.schedule_once(self.eliminarAnimacion, animacionLluvia10.image.get_duration(), animacionLluvia10)
         pyglet.clock.schedule_once(self.eliminarAnimacion, animacionLluvia11.image.get_duration(), animacionLluvia11)
         pyglet.clock.schedule_once(self.eliminarAnimacion, animacionLluvia12.image.get_duration(), animacionLluvia12)
+        
         #=======================================================================
-
+        
+    # Metodo para hacer aparecer el sonido de lluvia
+    def sonidoLluvia(self, tiempo):
+        self.playerL = self.lluviaSon.play()
 
     
     # El evento relativo a la pulsacion de una tecla
@@ -390,7 +410,10 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
 
     # Si intentan cerrar esta ventana, saldremos de la escena
     def on_close(self):
-        pyglet.window.Window.dispatch_events()
+        print "acaba2"
+        pyglet.clock.unschedule(self.aparecerRayo)
+        pyglet.clock.unschedule(self.aparecerLluvia)
+        pyglet.clock.unschedule(self.sonidoLluvia)
         self.director.salirEscena()
 
 
@@ -407,6 +430,17 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
 #         for frame in self.tanque.image.frames:
 #             frame.duration = 0.05
 #         pyglet.window.Window.dispatch_events()
+        print "acaba"
+        self.fin = True
+        pyglet.clock.unschedule(self.aparecerRayo)
+        pyglet.clock.unschedule(self.aparecerLluvia)
+        pyglet.clock.unschedule(self.sonidoLluvia)
+        self.playerL.pause()
+        self.playerR.pause()
+#         self.player.stop()
+#         stop = time()+6
+#         while time() < stop:
+#             print"ll"
         pyglet.window.Window.close(self);
 
 
@@ -436,16 +470,24 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
         if self.animacionCorredor.visible:
             self.animacionCorredor.x -= tiempo*VELOCIDAD_CORREDOR
             # Ademas, si llega al centro cambiamos la animación
-            if (self.animacionCorredor.x<(ANCHO_PANTALLA/2))&(self.animacionCorredor.x>(ANCHO_PANTALLA/2)-5):
+            if (self.animacionCorredor.x<(ANCHO_PANTALLA/2-20))&(self.animacionCorredor.x>(ANCHO_PANTALLA/2)-25):
                 print "hola"
                 
-                label = pyglet.text.Label('Hello, world',
-                          font_name='X-Files',
-                          font_size=36, color=(0, 0, 0, 255),
-                          x=self.animacionCorredor.x, y=self.animacionCorredor.y, batch = self.batch,
-                          anchor_x='center', anchor_y='center',
-                          group = self.grupoDelante)
-                label.draw()
+                self.text.delete()
+                self.text = pyglet.text.Label('El muerto es Fanuel Mraga, hombre rico y con poder.\n Un conjunto de sospechosos ricos y con poder más un mayordomo.',
+                      font_name='X-Files', multiline=True,
+                      font_size=26, color=(255, 255, 255, 255), width = ANCHO_PANTALLA/2 - 50, 
+                      x=ANCHO_PANTALLA/4, y=ALTO_PANTALLA/2, batch = self.batch,
+                      anchor_x='center', anchor_y='center',
+                      group = self.grupoDelante)
+                self.text.draw()
+                self.text2 = pyglet.text.Label('\nEl mayordomo ... me sorprendería que no hubiera sido él.\n Dicen que tenían una sociedad secreta que realizaba ritos de diferente tipo.',
+                      font_name='X-Files', multiline=True,
+                      font_size=26, color=(255, 255, 255, 255), width = ANCHO_PANTALLA/2 - 50, 
+                      x=3.1*ANCHO_PANTALLA/4, y=ALTO_PANTALLA/2, batch = self.batch,
+                      anchor_x='center', anchor_y='center',
+                      group = self.grupoDelante)
+                self.text2.draw()
                 pyglet.clock.schedule_interval(self.moverMapa, 0.5)
                 self.animacionCorredor.visible = False
                 self.animacionEspaldas.visible = True
@@ -453,8 +495,19 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
 #             if self.animacionCorredor.x<0:
 #                 self.director.salirEscena()
         if self.animacionEspaldas.visible:
-            self.animacionEspaldas.y += tiempo*VELOCIDAD_CORREDOR
+            self.animacionEspaldas.y += tiempo*VELOCIDAD_ARRIBA
+            if (self.animacionEspaldas.y>(ALTO_PANTALLA/2))&(self.animacionEspaldas.y<(ALTO_PANTALLA/2)+5):
+                self.text.delete()
+                self.text2.delete()
+                self.text = pyglet.text.Label('Tonterías...\n Centrémonos en el mayordomo.\n Quiero salir de aqui pronto o no podré llegar a...',
+                      font_name='X-Files', multiline=True,
+                      font_size=26, color=(255, 255, 255, 255), width = ANCHO_PANTALLA/2 - 50, 
+                      x=3.1*ANCHO_PANTALLA/4, y=ALTO_PANTALLA/2, batch = self.batch,
+                      anchor_x='center', anchor_y='center',
+                      group = self.grupoDelante)
+                self.text.draw()
             if self.animacionEspaldas.y>450:
+                self.text.delete()
                 self.director.salirEscena()
 
 
