@@ -3,6 +3,7 @@
 import pyglet
 from escena import *
 import random
+from animacionSalon import *
 
 VELOCIDAD_TANQUE = 100 # Pixels por segundo
 VELOCIDAD_ROTACION_TANQUE = 10 # Grados por segundo
@@ -410,7 +411,6 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
 
     # Si intentan cerrar esta ventana, saldremos de la escena
     def on_close(self):
-        print "acaba2"
         pyglet.clock.unschedule(self.aparecerRayo)
         pyglet.clock.unschedule(self.aparecerLluvia)
         pyglet.clock.unschedule(self.sonidoLluvia)
@@ -421,16 +421,18 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
     def on_mouse_press(self, x, y, button, modifiers):
         # Si se pulsa el boton izquierdo
         if (pyglet.window.mouse.LEFT == button):
-            self.director.salirEscena()
+            self.salirEscena()
         return
 
-
+    def salirEscena(self):
+        escenaSig = AnimacionSalon(self.director)
+        self.director.cambiarEscena(escenaSig)    
+        
     def close(self):
         # Restablecemos la duracion de cada frame del tanque
 #         for frame in self.tanque.image.frames:
 #             frame.duration = 0.05
 #         pyglet.window.Window.dispatch_events()
-        print "acaba"
         self.fin = True
         pyglet.clock.unschedule(self.aparecerRayo)
         pyglet.clock.unschedule(self.aparecerLluvia)
@@ -471,8 +473,6 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
             self.animacionCorredor.x -= tiempo*VELOCIDAD_CORREDOR
             # Ademas, si llega al centro cambiamos la animación
             if (self.animacionCorredor.x<(ANCHO_PANTALLA/2-20))&(self.animacionCorredor.x>(ANCHO_PANTALLA/2)-25):
-                print "hola"
-                
                 self.text.delete()
                 self.text = pyglet.text.Label('El muerto es Fanuel Mraga, hombre rico y con poder.\n Un conjunto de sospechosos ricos y con poder más un mayordomo.',
                       font_name='X-Files', multiline=True,
@@ -508,6 +508,6 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
                 self.text.draw()
             if self.animacionEspaldas.y>450:
                 self.text.delete()
-                self.director.salirEscena()
+                self.salirEscena()
 
 

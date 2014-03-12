@@ -20,7 +20,6 @@ class AplicacionJuego():
     
     def ejecutar(self):
 
-        while True:
 
             # Creamos la escena con la pantalla inicial
             escena = EscenaMenu(self.director)
@@ -31,33 +30,23 @@ class AplicacionJuego():
             if (salir_programa):
                 # Si ademas de salir de la escena, se quiere salir del programa, se finaliza
                 sys.exit()
-
-           
-            # Creamos la escena con la animacion antes de jugar
-            escena = EscenaAnimacion(self.director)
-            # Le decimos al director en que escena estamos
-            self.director.cambiarEscena(escena)
-            # Y ejecutamos el bucle
-            salir_programa = self.director.ejecutar()
-            if (salir_programa):
-                # Si ademas de salir de la escena, se quiere salir del programa, se finaliza
-                sys.exit()
+
             
             # En este punto, hay que iniciar el juego en sí
        
             # Creamos los jugadores
-            jugador1 = Jugador()
+            #jugador1 = Jugador()
             #jugador2 = Jugador()
 
             # Creamos la escena con la fase
-            escena = Intro(self.director, jugador1)
+            #escena = Intro(self.director, jugador1)
             # Le decimos al director en que escena estamos
-            self.director.cambiarEscena(escena)
+            #self.director.cambiarEscena(escena)
             # Y ejecutamos el bucle
-            salir_programa = self.director.ejecutar()
-            if (salir_programa):
+            #salir_programa = self.director.ejecutar()
+            #if (salir_programa):
                 # Si ademas de salir de la escena, se quiere salir del programa, se finaliza
-                pygame.quit()
+            #    pygame.quit()
 
 
 

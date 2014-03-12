@@ -4,12 +4,12 @@ import pyglet
 from pygame.locals import *
 from personajes import load_image
 from escena import *
-
+from animacion import *
 
 class EscenaMenu(EscenaPyglet, pyglet.window.Window):
 
     def __init__(self, director):
-
+        
         # Constructores de las clases padres
         EscenaPyglet.__init__(self, director)
         pyglet.window.Window.__init__(self, ANCHO_PANTALLA, ALTO_PANTALLA)
@@ -62,9 +62,18 @@ class EscenaMenu(EscenaPyglet, pyglet.window.Window):
         if(pyglet.window.mouse.LEFT == button):
             # Miramos a ver en que boton se ha pulsado, y se hace la accion correspondiente
             if  (x>=self.botonJugar.x) and (x<=(self.botonJugar.x + self.botonJugar.width)) and (y>=self.botonJugar.y) and (y<=(self.botonJugar.y + self.botonJugar.height)):
-                self.director.salirEscena()
+                #self.director.salirEscena()
+                # Creamos la escena con la animacion antes de jugar
+                escenaSig = EscenaAnimacion(self.director)
+                self.director.apilarEscena(escenaSig)    
             elif  (x>=self.botonSalir.x) and (x<=(self.botonSalir.x + self.botonSalir.width)) and (y>=self.botonSalir.y) and (y<=(self.botonSalir.y + self.botonSalir.height)):
                 self.director.salirPrograma()
     
     def update(self, *args):
         return
+
+    def hide(self):
+        self.set_visible(False)
+        
+    def show (self):
+        self.set_visible(True)

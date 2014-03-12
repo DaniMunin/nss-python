@@ -19,6 +19,9 @@ class Escena:
 
     def dibujar(self):
         raise NotImplemented("Tiene que implementar el metodo dibujar.")
+    
+    def hide(self):
+        raise NotImplemented("Tienes q implementar el método ocultar.")
 
 class EscenaPygame(Escena):
 
