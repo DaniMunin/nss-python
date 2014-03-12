@@ -24,7 +24,7 @@ SPRITE_SUBIENDO = 0
 SPRITE_BAJANDO = 2
 
 # Velocidades de los distintos personajes
-VELOCIDAD_JUGADOR = 0.1 # Pixeles por milisegundo
+VELOCIDAD_JUGADOR = 0.2 # Pixeles por milisegundo
 VELOCIDAD_SALTO_JUGADOR = 0.3 # Pixeles por milisegundo
 RETARDO_ANIMACION_JUGADOR = 1 / VELOCIDAD_JUGADOR
 
@@ -106,14 +106,14 @@ class Personaje(pygame.sprite.Sprite):
 
         # El retardo a la hora de cambiar la imagen del Sprite (para que no se mueva demasiado rápido)
         self.retardoMovimiento = 0;
-
+        
         # En que postura esta inicialmente
         self.numPostura = QUIETO
 
         # El rectangulo del Sprite
         self.rect = pygame.Rect(100,100,self.coordenadasHoja[self.numPostura][self.numImagenPostura][2],self.coordenadasHoja[self.numPostura][self.numImagenPostura][3])
 
-        # La posicion x e y que ocupa
+                # La posicion x e y que ocupa
         self.posicionx = 0
         self.posiciony = 0
         self.rect.left = 0
@@ -166,9 +166,10 @@ class Personaje(pygame.sprite.Sprite):
 
             elif self.mirando == ABAJO:
                 self.image = self.hoja.subsurface(self.coordenadasHoja[self.numPostura][self.numImagenPostura])
+                
+        self.mask = pygame.mask.from_surface(self.image, 127)
 
-
-    def movimientoHorizontal(self, incrementox, grupoPlataformas):
+    def movimientoHorizontal(self, incrementox):
         # Esta mirando hacia ese lado
         self.mirando = self.movimiento
         # Actualizamos la posicion
@@ -176,7 +177,7 @@ class Personaje(pygame.sprite.Sprite):
         self.rect.left = self.posicionx
         self.numPostura = SPRITE_ANDANDO
                 
-    def movimientoVertical(self, incrementoy, grupoPlataformas):
+    def movimientoVertical(self, incrementoy):
         # Esta mirando hacia ese lado
         self.mirando = self.movimiento
         # Actualizamos la posicion
@@ -187,24 +188,24 @@ class Personaje(pygame.sprite.Sprite):
         else:
             self.numPostura = SPRITE_BAJANDO
 
-    def update(self, grupoPlataformas, tiempo):
+    def update(self, tiempo):
         # Si vamos a la izquierda
         if self.movimiento == IZQUIERDA:
             # Realizamos ese movimiento a la izquierda
-            self.movimientoHorizontal(-self.velocidad*tiempo, grupoPlataformas)
+            self.movimientoHorizontal(-self.velocidad*tiempo)
                 
         # Si vamos a la derecha
         elif self.movimiento == DERECHA:
             # Realizamos ese movimiento a la derecha
-            self.movimientoHorizontal( self.velocidad*tiempo, grupoPlataformas)
+            self.movimientoHorizontal( self.velocidad*tiempo)
 
         # Si estamos saltando
         elif self.movimiento == ARRIBA:
-            self.movimientoVertical( -self.velocidad*tiempo, grupoPlataformas)
+            self.movimientoVertical( -self.velocidad*tiempo)
 
         # Si estamos saltando
         elif self.movimiento == ABAJO:
-            self.movimientoVertical( self.velocidad*tiempo, grupoPlataformas)
+            self.movimientoVertical( self.velocidad*tiempo)
             
         # Si no se ha pulsado ninguna tecla
         elif self.movimiento == QUIETO:
@@ -223,7 +224,7 @@ class Jugador(Personaje):
     "Cualquier personaje del juego"
     def __init__(self):
         # Invocamos al constructor de la clase padre con la configuracion de este personaje concreto
-        Personaje.__init__(self,'../res/Sprites/badass.png','../res/BadassCoordJugador.txt', [6, 6, 6, 1], VELOCIDAD_JUGADOR, VELOCIDAD_SALTO_JUGADOR, RETARDO_ANIMACION_JUGADOR);
+        Personaje.__init__(self,'../res/Sprites/badassSprites.png','../res/BadassCoordJugador.txt', [6, 6, 6, 1], VELOCIDAD_JUGADOR, VELOCIDAD_SALTO_JUGADOR, RETARDO_ANIMACION_JUGADOR);
 
 
     def mover(self, teclasPulsadas, arriba, abajo, izquierda, derecha):
