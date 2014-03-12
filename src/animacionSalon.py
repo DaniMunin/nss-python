@@ -3,7 +3,7 @@
 import pyglet
 from escena import *
 import random
-
+from intro import *
 
 VELOCIDAD_BADASS = 30 # Pixels por segundo
 
@@ -249,16 +249,20 @@ class AnimacionSalon(EscenaPyglet, pyglet.window.Window):
 
     # Si intentan cerrar esta ventana, saldremos de la escena
     def on_close(self):
-        self.director.salirEscena()
+        self.salirEscena()
 
 
     # El evento relativo al clic del raton
     def on_mouse_press(self, x, y, button, modifiers):
         # Si se pulsa el boton izquierdo
         if (pyglet.window.mouse.LEFT == button):
-            self.director.salirEscena()
+            self.salirEscena()
         return
 
+    def salirEscena(self):
+        jugador1 = Jugador()
+        escenaSig = Intro(self.director, jugador1)
+        self.director.cambiarEscena(escenaSig)
 
     def close(self):
         # Restablecemos la duracion de cada frame del tanque
@@ -511,7 +515,7 @@ class AnimacionSalon(EscenaPyglet, pyglet.window.Window):
                                                                         self.text.draw()
                                                                     else: 
                                                                         if self.tiempo ==4300: 
-                                                                            self.director.salirEscena()
+                                                                            self.salirEscena()
             self.tiempo += 1
             print self.tiempo
 

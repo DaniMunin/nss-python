@@ -13,7 +13,7 @@ class AplicacionJuego():
 
     def __init__(self):
         # Inicializamos la libreria de pygame
-        pygame.init()
+        #pygame.init()
         # Creamos el director
         self.director = Director()
 
