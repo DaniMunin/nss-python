@@ -128,7 +128,7 @@ class Personaje(pygame.sprite.Sprite):
 
         # Y actualizamos la postura del Sprite inicial, llamando al metodo correspondiente
         self.actualizarPostura(0,0)
-        self.mask = pygame.mask.from_surface(self.image)
+        self.mask = pygame.mask.from_surface(load_image("../res/Sprites/badassmask.png"))
         self.rect = self.image.get_rect(center=location)
 
 
@@ -278,5 +278,34 @@ class Jugador(Personaje):
 
     def update(self, level_mask, keys):
         move = self.mover(keys, K_UP, K_DOWN, K_LEFT, K_RIGHT)
+        x,y = self.check_collisions(move, level_mask)
+        self.actualizarPostura(x, y)
+        
+# -------------------------------------------------
+# Clase NoJugador
+DIRECT_DICT = {pygame.K_UP : ( 0,-1),
+               pygame.K_DOWN : ( 0, 1),
+               pygame.K_RIGHT: ( 1, 0),
+               pygame.K_LEFT : (-1, 0)}
+class NoJugador(Personaje):
+    "Cualquier personaje del juego"
+    def __init__(self, imagen, coordenadas):
+        # Invocamos al constructor de la clase padre con la configuracion de este personaje concreto
+        Personaje.__init__(self,'../res/Sprites/badassSprites.png','../res/BadassCoordJugador.txt', [6, 6, 6, 6], VELOCIDAD_JUGADOR, VELOCIDAD_SALTO_JUGADOR, RETARDO_ANIMACION_JUGADOR,(0,0));
+        self.speed = 7
+
+    def mover(self, direccion):
+        if direccion == 0:
+            move = (0,self.speed)
+        elif direccion == 1:
+            move = (self.speed,0)
+        elif direccion == 2:
+            move = (0,-self.speed)
+        elif direccion == 3:
+            move = (-self.speed,0)
+        return move
+
+    def update(self, level_mask, direccion):
+        move = self.mover(direccion)
         x,y = self.check_collisions(move, level_mask)
         self.actualizarPostura(x, y)
