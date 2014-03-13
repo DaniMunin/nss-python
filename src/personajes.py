@@ -132,12 +132,6 @@ class Personaje(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(center=location)
 
 
-    def establecerPosicion(self, posicionx, posiciony):
-        self.posicionx = posicionx
-        self.posiciony = posiciony
-        self.rect.left = self.posicionx
-        self.rect.bottom = self.posiciony
-
     # Metodo base para realizar el movimiento: simplemente se le indica cual va a hacer, y lo almacena
     def mover(self, movimiento):
             self.movimiento = movimiento
@@ -175,25 +169,6 @@ class Personaje(pygame.sprite.Sprite):
                 
             else:
                 self.numPostura = SPRITE_QUIETO
-
-    def movimientoHorizontal(self, incrementox):
-        # Esta mirando hacia ese lado
-        self.mirando = self.movimiento
-        # Actualizamos la posicion
-        self.posicionx += incrementox
-        self.rect.left = self.posicionx
-        self.numPostura = SPRITE_ANDANDO
-                
-    def movimientoVertical(self, incrementoy):
-        # Esta mirando hacia ese lado
-        self.mirando = self.movimiento
-        # Actualizamos la posicion
-        self.posiciony += incrementoy
-        self.rect.bottom = self.posiciony
-        if (incrementoy<0):
-            self.numPostura = SPRITE_SUBIENDO
-        else:
-            self.numPostura = SPRITE_BAJANDO
             
     def check_collisions(self, move, level_mask):
         """
@@ -217,34 +192,6 @@ until clear.
             test_offset = list(self.rect.topleft)
             test_offset[index] += move[index]
         return move[index]
-
-    def update(self, tiempo, level_mask):
-        # Si vamos a la izquierda
-        if self.movimiento == IZQUIERDA:
-            # Realizamos ese movimiento a la izquierda
-            self.movimientoHorizontal(-self.velocidad*tiempo)
-                
-        # Si vamos a la derecha
-        elif self.movimiento == DERECHA:
-            # Realizamos ese movimiento a la derecha
-            self.movimientoHorizontal( self.velocidad*tiempo)
-
-        # Si estamos saltando
-        elif self.movimiento == ARRIBA:
-            self.movimientoVertical( -self.velocidad*tiempo)
-
-        # Si estamos saltando
-        elif self.movimiento == ABAJO:
-            self.movimientoVertical( self.velocidad*tiempo)
-            
-        # Si no se ha pulsado ninguna tecla
-        elif self.movimiento == QUIETO:
-                self.numPostura = SPRITE_QUIETO
-
-        # Actualizamos la imagen a mostrar
-        x,y = self.check_collisions(move, level_mask)
-        self.actualizarPostura(x, y)
-        return
     
     def draw(self, surface):
         """Basic draw function."""
@@ -291,8 +238,9 @@ class NoJugador(Personaje):
     "Cualquier personaje del juego"
     def __init__(self, imagen, coordenadas):
         # Invocamos al constructor de la clase padre con la configuracion de este personaje concreto
-        Personaje.__init__(self,'../res/Sprites/badassSprites.png','../res/BadassCoordJugador.txt', [6, 6, 6, 6], VELOCIDAD_JUGADOR, VELOCIDAD_SALTO_JUGADOR, RETARDO_ANIMACION_JUGADOR,(0,0));
+        Personaje.__init__(self,imagen,coordenadas, [6, 6, 6, 1], VELOCIDAD_JUGADOR, VELOCIDAD_SALTO_JUGADOR, RETARDO_ANIMACION_JUGADOR,(0,0));
         self.speed = 7
+        self.posicion = (0,0)
 
     def mover(self, direccion):
         if direccion == 0:

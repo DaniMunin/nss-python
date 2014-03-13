@@ -29,7 +29,10 @@ class FaseInvestigacion(EscenaPygame):
         self.done = False
         self.player = jugador1
         fondo = pygame.image.load("../res/maps/mapa2.png")
-        self.level = Level(fondo, self.screen_rect.copy(), self.player)
+        #cambiar el rect.copy para poner posicion inicial
+        posInicialMapa = self.screen_rect.copy()
+        posInicialMapa.topleft = (posInicialMapa.topleft[0]-100,posInicialMapa.topleft[1]+100)
+        self.level = Level(fondo, posInicialMapa, self.player)
         self.grupoJugadores = pygame.sprite.Group(jugador1)
                 
     # Se actualiza el decorado, realizando las siguientes acciones:
@@ -75,10 +78,24 @@ player instance.
         mascara = pygame.image.load("../res/maps/mascaramapa.png").convert_alpha()        
         mascara = pygame.transform.scale(mascara, (ANCHO_PANTALLA*4, ALTO_PANTALLA*4))
         self.mask = pygame.mask.from_surface(mascara)
-        
+        self.bolio = NoJugador("../res/Sprites/badassSprites.png","../res/BadassCoordJugador.txt")
+        self.bolio.posicion = (244,1990)
+        self.image.blit(self.bolio.image, self.bolio.posicion)
+        self.espeonza = NoJugador("../res/Sprites/badassSprites.png","../res/BadassCoordJugador.txt")
+        self.image.blit(self.espeonza.image, (223,1748))
+        self.charles = NoJugador("../res/Sprites/badassSprites.png","../res/BadassCoordJugador.txt")
+        self.image.blit(self.charles.image, (156,1564))
+        self.cervero = NoJugador("../res/Sprites/badassSprites.png","../res/BadassCoordJugador.txt")
+        self.image.blit(self.cervero.image, (993,1984))
+        self.rateos = NoJugador("../res/Sprites/badassSprites.png","../res/BadassCoordJugador.txt")
+        self.image.blit(self.rateos.image, (831,1504))
+        self.poli = NoJugador("../res/Sprites/badassSprites.png","../res/BadassCoordJugador.txt")
+        self.image.blit(self.poli.image, (586,1387))
         self.rect = self.image.get_rect()
         self.player = player
-        self.player.rect.center = self.rect.center
+#         self.player.rect.center = self.rect.center
+        #posicion inicial
+        self.player.rect.center = (630,1480)
         self.viewport = viewport
 
     def update(self, keys):
