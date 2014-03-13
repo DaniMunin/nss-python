@@ -28,7 +28,7 @@ class FaseInvestigacion(EscenaPygame):
         self.keys = pygame.key.get_pressed()
         self.done = False
         self.player = jugador1
-        fondo = pygame.image.load("../res/maps/primerinterior.png")
+        fondo = pygame.image.load("../res/maps/mapa2.png")
         self.level = Level(fondo, self.screen_rect.copy(), self.player)
         self.grupoJugadores = pygame.sprite.Group(jugador1)
                 
@@ -71,9 +71,9 @@ player instance.
 """
         self.image = map_image
 #         self.image =pygame.image.load("../res/maps/primerinteriormask.png").convert_alpha() 
-        self.image = pygame.transform.scale(self.image, (ANCHO_PANTALLA*2, ALTO_PANTALLA*2))
-        mascara = pygame.image.load("../res/maps/primerinteriormask.png").convert_alpha()        
-        mascara = pygame.transform.scale(mascara, (ANCHO_PANTALLA*2, ALTO_PANTALLA*2))
+        self.image = pygame.transform.scale(self.image, (ANCHO_PANTALLA*4, ALTO_PANTALLA*4))
+        mascara = pygame.image.load("../res/maps/mascaramapa.png").convert_alpha()        
+        mascara = pygame.transform.scale(mascara, (ANCHO_PANTALLA*4, ALTO_PANTALLA*4))
         self.mask = pygame.mask.from_surface(mascara)
         
         self.rect = self.image.get_rect()
