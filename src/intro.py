@@ -47,7 +47,7 @@ class Intro(EscenaPygame):
         # De esta forma, se podrian tener muchas fases distintas con esta clase
 
         # Cargamos el decorado
-        self.image = load_image('../res/maps/mapa2.png', -1)
+        self.image = load_image('../res/maps/primerinterior.png', -1)
 #         self.image = pygame.transform.scale(self.image, (ANCHO_PANTALLA, ALTO_PANTALLA))
 #         self.image = pygame.transform.scale(self.image, (ANCHO_PANTALLA*2, ALTO_PANTALLA))
         self.image = pygame.transform.scale(self.image, (ANCHO_PANTALLA*4, ALTO_PANTALLA*4))
@@ -60,7 +60,7 @@ class Intro(EscenaPygame):
         self.rectSubimagen.topleft = (self.posicionx, self.posiciony)
         
         
-        self.imagemask = Colisiones("../res/maps/maskmap.png")
+        self.imagemask = Colisiones("../res/maps/primerinteriormask.png")
         
         print self.image.get_size()
         print self.imagemask.mask.get_size()

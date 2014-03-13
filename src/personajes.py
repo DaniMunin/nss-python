@@ -75,7 +75,7 @@ class Personaje(pygame.sprite.Sprite):
     #  Numero de imagenes en cada postura
     #  Velocidad de caminar y de salto
     #  Retardo para mostrar la animacion del personaje
-    def __init__(self, archivoImagen, archivoCoordenadas, numImagenes, velocidad, velocidadSalto, retardoAnimacion):
+    def __init__(self, archivoImagen, archivoCoordenadas, numImagenes, velocidad, velocidadSalto, retardoAnimacion,location):
         # Primero invocamos al constructor de la clase padre
         pygame.sprite.Sprite.__init__(self);
         # Se carga la hoja
@@ -127,7 +127,9 @@ class Personaje(pygame.sprite.Sprite):
         self.retardoAnimacion = retardoAnimacion
 
         # Y actualizamos la postura del Sprite inicial, llamando al metodo correspondiente
-        self.actualizarPostura()
+        self.actualizarPostura(0,0)
+        self.mask = pygame.mask.from_surface(self.image)
+        self.rect = self.image.get_rect(center=location)
 
 
     def establecerPosicion(self, posicionx, posiciony):
@@ -141,7 +143,7 @@ class Personaje(pygame.sprite.Sprite):
             self.movimiento = movimiento
 
 
-    def actualizarPostura(self):
+    def actualizarPostura(self, x, y):
         self.retardoMovimiento -= 1
         # Miramos si ha pasado el retardo para dibujar una nueva postura
         if (self.retardoMovimiento < 0):
@@ -155,19 +157,24 @@ class Personaje(pygame.sprite.Sprite):
             self.image = self.hoja.subsurface(self.coordenadasHoja[self.numPostura][self.numImagenPostura])
 
             # Si esta mirando a la izquiera, cogemos la porcion de la hoja
-            if self.mirando == IZQUIERDA:
+            if x<0:
+                self.numPostura = SPRITE_ANDANDO
                 self.image = self.hoja.subsurface(self.coordenadasHoja[self.numPostura][self.numImagenPostura])
             #  Si no, si mira a la derecha, invertimos esa imagen
-            elif self.mirando == DERECHA:
+            elif x>0:
+                self.numPostura = SPRITE_ANDANDO
                 self.image = pygame.transform.flip(self.hoja.subsurface(self.coordenadasHoja[self.numPostura][self.numImagenPostura]), 1, 0)
             
-            elif self.mirando == ARRIBA:
+            elif y>0:
+                self.numPostura = SPRITE_BAJANDO
                 self.image = self.hoja.subsurface(self.coordenadasHoja[self.numPostura][self.numImagenPostura])
 
-            elif self.mirando == ABAJO:
+            elif y<0:
+                self.numPostura = SPRITE_SUBIENDO
                 self.image = self.hoja.subsurface(self.coordenadasHoja[self.numPostura][self.numImagenPostura])
                 
-        self.mask = pygame.mask.from_surface(self.image, 127)
+            else:
+                self.numPostura = SPRITE_QUIETO
 
     def movimientoHorizontal(self, incrementox):
         # Esta mirando hacia ese lado
@@ -187,8 +194,31 @@ class Personaje(pygame.sprite.Sprite):
             self.numPostura = SPRITE_SUBIENDO
         else:
             self.numPostura = SPRITE_BAJANDO
+            
+    def check_collisions(self, move, level_mask):
+        """
+Call collision_detail for the x and y components of our movement vector.
+"""
+        x_change = self.collision_detail(move, level_mask, 0)
+        self.rect.move_ip((x_change,0))
+        y_change = self.collision_detail(move, level_mask, 1)
+        self.rect.move_ip((0,y_change))
+        return ( x_change, y_change)
 
-    def update(self, tiempo):
+    def collision_detail(self, move, level_mask, index):
+        """
+Check for collision and if found decrement vector by single pixels
+until clear.
+"""
+        test_offset = list(self.rect.topleft)
+        test_offset[index] += move[index]
+        while level_mask.overlap_area(self.mask, test_offset):
+            move[index] += (1 if move[index]<0 else -1)
+            test_offset = list(self.rect.topleft)
+            test_offset[index] += move[index]
+        return move[index]
+
+    def update(self, tiempo, level_mask):
         # Si vamos a la izquierda
         if self.movimiento == IZQUIERDA:
             # Realizamos ese movimiento a la izquierda
@@ -212,32 +242,41 @@ class Personaje(pygame.sprite.Sprite):
                 self.numPostura = SPRITE_QUIETO
 
         # Actualizamos la imagen a mostrar
-        self.actualizarPostura()
+        x,y = self.check_collisions(move, level_mask)
+        self.actualizarPostura(x, y)
         return
+    
+    def draw(self, surface):
+        """Basic draw function."""
+        surface.blit(self.image, self.rect)
 
 
 
 # -------------------------------------------------
 # Clase Jugador
-
+DIRECT_DICT = {pygame.K_UP : ( 0,-1),
+               pygame.K_DOWN : ( 0, 1),
+               pygame.K_RIGHT: ( 1, 0),
+               pygame.K_LEFT : (-1, 0)}
 class Jugador(Personaje):
     "Cualquier personaje del juego"
     def __init__(self):
         # Invocamos al constructor de la clase padre con la configuracion de este personaje concreto
-        Personaje.__init__(self,'../res/Sprites/badassSprites.png','../res/BadassCoordJugador.txt', [6, 6, 6, 1], VELOCIDAD_JUGADOR, VELOCIDAD_SALTO_JUGADOR, RETARDO_ANIMACION_JUGADOR);
-
+        Personaje.__init__(self,'../res/Sprites/badassSprites.png','../res/BadassCoordJugador.txt', [6, 6, 6, 1], VELOCIDAD_JUGADOR, VELOCIDAD_SALTO_JUGADOR, RETARDO_ANIMACION_JUGADOR,(0,0));
+        self.speed = 7
 
     def mover(self, teclasPulsadas, arriba, abajo, izquierda, derecha):
         # Indicamos la acción a realizar segun la tecla pulsada para el jugador
-        if teclasPulsadas[arriba]:
-            Personaje.mover(self,ARRIBA)
-        elif teclasPulsadas[izquierda]:
-            Personaje.mover(self,IZQUIERDA)
-        elif teclasPulsadas[derecha]:
-            Personaje.mover(self,DERECHA)
-        elif teclasPulsadas[abajo]:
-            Personaje.mover(self,ABAJO)
-        else:
-            Personaje.mover(self,QUIETO)
+        move = [0, 0]
+#         print "l"
+        for key in DIRECT_DICT:
+#             print teclasPulsadas[arriba]
+            if teclasPulsadas[key]:
+                for i in (0, 1):
+                    move[i] += DIRECT_DICT[key][i]*self.speed
+        return move
 
-
+    def update(self, level_mask, keys):
+        move = self.mover(keys, K_UP, K_DOWN, K_LEFT, K_RIGHT)
+        x,y = self.check_collisions(move, level_mask)
+        self.actualizarPostura(x, y)
