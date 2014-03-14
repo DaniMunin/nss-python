@@ -212,7 +212,7 @@ class Jugador(Personaje):
         Personaje.__init__(self,'../res/Sprites/badassSprites.png','../res/BadassCoordJugador.txt', [6, 6, 6, 1], VELOCIDAD_JUGADOR, VELOCIDAD_SALTO_JUGADOR, RETARDO_ANIMACION_JUGADOR,(0,0));
         self.speed = 7
 
-    def mover(self, teclasPulsadas, arriba, abajo, izquierda, derecha):
+    def mover(self, teclasPulsadas):
         # Indicamos la acción a realizar segun la tecla pulsada para el jugador
         move = [0, 0]
 #         print "l"
@@ -224,16 +224,13 @@ class Jugador(Personaje):
         return move
 
     def update(self, level_mask, keys):
-        move = self.mover(keys, K_UP, K_DOWN, K_LEFT, K_RIGHT)
+        move = self.mover(keys)
         x,y = self.check_collisions(move, level_mask)
         self.actualizarPostura(x, y)
+        print self.mask.centroid()
         
 # -------------------------------------------------
 # Clase NoJugador
-DIRECT_DICT = {pygame.K_UP : ( 0,-1),
-               pygame.K_DOWN : ( 0, 1),
-               pygame.K_RIGHT: ( 1, 0),
-               pygame.K_LEFT : (-1, 0)}
 class NoJugador(Personaje):
     "Cualquier personaje del juego"
     def __init__(self, imagen, coordenadas):
@@ -241,19 +238,58 @@ class NoJugador(Personaje):
         Personaje.__init__(self,imagen,coordenadas, [6, 6, 6, 1], VELOCIDAD_JUGADOR, VELOCIDAD_SALTO_JUGADOR, RETARDO_ANIMACION_JUGADOR,(0,0));
         self.speed = 7
         self.posicion = (0,0)
+#         self.mask = pygame.mask.from_surface(self.image)
+#         self.mask.fill()
+        #quitando esto funcionan colisiones
+        self.rect = Rect(self.rect.topleft[0]+603, self.rect.topleft[1]+1440, 35, 75)
 
-    def mover(self, direccion):
+    def mover(self, direccion, cantidad):
+        move = [0, 0]
         if direccion == 0:
-            move = (0,self.speed)
+#             self.posicion = (self.posicion[0] + cantidad, self.posicion[1])
+            move[0] += cantidad
         elif direccion == 1:
-            move = (self.speed,0)
+#             self.posicion = (self.posicion[0] - cantidad, self.posicion[1])
+            move[0] -= cantidad
         elif direccion == 2:
-            move = (0,-self.speed)
+#             self.posicion = (self.posicion[0], self.posicion[1] + cantidad)
+            move[1] += cantidad
         elif direccion == 3:
-            move = (-self.speed,0)
+#             self.posicion = (self.posicion[0], self.posicion[1] - cantidad)
+            move[1] -= cantidad
         return move
+    
+    def check_collisions(self, move, level_mask):
+        """
+Call collision_detail for the x and y components of our movement vector.
+"""
+        x_change = self.collision_detail(move, level_mask, 0)
+        self.rect.move_ip((x_change,0))
+        y_change = self.collision_detail(move, level_mask, 1)
+        self.rect.move_ip((0,y_change))
+        return ( x_change, y_change)
+    
+    def collision_detail(self, move, level_mask, index):
+        """
+Check for collision and if found decrement vector by single pixels
+until clear.
+(-17, 473)
+(585, 1912)
+"""
+#         test_offset = list((self.rect.topleft[0]+603, self.rect.topleft[1]+1440))
+        test_offset = list(self.rect.topleft)
+#         print test_offset
+        test_offset[index] += move[index]
+        while level_mask.overlap_area(self.mask, test_offset):
+            move[index] += (1 if move[index]<0 else -1)
+#             test_offset = list((self.rect.topleft[0]+603, self.rect.topleft[1]+1440))
+            test_offset = list(self.rect.topleft)
+            test_offset[index] += move[index]
+        return move[index]
 
-    def update(self, level_mask, direccion):
-        move = self.mover(direccion)
+    def update(self, level_mask, direccion, cantidad):
+        move = self.mover(direccion, cantidad)
         x,y = self.check_collisions(move, level_mask)
+        self.posicion = (self.posicion[0] + x, self.posicion[1] + y)
         self.actualizarPostura(x, y)
+#         self.posicion = x,y
