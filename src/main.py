@@ -9,6 +9,7 @@ from animacion import *
 
 
 
+
 class AplicacionJuego():
 
     def __init__(self):

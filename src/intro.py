@@ -76,6 +76,7 @@ class Intro(EscenaPygame):
 #         mask = load_image('../res/maps/maskmap.png', -1)
 #         self.mascaraPrueba = pygame.mask.from_surface(mask)
 #         self.image
+        
 
     def posicionesInicioJugadores(self):
         return self.inicioJugador1

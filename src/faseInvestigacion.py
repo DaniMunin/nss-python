@@ -4,6 +4,7 @@ import pygame, escena
 from escena import *
 from personajes import *
 from pygame.locals import *
+from testItem import *
 # -------------------------------------------------
 # -------------------------------------------------
 # Constantes
@@ -97,7 +98,12 @@ player instance.
         #posicion inicial
         self.player.rect.center = (630,1480)
         self.viewport = viewport
-
+        
+        self.ball = testItem()
+        self.ball.rect.center = (630,1480)
+        self.image.blit(self.ball.image, self.ball.rect)
+        
+        
     def update(self, keys):
         """
 Updates the player and then adjust the viewport with respect to the
