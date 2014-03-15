@@ -3,7 +3,7 @@
 import pyglet
 from escena import *
 import random
-from intro import *
+from faseInvestigacion import *
 
 VELOCIDAD_BADASS = 30 # Pixels por segundo
 
@@ -261,7 +261,8 @@ class AnimacionSalon(EscenaPyglet, pyglet.window.Window):
 
     def salirEscena(self):
         jugador1 = Jugador()
-        escenaSig = Intro(self.director, jugador1)
+        escenaSig = FaseInvestigacion(self.director, jugador1)
+#         escenaSig = Intro(self.director, jugador1)
         self.director.cambiarEscena(escenaSig)
 
     def close(self):

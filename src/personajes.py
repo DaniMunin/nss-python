@@ -128,15 +128,9 @@ class Personaje(pygame.sprite.Sprite):
 
         # Y actualizamos la postura del Sprite inicial, llamando al metodo correspondiente
         self.actualizarPostura(0,0)
-        self.mask = pygame.mask.from_surface(self.image)
+        self.mask = pygame.mask.from_surface(load_image("../res/Sprites/badassmask.png"))
         self.rect = self.image.get_rect(center=location)
 
-
-    def establecerPosicion(self, posicionx, posiciony):
-        self.posicionx = posicionx
-        self.posiciony = posiciony
-        self.rect.left = self.posicionx
-        self.rect.bottom = self.posiciony
 
     # Metodo base para realizar el movimiento: simplemente se le indica cual va a hacer, y lo almacena
     def mover(self, movimiento):
@@ -175,25 +169,6 @@ class Personaje(pygame.sprite.Sprite):
                 
             else:
                 self.numPostura = SPRITE_QUIETO
-
-    def movimientoHorizontal(self, incrementox):
-        # Esta mirando hacia ese lado
-        self.mirando = self.movimiento
-        # Actualizamos la posicion
-        self.posicionx += incrementox
-        self.rect.left = self.posicionx
-        self.numPostura = SPRITE_ANDANDO
-                
-    def movimientoVertical(self, incrementoy):
-        # Esta mirando hacia ese lado
-        self.mirando = self.movimiento
-        # Actualizamos la posicion
-        self.posiciony += incrementoy
-        self.rect.bottom = self.posiciony
-        if (incrementoy<0):
-            self.numPostura = SPRITE_SUBIENDO
-        else:
-            self.numPostura = SPRITE_BAJANDO
             
     def check_collisions(self, move, level_mask):
         """
@@ -217,34 +192,6 @@ until clear.
             test_offset = list(self.rect.topleft)
             test_offset[index] += move[index]
         return move[index]
-
-    def update(self, tiempo, level_mask):
-        # Si vamos a la izquierda
-        if self.movimiento == IZQUIERDA:
-            # Realizamos ese movimiento a la izquierda
-            self.movimientoHorizontal(-self.velocidad*tiempo)
-                
-        # Si vamos a la derecha
-        elif self.movimiento == DERECHA:
-            # Realizamos ese movimiento a la derecha
-            self.movimientoHorizontal( self.velocidad*tiempo)
-
-        # Si estamos saltando
-        elif self.movimiento == ARRIBA:
-            self.movimientoVertical( -self.velocidad*tiempo)
-
-        # Si estamos saltando
-        elif self.movimiento == ABAJO:
-            self.movimientoVertical( self.velocidad*tiempo)
-            
-        # Si no se ha pulsado ninguna tecla
-        elif self.movimiento == QUIETO:
-                self.numPostura = SPRITE_QUIETO
-
-        # Actualizamos la imagen a mostrar
-        x,y = self.check_collisions(move, level_mask)
-        self.actualizarPostura(x, y)
-        return
     
     def draw(self, surface):
         """Basic draw function."""
@@ -265,7 +212,7 @@ class Jugador(Personaje):
         Personaje.__init__(self,'../res/Sprites/badassSprites.png','../res/BadassCoordJugador.txt', [6, 6, 6, 1], VELOCIDAD_JUGADOR, VELOCIDAD_SALTO_JUGADOR, RETARDO_ANIMACION_JUGADOR,(0,0));
         self.speed = 7
 
-    def mover(self, teclasPulsadas, arriba, abajo, izquierda, derecha):
+    def mover(self, teclasPulsadas):
         # Indicamos la acción a realizar segun la tecla pulsada para el jugador
         move = [0, 0]
 #         print "l"
@@ -277,6 +224,72 @@ class Jugador(Personaje):
         return move
 
     def update(self, level_mask, keys):
-        move = self.mover(keys, K_UP, K_DOWN, K_LEFT, K_RIGHT)
+        move = self.mover(keys)
         x,y = self.check_collisions(move, level_mask)
         self.actualizarPostura(x, y)
+        print self.mask.centroid()
+        
+# -------------------------------------------------
+# Clase NoJugador
+class NoJugador(Personaje):
+    "Cualquier personaje del juego"
+    def __init__(self, imagen, coordenadas):
+        # Invocamos al constructor de la clase padre con la configuracion de este personaje concreto
+        Personaje.__init__(self,imagen,coordenadas, [6, 6, 6, 1], VELOCIDAD_JUGADOR, VELOCIDAD_SALTO_JUGADOR, RETARDO_ANIMACION_JUGADOR,(0,0));
+        self.speed = 7
+        self.posicion = (0,0)
+#         self.mask = pygame.mask.from_surface(self.image)
+#         self.mask.fill()
+        #quitando esto funcionan colisiones
+        self.rect = Rect(self.rect.topleft[0]+603, self.rect.topleft[1]+1440, 35, 75)
+
+    def mover(self, direccion, cantidad):
+        move = [0, 0]
+        if direccion == 0:
+#             self.posicion = (self.posicion[0] + cantidad, self.posicion[1])
+            move[0] += cantidad
+        elif direccion == 1:
+#             self.posicion = (self.posicion[0] - cantidad, self.posicion[1])
+            move[0] -= cantidad
+        elif direccion == 2:
+#             self.posicion = (self.posicion[0], self.posicion[1] + cantidad)
+            move[1] += cantidad
+        elif direccion == 3:
+#             self.posicion = (self.posicion[0], self.posicion[1] - cantidad)
+            move[1] -= cantidad
+        return move
+    
+    def check_collisions(self, move, level_mask):
+        """
+Call collision_detail for the x and y components of our movement vector.
+"""
+        x_change = self.collision_detail(move, level_mask, 0)
+        self.rect.move_ip((x_change,0))
+        y_change = self.collision_detail(move, level_mask, 1)
+        self.rect.move_ip((0,y_change))
+        return ( x_change, y_change)
+    
+    def collision_detail(self, move, level_mask, index):
+        """
+Check for collision and if found decrement vector by single pixels
+until clear.
+(-17, 473)
+(585, 1912)
+"""
+#         test_offset = list((self.rect.topleft[0]+603, self.rect.topleft[1]+1440))
+        test_offset = list(self.rect.topleft)
+#         print test_offset
+        test_offset[index] += move[index]
+        while level_mask.overlap_area(self.mask, test_offset):
+            move[index] += (1 if move[index]<0 else -1)
+#             test_offset = list((self.rect.topleft[0]+603, self.rect.topleft[1]+1440))
+            test_offset = list(self.rect.topleft)
+            test_offset[index] += move[index]
+        return move[index]
+
+    def update(self, level_mask, direccion, cantidad):
+        move = self.mover(direccion, cantidad)
+        x,y = self.check_collisions(move, level_mask)
+        self.posicion = (self.posicion[0] + x, self.posicion[1] + y)
+        self.actualizarPostura(x, y)
+#         self.posicion = x,y

@@ -74,49 +74,6 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
         self.playerR = self.rayoSon.play()
         
         
-        # La animacion del tanque la creamos a partir de un gif animado
-#         self.tanque = pyglet.sprite.Sprite(pyglet.resource.animation('/res/d.gif'), batch=self.batch, group=self.grupoMedio)
-#         # Esta si que se crea porque estara desde el principio
-#         self.tanque.scale = 1.2
-#         self.tanque.rotation = -4
-#         self.tanque.set_position(0,80)
-
-
-        # La animacion del humo
-        #=======================================================================
-        # self.animacionHumoFrames = [
-        #     pyglet.image.AnimationFrame(pyglet.image.load('imagenes/smoke_puff_0001.png'), 0.1),
-        #     pyglet.image.AnimationFrame(pyglet.image.load('imagenes/smoke_puff_0002.png'), 0.1),
-        #     pyglet.image.AnimationFrame(pyglet.image.load('imagenes/smoke_puff_0003.png'), 0.1),
-        #     pyglet.image.AnimationFrame(pyglet.image.load('imagenes/smoke_puff_0004.png'), 0.1),
-        #     pyglet.image.AnimationFrame(pyglet.image.load('imagenes/smoke_puff_0005.png'), 0.1),
-        #     pyglet.image.AnimationFrame(pyglet.image.load('imagenes/smoke_puff_0006.png'), 0.1),
-        #     pyglet.image.AnimationFrame(pyglet.image.load('imagenes/smoke_puff_0007.png'), 0.1),
-        #     pyglet.image.AnimationFrame(pyglet.image.load('imagenes/smoke_puff_0008.png'), 0.1),
-        #     pyglet.image.AnimationFrame(pyglet.image.load('imagenes/smoke_puff_0009.png'), 0.1),
-        #     pyglet.image.AnimationFrame(pyglet.image.load('imagenes/smoke_puff_0010.png'), None),
-        #     ]
-        #=======================================================================
-        # El ultimo frame se pone con una duracion de None, porque el humo no se reproduce en bucle,
-        #  sino solo una vez
-        # Por ahora no creamos la animacion, porque se empezaria a reproducir,
-        #  solo cargamos los frames de disco
-        # Esta animacion aparecera en el segundo determinado
-        #=======================================================================
-        # pyglet.clock.schedule_once(self.aparecerHumo, 3.5)
-        #=======================================================================
-
-
-        # La animacion de la explosion
-        #=======================================================================
-        # self.animacionExplosionFrames = crearFramesAnimacion('imagenes/fuego.png', 9, 5)
-        # self.animacionExplosion = None
-        #=======================================================================
-        # Esta animacion aparecera en el segundo determinado
-        #=======================================================================
-        # pyglet.clock.schedule_once(self.aparecerExplosion, 4)
-        #=======================================================================
-        # Esta animacion la tenemos que guardar como variable porque hay que mover su posicion
 
         # La animacion del rayo
         #=======================================================================
@@ -271,38 +228,6 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
         
         #=======================================================================
         
-    # Metodo que hace aparecer una animacion de humo en el cielo
-#     def aparecerHumoCielo(self, tiempo):
-        #=======================================================================
-        # animacionHumo = pyglet.sprite.Sprite(pyglet.image.Animation(self.animacionHumoFrames), batch=self.batch, group=self.grupoDetras)
-        # # La escalamos un factor aleatorio para dar sensacion de profundidad
-        # animacionHumo.scale = random.uniform(0.2, 1)
-        # # Decimos que aparezca en un sitio aleatorio del cielo
-        # animacionHumo.set_position(random.uniform(0, ANCHO_PANTALLA), random.uniform(ALTO_PANTALLA/4, ALTO_PANTALLA))
-        # # Programamos que se elimine la animacion cuando termine
-        # pyglet.clock.schedule_once(self.eliminarAnimacion, animacionHumo.image.get_duration(), animacionHumo)
-        #=======================================================================
-
-    # Metodo para hacer aparecer la animacion del humo en el tanque
-#     def aparecerHumo(self, tiempo):
-        #=======================================================================
-        # animacionHumo = pyglet.sprite.Sprite(pyglet.image.Animation(self.animacionHumoFrames), batch=self.batch, group=self.grupoDelante)
-        # animacionHumo.scale = 1.2
-        # animacionHumo.set_position(self.tanque.x, self.tanque.y)
-        # # Programamos que se elimine la animacion cuando termine
-        # pyglet.clock.schedule_once(self.eliminarAnimacion, animacionHumo.image.get_duration(), animacionHumo)
-        #=======================================================================
-
-    # Metodo para hacer aparecer la animacion de la explosion en el tanque
-#     def aparecerExplosion(self, tiempo):
-        # Creamos la animacion de la explosion
-        #=======================================================================
-        # self.animacionExplosion = pyglet.sprite.Sprite(pyglet.image.Animation(self.animacionExplosionFrames), batch=self.batch, group=self.grupoDelante)
-        # self.animacionExplosion.scale = 1
-        # self.animacionExplosion.set_position(self.tanque.x-10, self.tanque.y-15)
-        # # Programamos para que aparezca el fuego cuando esta termine
-        # pyglet.clock.schedule_once(self.aparecerFuegoYCorredor, self.animacionExplosion.image.get_duration())
-        #=======================================================================
 
     # Metodo para hacer aparecer la animacion del fuego y del corredor
     def aparecerLluvia(self, tiempo):
@@ -474,14 +399,14 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
             # Ademas, si llega al centro cambiamos la animación
             if (self.animacionCorredor.x<(ANCHO_PANTALLA/2-20))&(self.animacionCorredor.x>(ANCHO_PANTALLA/2)-25):
                 self.text.delete()
-                self.text = pyglet.text.Label('El muerto es Fanuel Mraga, hombre rico y con poder.\n Un conjunto de sospechosos ricos y con poder más un mayordomo.',
+                self.text = pyglet.text.Label('El muerto es Fanuel Mraga, hombre rico y con poder. Los sospechosos, un grupo de personas influyentes con los que la policía prefiere no lidiar y el mayordomo de la mansión.',
                       font_name='X-Files', multiline=True,
                       font_size=26, color=(255, 255, 255, 255), width = ANCHO_PANTALLA/2 - 50, 
                       x=ANCHO_PANTALLA/4, y=ALTO_PANTALLA/2, batch = self.batch,
                       anchor_x='center', anchor_y='center',
                       group = self.grupoDelante)
                 self.text.draw()
-                self.text2 = pyglet.text.Label('\nEl mayordomo ... me sorprendería que no hubiera sido él.\n Dicen que tenían una sociedad secreta que realizaba ritos de diferente tipo.',
+                self.text2 = pyglet.text.Label('\nEl mayordomo... me sorprendería que no hubiera sido él.',
                       font_name='X-Files', multiline=True,
                       font_size=26, color=(255, 255, 255, 255), width = ANCHO_PANTALLA/2 - 50, 
                       x=3.1*ANCHO_PANTALLA/4, y=ALTO_PANTALLA/2, batch = self.batch,
@@ -499,7 +424,7 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
             if (self.animacionEspaldas.y>(ALTO_PANTALLA/2))&(self.animacionEspaldas.y<(ALTO_PANTALLA/2)+5):
                 self.text.delete()
                 self.text2.delete()
-                self.text = pyglet.text.Label('Tonterías...\n Centrémonos en el mayordomo.\n Quiero salir de aqui pronto o no podré llegar a...',
+                self.text = pyglet.text.Label('Me centraré en él.\n Quiero salir de aqui pronto o no podré llegar a...',
                       font_name='X-Files', multiline=True,
                       font_size=26, color=(255, 255, 255, 255), width = ANCHO_PANTALLA/2 - 50, 
                       x=3.1*ANCHO_PANTALLA/4, y=ALTO_PANTALLA/2, batch = self.batch,
