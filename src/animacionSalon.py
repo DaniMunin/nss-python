@@ -287,7 +287,6 @@ class AnimacionSalon(EscenaPyglet, pyglet.window.Window):
     def salirEscena(self):
         jugador1 = Jugador()
         escenaSig = FaseInvestigacion(self.director, jugador1)
-#         escenaSig = Intro(self.director, jugador1)
         self.director.cambiarEscena(escenaSig)
 
     def close(self):
