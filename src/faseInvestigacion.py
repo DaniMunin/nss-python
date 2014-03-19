@@ -46,12 +46,12 @@ class FaseInvestigacion(EscenaPygame):
         self.eventoT = True
         self.activarEv = False
         self.text = Text()
-        self.bolio = NoJugador("../res/Sprites/bolio2.png","../res/BolioCoordJugador.txt", (244,1990))
-        self.espeonza = NoJugador("../res/Sprites/esperanza2.png","../res/EspeonzaCoordJugador.txt", (223,1748))
-        self.charles = NoJugador("../res/Sprites/charles.png","../res/CharlesCoordJugador.txt", (156,1564))
-        self.cervero = NoJugador("../res/Sprites/scien2.png","../res/ScienceCoordJugador.txt", (993,1984))
-        self.rateos = NoJugador("../res/Sprites/rateos2.png","../res/RateosCoordJugador.txt", (831,1504))
-        self.poli = NoJugador("../res/Sprites/poli.png","../res/PoliCoordJugador.txt", (586,1400))
+        self.bolio = NoJugador("../res/Sprites/bolio2.png","../res/BolioCoordJugador.txt", (244,1990), 1)
+        self.espeonza = NoJugador("../res/Sprites/esperanza2.png","../res/EspeonzaCoordJugador.txt", (223,1748), 1)
+        self.charles = NoJugador("../res/Sprites/charles.png","../res/CharlesCoordJugador.txt", (156,1564), 2)
+        self.cervero = NoJugador("../res/Sprites/scien2.png","../res/ScienceCoordJugador.txt", (993,1984), 1)
+        self.rateos = NoJugador("../res/Sprites/rateos2.png","../res/RateosCoordJugador.txt", (831,1504), 1)
+        self.poli = NoJugador("../res/Sprites/poli.png","../res/PoliCoordJugador.txt", (586,1400), 2)
 #         self.bolio.posicion = (244,1990)
 #         self.espeonza.posicion = (223,1748)
 #         self.charles.posicion = (156,1564)
@@ -61,6 +61,7 @@ class FaseInvestigacion(EscenaPygame):
 
         self.ball = Item(10)
         self.ball.rect.center = (630,1480)
+        self.level.mask.draw(self.ball.mask, self.ball.rect.center)
         
                 
     # Se actualiza el decorado, realizando las siguientes acciones:
@@ -103,6 +104,7 @@ class FaseInvestigacion(EscenaPygame):
     def dibujar(self):        
 #         self.text.render(self.screen, "Se acabs el tiempo!", (0,0,255), (self.player.rect.topleft[0], self.player.rect.topleft[1] -30))
         s = self.level.draw(self.screen)
+        s.blit(self.ball.image, self.ball.rect)
         s.blit(self.poli.image, self.poli.posicion)
         self.player.draw(s)
         s.blit(self.bolio.image, self.bolio.posicion)
@@ -115,10 +117,6 @@ class FaseInvestigacion(EscenaPygame):
             self.eventDraw(0,self.tiempoEv, s)
         if (self.dialogo != 6):
             self.interact(self.dialogo, self.tiempoDial, s)
-        
-        
-        s.blit(self.ball.image, self.ball.rect)
-        
         
 #         self.text.render(s, "Se acabff el tiempo!", (0,255,255), (self.level.poli.rect.topleft[0], self.level.poli.rect.topleft[1] -30))
         self.screen.blit(s, (0,0), self.level.viewport)

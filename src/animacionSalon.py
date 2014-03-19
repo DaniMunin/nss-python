@@ -63,7 +63,7 @@ class AnimacionSalon(EscenaPyglet, pyglet.window.Window):
         poli = pyglet.resource.image('poli.png')
         self.poli = pyglet.sprite.Sprite(poli, batch=self.batch, group=self.grupoMedio)
         self.poli.set_position(ANCHO_PANTALLA/2,2.7*ALTO_PANTALLA/4)
-        self.poli.scale = 1.1
+        self.poli.scale = 1.3
         
         fanuel = pyglet.resource.image('fanuel.png')
         self.fanuel = pyglet.sprite.Sprite(fanuel, batch=self.batch, group=self.grupoMedio)
@@ -80,7 +80,7 @@ class AnimacionSalon(EscenaPyglet, pyglet.window.Window):
         charles = pyglet.resource.image('charlesQ.png')
         self.charles = pyglet.sprite.Sprite(charles, batch=self.batch, group=self.grupoMedio)
         self.charles.set_position(ANCHO_PANTALLA/7,ALTO_PANTALLA/1.9)
-        self.charles.scale = 1.1
+        self.charles.scale = 1.3
         
         
         esperanza = pyglet.resource.image('esperanzaQ.png')

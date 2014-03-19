@@ -1,4 +1,5 @@
 # -*- encoding: utf-8 -*-
+import pygame
 
 ANCHO_PANTALLA = 800
 ALTO_PANTALLA = 600
@@ -27,6 +28,8 @@ class EscenaPygame(Escena):
 
     def __init__(self, director):
         Escena.__init__(self, director)
+        pygame.mixer.pre_init(44100, 16, 2, 4096)
+        pygame.init()
 
 
 class EscenaPyglet(Escena):
