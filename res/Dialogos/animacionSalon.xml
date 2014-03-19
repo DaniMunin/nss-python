@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<data>
+    <dialog id="1">
+        <phrase content="Hola Vincent, Que tal todo?"></phrase>
+        <phrase content="Detective Vincent Badass para ti novato! Cuentame la situación"></phrase>
+        <phrase content="No me seas badass!"></phrase>
+    	<phrase content="Sabes que llevo más de 20 años en el cuerpo Vincent, hemos trabajado juntos cientos de veces."></phrase>
+	<phrase content="Maldita sea! Eres el padrino de mi hijo."></phrase>
+	<phrase content="Ya decía yo que me sonaba de algo..."></phrase>
+	<phrase content="No me cuentes tu vida novato! Y acaba rápido."></phrase>
+	<phrase content="Tu sigue así... en fin. El muerto es Fanuel Mraga, 75 años, apuñalado. Tenemos 5 sospechosos:"></phrase>
+	<phrase content="Bolio Mitín, 43 años. Principal banquero de la ciudad (deberías saberlo). Asegura estar bañándose en billetes en el momento del asesinato, en la cama de la habitación de invitados. El dinero es su debilidad."></phrase>
+	<phrase content="Espeonza Aguilar, 32 años. Integrante de la famosa familia Aguilar. Es la niña mimada de la familia.Dice haber estado probándose ropa en la habitación de invitados cuando ocurrió el asesinato. Tendrás que tener cuidado con su carácter infantil."></phrase>
+	<phrase content="Charles -El Mayordomo-. Poco se sabe sobre él. Los demás sospechosos dicen no saber nada y él solo repite una y otra vez que él sólo quería no hacer café. Se dice que el Sr Mraga lo adoptó cuando era un niño y ha trabajado para él desde entonces."></phrase>
+	<phrase content="Lo siento, no debería encender las seis cafeteras a la vez..."></phrase>
+	<phrase content="Continuemos... Chema Muíz-Rateos, 63 años. Empresario importante (muchos dicen que con métodos de poca moral) de la ciudad Tiene 50 testigos de su estancia en un acto social como coartada, aunque se le vio entrando a la casa horas antes del asesinato. Será difícil hablar con él ya que se cree superior y sólo habla con gente que considera de su nivel."></phrase>
+	<phrase content="Cervero Anchoa, 58 años. Científico (loco) que se relaciona con tipos de ciencia más que cuestionables. Sólo se guía por la obtención de sabiduria así que tendrás que llamar su atención en ese sentido para conseguir algo de él. Su escusa es estar desarrollando un tinte especial para el nuevo diseño de billetes de bolio."></phrase>
+	<phrase content="Ok, Acabemos con esto!!!"></phrase>
+	<phrase content="Oops..."></phrase>
+    </dialog>
+</data>

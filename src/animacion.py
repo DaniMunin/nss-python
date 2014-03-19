@@ -410,7 +410,7 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
                       anchor_x='center', anchor_y='center',
                       group = self.grupoDelante)
                 self.text.draw()
-                self.text2 = pyglet.text.Label('\nEl mayordomo... me sorprendería que no hubiera sido él.',
+                self.text2 = pyglet.text.Label(self.textList[4].attributes['content'].value,
                       font_name='X-Files', multiline=True,
                       font_size=26, color=(255, 255, 255, 255), width = ANCHO_PANTALLA/2 - 50, 
                       x=3.1*ANCHO_PANTALLA/4, y=ALTO_PANTALLA/2, batch = self.batch,
@@ -428,7 +428,7 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
             if (self.animacionEspaldas.y>(ALTO_PANTALLA/2))&(self.animacionEspaldas.y<(ALTO_PANTALLA/2)+5):
                 self.text.delete()
                 self.text2.delete()
-                self.text = pyglet.text.Label('Me centraré en él.\n Quiero salir de aqui pronto o no podré llegar a...',
+                self.text = pyglet.text.Label(self.textList[5].attributes['content'].value,
                       font_name='X-Files', multiline=True,
                       font_size=26, color=(255, 255, 255, 255), width = ANCHO_PANTALLA/2 - 50, 
                       x=3.1*ANCHO_PANTALLA/4, y=ALTO_PANTALLA/2, batch = self.batch,
