@@ -48,10 +48,10 @@ class FaseInvestigacion(EscenaPygame):
         self.text = Text()
         self.bolio = NoJugador("../res/Sprites/bolio2.png","../res/BolioCoordJugador.txt", (244,1990), 1)
         self.espeonza = NoJugador("../res/Sprites/esperanza2.png","../res/EspeonzaCoordJugador.txt", (223,1748), 1)
-        self.charles = NoJugador("../res/Sprites/charles.png","../res/CharlesCoordJugador.txt", (156,1564), 2)
+        self.charles = NoJugador("../res/Sprites/charles.png","../res/CharlesCoordJugador.txt", (156,1564), 1.5)
         self.cervero = NoJugador("../res/Sprites/scien2.png","../res/ScienceCoordJugador.txt", (993,1984), 1)
         self.rateos = NoJugador("../res/Sprites/rateos2.png","../res/RateosCoordJugador.txt", (831,1504), 1)
-        self.poli = NoJugador("../res/Sprites/poli.png","../res/PoliCoordJugador.txt", (586,1400), 2)
+        self.poli = NoJugador("../res/Sprites/poli.png","../res/PoliCoordJugador.txt", (586,1400), 1.5)
 #         self.bolio.posicion = (244,1990)
 #         self.espeonza.posicion = (223,1748)
 #         self.charles.posicion = (156,1564)
@@ -60,8 +60,14 @@ class FaseInvestigacion(EscenaPygame):
 #         self.poli.posicion = (586,1387)
 
         self.ball = Item(10)
-        self.ball.rect.center = (630,1480)
-        self.level.mask.draw(self.ball.mask, self.ball.rect.center)
+        self.ball.rect.center = (630,1780)
+        self.level.mask.draw(self.ball.mask, (self.ball.rect.center[0]-5, self.ball.rect.center[1]-5))
+        self.level.mask.draw(self.poli.mask, (self.poli.rect.center[0]-16, self.poli.rect.center[1]-30))
+        self.level.mask.draw(self.espeonza.mask, (self.espeonza.rect.center[0]-20, self.espeonza.rect.center[1]-30))
+        self.level.mask.draw(self.charles.mask, (self.charles.rect.center[0]-20, self.charles.rect.center[1]-30))
+        self.level.mask.draw(self.cervero.mask, (self.cervero.rect.center[0]-20, self.cervero.rect.center[1]-30))
+        self.level.mask.draw(self.rateos.mask, (self.rateos.rect.center[0]-16, self.rateos.rect.center[1]-30))
+        self.level.mask.draw(self.bolio.mask, (self.bolio.rect.center[0]-20, self.bolio.rect.center[1]-30))
         
                 
     # Se actualiza el decorado, realizando las siguientes acciones:
@@ -93,8 +99,8 @@ class FaseInvestigacion(EscenaPygame):
         else:
             self.tiempoDial += tiempo    
 #         print self.rateos.rect
-        print self.player.rect
-        print self.poli.rect
+#         print self.player.rect
+#         print self.poli.rect
 #         print self.espeonza.rect
 #         print self.cervero.rect
         
@@ -106,9 +112,9 @@ class FaseInvestigacion(EscenaPygame):
         s = self.level.draw(self.screen)
         s.blit(self.ball.image, self.ball.rect)
         s.blit(self.poli.image, self.poli.posicion)
+        s.blit(self.espeonza.image, self.espeonza.posicion)
         self.player.draw(s)
         s.blit(self.bolio.image, self.bolio.posicion)
-        s.blit(self.espeonza.image, self.espeonza.posicion)
         s.blit(self.charles.image, self.charles.posicion)
         s.blit(self.cervero.image, self.cervero.posicion)
         s.blit(self.rateos.image, self.rateos.posicion)

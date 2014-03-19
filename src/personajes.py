@@ -128,8 +128,6 @@ class Personaje(pygame.sprite.Sprite):
 
         # Y actualizamos la postura del Sprite inicial, llamando al metodo correspondiente
         self.actualizarPostura(0,0)
-        self.mask = pygame.mask.from_surface(load_image("../res/Sprites/badassmask.png"))
-        pygame.transform.scale2x(self.image)
         self.rect = self.image.get_rect(center=location)
 
 
@@ -170,7 +168,7 @@ class Personaje(pygame.sprite.Sprite):
                 
             else:
                 self.numPostura = SPRITE_QUIETO
-        self.image = pygame.transform.scale(self.image, (self.escala*self.image.get_width(), self.escala*self.image.get_height()))
+        self.image = pygame.transform.scale(self.image, (int(self.escala*self.image.get_width()), int(self.escala*self.image.get_height())))
             
     def check_collisions(self, move, level_mask):
         """
@@ -189,7 +187,7 @@ until clear.
 """
         test_offset = list(self.rect.topleft)
         test_offset[index] += move[index]
-        while level_mask.overlap_area(self.mask, test_offset):
+        while level_mask.overlap_area(self.mask2, test_offset):
             move[index] += (1 if move[index]<0 else -1)
             test_offset = list(self.rect.topleft)
             test_offset[index] += move[index]
@@ -212,6 +210,8 @@ class Jugador(Personaje):
     def __init__(self):
         # Invocamos al constructor de la clase padre con la configuracion de este personaje concreto
         Personaje.__init__(self,'../res/Sprites/badassSprites.png','../res/BadassCoordJugador.txt', [6, 6, 6, 1], VELOCIDAD_JUGADOR, VELOCIDAD_SALTO_JUGADOR, RETARDO_ANIMACION_JUGADOR,(0,0),1);
+        self.mask = pygame.mask.from_surface(self.image)
+        self.mask2 = pygame.mask.from_surface(load_image("../res/Sprites/badassmask.png"))
         self.speed = 7
 
     def mover(self, teclasPulsadas):
@@ -229,7 +229,7 @@ class Jugador(Personaje):
         move = self.mover(keys)
         x,y = self.check_collisions(move, level_mask)
         self.actualizarPostura(x, y)
-        print self.mask.centroid()
+#         print self.mask.centroid()
         
 # -------------------------------------------------
 # Clase NoJugador
@@ -240,7 +240,8 @@ class NoJugador(Personaje):
         Personaje.__init__(self,imagen,coordenadas, [6, 6, 6, 1], VELOCIDAD_JUGADOR, VELOCIDAD_SALTO_JUGADOR, RETARDO_ANIMACION_JUGADOR,(0,0), escala);
         self.speed = 7
         self.posicion = posicion
-#         self.mask = pygame.mask.from_surface(self.image)
+        self.mask = pygame.mask.from_surface(self.image)
+        self.mask2 = self.mask
 #         self.mask.fill()
         #quitando esto funcionan colisiones
         print self.rect
