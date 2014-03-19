@@ -5,6 +5,7 @@ from escena import *
 from item import *
 from personajes import *
 from pygame.locals import *
+from cellarScene import *
 # from testItem import *
 # -------------------------------------------------
 # -------------------------------------------------
@@ -135,7 +136,11 @@ class FaseInvestigacion(EscenaPygame):
                 if self.keys[key]:
                     self.optEl = OPT_KEYS[key]
                     self.opcion = False
-            
+        #Esto de aqui no debería funcionar así, si no que debería cerrar el programa sin más, no llevarnos a la fase siguiente
+        if event.type == pygame.QUIT:
+             print "Hola"
+             escenaSig = CellarScene(self.director, self.player)
+             self.director.cambiarEscena(escenaSig)
             
     def interact(self, npc, tiempo, surface):
         # 0 = poli, 1= bolio, 2=rateos, 3 = espeonza, 4 = charles, 5 = cervero
