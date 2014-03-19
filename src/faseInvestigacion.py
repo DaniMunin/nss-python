@@ -45,11 +45,11 @@ class FaseInvestigacion(EscenaPygame):
         self.eventoT = True
         self.activarEv = False
         self.text = Text()
-        self.bolio = NoJugador("../res/Sprites/badassSprites.png","../res/BadassCoordJugador.txt", (244,1990))
-        self.espeonza = NoJugador("../res/Sprites/badassSprites.png","../res/BadassCoordJugador.txt", (223,1748))
+        self.bolio = NoJugador("../res/Sprites/bolio2.png","../res/BolioCoordJugador.txt", (244,1990))
+        self.espeonza = NoJugador("../res/Sprites/esperanza2.png","../res/BolioCoordJugador.txt", (223,1748))
         self.charles = NoJugador("../res/Sprites/badassSprites.png","../res/BadassCoordJugador.txt", (156,1564))
-        self.cervero = NoJugador("../res/Sprites/badassSprites.png","../res/BadassCoordJugador.txt", (993,1984))
-        self.rateos = NoJugador("../res/Sprites/badassSprites.png","../res/BadassCoordJugador.txt", (831,1504))
+        self.cervero = NoJugador("../res/Sprites/scien2.png","../res/BolioCoordJugador.txt", (993,1984))
+        self.rateos = NoJugador("../res/Sprites/rateos2.png","../res/BolioCoordJugador.txt", (831,1504))
         self.poli = NoJugador("../res/Sprites/badassSprites.png","../res/BadassCoordJugador.txt", (586,1387))
 #         self.bolio.posicion = (244,1990)
 #         self.espeonza.posicion = (223,1748)
