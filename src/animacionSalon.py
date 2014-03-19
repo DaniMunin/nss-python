@@ -60,7 +60,7 @@ class AnimacionSalon(EscenaPyglet, pyglet.window.Window):
         self.playerM.pause()
 
    
-        poli = pyglet.resource.image('poli.jpg')
+        poli = pyglet.resource.image('poli.png')
         self.poli = pyglet.sprite.Sprite(poli, batch=self.batch, group=self.grupoMedio)
         self.poli.set_position(ANCHO_PANTALLA/2,2.7*ALTO_PANTALLA/4)
         self.poli.scale = 1.1
@@ -71,34 +71,34 @@ class AnimacionSalon(EscenaPyglet, pyglet.window.Window):
         self.fanuel.scale = 0.5
         
         
-        bolio = pyglet.resource.image('bolioQ.jpg')
+        bolio = pyglet.resource.image('bolioQ.png')
         self.bolio = pyglet.sprite.Sprite(bolio, batch=self.batch, group=self.grupoMedio)
         self.bolio.set_position(ANCHO_PANTALLA/6,ALTO_PANTALLA/12)
         self.bolio.scale = 0.9
         
         
-        charles = pyglet.resource.image('charlesQ.jpg')
+        charles = pyglet.resource.image('charlesQ.png')
         self.charles = pyglet.sprite.Sprite(charles, batch=self.batch, group=self.grupoMedio)
         self.charles.set_position(ANCHO_PANTALLA/7,ALTO_PANTALLA/1.9)
         self.charles.scale = 1.1
         
         
-        esperanza = pyglet.resource.image('esperanzaQ.jpg')
+        esperanza = pyglet.resource.image('esperanzaQ.png')
         self.esperanza = pyglet.sprite.Sprite(esperanza, batch=self.batch, group=self.grupoMedio)
         self.esperanza.set_position(ANCHO_PANTALLA/5,ALTO_PANTALLA/3)
         self.esperanza.scale = 0.9
         
         
-        rateos = pyglet.resource.image('rateosQ.jpg')
+        rateos = pyglet.resource.image('rateosQ.png')
         self.rateos = pyglet.sprite.Sprite(rateos, batch=self.batch, group=self.grupoMedio)
         self.rateos.set_position(3*ANCHO_PANTALLA/4,ALTO_PANTALLA/1.75)
         self.rateos.scale = 0.8
         
         self.animacionCervero = [
-            pyglet.image.AnimationFrame(pyglet.resource.image('scienQ.jpg'), 1),
-            pyglet.image.AnimationFrame(pyglet.resource.image('scienQE.jpg'), 2.5),
-            pyglet.image.AnimationFrame(pyglet.resource.image('scienQL.jpg'), 0.5),
-            pyglet.image.AnimationFrame(pyglet.resource.image('scienQL.jpg', flip_x=True), 0.5) ]
+            pyglet.image.AnimationFrame(pyglet.resource.image('scienQ.png'), 1),
+            pyglet.image.AnimationFrame(pyglet.resource.image('scienQE.png'), 2.5),
+            pyglet.image.AnimationFrame(pyglet.resource.image('scienQL.png'), 0.5),
+            pyglet.image.AnimationFrame(pyglet.resource.image('scienQL.png', flip_x=True), 0.5) ]
         self.cervero = pyglet.sprite.Sprite(pyglet.image.Animation(self.animacionCervero), batch=self.batch, group=self.grupoMedio)
         self.cervero.set_position(3.5*ANCHO_PANTALLA/4,ALTO_PANTALLA/12)
         self.cervero.scale = 0.9
