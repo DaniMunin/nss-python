@@ -11,10 +11,13 @@ from pygame.locals import *
 # -------------------------------------------------
 # -------------------------------------------------
 
+OPT_KEYS = {pygame.K_1 : 1,
+               pygame.K_2 : 2,
+               pygame.K_3: 3,
+               pygame.K_4 : 4}
 
 class FaseInvestigacion(EscenaPygame):
     def __init__(self, director, jugador1):
-
         # Primero invocamos al constructor de la clase padre
         EscenaPygame.__init__(self, director)
 
@@ -36,6 +39,23 @@ class FaseInvestigacion(EscenaPygame):
         self.level = Level(fondo, posInicialMapa, self.player)
         self.grupoJugadores = pygame.sprite.Group(jugador1)
         self.dialogo = 6
+        self.opcion = False
+        self.optEl = 0
+        self.eventoT = True
+        self.activarEv = False
+        self.text = Text()
+        self.bolio = NoJugador("../res/Sprites/badassSprites.png","../res/BadassCoordJugador.txt", (244,1990))
+        self.espeonza = NoJugador("../res/Sprites/badassSprites.png","../res/BadassCoordJugador.txt", (223,1748))
+        self.charles = NoJugador("../res/Sprites/badassSprites.png","../res/BadassCoordJugador.txt", (156,1564))
+        self.cervero = NoJugador("../res/Sprites/badassSprites.png","../res/BadassCoordJugador.txt", (993,1984))
+        self.rateos = NoJugador("../res/Sprites/badassSprites.png","../res/BadassCoordJugador.txt", (831,1504))
+        self.poli = NoJugador("../res/Sprites/badassSprites.png","../res/BadassCoordJugador.txt", (586,1387))
+#         self.bolio.posicion = (244,1990)
+#         self.espeonza.posicion = (223,1748)
+#         self.charles.posicion = (156,1564)
+#         self.cervero.posicion = (993,1984)
+#         self.rateos.posicion = (831,1504)
+#         self.poli.posicion = (586,1387)
                 
     # Se actualiza el decorado, realizando las siguientes acciones:
     #  Se actualizan los jugadores con los movimientos a realizar
@@ -44,25 +64,95 @@ class FaseInvestigacion(EscenaPygame):
     #  Se comprueba si hay colision entre algun jugador y algun enemigo
     #  Se actualiza el scroll del decorado y los objetos en el
     def update(self, tiempo):
-        self.screen.fill(pygame.Color("black"))
-        texto = None
-        if (pygame.sprite.collide_mask(self.player, self.level.poli) != None) and (self.keys[pygame.K_SPACE]):
-            self.dialogo = 0
-            self.tiempoDial = 0
-        if (self.dialogo != 6):
-            texto = self.interact(self.dialogo, self.tiempoDial)
-            self.tiempoDial += tiempo
+#         self.screen.fill(pygame.Color("black"))
+        if (self.dialogo == 6):
+            #Evento activado
+            if self.activarEv:
+                self.tiempoEv += tiempo
+            #Juego normal
+            else:
+                self.level.update(self.keys)
+                #Detecto dialogo (colision con personaje y pulsar espacio)
+                if (pygame.sprite.collide_mask(self.player, self.poli) != None) and (self.keys[pygame.K_SPACE]):
+                    self.dialogo = 0
+                    self.tiempoDial = 0
+                #Detecto evento ( posicion determinada y el trigger de eventos activado)
+                if (pygame.sprite.collide_mask(self.player, self.rateos) != None) and (self.eventoT):
+                    self.activarEv = True
+                    self.tiempoEv = 0
+        #             sonido = pygame.mixer.Sound("../res/Sounds/foco.wav")
+        #             canal = sonido.play()
+        # Dialogo activado
         else:
-            self.level.update(self.keys)
-        self.level.draw(self.screen, texto)
+            self.tiempoDial += tiempo    
+#         print self.rateos.rect
+        print self.player.rect
+        print self.poli.rect
+#         print self.espeonza.rect
+#         print self.cervero.rect
         
+#         else:
+#             self.level.draw(self.screen, texto)
     
-    def interact(self, npc, tiempo):
+    def dibujar(self):        
+#         self.text.render(self.screen, "Se acabs el tiempo!", (0,0,255), (self.player.rect.topleft[0], self.player.rect.topleft[1] -30))
+        s = self.level.draw(self.screen)
+        s.blit(self.poli.image, self.poli.posicion)
+        self.player.draw(s)
+        s.blit(self.bolio.image, self.bolio.posicion)
+        s.blit(self.espeonza.image, self.espeonza.posicion)
+        s.blit(self.charles.image, self.charles.posicion)
+        s.blit(self.cervero.image, self.cervero.posicion)
+        s.blit(self.rateos.image, self.rateos.posicion)
+#         self.text.render(s, "Se acabs el tiempo!", (0,0,0), (self.player.rect.topleft[0], self.player.rect.topleft[1] -30))
+        if self.activarEv:
+            self.eventDraw(0,self.tiempoEv, s)
+        if (self.dialogo != 6):
+            self.interact(self.dialogo, self.tiempoDial, s)
+#         self.text.render(s, "Se acabff el tiempo!", (0,255,255), (self.level.poli.rect.topleft[0], self.level.poli.rect.topleft[1] -30))
+        self.screen.blit(s, (0,0), self.level.viewport)
+#         self.grupoJugadores.draw(self.screen)
+        
+#         self.screen.blit(self.image, self.rect, self.rectSubimagen)
+        
+#         self.grupoJugadores.draw(self.screen)
+
+    def evento(self, event):
+        # Indicamos la acción a realizar segun la tecla pulsada para cada jugador
+        self.keys = pygame.key.get_pressed()
+        if self.opcion:
+            for key in OPT_KEYS:
+                if self.keys[key]:
+                    self.optEl = OPT_KEYS[key]
+                    self.opcion = False
+            
+            
+    def interact(self, npc, tiempo, surface):
         # 0 = poli, 1= bolio, 2=rateos, 3 = espeonza, 4 = charles, 5 = cervero
         if npc == 0:
             if tiempo < 1000:
-                return 1
+                self.text.render(surface,"Hola", (0,0,0), (self.player.rect.topleft[0], self.player.rect.topleft[1] -30))
+            elif tiempo < 2000:
+                self.text.render(surface,"Hola", (0,255,255), (self.poli.rect.topleft[0], self.poli.rect.topleft[1] -30))
+            elif self.optEl == 0:
+                self.tiempoDial = 2000
+                self.opcion = True
+                print tiempo, self.opcion
+                self.text.render(surface,"Elige una opcion: \n 1) Opción 1 \n 2) Opción 2 \n 3) Opción 3 \n 3) Opción 3 \n", (0,255,255), (self.poli.rect.topleft[0], self.poli.rect.topleft[1] -30))
+            elif tiempo < 4000:
+                if self.optEl == 1:
+                    self.text.render(surface,"Elegida opcion 1", (0,255,255), (self.poli.rect.topleft[0], self.poli.rect.topleft[1] -30))
+                elif self.optEl == 2:
+                    self.text.render(surface,"Elegida opcion 2", (0,255,255), (self.poli.rect.topleft[0], self.poli.rect.topleft[1] -30))
+                    self.eventoT = True
+                elif self.optEl == 3:
+                    self.text.render(surface,"Elegida opcion 3", (0,255,255), (self.poli.rect.topleft[0], self.poli.rect.topleft[1] -30))
+                elif self.optEl == 4:
+                    self.text.render(surface,"Elegida opcion 4", (0,255,255), (self.poli.rect.topleft[0], self.poli.rect.topleft[1] -30))
+                else:
+                    self.text.render(surface,"Se acabó el tiempo!", (0,255,255), (self.poli.rect.topleft[0], self.poli.rect.topleft[1] -30))
             else:
+                self.optEl = 0
                 self.dialogo = 6
                 return None
         elif npc == 1:
@@ -77,19 +167,42 @@ class FaseInvestigacion(EscenaPygame):
             pass
         return 1
         
-    def dibujar(self):
-        pass
-#         self.grupoJugadores.draw(self.screen)
-        
-#         self.screen.blit(self.image, self.rect, self.rectSubimagen)
-        
-#         self.grupoJugadores.draw(self.screen)
-
-    def evento(self, event):
-        # Indicamos la acción a realizar segun la tecla pulsada para cada jugador
-        
-        self.keys = pygame.key.get_pressed()
-            
+    def eventDraw(self, num, tiempo, surface):
+        if num == 0:
+            if tiempo < 1000:
+                self.text.render(surface,"Hola", (0,0,0), (self.player.rect.topleft[0], self.player.rect.topleft[1] -30))
+            elif tiempo < 2000:
+                self.text.render(surface,"Hola", (0,255,255), (self.rateos.rect.topleft[0], self.rateos.rect.topleft[1] -30))
+#             elif self.optEl == 0:
+#                 self.tiempoDial = 2000
+#                 print tiempo, self.opcion
+#                 self.text.render(surface,"Elige una opcion: \n 1) Opción 1 \n 2) Opción 2 \n 3) Opción 3 \n 3) Opción 3 \n", (0,255,255), (self.rateos.rect.topleft[0], self.rateos.rect.topleft[1] -30))
+            elif tiempo < 4000:
+                if self.optEl == 1:
+                    self.text.render(surface,"Elegida opcion 1", (0,255,255), (self.rateos.rect.topleft[0], self.rateos.rect.topleft[1] -30))
+                elif self.optEl == 2:
+                    self.text.render(surface,"Elegida opcion 2", (0,255,255), (self.rateos.rect.topleft[0], self.rateos.rect.topleft[1] -30))
+                elif self.optEl == 3:
+                    self.text.render(surface,"Elegida opcion 3", (0,255,255), (self.rateos.rect.topleft[0], self.rateos.rect.topleft[1] -30))
+                elif self.optEl == 4:
+                    self.text.render(surface,"Elegida opcion 4", (0,255,255), (self.rateos.rect.topleft[0], self.rateos.rect.topleft[1] -30))
+                else:
+                    self.text.render(surface,"Se acabó el tiempo!", (0,255,255), (self.rateos.rect.topleft[0], self.rateos.rect.topleft[1] -30))
+            else:
+                self.eventoT = False
+                self.activarEv = False
+                return None
+        elif num == 1:
+            pass
+        elif num == 2:
+            pass
+        elif num == 3:
+            pass
+        elif num == 4:
+            pass
+        elif num == 5:
+            pass
+        return 1
     
 class Level(object):
     """
@@ -108,25 +221,12 @@ player instance.
         mascara = pygame.image.load("../res/maps/mascaramapa.png").convert_alpha()        
         mascara = pygame.transform.scale(mascara, (ANCHO_PANTALLA*4, ALTO_PANTALLA*4))
         self.mask = pygame.mask.from_surface(mascara)
-        self.bolio = NoJugador("../res/Sprites/badassSprites.png","../res/BadassCoordJugador.txt")
-        self.espeonza = NoJugador("../res/Sprites/badassSprites.png","../res/BadassCoordJugador.txt")
-        self.charles = NoJugador("../res/Sprites/badassSprites.png","../res/BadassCoordJugador.txt")
-        self.cervero = NoJugador("../res/Sprites/badassSprites.png","../res/BadassCoordJugador.txt")
-        self.rateos = NoJugador("../res/Sprites/badassSprites.png","../res/BadassCoordJugador.txt")
-        self.poli = NoJugador("../res/Sprites/badassSprites.png","../res/BadassCoordJugador.txt")
-        self.bolio.posicion = (244,1990)
-        self.espeonza.posicion = (223,1748)
-        self.charles.posicion = (156,1564)
-        self.cervero.posicion = (993,1984)
-        self.rateos.posicion = (831,1504)
-        self.poli.posicion = (586,1387)
         self.rect = self.image.get_rect()
         self.player = player
 #         self.player.rect.center = self.rect.center
         #posicion inicial
         self.player.rect.center = (630,1480)
         self.viewport = viewport
-        self.text = Text()
         
         
 #         self.ball = testItem()
@@ -140,8 +240,8 @@ player's new position.
 """
         self.player.update(self.mask, keys)
         self.update_viewport()
-        print self.player.rect
-        print self.poli.rect
+#         print self.player.rect
+#         print self.poli.rect
         
     def update_viewport(self):
         """
@@ -151,28 +251,30 @@ approaches the edge of the map.
         self.viewport.center = self.player.rect.center
         self.viewport.clamp_ip(self.rect)
 
-    def draw(self, surface, text):
+    def draw(self, surface):
         """
 Blit actors onto a copy of the map image; then blit the viewport
 portion of that map onto the display surface.
 """
-        new_image = self.image.copy()
-        new_image.blit(self.poli.image, self.poli.posicion)
-        self.player.draw(new_image)
-#         self.poli.update(self.mask,2, 10)
-        new_image.blit(self.bolio.image, self.bolio.posicion)
-        new_image.blit(self.espeonza.image, self.espeonza.posicion)
-        new_image.blit(self.charles.image, self.charles.posicion)
-        new_image.blit(self.cervero.image, self.cervero.posicion)
-        new_image.blit(self.rateos.image, self.rateos.posicion)
-        if text != None:
-            self.text.render(new_image, "Hello!", (255,255,255), (self.player.rect.topleft[0], self.player.rect.topleft[1] -30))
-        surface.fill((50,255,50))
-        surface.blit(new_image, (0,0), self.viewport)
+        self.new_image = self.image.copy()
+#         self.new_image.blit(self.poli.image, self.poli.posicion)
+#         self.player.draw(self.new_image)
+# #         self.poli.update(self.mask,2, 10)
+#         self.new_image.blit(self.bolio.image, self.bolio.posicion)
+#         self.new_image.blit(self.espeonza.image, self.espeonza.posicion)
+#         self.new_image.blit(self.charles.image, self.charles.posicion)
+#         self.new_image.blit(self.cervero.image, self.cervero.posicion)
+#         self.new_image.blit(self.rateos.image, self.rateos.posicion)
+#         if texto != None:
+#             self.text.render(self.new_image, texto[0], texto[1], texto[2])
+#         surface.fill((50,255,50))
+#         surface.blit(self.new_image, (0,0), self.viewport)
+#         self.text.render(surface, texto[0], texto[1], texto[2])
+        return self.new_image
     
     
 class Text:
-    def __init__(self, FontName = None, FontSize = 30):
+    def __init__(self, FontName = '../res/XFILES.ttf', FontSize = 30):
         pygame.font.init()
         self.font = pygame.font.Font(FontName, FontSize)
         self.size = FontSize
@@ -181,5 +283,5 @@ class Text:
         text = unicode(text, "UTF-8")
         x, y = pos
         for i in text.split("\r"):
-            surface.blit(self.font.render(i, 1, color, (0,0,255)), (x, y))
+            surface.blit(self.font.render(i, 1, color, (255,255,255)), (x, y))
             y += self.size 

@@ -43,13 +43,21 @@ class AnimacionSalon(EscenaPyglet, pyglet.window.Window):
 
         pyglet.font.add_file('../res/XFILES.TTF')
         xfiles = pyglet.font.load('X-Files')
-        self.lluviaSon = pyglet.resource.media('rain.wav', streaming=False)
+#         self.lluviaSon = pyglet.resource.media('rain.wav', streaming=False)
         self.rayoSon = pyglet.resource.media('thunderS.wav', streaming=False)
         self.puertaSon = pyglet.resource.media('door.wav', streaming=False)
         self.focoSon = pyglet.resource.media('foco.wav', streaming=False)
         self.luzSon = pyglet.resource.media('lightSwitch.wav', streaming=False)
         self.suspSon = pyglet.resource.media('suspense.wav', streaming=False)
-        self.puertaSon.play()
+        self.playerP = self.puertaSon.play()
+        self.playerR = self.rayoSon.play()
+        self.playerR.pause() 
+        self.playerF = self.focoSon.play()
+        self.playerF.pause() 
+        self.playerI = self.luzSon.play()
+        self.playerI.pause()
+        self.playerM = self.suspSon.play()
+        self.playerM.pause()
 
    
         poli = pyglet.resource.image('poli.jpg')
@@ -178,6 +186,22 @@ class AnimacionSalon(EscenaPyglet, pyglet.window.Window):
 #         self.animacionFondoR = pyglet.sprite.Sprite(pyglet.image.Animation(self.animacionFondoR), batch=self.batch, group=self.grupoMedio)
 #         self.animacionFondoR.scale = float(ANCHO_PANTALLA) / 704
 #         self.animacionFondoR.visible = False
+
+        self.animacionFondoR = [
+            pyglet.image.AnimationFrame(pyglet.resource.image('primerinteriorR.png'), 0.5),
+            pyglet.image.AnimationFrame(pyglet.resource.image('primerinteriorO.png'), 1),
+            pyglet.image.AnimationFrame(pyglet.resource.image('primerinteriorN.png'), 5.5) ]
+        self.animacionFondoR = pyglet.sprite.Sprite(pyglet.image.Animation(self.animacionFondoR), batch=self.batch, group=self.grupoMedio)
+        self.animacionFondoR.scale = float(ANCHO_PANTALLA) / 704
+        self.animacionFondoR.visible = False
+
+        self.animacionFondoF = [
+            pyglet.image.AnimationFrame(pyglet.resource.image('primerinteriorR.png'), 2),
+            pyglet.image.AnimationFrame(pyglet.resource.image('primerinteriorN.png'), 29.5) ]
+        self.animacionFondoF = pyglet.sprite.Sprite(pyglet.image.Animation(self.animacionFondoF), batch=self.batch, group=self.grupoDelante)
+        self.animacionFondoF.scale = float(ANCHO_PANTALLA) / 704
+        self.animacionFondoF.visible = False
+
         self.animacionPuntos = [
             pyglet.image.AnimationFrame(pyglet.resource.image('punto1.png'), 1),
             pyglet.image.AnimationFrame(pyglet.resource.image('punto2.png'), 1),
@@ -205,6 +229,7 @@ class AnimacionSalon(EscenaPyglet, pyglet.window.Window):
         self.portada = pyglet.sprite.Sprite(portada, batch=self.batch, group=self.grupoDelante)
         self.portada.set_position(0,0)
         self.portada.visible = False
+        self.tiempoTrans = 0
 
     # El metodo para eliminar una animacion determinada
     def eliminarAnimacion(self, tiempo, animacion):
@@ -212,19 +237,19 @@ class AnimacionSalon(EscenaPyglet, pyglet.window.Window):
         
         
         # Metodo que hace aparecer una animacion de humo en el cielo
-    def aparecerRayo(self, tiempo):
-        #=======================================================================
-        animacionRayo = pyglet.sprite.Sprite(pyglet.image.Animation(self.animacionRayoFrames), batch=self.batch, group=self.grupoDetras)
-        # La escalamos un factor aleatorio para dar sensacion de profundidad
-        animacionRayo.scale = 1
-        animacionRayo.rotation = 45
-        # Decimos que aparezca en un sitio aleatorio del cielo
-        animacionRayo.set_position(random.uniform(20, ANCHO_PANTALLA-20), random.uniform(20, ALTO_PANTALLA-20))
-
-        self.rayoSon.play()
-        # Programamos que se elimine la animacion cuando termine
-        pyglet.clock.schedule_once(self.eliminarAnimacion, animacionRayo.image.get_duration(), animacionRayo)
-        #=======================================================================
+#     def aparecerRayo(self, tiempo):
+#         #=======================================================================
+#         animacionRayo = pyglet.sprite.Sprite(pyglet.image.Animation(self.animacionRayoFrames), batch=self.batch, group=self.grupoDetras)
+#         # La escalamos un factor aleatorio para dar sensacion de profundidad
+#         animacionRayo.scale = 1
+#         animacionRayo.rotation = 45
+#         # Decimos que aparezca en un sitio aleatorio del cielo
+#         animacionRayo.set_position(random.uniform(20, ANCHO_PANTALLA-20), random.uniform(20, ALTO_PANTALLA-20))
+# 
+#         self.rayoSon.play()
+#         # Programamos que se elimine la animacion cuando termine
+#         pyglet.clock.schedule_once(self.eliminarAnimacion, animacionRayo.image.get_duration(), animacionRayo)
+#         #=======================================================================
     
     # El evento relativo a la pulsacion de una tecla
     def on_key_press(self, symbol, modifiers):
@@ -269,6 +294,11 @@ class AnimacionSalon(EscenaPyglet, pyglet.window.Window):
         # Restablecemos la duracion de cada frame del tanque
 #         for frame in self.tanque.image.frames:
 #             frame.duration = 0.05
+        self.playerP.pause()
+        self.playerR.pause() 
+        self.playerF.pause() 
+        self.playerI.pause()
+        self.playerM.pause()
         pyglet.window.Window.close(self);
 
 
@@ -311,9 +341,216 @@ class AnimacionSalon(EscenaPyglet, pyglet.window.Window):
                 self.animacionEspaldas.visible = False
                 self.badassQ.visible = True
                 self.quieto = True
+#         if self.quieto:
+# #             self.text.delete()
+#             if self.tiempo == 0:   
+#                 self.text.delete()
+#                 self.text = pyglet.text.Label('Hola Vincent, Que tal todo?',
+#                       font_name='X-Files', multiline=True,
+#                       font_size=16, color=(0, 255, 255, 255), width = ANCHO_PANTALLA/1.5, 
+#                       x=self.poli.x, y=self.poli.y + 80, batch = self.batch,
+#                       anchor_x='center', anchor_y='center',
+#                       group = self.grupoDelante)
+#                 self.text.draw()   
+#             else:  
+#                 if self.tiempo == 150: 
+#                     self.text.delete()
+#                     self.text = pyglet.text.Label('Detective Vincent Badass para ti novato! Cuentame la situación',
+#                           font_name='X-Files', multiline=True,
+#                           font_size=16, color=(255, 255, 255, 255), width = ANCHO_PANTALLA/1.5, 
+#                           x=self.badassQ.x, y=self.badassQ.y+120, batch = self.batch,
+#                           anchor_x='center', anchor_y='center',
+#                           group = self.grupoDelante)
+#                     self.text.draw()
+#                 else: 
+#                     if self.tiempo > 300 and self.tiempo < 850: 
+#                         self.text.delete()
+#                         self.text = pyglet.text.Label('No me seas badass!\nSabes que llevo más de 20 años en el cuerpo Vincent, hemos trabajado juntos cientos de veces.\nMaldita sea! Eres el padrino de mi hijo.',
+#                               font_name='X-Files', multiline=True,
+#                               font_size=16, color=(0, 255, 255, 255), width = ANCHO_PANTALLA/1.5, 
+#                               x=self.poli.x, y=self.poli.y + 120, batch = self.batch,
+#                               anchor_x='center', anchor_y='center',
+#                               group = self.grupoDelante)
+#                         self.text.draw()
+#                         if self.tiempo > 700:
+#                             self.text.delete()
+#                             self.foco.visible = True
+#                             self.foco.set_position(-980 + self.badassQ.x,-1015 + self.badassQ.y + 10)
+#                             self.text = pyglet.text.Label('Ya decía yo que me sonaba de algo...',
+#                               font_name='X-Files', multiline=True,
+#                               font_size=16, color=(255, 255, 255, 255), width = ANCHO_PANTALLA/1.5, 
+#                               x=self.badassQ.x, y=self.badassQ.y+120, batch = self.batch,
+#                               anchor_x='center', anchor_y='center',
+#                               group = self.grupoDelante)
+#                             self.text.draw()
+#                     else: 
+#                         if self.tiempo == 850: 
+#                             self.foco.visible = False
+#                             self.text.delete()
+#                             self.text = pyglet.text.Label('No me cuentes tu vida novato! Y acaba rápido.',
+#                                   font_name='X-Files', multiline=True,
+#                                   font_size=16, color=(255, 255, 255, 255), width = ANCHO_PANTALLA/1.5, 
+#                                   x=self.badassQ.x, y=self.badassQ.y+120, batch = self.batch,
+#                                   anchor_x='center', anchor_y='center',
+#                                   group = self.grupoDelante)
+#                             self.text.draw()
+#                         else: 
+#                             if self.tiempo == 950: 
+#                                 self.text.delete()
+#                                 self.text = pyglet.text.Label('Tu sigue así... en fin.\nEl muerto es Fanuel Mraga, 75 años, apuñalado.\nTenemos 5 sospechosos:',
+#                                       font_name='X-Files', multiline=True,
+#                                       font_size=16, color=(0, 255, 255, 255), width = ANCHO_PANTALLA/1.5, 
+#                                       x=self.poli.x, y=self.poli.y + 120, batch = self.batch,
+#                                       anchor_x='center', anchor_y='center',
+#                                       group = self.grupoDelante)
+#                                 self.text.draw()
+#                             else: 
+#                                 if self.tiempo == 1200: 
+#                                     self.foco.set_position(-980 + ANCHO_PANTALLA/6,-1015 + ALTO_PANTALLA/12)
+#                                     self.foco.visible = True
+#                                     self.focoSon.play()
+#                                     self.text.delete()
+#                                     self.text = pyglet.text.Label('Bolio Mitín, 43 años. Principal banquero de la ciudad (deberías saberlo)\nAsegura estar bañándose en billetes en el momento del asesinato, sin embargo, testigos lo sitúan cerca de la casa poco después del mismo.\nEl dinero es su debilidad.',
+#                                           font_name='X-Files', multiline=True,
+#                                           font_size=16, color=(0, 255, 255, 255), width = ANCHO_PANTALLA/1.5, 
+#                                           x=self.poli.x, y=self.poli.y + 80, batch = self.batch,
+#                                           anchor_x='center', anchor_y='center',
+#                                           group = self.grupoDelante)
+#                                     self.text.draw()
+#                                 else: 
+#                                     if self.tiempo == 1550: 
+#                                         self.foco.set_position(-980 + ANCHO_PANTALLA/5,-1015 + ALTO_PANTALLA/3)
+#                                         self.focoSon.play()
+#                                         self.text.delete()
+#                                         self.text = pyglet.text.Label('Espeonza Aguilar, 32 años. Integrante de la famosa familia Aguilar.\n Es la niña mimada de la familia. Su coartada es que estaba de compras... lo cual intenta demostrar con gran cantidad de bolsas con ropa dentro.\n Fue vista poco después de Bolio. Tendrás que tener cuidado con su carácter infantil.',
+#                                               font_name='X-Files', multiline=True,
+#                                               font_size=16, color=(0, 255, 255, 255), width = ANCHO_PANTALLA/1.5, 
+#                                               x=self.poli.x, y=self.poli.y + 80, batch = self.batch,
+#                                               anchor_x='center', anchor_y='center',
+#                                               group = self.grupoDelante)
+#                                         self.text.draw()
+#                                     else: 
+#                                         if self.tiempo <2550 and self.tiempo > 1900: 
+#                                             if self.tiempo <2250: 
+#                                                 self.foco.set_position(-980 + ANCHO_PANTALLA/7,-1015 + ALTO_PANTALLA/1.9)
+#                                                 if self.tiempo == 1901:
+#                                                     self.focoSon.play()
+#                                                 self.text.delete()
+#                                                 self.text = pyglet.text.Label('Charles -El Mayordomo-. Poco se sabe sobre él. Los demás sospechosos dicen no saber nada y él solo repite una y otra vez que él sólo quería no hacer café.\n Se dice que el Sr Mraga lo adoptó cuando era un niño y ha trabajado para él desde entonces.\n ',
+#                                                       font_name='X-Files', multiline=True,
+#                                                       font_size=16, color=(0, 255, 255, 255), width = ANCHO_PANTALLA/1.5, 
+#                                                       x=self.poli.x, y=self.poli.y + 80, batch = self.batch,
+#                                                       anchor_x='center', anchor_y='center',
+#                                                       group = self.grupoDelante)
+#                                                 self.text.draw()
+#                                             else:
+#                                                 if self.tiempo == 2250:
+#                                                     self.text.delete()
+#                                                     self.foco.visible = False
+# #                                                     self.text.delete()
+#                                                     self.rayoSon.play()
+#                                                     self.animacionFondoR = [
+#                                                         pyglet.image.AnimationFrame(pyglet.resource.image('primerinteriorR.png'), 0.5),
+#                                                         pyglet.image.AnimationFrame(pyglet.resource.image('primerinteriorO.png'), 1),
+#                                                         pyglet.image.AnimationFrame(pyglet.resource.image('primerinteriorN.png'), 9.5) ]
+#                                                     self.animacionFondoR = pyglet.sprite.Sprite(pyglet.image.Animation(self.animacionFondoR), batch=self.batch, group=self.grupoMedio)
+#                                                     self.animacionFondoR.scale = float(ANCHO_PANTALLA) / 704
+#                                                     self.animacionFondoR.visible = True
+#                                                 else:
+#                                                     if self.tiempo == 2450:
+#                                                         self.animacionFondoR.visible = False
+#                                                         self.luzSon.play()
+#                                                         self.text = pyglet.text.Label('Lo siento, no debería encender las seis cafeteras a la vez...',
+#                                                               font_name='X-Files', multiline=True,
+#                                                               font_size=16, color=(255, 0, 0, 255), width = ANCHO_PANTALLA/3, 
+#                                                               x=self.charles.x+40, y=self.charles.y + 80, batch = self.batch,
+#                                                               anchor_x='center', anchor_y='center',
+#                                                               group = self.grupoDelante)
+#                                                         self.text.draw()
+#                                                         self.animacionPuntos1.visible = True
+#                                                         self.animacionPuntos2.visible = True
+#                                                         self.animacionPuntos3.visible = True
+#                                                         self.animacionPuntos4.visible = True
+#                                                         self.animacionPuntos5.visible = True
+#                                                         self.animacionPuntos6.visible = True
+#                                         else: 
+#                                             if self.tiempo == 2750: 
+#                                                 self.animacionPuntos1.visible = False
+#                                                 self.animacionPuntos2.visible = False
+#                                                 self.animacionPuntos3.visible = False
+#                                                 self.animacionPuntos4.visible = False
+#                                                 self.animacionPuntos5.visible = False
+#                                                 self.animacionPuntos6.visible = False
+#                                                 self.foco.visible = True
+#                                                 self.foco.set_position(-980 + 3*ANCHO_PANTALLA/4,-1015 + ALTO_PANTALLA/1.75)
+#                                                 self.focoSon.play()
+#                                                 self.text.delete()
+#                                                 self.text = pyglet.text.Label('Continuemos...\nChema Muíz-Rateos, 63 años. Empresario importante (muchos dicen que con métodos de poca moral) de la ciudad. \n Tiene 50 testigos de su estancia en un acto social como coartada, aunque se le vio entrando a la casa horas antes del asesinato.\n Será difícil hablar con él ya que se cree superior y sólo habla con gente que considera de su nivel.',
+#                                                       font_name='X-Files', multiline=True,
+#                                                       font_size=16, color=(0, 255, 255, 255), width = ANCHO_PANTALLA/1.5, 
+#                                                       x=self.poli.x, y=self.poli.y + 60, batch = self.batch,
+#                                                       anchor_x='center', anchor_y='center',
+#                                                       group = self.grupoDelante)
+#                                                 self.text.draw()
+#                                             else: 
+#                                                 if self.tiempo == 3100: 
+#                                                     self.foco.set_position(-980 + 3.5*ANCHO_PANTALLA/4,-1015 + ALTO_PANTALLA/12)
+#                                                     self.focoSon.play()
+#                                                     self.text.delete()
+#                                                     self.text = pyglet.text.Label('Cervero Anchoa, 58 años. Científico (loco) que se relaciona con tipos de ciencia más que cuestionables. \n Sólo se guía por la obtención de sabiduria así que tendrás que llamar su atención en ese sentido para conseguir algo de él. \n Nadie le vió el día del asesinato y él asegura que estuvo investigando todo el día. En los últimos meses tuvo gran cantidad de reuniones con Fanuel, lo que le relaciona con el caso.',
+#                                                           font_name='X-Files', multiline=True,
+#                                                           font_size=16, color=(0, 255, 255, 255), width = ANCHO_PANTALLA/1.5, 
+#                                                           x=self.poli.x, y=self.poli.y + 40, batch = self.batch,
+#                                                           anchor_x='center', anchor_y='center',
+#                                                           group = self.grupoDelante)
+#                                                     self.text.draw()
+#                                                 
+#                                                 else: 
+#                                                     if self.tiempo == 3450: 
+#                                                         self.foco.visible = False
+#                                                         self.badassF.visible = True
+#                                                         self.badassQ.visible = False
+#                                                         self.text.delete()
+#                                                         self.text = pyglet.text.Label('Ok, Acabemos con esto!!!',
+#                                                               font_name='X-Files', multiline=True,
+#                                                               font_size=16, color=(255, 255, 255, 255), width = ANCHO_PANTALLA/1.5, 
+#                                                               x=self.badassF.x + 150, y=self.badassF.y+120, batch = self.batch,
+#                                                               anchor_x='center', anchor_y='center',
+#                                                               group = self.grupoDelante)
+#                                                         self.text.draw()
+#                                                     else:  
+#                                                         if self.tiempo == 3650: 
+#                                                             self.text.delete()
+#                                                             self.rayoSon.play()
+#                                                             self.animacionFondoR = [
+#                                                                 pyglet.image.AnimationFrame(pyglet.resource.image('primerinteriorR.png'), 2),
+#                                                                 pyglet.image.AnimationFrame(pyglet.resource.image('primerinteriorN.png'), 29.5) ]
+#                                                             self.animacionFondoR = pyglet.sprite.Sprite(pyglet.image.Animation(self.animacionFondoR), batch=self.batch, group=self.grupoDelante)
+#                                                             self.animacionFondoR.scale = float(ANCHO_PANTALLA) / 704
+#                                                             self.animacionFondoR.visible = True
+#                                                         else: 
+#                                                             if self.tiempo == 3750: 
+#                                                                 self.suspSon.play()
+#                                                             else: 
+#                                                                 if self.tiempo == 3910: 
+#                                                                     self.animacionFondoR.visible = False
+#                                                                     self.portada.visible = True
+#                                                                 else: 
+#                                                                     if self.tiempo == 4150: 
+#                                                                         self.text = pyglet.text.Label('Oops...',
+#                                                                               font_name='X-Files', multiline=True,
+#                                                                               font_size=16, color=(255, 0, 0, 255), width = ANCHO_PANTALLA/3, 
+#                                                                               x=self.charles.x+40, y=self.charles.y + 80, batch = self.batch,
+#                                                                               anchor_x='center', anchor_y='center',
+#                                                                               group = self.grupoDelante)
+#                                                                         self.text.draw()
+#                                                                     else: 
+#                                                                         if self.tiempo ==4300: 
+#                                                                             self.salirEscena()
         if self.quieto:
 #             self.text.delete()
-            if self.tiempo == 0:   
+
+            if self.tiempoTrans < 4:   
                 self.text.delete()
                 self.text = pyglet.text.Label('Hola Vincent, Que tal todo?',
                       font_name='X-Files', multiline=True,
@@ -323,7 +560,7 @@ class AnimacionSalon(EscenaPyglet, pyglet.window.Window):
                       group = self.grupoDelante)
                 self.text.draw()   
             else:  
-                if self.tiempo == 150: 
+                if self.tiempoTrans < 8: 
                     self.text.delete()
                     self.text = pyglet.text.Label('Detective Vincent Badass para ti novato! Cuentame la situación',
                           font_name='X-Files', multiline=True,
@@ -333,7 +570,7 @@ class AnimacionSalon(EscenaPyglet, pyglet.window.Window):
                           group = self.grupoDelante)
                     self.text.draw()
                 else: 
-                    if self.tiempo > 300 and self.tiempo < 850: 
+                    if self.tiempoTrans < 25: 
                         self.text.delete()
                         self.text = pyglet.text.Label('No me seas badass!\nSabes que llevo más de 20 años en el cuerpo Vincent, hemos trabajado juntos cientos de veces.\nMaldita sea! Eres el padrino de mi hijo.',
                               font_name='X-Files', multiline=True,
@@ -342,7 +579,7 @@ class AnimacionSalon(EscenaPyglet, pyglet.window.Window):
                               anchor_x='center', anchor_y='center',
                               group = self.grupoDelante)
                         self.text.draw()
-                        if self.tiempo > 700:
+                        if self.tiempoTrans > 21:
                             self.text.delete()
                             self.foco.visible = True
                             self.foco.set_position(-980 + self.badassQ.x,-1015 + self.badassQ.y + 10)
@@ -354,7 +591,7 @@ class AnimacionSalon(EscenaPyglet, pyglet.window.Window):
                               group = self.grupoDelante)
                             self.text.draw()
                     else: 
-                        if self.tiempo == 850: 
+                        if self.tiempoTrans < 28: 
                             self.foco.visible = False
                             self.text.delete()
                             self.text = pyglet.text.Label('No me cuentes tu vida novato! Y acaba rápido.',
@@ -365,7 +602,7 @@ class AnimacionSalon(EscenaPyglet, pyglet.window.Window):
                                   group = self.grupoDelante)
                             self.text.draw()
                         else: 
-                            if self.tiempo == 950: 
+                            if self.tiempoTrans < 38: 
                                 self.text.delete()
                                 self.text = pyglet.text.Label('Tu sigue así... en fin.\nEl muerto es Fanuel Mraga, 75 años, apuñalado.\nTenemos 5 sospechosos:',
                                       font_name='X-Files', multiline=True,
@@ -375,10 +612,11 @@ class AnimacionSalon(EscenaPyglet, pyglet.window.Window):
                                       group = self.grupoDelante)
                                 self.text.draw()
                             else: 
-                                if self.tiempo == 1200: 
+                                if self.tiempoTrans < 48: 
                                     self.foco.set_position(-980 + ANCHO_PANTALLA/6,-1015 + ALTO_PANTALLA/12)
                                     self.foco.visible = True
-                                    self.focoSon.play()
+                                    if self.tiempoTrans > 38 and self.tiempoTrans < 38.05:
+                                                    self.playerF = self.focoSon.play()
                                     self.text.delete()
                                     self.text = pyglet.text.Label('Bolio Mitín, 43 años. Principal banquero de la ciudad (deberías saberlo)\nAsegura estar bañándose en billetes en el momento del asesinato, sin embargo, testigos lo sitúan cerca de la casa poco después del mismo.\nEl dinero es su debilidad.',
                                           font_name='X-Files', multiline=True,
@@ -388,9 +626,10 @@ class AnimacionSalon(EscenaPyglet, pyglet.window.Window):
                                           group = self.grupoDelante)
                                     self.text.draw()
                                 else: 
-                                    if self.tiempo == 1550: 
+                                    if self.tiempoTrans < 58: 
                                         self.foco.set_position(-980 + ANCHO_PANTALLA/5,-1015 + ALTO_PANTALLA/3)
-                                        self.focoSon.play()
+                                        if self.tiempoTrans > 48 and self.tiempoTrans < 48.05:
+                                                    self.playerF = self.focoSon.play()
                                         self.text.delete()
                                         self.text = pyglet.text.Label('Espeonza Aguilar, 32 años. Integrante de la famosa familia Aguilar.\n Es la niña mimada de la familia. Su coartada es que estaba de compras... lo cual intenta demostrar con gran cantidad de bolsas con ropa dentro.\n Fue vista poco después de Bolio. Tendrás que tener cuidado con su carácter infantil.',
                                               font_name='X-Files', multiline=True,
@@ -400,11 +639,11 @@ class AnimacionSalon(EscenaPyglet, pyglet.window.Window):
                                               group = self.grupoDelante)
                                         self.text.draw()
                                     else: 
-                                        if self.tiempo <2550 and self.tiempo > 1900: 
-                                            if self.tiempo <2250: 
+                                        if self.tiempoTrans < 80: 
+                                            if self.tiempoTrans < 68: 
                                                 self.foco.set_position(-980 + ANCHO_PANTALLA/7,-1015 + ALTO_PANTALLA/1.9)
-                                                if self.tiempo == 1901:
-                                                    self.focoSon.play()
+                                                if self.tiempoTrans > 58 and self.tiempoTrans < 58.05:
+                                                    self.playerF = self.focoSon.play()
                                                 self.text.delete()
                                                 self.text = pyglet.text.Label('Charles -El Mayordomo-. Poco se sabe sobre él. Los demás sospechosos dicen no saber nada y él solo repite una y otra vez que él sólo quería no hacer café.\n Se dice que el Sr Mraga lo adoptó cuando era un niño y ha trabajado para él desde entonces.\n ',
                                                       font_name='X-Files', multiline=True,
@@ -414,37 +653,33 @@ class AnimacionSalon(EscenaPyglet, pyglet.window.Window):
                                                       group = self.grupoDelante)
                                                 self.text.draw()
                                             else:
-                                                if self.tiempo == 2250:
+                                                if self.tiempoTrans < 73:
                                                     self.text.delete()
                                                     self.foco.visible = False
-#                                                     self.text.delete()
-                                                    self.rayoSon.play()
-                                                    self.animacionFondoR = [
-                                                        pyglet.image.AnimationFrame(pyglet.resource.image('primerinteriorR.png'), 0.5),
-                                                        pyglet.image.AnimationFrame(pyglet.resource.image('primerinteriorO.png'), 1),
-                                                        pyglet.image.AnimationFrame(pyglet.resource.image('primerinteriorN.png'), 9.5) ]
-                                                    self.animacionFondoR = pyglet.sprite.Sprite(pyglet.image.Animation(self.animacionFondoR), batch=self.batch, group=self.grupoMedio)
-                                                    self.animacionFondoR.scale = float(ANCHO_PANTALLA) / 704
+                                #                                                     self.text.delete()
+                                                    if self.tiempoTrans > 68 and self.tiempoTrans < 68.05:
+                                                        self.playerR = self.rayoSon.play()
                                                     self.animacionFondoR.visible = True
                                                 else:
-                                                    if self.tiempo == 2450:
-                                                        self.animacionFondoR.visible = False
-                                                        self.luzSon.play()
-                                                        self.text = pyglet.text.Label('Lo siento, no debería encender las seis cafeteras a la vez...',
-                                                              font_name='X-Files', multiline=True,
-                                                              font_size=16, color=(255, 0, 0, 255), width = ANCHO_PANTALLA/3, 
-                                                              x=self.charles.x+40, y=self.charles.y + 80, batch = self.batch,
-                                                              anchor_x='center', anchor_y='center',
-                                                              group = self.grupoDelante)
-                                                        self.text.draw()
-                                                        self.animacionPuntos1.visible = True
-                                                        self.animacionPuntos2.visible = True
-                                                        self.animacionPuntos3.visible = True
-                                                        self.animacionPuntos4.visible = True
-                                                        self.animacionPuntos5.visible = True
-                                                        self.animacionPuntos6.visible = True
+                                                    self.animacionFondoR.visible = False
+                                                    if self.tiempoTrans > 73 and self.tiempoTrans < 73.05:
+                                                        self.playerI = self.luzSon.play()
+                                                    self.text.delete()
+                                                    self.text = pyglet.text.Label('Lo siento, no debería encender las seis cafeteras a la vez...',
+                                                          font_name='X-Files', multiline=True,
+                                                          font_size=16, color=(255, 0, 0, 255), width = ANCHO_PANTALLA/3, 
+                                                          x=self.charles.x+40, y=self.charles.y + 80, batch = self.batch,
+                                                          anchor_x='center', anchor_y='center',
+                                                          group = self.grupoDelante)
+                                                    self.text.draw()
+                                                    self.animacionPuntos1.visible = True
+                                                    self.animacionPuntos2.visible = True
+                                                    self.animacionPuntos3.visible = True
+                                                    self.animacionPuntos4.visible = True
+                                                    self.animacionPuntos5.visible = True
+                                                    self.animacionPuntos6.visible = True
                                         else: 
-                                            if self.tiempo == 2750: 
+                                            if self.tiempoTrans < 90: 
                                                 self.animacionPuntos1.visible = False
                                                 self.animacionPuntos2.visible = False
                                                 self.animacionPuntos3.visible = False
@@ -453,7 +688,8 @@ class AnimacionSalon(EscenaPyglet, pyglet.window.Window):
                                                 self.animacionPuntos6.visible = False
                                                 self.foco.visible = True
                                                 self.foco.set_position(-980 + 3*ANCHO_PANTALLA/4,-1015 + ALTO_PANTALLA/1.75)
-                                                self.focoSon.play()
+                                                if self.tiempoTrans > 80 and self.tiempoTrans < 80.05:
+                                                    self.playerF = self.focoSon.play()
                                                 self.text.delete()
                                                 self.text = pyglet.text.Label('Continuemos...\nChema Muíz-Rateos, 63 años. Empresario importante (muchos dicen que con métodos de poca moral) de la ciudad. \n Tiene 50 testigos de su estancia en un acto social como coartada, aunque se le vio entrando a la casa horas antes del asesinato.\n Será difícil hablar con él ya que se cree superior y sólo habla con gente que considera de su nivel.',
                                                       font_name='X-Files', multiline=True,
@@ -463,9 +699,10 @@ class AnimacionSalon(EscenaPyglet, pyglet.window.Window):
                                                       group = self.grupoDelante)
                                                 self.text.draw()
                                             else: 
-                                                if self.tiempo == 3100: 
+                                                if self.tiempoTrans < 100: 
                                                     self.foco.set_position(-980 + 3.5*ANCHO_PANTALLA/4,-1015 + ALTO_PANTALLA/12)
-                                                    self.focoSon.play()
+                                                    if self.tiempoTrans > 90 and self.tiempoTrans < 90.05:
+                                                        self.playerF = self.focoSon.play()
                                                     self.text.delete()
                                                     self.text = pyglet.text.Label('Cervero Anchoa, 58 años. Científico (loco) que se relaciona con tipos de ciencia más que cuestionables. \n Sólo se guía por la obtención de sabiduria así que tendrás que llamar su atención en ese sentido para conseguir algo de él. \n Nadie le vió el día del asesinato y él asegura que estuvo investigando todo el día. En los últimos meses tuvo gran cantidad de reuniones con Fanuel, lo que le relaciona con el caso.',
                                                           font_name='X-Files', multiline=True,
@@ -476,7 +713,7 @@ class AnimacionSalon(EscenaPyglet, pyglet.window.Window):
                                                     self.text.draw()
                                                 
                                                 else: 
-                                                    if self.tiempo == 3450: 
+                                                    if self.tiempoTrans < 105: 
                                                         self.foco.visible = False
                                                         self.badassF.visible = True
                                                         self.badassQ.visible = False
@@ -489,24 +726,26 @@ class AnimacionSalon(EscenaPyglet, pyglet.window.Window):
                                                               group = self.grupoDelante)
                                                         self.text.draw()
                                                     else:  
-                                                        if self.tiempo == 3650: 
+                                                        if self.tiempoTrans < 110: 
                                                             self.text.delete()
-                                                            self.rayoSon.play()
-                                                            self.animacionFondoR = [
-                                                                pyglet.image.AnimationFrame(pyglet.resource.image('primerinteriorR.png'), 2),
-                                                                pyglet.image.AnimationFrame(pyglet.resource.image('primerinteriorN.png'), 29.5) ]
-                                                            self.animacionFondoR = pyglet.sprite.Sprite(pyglet.image.Animation(self.animacionFondoR), batch=self.batch, group=self.grupoDelante)
-                                                            self.animacionFondoR.scale = float(ANCHO_PANTALLA) / 704
-                                                            self.animacionFondoR.visible = True
+                                                            if self.tiempoTrans > 105 and self.tiempoTrans < 105.04:
+                                                                self.playerR = self.rayoSon.play()
+                            #                                 self.animacionFondoR = [
+                            #                                     pyglet.image.AnimationFrame(pyglet.resource.image('primerinteriorR.png'), 2),
+                            #                                     pyglet.image.AnimationFrame(pyglet.resource.image('primerinteriorN.png'), 29.5) ]
+                            #                                 self.animacionFondoR = pyglet.sprite.Sprite(pyglet.image.Animation(self.animacionFondoR), batch=self.batch, group=self.grupoDelante)
+                            #                                 self.animacionFondoR.scale = float(ANCHO_PANTALLA) / 704
+                                                            self.animacionFondoF.visible = True
                                                         else: 
-                                                            if self.tiempo == 3750: 
-                                                                self.suspSon.play()
+                                                            if self.tiempoTrans < 110.05 and self.tiempoTrans > 110: 
+                                                                self.playerM = self.suspSon.play()
                                                             else: 
-                                                                if self.tiempo == 3910: 
-                                                                    self.animacionFondoR.visible = False
+                                                                if self.tiempoTrans > 114 and self.tiempoTrans < 116: 
+                                                                    self.animacionFondoF.visible = False
                                                                     self.portada.visible = True
                                                                 else: 
-                                                                    if self.tiempo == 4150: 
+                                                                    if self.tiempoTrans < 125 and self.tiempoTrans > 119: 
+                                                                        self.text.delete()
                                                                         self.text = pyglet.text.Label('Oops...',
                                                                               font_name='X-Files', multiline=True,
                                                                               font_size=16, color=(255, 0, 0, 255), width = ANCHO_PANTALLA/3, 
@@ -514,9 +753,10 @@ class AnimacionSalon(EscenaPyglet, pyglet.window.Window):
                                                                               anchor_x='center', anchor_y='center',
                                                                               group = self.grupoDelante)
                                                                         self.text.draw()
-                                                                    else: 
-                                                                        if self.tiempo ==4300: 
-                                                                            self.salirEscena()
-            self.tiempo += 1
-            print self.tiempo
+                                                                    elif self.tiempoTrans > 125: 
+                                                                        self.salirEscena()
+#             self.tiempo += 1
+#             print self.tiempo
+            self.tiempoTrans += tiempo
+            print self.tiempoTrans
 

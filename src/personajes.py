@@ -233,15 +233,16 @@ class Jugador(Personaje):
 # Clase NoJugador
 class NoJugador(Personaje):
     "Cualquier personaje del juego"
-    def __init__(self, imagen, coordenadas):
+    def __init__(self, imagen, coordenadas, posicion):
         # Invocamos al constructor de la clase padre con la configuracion de este personaje concreto
         Personaje.__init__(self,imagen,coordenadas, [6, 6, 6, 1], VELOCIDAD_JUGADOR, VELOCIDAD_SALTO_JUGADOR, RETARDO_ANIMACION_JUGADOR,(0,0));
         self.speed = 7
-        self.posicion = (0,0)
+        self.posicion = posicion
 #         self.mask = pygame.mask.from_surface(self.image)
 #         self.mask.fill()
         #quitando esto funcionan colisiones
-        self.rect = Rect(self.rect.topleft[0]+603, self.rect.topleft[1]+1440, 35, 75)
+        print self.rect
+        self.rect = Rect(self.rect.topleft[0] + posicion[0] + 20, self.rect.topleft[1] + posicion[1] + 30, 35, 75)
 
     def mover(self, direccion, cantidad):
         move = [0, 0]

@@ -72,7 +72,8 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
         self.lluviaSon = pyglet.resource.media('rain.wav', streaming=False)
         self.rayoSon = pyglet.resource.media("thunder.wav", streaming=False)
         self.playerR = self.rayoSon.play()
-        
+        self.playerL = self.lluviaSon.play()
+        self.playerL.stop()
         
 
         # La animacion del rayo
