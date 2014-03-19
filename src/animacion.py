@@ -4,6 +4,7 @@ import pyglet
 from escena import *
 import random
 from animacionSalon import *
+from xml.dom import minidom
 
 VELOCIDAD_TANQUE = 100 # Pixels por segundo
 VELOCIDAD_ROTACION_TANQUE = 10 # Grados por segundo
@@ -49,6 +50,8 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
         pyglet.resource.path = ['.', '../res', '../res/maps', '../res/Sounds', '../res/Sprites']
         pyglet.resource.reindex()
 
+        #carga del fichero de textos
+        self.fullname = os.path.join('', "../res/Dialogos/escenaAnimacion.xml")
         # La imagen de fondo
         self.imagen = pyglet.image.load('../res/maps/entrada.jpg')
         self.imagen = pyglet.sprite.Sprite(self.imagen)
@@ -190,15 +193,15 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
         #  pone como invisible hasta cuandos ea necesario que aparezca
         self.animacionEspaldas.visible = False
         
-        
-        self.text = pyglet.text.Label('Es una tarde de tormenta en la ciudad.\n Me han enviado a un caso típico de asesinato que los inútiles de la policía no saben resolver.\n Como siempre VINCENT BADASS a resolver los problemas.',
+        xmldoc = minidom.parse(self.fullname)
+        self.textList = xmldoc.getElementsByTagName('phrase') 
+        self.text = pyglet.text.Label(str(self.textList[0].attributes['content'].value)+"\n"+self.textList[1].attributes['content'].value+"\n"+self.textList[2].attributes['content'].value+"\n",
                       font_name='X-Files', multiline=True,
                       font_size=26, color=(255, 255, 255, 255), width = ANCHO_PANTALLA/2 - 20, 
                       x=ANCHO_PANTALLA/4, y=ALTO_PANTALLA/2, batch = self.batch,
                       anchor_x='center', anchor_y='center',
                       group = self.grupoDelante)
         self.text.draw()
-
 
 
 
@@ -400,7 +403,7 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
             # Ademas, si llega al centro cambiamos la animación
             if (self.animacionCorredor.x<(ANCHO_PANTALLA/2-20))&(self.animacionCorredor.x>(ANCHO_PANTALLA/2)-25):
                 self.text.delete()
-                self.text = pyglet.text.Label('El muerto es Fanuel Mraga, hombre rico y con poder. Los sospechosos, un grupo de personas influyentes con los que la policía prefiere no lidiar y el mayordomo de la mansión.',
+                self.text = pyglet.text.Label(self.textList[3].attributes['content'].value,
                       font_name='X-Files', multiline=True,
                       font_size=26, color=(255, 255, 255, 255), width = ANCHO_PANTALLA/2 - 50, 
                       x=ANCHO_PANTALLA/4, y=ALTO_PANTALLA/2, batch = self.batch,

@@ -27,9 +27,9 @@ class Director():
 
         # Si la escena es de juego, la ejecutamos como un bucle
         if isinstance(self.escena, EscenaPygame):
-
-            tiempo_pasado = 0
+          
             while not self.salir_programa:
+                tiempo_pasado = 0
                 self.salir_escena = False;
                 # El bucle del juego, las acciones que se realicen se harán en cada escena
                 while not self.salir_escena:
@@ -57,13 +57,14 @@ class Director():
                     if(self.quiere_salir_escena):
                         self.ejecutarSalirEscena()
                         
-                    #Comprobamos si quiere cambiar de escena
-                    if(self.quiere_cambiar_escena != None):
-                        self.ejecutarCambiarEscena()
+                    
                         
                     #Comprobamos si quiere cambiar de escena
                     if(self.quiere_apilar_escena != None):
                         self.ejecutarApilarEscena()
+                #Comprobamos si quiere cambiar de escena
+                if(self.quiere_cambiar_escena != None):
+                    self.ejecutarCambiarEscena()
                 if self.escena == None:
                     self.salir_programa = True
             
@@ -102,9 +103,9 @@ class Director():
                 self.ejecutar()
             else:
                 self.quiere_cambiar_escena = escena
+                self.salir_escena = True
         
-    def ejecutarCambiarEscena(self):
-        self.salir_escena = True
+    def ejecutarCambiarEscena(self):  
         self.escena = self.quiere_cambiar_escena
         self.quiere_cambiar_escena = None
 
