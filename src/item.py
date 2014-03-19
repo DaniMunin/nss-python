@@ -1,10 +1,10 @@
-from item import *
 import pygame, sys, os
 from pygame.locals import *
 
-class testItem(pygame.sprite.Sprite):
+class Item(pygame.sprite.Sprite):
     
-    def __init__(self):
+    def __init__(self, id):
+        self.itemId = id
         pygame.sprite.Sprite.__init__(self)
         fullname = os.path.join('', "../res/Sprites/ball.png")
         self.image =pygame.image.load(fullname)
@@ -15,6 +15,4 @@ class testItem(pygame.sprite.Sprite):
         self.mask = pygame.mask.from_surface(pygame.image.load(fullname))
 
     def onUse(self):
-        raise NotImplemented("Tiene que implementar el metodo onUse.")
-    
-    
+        return self.itemId

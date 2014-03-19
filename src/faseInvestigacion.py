@@ -2,6 +2,7 @@
 
 import pygame, escena
 from escena import *
+from item import *
 from personajes import *
 from pygame.locals import *
 # from testItem import *
@@ -56,6 +57,10 @@ class FaseInvestigacion(EscenaPygame):
 #         self.cervero.posicion = (993,1984)
 #         self.rateos.posicion = (831,1504)
 #         self.poli.posicion = (586,1387)
+
+        self.ball = Item(10)
+        self.ball.rect.center = (630,1480)
+        
                 
     # Se actualiza el decorado, realizando las siguientes acciones:
     #  Se actualizan los jugadores con los movimientos a realizar
@@ -109,6 +114,11 @@ class FaseInvestigacion(EscenaPygame):
             self.eventDraw(0,self.tiempoEv, s)
         if (self.dialogo != 6):
             self.interact(self.dialogo, self.tiempoDial, s)
+        
+        
+        s.blit(self.ball.image, self.ball.rect)
+        
+        
 #         self.text.render(s, "Se acabff el tiempo!", (0,255,255), (self.level.poli.rect.topleft[0], self.level.poli.rect.topleft[1] -30))
         self.screen.blit(s, (0,0), self.level.viewport)
 #         self.grupoJugadores.draw(self.screen)
