@@ -235,9 +235,21 @@ class Jugador(Personaje):
 # Clase NoJugador
 class NoJugador(Personaje):
     "Cualquier personaje del juego"
-    def __init__(self, imagen, coordenadas, posicion, escala):
+    def __init__(self, imagen, coordenadas, posicion, escala, xml):
         # Invocamos al constructor de la clase padre con la configuracion de este personaje concreto
         Personaje.__init__(self,imagen,coordenadas, [6, 6, 6, 1], VELOCIDAD_JUGADOR, VELOCIDAD_SALTO_JUGADOR, RETARDO_ANIMACION_JUGADOR,(0,0), escala);
+        
+        self.estado = 0
+        #Tratamiento de dialogos XML
+        self.fullname = os.path.join('', "../res/Dialogos/"+xml)
+        xmldoc = minidom.parse(self.espeonza.fullname)
+        itemlist = xmldoc.getElementsByTagName('dialog') 
+#         phrase_list = itemlist[0].getElementsByTagName("phrase")
+        self.obj=[]
+        for item in itelmlist:
+            self.obj.append(item.attributes['obj'].value)
+        
+        
         self.speed = 7
         self.posicion = posicion
         self.mask = pygame.mask.from_surface(self.image)
@@ -297,3 +309,31 @@ until clear.
         self.posicion = (self.posicion[0] + x, self.posicion[1] + y)
         self.actualizarPostura(x, y)
 #         self.posicion = x,y
+
+    def onUse(self, object):
+        phrase_list = itemlist[self.estado].getElementsByTagName("phrase")
+        phrase = phrase_list[0].attributes['content'].value
+        response_list=[];
+        for response in phrase_list[0].getElementsByTagName("response"):
+            response_list.append(response.attributes["content"].value, int(response.attributes["next"].value))
+        result_list=[]
+        if(len(response_list)==0):
+            results=phrase_list[respuesta].getElementsByTagName("result")
+            result_list.append(results[0].attributes["obj"].value)
+            result_list.append(results[0].attributes["move"].value)
+            result_list.append(results[0].attributes["event"].value)
+        return phrase, response_list, result_list
+    
+    def continuar(self, respuesta):
+        phrase_list = itemlist[self.estado].getElementsByTagName("phrase")
+        phrase = phrase_list[respuesta].attributes['content'].value
+        response_list=[];
+        for response in phrase_list[respuesta].getElementsByTagName("response"):
+            response_list.append(response.attributes["content"].value, int(response.attributes["next"].value))
+        result_list=[]
+        if(len(response_list)==0):
+            results=phrase_list[respuesta].getElementsByTagName("result")
+            result_list.append(results[0].attributes["obj"].value)
+            result_list.append(results[0].attributes["move"].value)
+            result_list.append(results[0].attributes["event"].value)
+        return phrase, response_list, result_list

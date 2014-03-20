@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data>
+    <dialog id="1">
+        <phrase content="Buenos días detective. ¿Cómo va la investigación?">
+        	<response content="He tenido días mejores..." next="1"></response>
+			<response content="Es un día maravilloso en el mundo, ¿no me ves sonriendo?" next="2"></response>
+		</phrase>
+		<phrase content="Pobre detective, ¿necesita que le ayude en algo?">
+			<response content="Puedes decir que eres culpable y así puedo largarme de aquí" next="3"></response>
+			<response content="No, no creo que fueses capaz..." next="4"></response>
+		</phrase>
+        <phrase content="El mundo es maravilloso y lo mejor es estar siempre sonriendo."></phrase>
+        <phrase content="Pero mi papa dice que si lo digo me encerrarán. Y yo estuve de compras cuando el señor Mraga murió"></phrase>
+        <phrase content="Hasta luego señor detective"></phrase>
+    </dialog>
+</data>
