@@ -6,7 +6,6 @@ from item import *
 from personajes import *
 from pygame.locals import *
 from cellarScene import *
-from xml.dom import minidom
 # from testItem import *
 # -------------------------------------------------
 # -------------------------------------------------
@@ -46,6 +45,11 @@ class FaseInvestigacion(EscenaPygame):
         self.optEl = 0
         self.eventoT = True
         self.activarEv = False
+        self.accion = False
+        self.primerDia = False
+        self.accionO = None
+        self.accionT = None
+        self.accionR = None
         self.text = Text()
         self.bolio = NoJugador("../res/Sprites/bolio2.png","../res/BolioCoordJugador.txt", (244,1990), 1, "dialogoEspeonza.xml")
         self.espeonza = NoJugador("../res/Sprites/esperanza2.png","../res/EspeonzaCoordJugador.txt", (223,1748), 1, "dialogoEspeonza.xml")
@@ -53,12 +57,7 @@ class FaseInvestigacion(EscenaPygame):
         self.cervero = NoJugador("../res/Sprites/scien2.png","../res/ScienceCoordJugador.txt", (993,1984), 1, "dialogoEspeonza.xml")
         self.rateos = NoJugador("../res/Sprites/rateos2.png","../res/RateosCoordJugador.txt", (831,1504), 1, "dialogoEspeonza.xml")
         self.poli = NoJugador("../res/Sprites/poli.png","../res/PoliCoordJugador.txt", (586,1400), 1.5, "dialogoEspeonza.xml")
-#         self.bolio.posicion = (244,1990)
-#         self.espeonza.posicion = (223,1748)
-#         self.charles.posicion = (156,1564)
-#         self.cervero.posicion = (993,1984)
-#         self.rateos.posicion = (831,1504)
-#         self.poli.posicion = (586,1387)
+        self.grupoNPC = pygame.sprite.Group( self.poli, self.rateos, self.cervero, self.charles, self.espeonza, self.bolio )
 
         self.ball = Item(10)
         self.ball.rect.center = (630,1780)
@@ -79,26 +78,12 @@ class FaseInvestigacion(EscenaPygame):
     #  Se actualiza el scroll del decorado y los objetos en el
     def update(self, tiempo):
 #         self.screen.fill(pygame.Color("black"))
-        if (self.dialogo == 6):
-            #Evento activado
-            if self.activarEv:
-                self.tiempoEv += tiempo
-            #Juego normal
-            else:
-                self.level.update(self.keys)
-                #Detecto dialogo (colision con personaje y pulsar espacio)
-                if (pygame.sprite.collide_mask(self.player, self.poli) != None) and (self.keys[pygame.K_SPACE]):
-                    self.dialogo = 0
-                    self.tiempoDial = 0
-                #Detecto evento ( posicion determinada y el trigger de eventos activado)
-                if (pygame.sprite.collide_mask(self.player, self.rateos) != None) and (self.eventoT):
-                    self.activarEv = True
-                    self.tiempoEv = 0
-        #             sonido = pygame.mixer.Sound("../res/Sounds/foco.wav")
-        #             canal = sonido.play()
-        # Dialogo activado
-        else:
-            self.tiempoDial += tiempo    
+        if (self.accion):
+            self.tiempoDial += tiempo
+            if ~self.primerDia:
+                self.accionT, self.accionR, self.accionResult = self.continuarAccion(self.accionO, self.numRes) 
+        else:   
+            self.level.update(self.keys)
 #         print self.rateos.rect
 #         print self.player.rect
 #         print self.poli.rect
@@ -119,110 +104,63 @@ class FaseInvestigacion(EscenaPygame):
         s.blit(self.charles.image, self.charles.posicion)
         s.blit(self.cervero.image, self.cervero.posicion)
         s.blit(self.rateos.image, self.rateos.posicion)
-#         self.text.render(s, "Se acabs el tiempo!", (0,0,0), (self.player.rect.topleft[0], self.player.rect.topleft[1] -30))
-        if self.activarEv:
-            self.eventDraw(0,self.tiempoEv, s)
-        if (self.dialogo != 6):
-            self.interact(self.dialogo, self.tiempoDial, s)
         
-#         self.text.render(s, "Se acabff el tiempo!", (0,255,255), (self.level.poli.rect.topleft[0], self.level.poli.rect.topleft[1] -30))
+        if self.accion:
+            self.interact(self.tiempoDial, s)
+            
         self.screen.blit(s, (0,0), self.level.viewport)
-#         self.grupoJugadores.draw(self.screen)
-        
-#         self.screen.blit(self.image, self.rect, self.rectSubimagen)
-        
-#         self.grupoJugadores.draw(self.screen)
 
     def evento(self, event):
-        # Indicamos la acción a realizar segun la tecla pulsada para cada jugador
+        # Indicamos la acciÃ³n a realizar segun la tecla pulsada para cada jugador
         self.keys = pygame.key.get_pressed()
         if self.opcion:
             for key in OPT_KEYS:
                 if self.keys[key]:
                     self.optEl = OPT_KEYS[key]
                     self.opcion = False
-        #Esto de aqui no debería funcionar así, si no que debería cerrar el programa sin más, no llevarnos a la fase siguiente
+                    self.numRes = self.accionR[optEl][1]
+        if self.keys[K_SPACE] and ~self.accion:
+            if (pygame.sprite.spritecollideany(self.player, self.grupoNPC) != None):
+                self.accionO = pygame.sprite.spritecollideany(self.player, self.grupoNPC)
+                self.accionT, self.accionR, self.accionResult = self.empezarAccion(self.accionO)
+        #Esto de aqui no deberÃ­a funcionar asÃ­, si no que deberÃ­a cerrar el programa sin mÃ¡s, no llevarnos a la fase siguiente
         if event.type == pygame.QUIT:
              print "Hola"
              escenaSig = CellarScene(self.director, self.player)
              self.director.cambiarEscena(escenaSig)
             
-    def interact(self, npc, tiempo, surface):
-        # 0 = poli, 1= bolio, 2=rateos, 3 = espeonza, 4 = charles, 5 = cervero
-        if npc == 0:
-            if tiempo < 1000:
-                self.text.render(surface,"Hola", (0,0,0), (self.player.rect.topleft[0], self.player.rect.topleft[1] -30))
-            elif tiempo < 2000:
-                self.text.render(surface,"Hola", (0,255,255), (self.poli.rect.topleft[0], self.poli.rect.topleft[1] -30))
-            elif self.optEl == 0:
-                self.tiempoDial = 2000
-                self.opcion = True
-                print tiempo, self.opcion
-                self.text.render(surface,"Elige una opcion: \n 1) Opción 1 \n 2) Opción 2 \n 3) Opción 3 \n 3) Opción 3 \n", (0,255,255), (self.poli.rect.topleft[0], self.poli.rect.topleft[1] -30))
-            elif tiempo < 4000:
-                if self.optEl == 1:
-                    self.text.render(surface,"Elegida opcion 1", (0,255,255), (self.poli.rect.topleft[0], self.poli.rect.topleft[1] -30))
-                elif self.optEl == 2:
-                    self.text.render(surface,"Elegida opcion 2", (0,255,255), (self.poli.rect.topleft[0], self.poli.rect.topleft[1] -30))
-                    self.eventoT = True
-                elif self.optEl == 3:
-                    self.text.render(surface,"Elegida opcion 3", (0,255,255), (self.poli.rect.topleft[0], self.poli.rect.topleft[1] -30))
-                elif self.optEl == 4:
-                    self.text.render(surface,"Elegida opcion 4", (0,255,255), (self.poli.rect.topleft[0], self.poli.rect.topleft[1] -30))
-                else:
-                    self.text.render(surface,"Se acabó el tiempo!", (0,255,255), (self.poli.rect.topleft[0], self.poli.rect.topleft[1] -30))
-            else:
-                self.optEl = 0
-                self.dialogo = 6
-                return None
-        elif npc == 1:
-            pass
-        elif npc == 2:
-            pass
-        elif npc == 3:
-            pass
-        elif npc == 4:
-            pass
-        elif npc == 5:
-            pass
-        return 1
-        
-    def eventDraw(self, num, tiempo, surface):
-        if num == 0:
-            if tiempo < 1000:
-                self.text.render(surface,"Hola", (0,0,0), (self.player.rect.topleft[0], self.player.rect.topleft[1] -30))
-            elif tiempo < 2000:
-                self.text.render(surface,"Hola", (0,255,255), (self.rateos.rect.topleft[0], self.rateos.rect.topleft[1] -30))
-#             elif self.optEl == 0:
-#                 self.tiempoDial = 2000
+    def interact(self, tiempo, surface):
+        if tiempo < 1000:
+                self.text.render(surface,self.accionT, (0,0,0), (self.player.rect.topleft[0], self.player.rect.topleft[1] -30))
+        elif len(self.accionR) == 1:
+            if tiempo < 2000:
+                self.text.render(surface,self.accionR[0][0], (0,255,255), (self.player.rect.topleft[0], self.player.rect.topleft[1] -30))
+                self.numRes = self.accionR[0][1] 
+        elif len(self.accionR) == 0:
+            self.accion = False
+        elif self.optEl == 0:
+            self.tiempoDial = 2000
+            self.opcion = True
 #                 print tiempo, self.opcion
-#                 self.text.render(surface,"Elige una opcion: \n 1) Opción 1 \n 2) Opción 2 \n 3) Opción 3 \n 3) Opción 3 \n", (0,255,255), (self.rateos.rect.topleft[0], self.rateos.rect.topleft[1] -30))
-            elif tiempo < 4000:
-                if self.optEl == 1:
-                    self.text.render(surface,"Elegida opcion 1", (0,255,255), (self.rateos.rect.topleft[0], self.rateos.rect.topleft[1] -30))
-                elif self.optEl == 2:
-                    self.text.render(surface,"Elegida opcion 2", (0,255,255), (self.rateos.rect.topleft[0], self.rateos.rect.topleft[1] -30))
-                elif self.optEl == 3:
-                    self.text.render(surface,"Elegida opcion 3", (0,255,255), (self.rateos.rect.topleft[0], self.rateos.rect.topleft[1] -30))
-                elif self.optEl == 4:
-                    self.text.render(surface,"Elegida opcion 4", (0,255,255), (self.rateos.rect.topleft[0], self.rateos.rect.topleft[1] -30))
-                else:
-                    self.text.render(surface,"Se acabó el tiempo!", (0,255,255), (self.rateos.rect.topleft[0], self.rateos.rect.topleft[1] -30))
-            else:
-                self.eventoT = False
-                self.activarEv = False
-                return None
-        elif num == 1:
-            pass
-        elif num == 2:
-            pass
-        elif num == 3:
-            pass
-        elif num == 4:
-            pass
-        elif num == 5:
-            pass
-        return 1
+            for i in len(self.accionR):
+                self.text.render(surface,self.accionR[i][0], (0,255,255), (self.poli.rect.topleft[0], self.poli.rect.topleft[1] -30))
+#                 self.primerDia = False
+        else:
+            self.primerDia = False
+    
+    def empezarAccion(self, objeto, usar = None):
+        #recuperar texto xml
+        self.accion = True
+        self.tiempoDia = 0
+        self.primerDia = True
+        texto,respuesta,resultado = objeto.onUse(usar)
+        return texto,respuesta,resultado
+    
+    def continuarAccion(self, objeto, respuesta):
+        #recuperar texto xml
+        texto,respuesta,resultado = objeto.continuar(self.resDial)
+        return texto,respuesta,resultado
+    
     
 class Level(object):
     """
@@ -248,10 +186,6 @@ player instance.
         self.player.rect.center = (630,1480)
         self.viewport = viewport
         
-        
-#         self.ball = testItem()
-#         self.ball.rect.center = (630,1480)
-#         self.image.blit(self.ball.image, self.ball.rect)
 
     def update(self, keys):
         """
@@ -277,19 +211,6 @@ Blit actors onto a copy of the map image; then blit the viewport
 portion of that map onto the display surface.
 """
         self.new_image = self.image.copy()
-#         self.new_image.blit(self.poli.image, self.poli.posicion)
-#         self.player.draw(self.new_image)
-# #         self.poli.update(self.mask,2, 10)
-#         self.new_image.blit(self.bolio.image, self.bolio.posicion)
-#         self.new_image.blit(self.espeonza.image, self.espeonza.posicion)
-#         self.new_image.blit(self.charles.image, self.charles.posicion)
-#         self.new_image.blit(self.cervero.image, self.cervero.posicion)
-#         self.new_image.blit(self.rateos.image, self.rateos.posicion)
-#         if texto != None:
-#             self.text.render(self.new_image, texto[0], texto[1], texto[2])
-#         surface.fill((50,255,50))
-#         surface.blit(self.new_image, (0,0), self.viewport)
-#         self.text.render(surface, texto[0], texto[1], texto[2])
         return self.new_image
     
     
