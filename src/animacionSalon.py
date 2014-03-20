@@ -4,6 +4,7 @@ import pyglet
 from escena import *
 import random
 from faseInvestigacion import *
+from xml.dom import minidom
 
 VELOCIDAD_BADASS = 30 # Pixels por segundo
 
@@ -25,6 +26,8 @@ class AnimacionSalon(EscenaPyglet, pyglet.window.Window):
         pyglet.resource.path = ['.', '../res', '../res/maps', '../res/Sounds', '../res/Sprites']
         pyglet.resource.reindex()
 
+         #carga del fichero de textos
+        self.fullname = os.path.join('', "../res/Dialogos/animacionSalon.xml")
         # La imagen de fondo
         self.imagen = pyglet.image.load('../res/maps/primerinterior.png')
         self.imagen = pyglet.sprite.Sprite(self.imagen)
@@ -551,7 +554,9 @@ class AnimacionSalon(EscenaPyglet, pyglet.window.Window):
 
             if self.tiempoTrans < 4:   
                 self.text.delete()
-                self.text = pyglet.text.Label('Hola Vincent, Que tal todo?',
+                xmldoc = minidom.parse(self.fullname)
+                self.textList = xmldoc.getElementsByTagName('phrase') 
+                self.text = pyglet.text.Label(self.textList[0].attributes['content'].value,
                       font_name='X-Files', multiline=True,
                       font_size=16, color=(0, 255, 255, 255), width = ANCHO_PANTALLA/1.5, 
                       x=self.poli.x, y=self.poli.y + 80, batch = self.batch,
@@ -561,7 +566,7 @@ class AnimacionSalon(EscenaPyglet, pyglet.window.Window):
             else:  
                 if self.tiempoTrans < 8: 
                     self.text.delete()
-                    self.text = pyglet.text.Label('Detective Vincent Badass para ti novato! Cuentame la situación',
+                    self.text = pyglet.text.Label(self.textList[1].attributes['content'].value,
                           font_name='X-Files', multiline=True,
                           font_size=16, color=(255, 255, 255, 255), width = ANCHO_PANTALLA/1.5, 
                           x=self.badassQ.x, y=self.badassQ.y+120, batch = self.batch,
@@ -571,7 +576,7 @@ class AnimacionSalon(EscenaPyglet, pyglet.window.Window):
                 else: 
                     if self.tiempoTrans < 25: 
                         self.text.delete()
-                        self.text = pyglet.text.Label('No me seas badass!\nSabes que llevo más de 20 años en el cuerpo Vincent, hemos trabajado juntos cientos de veces.\nMaldita sea! Eres el padrino de mi hijo.',
+                        self.text = pyglet.text.Label(self.textList[2].attributes['content'].value+"\n"+self.textList[3].attributes['content'].value+"\n"+self.textList[4].attributes['content'].value,
                               font_name='X-Files', multiline=True,
                               font_size=16, color=(0, 255, 255, 255), width = ANCHO_PANTALLA/1.5, 
                               x=self.poli.x, y=self.poli.y + 120, batch = self.batch,
@@ -582,7 +587,7 @@ class AnimacionSalon(EscenaPyglet, pyglet.window.Window):
                             self.text.delete()
                             self.foco.visible = True
                             self.foco.set_position(-980 + self.badassQ.x,-1015 + self.badassQ.y + 10)
-                            self.text = pyglet.text.Label('Ya decía yo que me sonaba de algo...',
+                            self.text = pyglet.text.Label(self.textList[5].attributes['content'].value,
                               font_name='X-Files', multiline=True,
                               font_size=16, color=(255, 255, 255, 255), width = ANCHO_PANTALLA/1.5, 
                               x=self.badassQ.x, y=self.badassQ.y+120, batch = self.batch,
@@ -593,7 +598,7 @@ class AnimacionSalon(EscenaPyglet, pyglet.window.Window):
                         if self.tiempoTrans < 28: 
                             self.foco.visible = False
                             self.text.delete()
-                            self.text = pyglet.text.Label('No me cuentes tu vida novato! Y acaba rápido.',
+                            self.text = pyglet.text.Label(self.textList[6].attributes['content'].value,
                                   font_name='X-Files', multiline=True,
                                   font_size=16, color=(255, 255, 255, 255), width = ANCHO_PANTALLA/1.5, 
                                   x=self.badassQ.x, y=self.badassQ.y+120, batch = self.batch,
@@ -603,7 +608,7 @@ class AnimacionSalon(EscenaPyglet, pyglet.window.Window):
                         else: 
                             if self.tiempoTrans < 38: 
                                 self.text.delete()
-                                self.text = pyglet.text.Label('Tu sigue así... en fin.\nEl muerto es Fanuel Mraga, 75 años, apuñalado.\nTenemos 5 sospechosos:',
+                                self.text = pyglet.text.Label(self.textList[7].attributes['content'].value,
                                       font_name='X-Files', multiline=True,
                                       font_size=16, color=(0, 255, 255, 255), width = ANCHO_PANTALLA/1.5, 
                                       x=self.poli.x, y=self.poli.y + 120, batch = self.batch,
@@ -617,7 +622,7 @@ class AnimacionSalon(EscenaPyglet, pyglet.window.Window):
                                     if self.tiempoTrans > 38 and self.tiempoTrans < 38.05:
                                                     self.playerF = self.focoSon.play()
                                     self.text.delete()
-                                    self.text = pyglet.text.Label('Bolio Mitín, 43 años. Principal banquero de la ciudad (deberías saberlo)\nAsegura estar bañándose en billetes en el momento del asesinato, sin embargo, testigos lo sitúan cerca de la casa poco después del mismo.\nEl dinero es su debilidad.',
+                                    self.text = pyglet.text.Label(self.textList[8].attributes['content'].value,
                                           font_name='X-Files', multiline=True,
                                           font_size=16, color=(0, 255, 255, 255), width = ANCHO_PANTALLA/1.5, 
                                           x=self.poli.x, y=self.poli.y + 80, batch = self.batch,
@@ -630,7 +635,7 @@ class AnimacionSalon(EscenaPyglet, pyglet.window.Window):
                                         if self.tiempoTrans > 48 and self.tiempoTrans < 48.05:
                                                     self.playerF = self.focoSon.play()
                                         self.text.delete()
-                                        self.text = pyglet.text.Label('Espeonza Aguilar, 32 años. Integrante de la famosa familia Aguilar.\n Es la niña mimada de la familia. Su coartada es que estaba de compras... lo cual intenta demostrar con gran cantidad de bolsas con ropa dentro.\n Fue vista poco después de Bolio. Tendrás que tener cuidado con su carácter infantil.',
+                                        self.text = pyglet.text.Label(self.textList[9].attributes['content'].value,
                                               font_name='X-Files', multiline=True,
                                               font_size=16, color=(0, 255, 255, 255), width = ANCHO_PANTALLA/1.5, 
                                               x=self.poli.x, y=self.poli.y + 80, batch = self.batch,
@@ -644,7 +649,7 @@ class AnimacionSalon(EscenaPyglet, pyglet.window.Window):
                                                 if self.tiempoTrans > 58 and self.tiempoTrans < 58.05:
                                                     self.playerF = self.focoSon.play()
                                                 self.text.delete()
-                                                self.text = pyglet.text.Label('Charles -El Mayordomo-. Poco se sabe sobre él. Los demás sospechosos dicen no saber nada y él solo repite una y otra vez que él sólo quería no hacer café.\n Se dice que el Sr Mraga lo adoptó cuando era un niño y ha trabajado para él desde entonces.\n ',
+                                                self.text = pyglet.text.Label(self.textList[10].attributes['content'].value,
                                                       font_name='X-Files', multiline=True,
                                                       font_size=16, color=(0, 255, 255, 255), width = ANCHO_PANTALLA/1.5, 
                                                       x=self.poli.x, y=self.poli.y + 80, batch = self.batch,
@@ -664,7 +669,7 @@ class AnimacionSalon(EscenaPyglet, pyglet.window.Window):
                                                     if self.tiempoTrans > 73 and self.tiempoTrans < 73.05:
                                                         self.playerI = self.luzSon.play()
                                                     self.text.delete()
-                                                    self.text = pyglet.text.Label('Lo siento, no debería encender las seis cafeteras a la vez...',
+                                                    self.text = pyglet.text.Label(self.textList[11].attributes['content'].value,
                                                           font_name='X-Files', multiline=True,
                                                           font_size=16, color=(255, 0, 0, 255), width = ANCHO_PANTALLA/3, 
                                                           x=self.charles.x+40, y=self.charles.y + 80, batch = self.batch,
@@ -690,7 +695,7 @@ class AnimacionSalon(EscenaPyglet, pyglet.window.Window):
                                                 if self.tiempoTrans > 80 and self.tiempoTrans < 80.05:
                                                     self.playerF = self.focoSon.play()
                                                 self.text.delete()
-                                                self.text = pyglet.text.Label('Continuemos...\nChema Muíz-Rateos, 63 años. Empresario importante (muchos dicen que con métodos de poca moral) de la ciudad. \n Tiene 50 testigos de su estancia en un acto social como coartada, aunque se le vio entrando a la casa horas antes del asesinato.\n Será difícil hablar con él ya que se cree superior y sólo habla con gente que considera de su nivel.',
+                                                self.text = pyglet.text.Label(self.textList[12].attributes['content'].value,
                                                       font_name='X-Files', multiline=True,
                                                       font_size=16, color=(0, 255, 255, 255), width = ANCHO_PANTALLA/1.5, 
                                                       x=self.poli.x, y=self.poli.y + 60, batch = self.batch,
@@ -703,7 +708,7 @@ class AnimacionSalon(EscenaPyglet, pyglet.window.Window):
                                                     if self.tiempoTrans > 90 and self.tiempoTrans < 90.05:
                                                         self.playerF = self.focoSon.play()
                                                     self.text.delete()
-                                                    self.text = pyglet.text.Label('Cervero Anchoa, 58 años. Científico (loco) que se relaciona con tipos de ciencia más que cuestionables. \n Sólo se guía por la obtención de sabiduria así que tendrás que llamar su atención en ese sentido para conseguir algo de él. \n Nadie le vió el día del asesinato y él asegura que estuvo investigando todo el día. En los últimos meses tuvo gran cantidad de reuniones con Fanuel, lo que le relaciona con el caso.',
+                                                    self.text = pyglet.text.Label(self.textList[13].attributes['content'].value,
                                                           font_name='X-Files', multiline=True,
                                                           font_size=16, color=(0, 255, 255, 255), width = ANCHO_PANTALLA/1.5, 
                                                           x=self.poli.x, y=self.poli.y + 40, batch = self.batch,
@@ -717,7 +722,7 @@ class AnimacionSalon(EscenaPyglet, pyglet.window.Window):
                                                         self.badassF.visible = True
                                                         self.badassQ.visible = False
                                                         self.text.delete()
-                                                        self.text = pyglet.text.Label('Ok, Acabemos con esto!!!',
+                                                        self.text = pyglet.text.Label(self.textList[14].attributes['content'].value,
                                                               font_name='X-Files', multiline=True,
                                                               font_size=16, color=(255, 255, 255, 255), width = ANCHO_PANTALLA/1.5, 
                                                               x=self.badassF.x + 150, y=self.badassF.y+120, batch = self.batch,
@@ -745,7 +750,7 @@ class AnimacionSalon(EscenaPyglet, pyglet.window.Window):
                                                                 else: 
                                                                     if self.tiempoTrans < 125 and self.tiempoTrans > 119: 
                                                                         self.text.delete()
-                                                                        self.text = pyglet.text.Label('Oops...',
+                                                                        self.text = pyglet.text.Label(self.textList[15].attributes['content'].value,
                                                                               font_name='X-Files', multiline=True,
                                                                               font_size=16, color=(255, 0, 0, 255), width = ANCHO_PANTALLA/3, 
                                                                               x=self.charles.x+40, y=self.charles.y + 80, batch = self.batch,
