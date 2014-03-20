@@ -6,6 +6,7 @@ from item import *
 from personajes import *
 from pygame.locals import *
 from cellarScene import *
+from xml.dom import minidom
 # from testItem import *
 # -------------------------------------------------
 # -------------------------------------------------
@@ -46,12 +47,12 @@ class FaseInvestigacion(EscenaPygame):
         self.eventoT = True
         self.activarEv = False
         self.text = Text()
-        self.bolio = NoJugador("../res/Sprites/bolio2.png","../res/BolioCoordJugador.txt", (244,1990), 1)
-        self.espeonza = NoJugador("../res/Sprites/esperanza2.png","../res/EspeonzaCoordJugador.txt", (223,1748), 1)
-        self.charles = NoJugador("../res/Sprites/charles.png","../res/CharlesCoordJugador.txt", (156,1564), 1.5)
-        self.cervero = NoJugador("../res/Sprites/scien2.png","../res/ScienceCoordJugador.txt", (993,1984), 1)
-        self.rateos = NoJugador("../res/Sprites/rateos2.png","../res/RateosCoordJugador.txt", (831,1504), 1)
-        self.poli = NoJugador("../res/Sprites/poli.png","../res/PoliCoordJugador.txt", (586,1400), 1.5)
+        self.bolio = NoJugador("../res/Sprites/bolio2.png","../res/BolioCoordJugador.txt", (244,1990), 1, "dialogoEspeonza.xml")
+        self.espeonza = NoJugador("../res/Sprites/esperanza2.png","../res/EspeonzaCoordJugador.txt", (223,1748), 1, "dialogoEspeonza.xml")
+        self.charles = NoJugador("../res/Sprites/charles.png","../res/CharlesCoordJugador.txt", (156,1564), 1.5, "dialogoEspeonza.xml")
+        self.cervero = NoJugador("../res/Sprites/scien2.png","../res/ScienceCoordJugador.txt", (993,1984), 1, "dialogoEspeonza.xml")
+        self.rateos = NoJugador("../res/Sprites/rateos2.png","../res/RateosCoordJugador.txt", (831,1504), 1, "dialogoEspeonza.xml")
+        self.poli = NoJugador("../res/Sprites/poli.png","../res/PoliCoordJugador.txt", (586,1400), 1.5, "dialogoEspeonza.xml")
 #         self.bolio.posicion = (244,1990)
 #         self.espeonza.posicion = (223,1748)
 #         self.charles.posicion = (156,1564)

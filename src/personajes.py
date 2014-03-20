@@ -3,7 +3,7 @@
 import pygame, sys, os
 from pygame.locals import *
 from escena import *
-
+from xml.dom import minidom
 # -------------------------------------------------
 # -------------------------------------------------
 # Constantes
@@ -242,11 +242,11 @@ class NoJugador(Personaje):
         self.estado = 0
         #Tratamiento de dialogos XML
         self.fullname = os.path.join('', "../res/Dialogos/"+xml)
-        xmldoc = minidom.parse(self.espeonza.fullname)
+        xmldoc = minidom.parse(self.fullname)
         itemlist = xmldoc.getElementsByTagName('dialog') 
 #         phrase_list = itemlist[0].getElementsByTagName("phrase")
         self.obj=[]
-        for item in itelmlist:
+        for item in itemlist:
             self.obj.append(item.attributes['obj'].value)
         
         
