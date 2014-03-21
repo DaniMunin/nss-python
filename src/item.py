@@ -27,24 +27,24 @@ class Item(pygame.sprite.Sprite):
     def onUse(self):
         return self.itemId
     
-    def onUse(self, object):
-        if object != None:
-            print object
-        phrase_list = self.itemlist[self.estado].getElementsByTagName("phrase")
-        phrase = phrase_list[0].attributes['content'].value
-        response_list=[];
-        for response in phrase_list[0].getElementsByTagName("response"):
-            response_list.append((response.attributes["content"].value, int(response.attributes["next"].value)))
-        result_list=[]
-        if(len(response_list)==0):
-            results=phrase_list[respuesta].getElementsByTagName("result")
-            result_list.append(results[0].attributes["obj"].value)
-            result_list.append(results[0].attributes["move"].value)
-            result_list.append(results[0].attributes["event"].value)
-        return phrase, response_list, result_list
+#     def onUse(self, object):
+#         if object != None:
+#             print object
+#         phrase_list = self.itemlist[self.estado].getElementsByTagName("phrase")
+#         phrase = phrase_list[0].attributes['content'].value
+#         response_list=[];
+#         for response in phrase_list[0].getElementsByTagName("response"):
+#             response_list.append((response.attributes["content"].value, int(response.attributes["next"].value)))
+#         result_list=[]
+#         if(len(response_list)==0):
+#             results=phrase_list[respuesta].getElementsByTagName("result")
+#             result_list.append(results[0].attributes["obj"].value)
+#             result_list.append(results[0].attributes["move"].value)
+#             result_list.append(results[0].attributes["event"].value)
+#         return phrase, response_list, result_list
     
     def continuar(self, respuesta, object = None):
-        if object != None:
+        if object != None and self.itemlist[self.estado].attributes['id'].value != "final":
             print object
             self.cambiarEstado(object)
         phrase_list = self.itemlist[self.estado].getElementsByTagName("phrase")
@@ -58,6 +58,7 @@ class Item(pygame.sprite.Sprite):
             result_list.append(results[0].attributes["obj"].value)
             result_list.append(results[0].attributes["move"].value)
             result_list.append(results[0].attributes["event"].value)
+            result_list.append(results[0].attributes["state"].value)
         return phrase, response_list, result_list
     
     def cambiarEstado(self, object=None, estado=None):
@@ -65,7 +66,11 @@ class Item(pygame.sprite.Sprite):
             if object in self.obj:
                 self.estado = self.obj.index(object)
             else:
-                print len(self.obj)
                 self.estado = len(self.obj)-1
         if estado != None:
-            self.estado = estado
+            if estado == -1:
+                for item in self.itemlist:
+                    if item.attributes['id'].value == "final":
+                        self.estado = self.itemlist.index(item)
+            else:
+                self.estado = estado

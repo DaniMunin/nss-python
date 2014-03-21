@@ -53,6 +53,7 @@ class FaseInvestigacion(EscenaPygame):
         self.accionO = None
         self.accionT = None
         self.accionR = None
+        self.accionResult = None
         self.text = Text()
         self.bolio = NoJugador("../res/Sprites/bolio2.png","../res/BolioCoordJugador.txt", (244,1990), 1, "dialogoEspeonza.xml", (184,134,11))
         self.espeonza = NoJugador("../res/Sprites/esperanza2.png","../res/EspeonzaCoordJugador.txt", (223,1748), 1, "dialogoEspeonza.xml", (199,21,133))
@@ -90,14 +91,12 @@ class FaseInvestigacion(EscenaPygame):
         elif (self.inventario):
             if self.optEl != 0:
                 self.inventario = False
-                if self.mostrar:
-                    self.optEl = 0
-                else:
+                if not self.mostrar:
                     self.primerDia = True
                     self.numRes = 0
                     self.accionO = pygame.sprite.spritecollideany(self.player, self.grupoObj)
                     self.accionT, self.accionR, self.accionResult = self.empezarAccion(self.accionO, self.player.objetos[self.optEl - 1])
-                    self.optEl = 0
+                self.optEl = 0
         else:   
             self.level.update(self.keys)
 #         print self.rateos.rect
@@ -141,7 +140,7 @@ class FaseInvestigacion(EscenaPygame):
                         self.optEl = 0
                         self.tiempoDial = 0
         #Interactuar con npc/objeto sin utilizar nada
-        if self.keys[K_SPACE] and ~self.accion and ~self.inventario:
+        if self.keys[K_SPACE] and (not self.accion) and (not self.inventario):
             if (pygame.sprite.spritecollideany(self.player, self.grupoNPC) != None):
                 self.primerDia = True
                 self.numRes = 0
@@ -178,7 +177,17 @@ class FaseInvestigacion(EscenaPygame):
                 self.text.render(surface,self.accionR[0][0], (0,0,0), (self.player.rect.topleft[0], self.player.rect.topleft[1]))
                 self.numRes = self.accionR[0][1] 
         elif len(self.accionR) == 0:
-            self.accionO.estado = 0
+            #Objetos recibidos
+            if self.accionResult[0] != "None":
+                self.player.objetos.append(self.accionResult[0])
+            #Nuevo estado del objeto/npc
+            self.accionO.cambiarEstado(None, int(self.accionResult[3]))
+            #Eventos generados
+            if self.accionResult[2] != "None":
+                pass
+            #Movimiento de algun personaje
+            if self.accionResult[1] != "None":
+                pass
             self.accion = False
         elif self.optEl == 0:
             self.tiempoDial = 2000

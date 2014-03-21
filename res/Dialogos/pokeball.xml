@@ -3,12 +3,16 @@
         <phrase content="Es una pokeball!! ¿Que hago con ella?">
 			<response content="Dale una patada" next="1"></response>
 			<response content="Intenta abrirla" next="2"></response>
+			<response content="Háblale cariñosamente" next="3"></response>
 		</phrase>
         <phrase content="Ahora te duele el pie...">
-			<result obj="Puedes decir que eres culpable y así puedo largarme de aquí" move="3" event ="None"></result>
+			<result obj="None" move="None" event ="None" state ="0"></result>
 		</phrase>
         <phrase content="Imposible, está atada con un nudo doble!">
-			<result obj="Puedes decir que eres culpable y así puedo largarme de aquí" move="3" event ="None"></result>
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+        <phrase content="Como si eso fuera a servir, un momento...%Has conseguido Pikachu">
+			<result obj="Pikachu" move="None" event ="None" state ="-1"></result>
 		</phrase>
     </dialog>
     <dialog id="2" obj="Bastón">
@@ -17,15 +21,20 @@
 			<response content="Irse corriendo" next="2"></response>
 		</phrase>
         <phrase content="Casi se rompe el bastón!">
-			<result obj="Puedes decir que eres culpable y así puedo largarme de aquí" move="3" event ="None"></result>
+			<result obj="None" move="None" event ="None" state ="0"></result>
 		</phrase>
         <phrase content="...">
-			<result obj="Puedes decir que eres culpable y así puedo largarme de aquí" move="3" event ="None"></result>
+			<result obj="None" move="None" event ="None" state ="0"></result>
 		</phrase>
     </dialog>
-    <dialog id="2" obj="None">
+    <dialog id="final" obj="None">
+        <phrase content="No puedes hacer nada, está vacía.">
+			<result obj="None" move="None" event ="None" state ="-1"></result>
+		</phrase>
+    </dialog>
+    <dialog id="4" obj="None">
         <phrase content="Claro, muy útil...">
-			<result obj="Puedes decir que eres culpable y así puedo largarme de aquí" move="3" event ="None"></result>
+			<result obj="None" move="None" event ="None" state ="0"></result>
 		</phrase>
     </dialog>
 </data>

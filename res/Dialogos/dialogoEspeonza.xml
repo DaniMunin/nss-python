@@ -10,10 +10,13 @@
 			<response content="No, no creo que fueses capaz..." next="4"></response>
 		</phrase>
         <phrase content="El mundo es maravilloso% y lo mejor es estar siempre sonriendo.">
-			<result obj="Puedes decir que eres culpable y así puedo largarme de aquí" move="3" event ="None"></result></phrase>
+			<result obj="None" move="None" event ="None" state ="0"></result>
+			</phrase>
         <phrase content="Pero mi papa dice que si lo digo me encerrarán.% Y yo estuve de compras cuando el señor Mraga murió">
-			<result obj="Puedes decir que eres culpable y así puedo largarme de aquí" move="3" event ="None"></result></phrase>
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
         <phrase content="Hasta luego señor detective">
-			<result obj="Puedes decir que eres culpable y así puedo largarme de aquí" move="3" event ="None"></result></phrase>
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
     </dialog>
 </data>
