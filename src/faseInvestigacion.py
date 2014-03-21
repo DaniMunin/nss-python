@@ -46,6 +46,8 @@ class FaseInvestigacion(EscenaPygame):
         self.eventoT = True
         self.activarEv = False
         self.accion = False
+        self.inventario = False
+        self.mostrar = True
         self.primerDia = True
         self.numRes = 0
         self.accionO = None
@@ -60,8 +62,10 @@ class FaseInvestigacion(EscenaPygame):
         self.poli = NoJugador("../res/Sprites/poli.png","../res/PoliCoordJugador.txt", (586,1400), 1.5, "dialogoEspeonza.xml", (0,0,255))
         self.grupoNPC = pygame.sprite.Group( self.poli, self.rateos, self.cervero, self.charles, self.espeonza, self.bolio )
 
-        self.ball = Item(10)
+        self.ball = Item(10, "pokeball.xml")
         self.ball.rect.center = (630,1780)
+        self.grupoObj = pygame.sprite.Group(self.ball)
+        
         self.level.mask.draw(self.ball.mask, (self.ball.rect.center[0]-5, self.ball.rect.center[1]-5))
         self.level.mask.draw(self.poli.mask, (self.poli.rect.center[0]-16, self.poli.rect.center[1]-30))
         self.level.mask.draw(self.espeonza.mask, (self.espeonza.rect.center[0]-20, self.espeonza.rect.center[1]-30))
@@ -83,6 +87,17 @@ class FaseInvestigacion(EscenaPygame):
             self.tiempoDial += tiempo
             if ~self.primerDia:
                 self.accionT, self.accionR, self.accionResult = self.continuarAccion(self.accionO, self.numRes) 
+        elif (self.inventario):
+            if self.optEl != 0:
+                self.inventario = False
+                if self.mostrar:
+                    self.optEl = 0
+                else:
+                    self.primerDia = True
+                    self.numRes = 0
+                    self.accionO = pygame.sprite.spritecollideany(self.player, self.grupoObj)
+                    self.accionT, self.accionR, self.accionResult = self.empezarAccion(self.accionO, self.player.objetos[self.optEl - 1])
+                    self.optEl = 0
         else:   
             self.level.update(self.keys)
 #         print self.rateos.rect
@@ -108,6 +123,9 @@ class FaseInvestigacion(EscenaPygame):
         if self.accion:
             self.interact(self.tiempoDial, s)
             
+        if self.inventario:
+            self.mostrarInv(s)
+            
         self.screen.blit(s, (0,0), self.level.viewport)
 
     def evento(self, event):
@@ -118,15 +136,34 @@ class FaseInvestigacion(EscenaPygame):
                 if self.keys[key]:
                     self.optEl = OPT_KEYS[key]
                     self.opcion = False
-                    self.numRes = self.accionR[self.optEl - 1][1]
-                    self.optEl = 0
-                    self.tiempoDial = 0
-        if self.keys[K_SPACE] and ~self.accion:
+                    if self.accionR != None and self.accionR != []:
+                        self.numRes = self.accionR[self.optEl - 1][1]
+                        self.optEl = 0
+                        self.tiempoDial = 0
+        #Interactuar con npc/objeto sin utilizar nada
+        if self.keys[K_SPACE] and ~self.accion and ~self.inventario:
             if (pygame.sprite.spritecollideany(self.player, self.grupoNPC) != None):
                 self.primerDia = True
                 self.numRes = 0
                 self.accionO = pygame.sprite.spritecollideany(self.player, self.grupoNPC)
                 self.accionT, self.accionR, self.accionResult = self.empezarAccion(self.accionO)
+            if (pygame.sprite.spritecollideany(self.player, self.grupoObj) != None):
+                self.primerDia = True
+                self.numRes = 0
+                self.accionO = pygame.sprite.spritecollideany(self.player, self.grupoObj)
+                self.accionT, self.accionR, self.accionResult = self.empezarAccion(self.accionO)
+        #Abrir el inventario
+        if self.keys[K_i] and ~self.accion and ~self.inventario:
+            #Interactuar con npc/objeto utilizando un objeto
+            if (pygame.sprite.spritecollideany(self.player, self.grupoObj) != None):
+                self.mostrar = False
+            else: 
+                self.mostrar = True
+            self.inventario = True
+        #Cerrar el inventario en caso de estar solo mostrandolo
+        if self.inventario and self.mostrar:
+            if self.keys[K_u]:
+                self.optEl = 1
         #Esto de aqui no deberÃ­a funcionar asÃ­, si no que deberÃ­a cerrar el programa sin mÃ¡s, no llevarnos a la fase siguiente
         if event.type == pygame.QUIT:
              print "Hola"
@@ -141,6 +178,7 @@ class FaseInvestigacion(EscenaPygame):
                 self.text.render(surface,self.accionR[0][0], (0,0,0), (self.player.rect.topleft[0], self.player.rect.topleft[1]))
                 self.numRes = self.accionR[0][1] 
         elif len(self.accionR) == 0:
+            self.accionO.estado = 0
             self.accion = False
         elif self.optEl == 0:
             self.tiempoDial = 2000
@@ -152,12 +190,23 @@ class FaseInvestigacion(EscenaPygame):
         else:
             self.primerDia = False
     
+    #Muestra el inventario hasta pulsar la tecla u o seleccionar un objeto
+    def mostrarInv(self, surface):
+        if self.optEl == 0:
+            self.tiempoDial = 2000
+            self.opcion = True
+            j = len(self.player.objetos)
+            self.text.render(surface,"Inventario:", (0,0,0), (self.player.rect.topleft[0], self.player.rect.topleft[1] - (j+1)*30))
+            for i in range(len(self.player.objetos)):
+                self.text.render(surface,self.player.objetos[i], (0,0,0), (self.player.rect.topleft[0], self.player.rect.topleft[1] - j*30))
+                j -= 1
+            
     def empezarAccion(self, objeto, usar = None):
         #recuperar texto xml
         self.accion = True
         self.tiempoDial = 0
         self.primerDia = True
-        texto,respuesta,resultado = objeto.onUse(usar)
+        texto,respuesta,resultado = objeto.continuar(0,usar)
         return texto,respuesta,resultado
     
     def continuarAccion(self, objeto, respuesta):

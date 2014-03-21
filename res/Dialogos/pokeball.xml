@@ -1,20 +1,31 @@
 <data>
-    <dialog id="1">
-        <phrase content="item1">
-		<response content="item1.1" next="5"></response>
-		<response content="item1.2" next="7"></response>
-	</phrase>
-        <phrase content="item2"></phrase>
-        <phrase content="item3"></phrase>
-        <phrase content="item4"></phrase>
+    <dialog id="1" obj="None">
+        <phrase content="Es una pokeball!! ¿Que hago con ella?">
+			<response content="Dale una patada" next="1"></response>
+			<response content="Intenta abrirla" next="2"></response>
+		</phrase>
+        <phrase content="Ahora te duele el pie...">
+			<result obj="Puedes decir que eres culpable y así puedo largarme de aquí" move="3" event ="None"></result>
+		</phrase>
+        <phrase content="Imposible, está atada con un nudo doble!">
+			<result obj="Puedes decir que eres culpable y así puedo largarme de aquí" move="3" event ="None"></result>
+		</phrase>
     </dialog>
-    <dialog id="2">
-        <phrase content="item1">
-		<response content="item2.1" next="10"></response>
-		<response content="item2.2" next="15"></response>
-	</phrase>
-        <phrase content="item2"></phrase>
-        <phrase content="item3"></phrase>
-        <phrase content="item4"></phrase>
+    <dialog id="2" obj="Bastón">
+        <phrase content="Es una pokeball!! ¿Y un bastón para?">
+			<response content="Golpearla" next="1"></response>
+			<response content="Irse corriendo" next="2"></response>
+		</phrase>
+        <phrase content="Casi se rompe el bastón!">
+			<result obj="Puedes decir que eres culpable y así puedo largarme de aquí" move="3" event ="None"></result>
+		</phrase>
+        <phrase content="...">
+			<result obj="Puedes decir que eres culpable y así puedo largarme de aquí" move="3" event ="None"></result>
+		</phrase>
+    </dialog>
+    <dialog id="2" obj="None">
+        <phrase content="Claro, muy útil...">
+			<result obj="Puedes decir que eres culpable y así puedo largarme de aquí" move="3" event ="None"></result>
+		</phrase>
     </dialog>
 </data>

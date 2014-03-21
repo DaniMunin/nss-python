@@ -213,6 +213,7 @@ class Jugador(Personaje):
         self.mask = pygame.mask.from_surface(self.image)
         self.mask2 = pygame.mask.from_surface(load_image("../res/Sprites/badassmask.png"))
         self.speed = 7
+        self.objetos = ["Bastón", "Placa"]
 
     def mover(self, teclasPulsadas):
         # Indicamos la acción a realizar segun la tecla pulsada para el jugador
@@ -329,7 +330,9 @@ until clear.
             result_list.append(results[0].attributes["event"].value)
         return phrase, response_list, result_list
     
-    def continuar(self, respuesta):
+    def continuar(self, respuesta, object= None):
+        if object != None:
+            print object
         phrase_list = self.itemlist[self.estado].getElementsByTagName("phrase")
         phrase = phrase_list[respuesta].attributes['content'].value
         response_list=[];
