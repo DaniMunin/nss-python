@@ -235,19 +235,24 @@ class Jugador(Personaje):
 # Clase NoJugador
 class NoJugador(Personaje):
     "Cualquier personaje del juego"
-    def __init__(self, imagen, coordenadas, posicion, escala, xml):
+    def __init__(self, imagen, coordenadas, posicion, escala, xml, color):
         # Invocamos al constructor de la clase padre con la configuracion de este personaje concreto
         Personaje.__init__(self,imagen,coordenadas, [6, 6, 6, 1], VELOCIDAD_JUGADOR, VELOCIDAD_SALTO_JUGADOR, RETARDO_ANIMACION_JUGADOR,(0,0), escala);
-        
+        self.color = color
         self.estado = 0
         #Tratamiento de dialogos XML
         self.fullname = os.path.join('', "../res/Dialogos/"+xml)
         xmldoc = minidom.parse(self.fullname)
-        itemlist = xmldoc.getElementsByTagName('dialog') 
-#         phrase_list = itemlist[0].getElementsByTagName("phrase")
+        self.itemlist = xmldoc.getElementsByTagName('dialog') 
         self.obj=[]
-        for item in itemlist:
-            self.obj.append(item.attributes['obj'].value)
+        for item in self.itemlist:
+            response_list=[];
+            phrase_list = item.getElementsByTagName("phrase")
+            for response in phrase_list[0].getElementsByTagName("response"):
+                response_list.append(response.attributes["content"].value)
+            if len(response_list)==0 :
+                results=phrase_list[respuesta].getElementsByTagName("result")
+                self.obj.append(results[0].attributes["obj"].value)
         
         
         self.speed = 7
@@ -311,11 +316,11 @@ until clear.
 #         self.posicion = x,y
 
     def onUse(self, object):
-        phrase_list = itemlist[self.estado].getElementsByTagName("phrase")
+        phrase_list = self.itemlist[self.estado].getElementsByTagName("phrase")
         phrase = phrase_list[0].attributes['content'].value
         response_list=[];
         for response in phrase_list[0].getElementsByTagName("response"):
-            response_list.append(response.attributes["content"].value, int(response.attributes["next"].value))
+            response_list.append((response.attributes["content"].value, int(response.attributes["next"].value)))
         result_list=[]
         if(len(response_list)==0):
             results=phrase_list[respuesta].getElementsByTagName("result")
@@ -325,11 +330,11 @@ until clear.
         return phrase, response_list, result_list
     
     def continuar(self, respuesta):
-        phrase_list = itemlist[self.estado].getElementsByTagName("phrase")
+        phrase_list = self.itemlist[self.estado].getElementsByTagName("phrase")
         phrase = phrase_list[respuesta].attributes['content'].value
         response_list=[];
         for response in phrase_list[respuesta].getElementsByTagName("response"):
-            response_list.append(response.attributes["content"].value, int(response.attributes["next"].value))
+            response_list.append((response.attributes["content"].value, int(response.attributes["next"].value)))
         result_list=[]
         if(len(response_list)==0):
             results=phrase_list[respuesta].getElementsByTagName("result")

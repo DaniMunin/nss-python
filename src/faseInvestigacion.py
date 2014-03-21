@@ -46,17 +46,18 @@ class FaseInvestigacion(EscenaPygame):
         self.eventoT = True
         self.activarEv = False
         self.accion = False
-        self.primerDia = False
+        self.primerDia = True
+        self.numRes = 0
         self.accionO = None
         self.accionT = None
         self.accionR = None
         self.text = Text()
-        self.bolio = NoJugador("../res/Sprites/bolio2.png","../res/BolioCoordJugador.txt", (244,1990), 1, "dialogoEspeonza.xml")
-        self.espeonza = NoJugador("../res/Sprites/esperanza2.png","../res/EspeonzaCoordJugador.txt", (223,1748), 1, "dialogoEspeonza.xml")
-        self.charles = NoJugador("../res/Sprites/charles.png","../res/CharlesCoordJugador.txt", (156,1564), 1.5, "dialogoEspeonza.xml")
-        self.cervero = NoJugador("../res/Sprites/scien2.png","../res/ScienceCoordJugador.txt", (993,1984), 1, "dialogoEspeonza.xml")
-        self.rateos = NoJugador("../res/Sprites/rateos2.png","../res/RateosCoordJugador.txt", (831,1504), 1, "dialogoEspeonza.xml")
-        self.poli = NoJugador("../res/Sprites/poli.png","../res/PoliCoordJugador.txt", (586,1400), 1.5, "dialogoEspeonza.xml")
+        self.bolio = NoJugador("../res/Sprites/bolio2.png","../res/BolioCoordJugador.txt", (244,1990), 1, "dialogoEspeonza.xml", (184,134,11))
+        self.espeonza = NoJugador("../res/Sprites/esperanza2.png","../res/EspeonzaCoordJugador.txt", (223,1748), 1, "dialogoEspeonza.xml", (199,21,133))
+        self.charles = NoJugador("../res/Sprites/charles.png","../res/CharlesCoordJugador.txt", (156,1564), 1.5, "dialogoEspeonza.xml", (200,20,20))
+        self.cervero = NoJugador("../res/Sprites/scien2.png","../res/ScienceCoordJugador.txt", (993,1984), 1, "dialogoEspeonza.xml", (50,205,50))
+        self.rateos = NoJugador("../res/Sprites/rateos2.png","../res/RateosCoordJugador.txt", (831,1504), 1, "dialogoEspeonza.xml", (100,100,100))
+        self.poli = NoJugador("../res/Sprites/poli.png","../res/PoliCoordJugador.txt", (586,1400), 1.5, "dialogoEspeonza.xml", (0,0,255))
         self.grupoNPC = pygame.sprite.Group( self.poli, self.rateos, self.cervero, self.charles, self.espeonza, self.bolio )
 
         self.ball = Item(10)
@@ -94,7 +95,6 @@ class FaseInvestigacion(EscenaPygame):
 #             self.level.draw(self.screen, texto)
     
     def dibujar(self):        
-#         self.text.render(self.screen, "Se acabs el tiempo!", (0,0,255), (self.player.rect.topleft[0], self.player.rect.topleft[1] -30))
         s = self.level.draw(self.screen)
         s.blit(self.ball.image, self.ball.rect)
         s.blit(self.poli.image, self.poli.posicion)
@@ -118,9 +118,13 @@ class FaseInvestigacion(EscenaPygame):
                 if self.keys[key]:
                     self.optEl = OPT_KEYS[key]
                     self.opcion = False
-                    self.numRes = self.accionR[optEl][1]
+                    self.numRes = self.accionR[self.optEl - 1][1]
+                    self.optEl = 0
+                    self.tiempoDial = 0
         if self.keys[K_SPACE] and ~self.accion:
             if (pygame.sprite.spritecollideany(self.player, self.grupoNPC) != None):
+                self.primerDia = True
+                self.numRes = 0
                 self.accionO = pygame.sprite.spritecollideany(self.player, self.grupoNPC)
                 self.accionT, self.accionR, self.accionResult = self.empezarAccion(self.accionO)
         #Esto de aqui no deberÃ­a funcionar asÃ­, si no que deberÃ­a cerrar el programa sin mÃ¡s, no llevarnos a la fase siguiente
@@ -131,34 +135,34 @@ class FaseInvestigacion(EscenaPygame):
             
     def interact(self, tiempo, surface):
         if tiempo < 1000:
-                self.text.render(surface,self.accionT, (0,0,0), (self.player.rect.topleft[0], self.player.rect.topleft[1] -30))
+            self.text.render(surface,self.accionT, self.accionO.color, (self.accionO.rect.topleft[0], self.accionO.rect.topleft[1]))
         elif len(self.accionR) == 1:
             if tiempo < 2000:
-                self.text.render(surface,self.accionR[0][0], (0,255,255), (self.player.rect.topleft[0], self.player.rect.topleft[1] -30))
+                self.text.render(surface,self.accionR[0][0], (0,0,0), (self.player.rect.topleft[0], self.player.rect.topleft[1]))
                 self.numRes = self.accionR[0][1] 
         elif len(self.accionR) == 0:
             self.accion = False
         elif self.optEl == 0:
             self.tiempoDial = 2000
             self.opcion = True
-#                 print tiempo, self.opcion
-            for i in len(self.accionR):
-                self.text.render(surface,self.accionR[i][0], (0,255,255), (self.poli.rect.topleft[0], self.poli.rect.topleft[1] -30))
-#                 self.primerDia = False
+            j = len(self.accionR)
+            for i in range(len(self.accionR)):
+                self.text.render(surface,self.accionR[i][0], (0,0,0), (self.player.rect.topleft[0], self.player.rect.topleft[1] - j*30))
+                j -= 1
         else:
             self.primerDia = False
     
     def empezarAccion(self, objeto, usar = None):
         #recuperar texto xml
         self.accion = True
-        self.tiempoDia = 0
+        self.tiempoDial = 0
         self.primerDia = True
         texto,respuesta,resultado = objeto.onUse(usar)
         return texto,respuesta,resultado
     
     def continuarAccion(self, objeto, respuesta):
         #recuperar texto xml
-        texto,respuesta,resultado = objeto.continuar(self.resDial)
+        texto,respuesta,resultado = objeto.continuar(respuesta)
         return texto,respuesta,resultado
     
     
@@ -215,14 +219,15 @@ portion of that map onto the display surface.
     
     
 class Text:
-    def __init__(self, FontName = '../res/XFILES.ttf', FontSize = 30):
+    def __init__(self, FontName = '../res/XFILES.ttf', FontSize = 20):
         pygame.font.init()
         self.font = pygame.font.Font(FontName, FontSize)
         self.size = FontSize
  
     def render(self, surface, text, color, pos):
-        text = unicode(text, "UTF-8")
+#         text = unicode(text, "UTF-8")
         x, y = pos
-        for i in text.split("\r"):
-            surface.blit(self.font.render(i, 1, color, (255,255,255)), (x, y))
+        numLin = len(text.split("%"))
+        for i in text.split("%"):
+            surface.blit(self.font.render(i, 1, color, (255,255,255)), (x - self.font.size(i)[0]/2, y - numLin*self.font.size(i)[1]))
             y += self.size 

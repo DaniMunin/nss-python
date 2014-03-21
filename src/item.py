@@ -12,6 +12,7 @@ class Item(pygame.sprite.Sprite):
         screen = pygame.display.get_surface()
         self.area = screen.get_rect()
         self.mask = pygame.mask.from_surface(pygame.image.load(fullname))
+        self.color = (0,0,0)
 
     def onUse(self):
         return self.itemId
