@@ -11,8 +11,7 @@ class Evento(pygame.sprite.Sprite):
             self.fullname = os.path.join('', "../res/Dialogos/"+xml)
             xmldoc = minidom.parse(self.fullname)
             self.itemlist = xmldoc.getElementsByTagName('dialog') 
-        self.activo = activo
-        self.pasado = pasado
+        self.estado = 0
         self.image = pygame.image.load("../res/Sprites/ball.png")
         self.mask = pygame.mask.from_surface(self.image)
         self.posicion = posicion
@@ -25,7 +24,7 @@ class Evento(pygame.sprite.Sprite):
         pass
     
     def cambiarEstado(self, object=None, estado=None):
-        self.pasado = True
+        self.estado = estado
         return True
     
 class EventoDesaparicion(Evento):
@@ -53,7 +52,7 @@ class EventoAparicion(Evento):
         self.mascara.draw(self.sprite.mask, (self.sprite.rect.center[0]-20, self.sprite.rect.center[1]-30))
         
     def continuar(self, respuesta, object = None):
-        phrase_list = self.itemlist[0].getElementsByTagName("phrase")
+        phrase_list = self.itemlist[self.estado].getElementsByTagName("phrase")
         phrase = phrase_list[respuesta].attributes['content'].value
         response_list=[];
         for response in phrase_list[respuesta].getElementsByTagName("response"):

@@ -58,7 +58,6 @@ class FaseInvestigacion(EscenaPygame):
         self.accionR = None
         self.accionResult = None
         
-        
         self.text = Text()
         
         self.bolio = NoJugador("../res/Sprites/bolio2.png","../res/BolioCoordJugador.txt", (244,1990), 1, "dialogoBolio.xml", (184,134,11))
@@ -185,6 +184,8 @@ class FaseInvestigacion(EscenaPygame):
         if self.keys[K_a]:
             evPrueba = EventoAparicion((586,1600), "", "dialogoEventoPrueba.xml", self.espeonza, self.grupoNPCDetras,self.level.mask)
             evPrueba.onEvent()
+        ########################################
+        #Captar eventos
         if (len(self.eventosActivos) != 0) and (not self.accion):
             for ev in self.eventosActivos:
 #                 print self.player.rect.topleft
@@ -195,13 +196,12 @@ class FaseInvestigacion(EscenaPygame):
                     self.numRes = 0
                     self.accionO = ev
                     self.accionT, self.accionR, self.accionResult = self.empezarAccion(self.accionO)
-            ########################################
         #Cerrar el inventario en caso de estar solo mostrandolo
         if self.inventario and self.mostrar:
             if self.keys[K_u]:
                 self.optEl = 1
         #Esto de aqui no deberÃ­a funcionar asÃ­, si no que deberÃ­a cerrar el programa sin mÃ¡s, no llevarnos a la fase siguiente
-        if event.type == pygame.QUIT:
+        if event.type == pygame.QUIT or (self.keys[K_t] and self.keys[K_r]):
              print "Hola"
              escenaSig = CellarScene(self.director, self.player)
              self.director.cambiarEscena(escenaSig)
@@ -226,6 +226,7 @@ class FaseInvestigacion(EscenaPygame):
                 for e in self.eventos:
                     if e.nombre==self.accionResult[2]:
                         self.eventosActivos.append(e)
+                        self.eventos.remove(e)
             #Movimiento de algun personaje
             if self.accionResult[1] != "None":
                 pass
