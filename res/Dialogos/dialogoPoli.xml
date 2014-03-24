@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data>
+    <dialog id="1">
+        <phrase content="Que tal la investigacion detective,% ha encontrado ya al culpable?">
+        	<response content="1 - Creo que se quien es, necesito comprobar una cosa%" next="1"></response>
+			<response content="2 - Claro que conozco al culpable, soy Vicent Badass al fin y al cabo!%" next="2"></response>
+			<response content="3 - No me interrumpas en mi investigacion, notavo%" next="3"></response>
+		</phrase>
+		<phrase content="A quien quiere que investiguemos?">
+			<response content="1 - A Espeonza" next="4"></response>
+			<response content="2 - A Bolio" next="4"></response>
+			<response content="3 - A Rateos" next="4"></response>
+			<response content="4 - A Cervero" next="4"></response>
+			<response content="5 - A Charles" next="4"></response>
+			<response content="6 - A ti" next="4"></response>
+			<response content="7 - A mi" next="4"></response>
+			<response content="8 - A nadie, deja de presionarme, voy a tomarme un cafe" next="4"></response>
+		</phrase>
+        <phrase content="El culpable ya?% Por fin podre ver a Vicent Badass en accion!% Y quien es el culpable?">
+			<response content="1 - Espeonza" next="4"></response>
+			<response content="2 - Bolio" next="4"></response>
+			<response content="3 - Rateos" next="4"></response>
+			<response content="4 - Cervero" next="4"></response>
+			<response content="5 - Charles" next="4"></response>
+			<response content="6 - ti" next="4"></response>
+			<response content="7 - mi" next="4"></response>
+			<response content="8 - Nadie, deja de presionarme, voy a tomar otro cafe" next="4"></response>
+			</phrase>
+        <phrase content="Hasta luego detective">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+		<phrase content="Procedamos con la investigacion entonces">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+    </dialog>
+</data>

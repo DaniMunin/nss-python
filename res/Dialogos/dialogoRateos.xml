@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data>
+    <dialog id="1">
+        <phrase content="Hermoso dia para que venga a molestarme detective.">
+        	<response content="1 - Ten cuidado, no desbordes tanta amabilidad que puedes hacerte daño" next="1"></response>
+			<response content="2 - Hermoso dia para cometer un asesinato, no señor Rateos?" next="2"></response>
+		</phrase>
+		<phrase content="Solo soy amable con la gente que vale la pena">
+			<response content="1 - Oh, disculpe entonces, me voy de nuevo a mi cuchitril y no lo molesto señor" next="3"></response>
+			<response content="2 - Entonces no te hablas a ti mismo?" next="4"></response>
+		</phrase>
+        <phrase content="Yo no he sido el culpable,% estaba en un acto social, tengo 50 testigos y no pienso hablar mas,% pregunteles a ellos si no">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+			</phrase>
+        <phrase content="Asi me gusta, se obediente y largate.% Toma, un centimo para que te compres alguna cosa de pobres.">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+        <phrase content="No tengo por que aguantar tus impertinencias. Dejame en paz">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+    </dialog>
+</data>

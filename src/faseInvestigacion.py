@@ -55,12 +55,12 @@ class FaseInvestigacion(EscenaPygame):
         self.accionR = None
         self.accionResult = None
         self.text = Text()
-        self.bolio = NoJugador("../res/Sprites/bolio2.png","../res/BolioCoordJugador.txt", (244,1990), 1, "dialogoEspeonza.xml", (184,134,11))
+        self.bolio = NoJugador("../res/Sprites/bolio2.png","../res/BolioCoordJugador.txt", (244,1990), 1, "dialogoBolio.xml", (184,134,11))
         self.espeonza = NoJugador("../res/Sprites/esperanza2.png","../res/EspeonzaCoordJugador.txt", (223,1748), 1, "dialogoEspeonza.xml", (199,21,133))
-        self.charles = NoJugador("../res/Sprites/charles.png","../res/CharlesCoordJugador.txt", (156,1564), 1.5, "dialogoEspeonza.xml", (200,20,20))
-        self.cervero = NoJugador("../res/Sprites/scien2.png","../res/ScienceCoordJugador.txt", (993,1984), 1, "dialogoEspeonza.xml", (50,205,50))
-        self.rateos = NoJugador("../res/Sprites/rateos2.png","../res/RateosCoordJugador.txt", (831,1504), 1, "dialogoEspeonza.xml", (100,100,100))
-        self.poli = NoJugador("../res/Sprites/poli.png","../res/PoliCoordJugador.txt", (586,1400), 1.5, "dialogoEspeonza.xml", (0,0,255))
+        self.charles = NoJugador("../res/Sprites/charles.png","../res/CharlesCoordJugador.txt", (156,1564), 1.5, "dialogoCharles.xml", (200,20,20))
+        self.cervero = NoJugador("../res/Sprites/scien2.png","../res/ScienceCoordJugador.txt", (993,1984), 1, "dialogoCervero.xml", (50,205,50))
+        self.rateos = NoJugador("../res/Sprites/rateos2.png","../res/RateosCoordJugador.txt", (831,1504), 1, "dialogoRateos.xml", (100,100,100))
+        self.poli = NoJugador("../res/Sprites/poli.png","../res/PoliCoordJugador.txt", (586,1400), 1.5, "dialogoPoli.xml", (0,0,255))
         self.grupoNPC = pygame.sprite.Group( self.poli, self.rateos, self.cervero, self.charles, self.espeonza, self.bolio )
 
         self.ball = Item(10, "pokeball.xml")

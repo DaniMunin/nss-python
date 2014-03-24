@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data>
+    <dialog id="1">
+        <phrase content="Buenos dias detective.% Quiere unas acciones?% Las vendo baratas">
+        	<response content="1 - Acciones... Buen plan, pongame dos y una confesion de asesinato" next="1"></response>
+			<response content="2 - Deja de pensar en dinero por un momento" next="2"></response>
+		</phrase>
+		<phrase content="Son buenas y bonitas, se las envuelvo para regalo?">
+			<response content="1 - No me interesan las acciones, quiero la confesion" next="3"></response>
+			<response content="2 - Si, y pongales un lacito rosa, un corazon y una dedicatoria: A Vicent" next="4"></response>
+		</phrase>
+        <phrase content="El dinero lo es todo amigo mio, y si no puedes comprenderlo puedes marcharte">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+			</phrase>
+        <phrase content="Yo no he sido.% Cuando Mraga murio estaba dandome mi tradicional baño de dinero en la habitacion">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+        <phrase content="No soporto su sarcasmo detective">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+    </dialog>
+</data>
