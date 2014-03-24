@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <data>
-    <dialog id="1">
-        <phrase content="Buenos dias señor detective. Quiere una taza de cafe?">
-        	<response content="1 - Nadie dice que no a un cafe" next="2"></response>
+    <dialog id="1" obj="None">
+        <phrase content="Buenos dias señor detective. %Quiere una taza de cafe?">
+        	<response content="1 - Nadie dice que no a un cafe%" next="2"></response>
 			<response content="2 - No quiero cafe, gracias.% A todo esto, me encantan las novelas de asesinatos, conoces quien es el culpable siempre en ellas?" next="1"></response>
 		</phrase>
-		<phrase content="El mayordomo, por supuesto. Espere... cree que he asesinado al señor Mraga?">
-			<response content="1 - Yo no he dicho nada, todo lo has dicho tu" next="3"></response>
+		<phrase content="El mayordomo, por supuesto.% Espere... cree que he asesinado al señor Mraga?">
+			<response content="1 - Yo no he dicho nada, todo lo has dicho tu%" next="3"></response>
 			<response content="2 - La historia y el instinto me dice que fue usted" next="4"></response>
 		</phrase>
-        <phrase content="Sirvase usted mismo. Es de la mejor cosecha del mundo.">
+        <phrase content="Sirvase usted mismo.% Es de la mejor cosecha del mundo.">
 			<result obj="None" move="None" event ="None" state ="0"></result>
 			</phrase>
-        <phrase content="Yo no he podido ser, no he participado en ningun rito raro ni nada, yo solo se hacer cafe">
+        <phrase content="Yo no he podido ser,% no he participado en ningun rito raro ni nada,% yo solo se hacer cafe">
 			<result obj="None" move="None" event ="None" state ="0"></result>
 		</phrase>
-        <phrase content="Pero es imposible señor, debe ser un error, yo soy un simple empleado que se dedica a hacer cafe">
+        <phrase content="Pero es imposible señor,% debe ser un error, yo soy un simple% empleado que se dedica a hacer cafe">
 			<result obj="None" move="None" event ="None" state ="0"></result>
 		</phrase>
     </dialog>

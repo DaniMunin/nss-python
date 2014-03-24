@@ -6,6 +6,7 @@ from item import *
 from personajes import *
 from pygame.locals import *
 from cellarScene import *
+from evento import *
 # from testItem import *
 # -------------------------------------------------
 # -------------------------------------------------
@@ -50,18 +51,25 @@ class FaseInvestigacion(EscenaPygame):
         self.mostrar = True
         self.primerDia = True
         self.numRes = 0
+        self.eventoAct = False
+        
         self.accionO = None
         self.accionT = None
         self.accionR = None
         self.accionResult = None
+        
+        
         self.text = Text()
+        
         self.bolio = NoJugador("../res/Sprites/bolio2.png","../res/BolioCoordJugador.txt", (244,1990), 1, "dialogoBolio.xml", (184,134,11))
         self.espeonza = NoJugador("../res/Sprites/esperanza2.png","../res/EspeonzaCoordJugador.txt", (223,1748), 1, "dialogoEspeonza.xml", (199,21,133))
-        self.charles = NoJugador("../res/Sprites/charles.png","../res/CharlesCoordJugador.txt", (156,1564), 1.5, "dialogoCharles.xml", (200,20,20))
+        self.charles = NoJugador("../res/Sprites/charles.png","../res/CharlesCoordJugador.txt", (190,1514), 1.5, "dialogoCharles.xml", (200,20,20))
         self.cervero = NoJugador("../res/Sprites/scien2.png","../res/ScienceCoordJugador.txt", (993,1984), 1, "dialogoCervero.xml", (50,205,50))
         self.rateos = NoJugador("../res/Sprites/rateos2.png","../res/RateosCoordJugador.txt", (831,1504), 1, "dialogoRateos.xml", (100,100,100))
         self.poli = NoJugador("../res/Sprites/poli.png","../res/PoliCoordJugador.txt", (586,1400), 1.5, "dialogoPoli.xml", (0,0,255))
         self.grupoNPC = pygame.sprite.Group( self.poli, self.rateos, self.cervero, self.charles, self.espeonza, self.bolio )
+        self.grupoNPCDetras = pygame.sprite.Group( self.poli, self.charles, self.espeonza)
+        self.grupoNPCDelante = pygame.sprite.Group( self.rateos, self.cervero, self.bolio )
 
         self.ball = Item(10, "pokeball.xml")
         self.ball.rect.center = (630,1780)
@@ -74,6 +82,12 @@ class FaseInvestigacion(EscenaPygame):
         self.level.mask.draw(self.cervero.mask, (self.cervero.rect.center[0]-20, self.cervero.rect.center[1]-30))
         self.level.mask.draw(self.rateos.mask, (self.rateos.rect.center[0]-16, self.rateos.rect.center[1]-30))
         self.level.mask.draw(self.bolio.mask, (self.bolio.rect.center[0]-20, self.bolio.rect.center[1]-30))
+        
+        self.evPrueba = EventoAparicion((586,1600),"evPrueba", "dialogoEventoPrueba.xml", self.espeonza, self.grupoNPCDetras,self.level.mask)
+        self.eventos = []
+        self.eventosActivos = []
+        self.eventos.append(self.evPrueba)
+#         self.eventosActivos.append(evPrueba)
         
                 
     # Se actualiza el decorado, realizando las siguientes acciones:
@@ -97,6 +111,8 @@ class FaseInvestigacion(EscenaPygame):
                     self.accionO = pygame.sprite.spritecollideany(self.player, self.grupoObj)
                     self.accionT, self.accionR, self.accionResult = self.empezarAccion(self.accionO, self.player.objetos[self.optEl - 1])
                 self.optEl = 0
+#         elif (self.eventoAct):
+#             self.accionT, self.accionR, self.accionResult = self.continuarAccion(self.accionO, self.numRes) 
         else:   
             self.level.update(self.keys)
 #         print self.rateos.rect
@@ -111,13 +127,15 @@ class FaseInvestigacion(EscenaPygame):
     def dibujar(self):        
         s = self.level.draw(self.screen)
         s.blit(self.ball.image, self.ball.rect)
-        s.blit(self.poli.image, self.poli.posicion)
-        s.blit(self.espeonza.image, self.espeonza.posicion)
+        self.grupoNPCDetras.draw(s)
+#         s.blit(self.poli.image, self.poli.posicion)
+#         s.blit(self.espeonza.image, self.espeonza.posicion)
+#         s.blit(self.charles.image, self.charles.posicion)
         self.player.draw(s)
-        s.blit(self.bolio.image, self.bolio.posicion)
-        s.blit(self.charles.image, self.charles.posicion)
-        s.blit(self.cervero.image, self.cervero.posicion)
-        s.blit(self.rateos.image, self.rateos.posicion)
+        self.grupoNPCDelante.draw(s)
+#         s.blit(self.bolio.image, self.bolio.posicion)
+#         s.blit(self.cervero.image, self.cervero.posicion)
+#         s.blit(self.rateos.image, self.rateos.posicion)
         
         if self.accion:
             self.interact(self.tiempoDial, s)
@@ -152,13 +170,32 @@ class FaseInvestigacion(EscenaPygame):
                 self.accionO = pygame.sprite.spritecollideany(self.player, self.grupoObj)
                 self.accionT, self.accionR, self.accionResult = self.empezarAccion(self.accionO)
         #Abrir el inventario
-        if self.keys[K_i] and ~self.accion and ~self.inventario:
+        if (self.keys[K_i]) and (not self.accion) and (not self.inventario):
             #Interactuar con npc/objeto utilizando un objeto
             if (pygame.sprite.spritecollideany(self.player, self.grupoObj) != None):
                 self.mostrar = False
             else: 
                 self.mostrar = True
             self.inventario = True
+            
+#             PRUEBAS EVENTOS....
+        if self.keys[K_d]:
+            evPrueba = EventoDesaparicion((586,1700), "",self.espeonza, self.grupoNPCDetras,self.level.mask)
+            evPrueba.onEvent()
+        if self.keys[K_a]:
+            evPrueba = EventoAparicion((586,1600), "", "dialogoEventoPrueba.xml", self.espeonza, self.grupoNPCDetras,self.level.mask)
+            evPrueba.onEvent()
+        if (len(self.eventosActivos) != 0) and (not self.accion):
+            for ev in self.eventosActivos:
+#                 print self.player.rect.topleft
+#                 print ev.posicion
+                if pygame.sprite.collide_mask(self.player, ev):
+                    ev.onEvent()
+                    self.primerDia = True
+                    self.numRes = 0
+                    self.accionO = ev
+                    self.accionT, self.accionR, self.accionResult = self.empezarAccion(self.accionO)
+            ########################################
         #Cerrar el inventario en caso de estar solo mostrandolo
         if self.inventario and self.mostrar:
             if self.keys[K_u]:
@@ -181,10 +218,14 @@ class FaseInvestigacion(EscenaPygame):
             if self.accionResult[0] != "None":
                 self.player.objetos.append(self.accionResult[0])
             #Nuevo estado del objeto/npc
-            self.accionO.cambiarEstado(None, int(self.accionResult[3]))
+            elimEvento = self.accionO.cambiarEstado(None, int(self.accionResult[3]))
+            if elimEvento:
+                self.eventosActivos.remove(self.accionO)
             #Eventos generados
             if self.accionResult[2] != "None":
-                pass
+                for e in self.eventos:
+                    if e.nombre==self.accionResult[2]:
+                        self.eventosActivos.append(e)
             #Movimiento de algun personaje
             if self.accionResult[1] != "None":
                 pass

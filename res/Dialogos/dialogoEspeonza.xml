@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <data>
-    <dialog id="1">
+    <dialog id="1" obj="None">
         <phrase content="Buenos días detective.% ¿Cómo va la investigación?">
         	<response content="He tenido días mejores...%" next="1"></response>
 			<response content="Es un día maravilloso en el mundo,% ¿no me ves sonriendo?" next="2"></response>
@@ -10,7 +10,7 @@
 			<response content="No, no creo que fueses capaz..." next="4"></response>
 		</phrase>
         <phrase content="El mundo es maravilloso% y lo mejor es estar siempre sonriendo.">
-			<result obj="None" move="None" event ="None" state ="0"></result>
+			<result obj="None" move="None" event ="evPrueba" state ="0"></result>
 			</phrase>
         <phrase content="Pero mi papa dice que si lo digo me encerrarán.% Y yo estuve de compras cuando el señor Mraga murió">
 			<result obj="None" move="None" event ="None" state ="0"></result>

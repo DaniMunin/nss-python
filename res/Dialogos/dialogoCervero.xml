@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <data>
-    <dialog id="1">
+    <dialog id="1" obj="None">
         <phrase content="Si mezclo estes dos elementos podria crear uno que...">
         	<response content="1 - Uno que evitara que te inculpasen?" next="1"></response>
 			<response content="2 - Uno que convirtiera el agua en café?" next="2"></response>

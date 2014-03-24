@@ -74,3 +74,4 @@ class Item(pygame.sprite.Sprite):
                         self.estado = self.itemlist.index(item)
             else:
                 self.estado = estado
+        return False

@@ -247,15 +247,7 @@ class NoJugador(Personaje):
         self.itemlist = xmldoc.getElementsByTagName('dialog') 
         self.obj=[]
         for item in self.itemlist:
-            response_list=[];
-            phrase_list = item.getElementsByTagName("phrase")
-            for response in phrase_list[0].getElementsByTagName("response"):
-                response_list.append(response.attributes["content"].value)
-            if len(response_list)==0 :
-                results=phrase_list[respuesta].getElementsByTagName("result")
-                self.obj.append(results[0].attributes["obj"].value)
-        
-        
+            self.obj.append(item.attributes['obj'].value)
         self.speed = 7
         self.posicion = posicion
         self.mask = pygame.mask.from_surface(self.image)
@@ -361,3 +353,4 @@ until clear.
                         self.estado = self.itemlist.index(item)
             else:
                 self.estado = estado
+        return False

@@ -1,0 +1,14 @@
+<data>
+    <dialog id="1" obj="None">
+        <phrase content="Es un evento!">
+			<response content="Bien" next="1"></response>
+			<response content="Mal" next="2"></response>
+		</phrase>
+        <phrase content="Bien!">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+        <phrase content="Mal!">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+    </dialog>
+</data>
