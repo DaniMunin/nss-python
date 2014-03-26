@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data>
+    <dialog id="1" obj="None">
+        <phrase content="Estan trabajando dentro,% no puedes pasar.">
+        	<response content="1 - Dejame pasar, yo soy la ley!%" next="2"></response>
+			<response content="2 - Necesito pasar,% tengo que completar la investigacion" next="1"></response>
+		</phrase>
+		<phrase content="Antes de pasar tiene que encontrar mas pistas,% cuando logres demostrar que eres% un detective de verdad podras pasar">
+			<response content="1 - (Apartar de una patada)" next="3"></response>
+			<response content="2 - Volvere en breve, y traere mis pistas!" next="4"></response>
+		</phrase>
+        <phrase content="Y yo un policia que puede pegarle una paliza.% Venga, circule.">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+			</phrase>
+        <phrase content="(Detiene tu patada, te da a ti una mas fuerte)% Quieres repetir?">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+        <phrase content="Dale">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+    </dialog>
+</data>
