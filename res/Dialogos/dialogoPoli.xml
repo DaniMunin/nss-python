@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <data>
     <dialog id="1" obj="None">
-        <phrase content="Que tal la investigacion detective,% ha encontrado ya al culpable?">
-        	<response content="1 - Creo que se quien es, necesito comprobar una cosa%" next="1"></response>
+        <phrase content="Que tal la investigacion detective,% ha encontrado ya al culpable?%">
+        	<response content="1 - Creo que se quien es, necesito comprobar una cosa%%" next="1"></response>
 			<response content="2 - Claro que conozco al culpable,% soy Vicent Badass al fin y al cabo!%" next="2"></response>
 			<response content="3 - No me interrumpas en mi investigacion, notavo%" next="3"></response>
 		</phrase>

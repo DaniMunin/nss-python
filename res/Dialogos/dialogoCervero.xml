@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <data>
     <dialog id="1" obj="None">
-        <phrase content="Si mezclo estes dos elementos podria crear uno que...">
+        <phrase content="Si mezclo estes dos elementos% podria crear uno que...">
         	<response content="1 - Uno que evitara que te inculpasen?" next="1"></response>
-			<response content="2 - Uno que convirtiera el agua en café?" next="2"></response>
+			<response content="2 - Uno que convirtiera el agua en cafe?" next="2"></response>
 		</phrase>
-		<phrase content="Inculpar en que?% Yo estaba trabajando en tintes para billetes del señor Mitin cuando el viejo murio.">
-			<response content="1 - Tinta para billetes?% Pasame unos cuantos cuando lo logres" next="3"></response>
-			<response content="2 - Hum... y consideras eso una coartada?" next="4"></response>
+		<phrase content="Inculpar en que?% Yo estaba trabajando en tintes% para billetes del señor Mitin% cuando el viejo murio.">
+			<response content="1 - Tinta para billetes?% Pasame unos cuantos% cuando lo logres%%" next="3"></response>
+			<response content="2 - Hum...% y consideras eso una coartada?" next="4"></response>
 		</phrase>
-        <phrase content="Ojala señor detective...% El mundo daria un paso gigantesco si descubriera unos polvos% que al echarlos en el agua se crease cafe...% Pero eso es un sueño">
+        <phrase content="Ojala señor detective...% El mundo daria un paso gigantesco% si descubriera unos polvos% que al echarlos en el agua se crease cafe...% Pero eso es un sueño">
 			<result obj="None" move="None" event ="None" state ="0"></result>
 			</phrase>
-        <phrase content="Tengo que apuntar en mi libreta ese nuevo termino. El autosoborno">
+        <phrase content="Tengo que apuntar% en mi libreta ese nuevo termino. El autosoborno">
 			<result obj="None" move="None" event ="None" state ="0"></result>
 		</phrase>
-        <phrase content="Que dice de ritos satanicos ni ritos satanicos. Vayase y dejeme trabajar">
+        <phrase content="Que dice de ritos satanicos ni ritos satanicos.% Vayase y dejeme trabajar">
 			<result obj="None" move="None" event ="None" state ="0"></result>
 		</phrase>
     </dialog>
