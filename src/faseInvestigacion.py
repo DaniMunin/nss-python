@@ -67,12 +67,14 @@ class FaseInvestigacion(EscenaPygame):
         self.rateos = NoJugador("../res/Sprites/rateos2.png","../res/RateosCoordJugador.txt", (831,1504), 1, "dialogoRateos.xml", (100,100,100))
         self.poli = NoJugador("../res/Sprites/poli.png","../res/PoliCoordJugador.txt", (586,1400), 1.5, "dialogoPoli.xml", (0,0,255))
         self.grupoNPC = pygame.sprite.Group( self.poli, self.rateos, self.cervero, self.charles, self.espeonza, self.bolio )
-        self.grupoNPCDetras = pygame.sprite.Group( self.poli, self.charles, self.espeonza)
-        self.grupoNPCDelante = pygame.sprite.Group( self.rateos, self.cervero, self.bolio )
+        self.grupoNPCDetras = pygame.sprite.Group( self.poli, self.charles, self.espeonza, self.cervero)
+        self.grupoNPCDelante = pygame.sprite.Group( self.rateos, self.bolio )
 
-        self.ball = Item(10, "pokeball.xml")
-        self.ball.rect.center = (630,1780)
-        self.grupoObj = pygame.sprite.Group(self.ball)
+        self.ball = ItemVisible(10, "pokeball.xml","../res/Sprites/ball.png", (630,1780))
+#         self.ball.rect.center = (630,1780)
+        self.chim1 = ItemInvisible(10, "pokeball.xml", (756,1446))
+#         self.chim1.rect.center = (756,1446)
+        self.grupoObj = pygame.sprite.Group(self.ball, self.chim1)
         
         self.level.mask.draw(self.ball.mask, (self.ball.rect.center[0]-5, self.ball.rect.center[1]-5))
         self.level.mask.draw(self.poli.mask, (self.poli.rect.center[0]-16, self.poli.rect.center[1]-30))
@@ -114,6 +116,7 @@ class FaseInvestigacion(EscenaPygame):
 #             self.accionT, self.accionR, self.accionResult = self.continuarAccion(self.accionO, self.numRes) 
         else:   
             self.level.update(self.keys)
+            print self.player.rect
 #         print self.rateos.rect
 #         print self.player.rect
 #         print self.poli.rect
