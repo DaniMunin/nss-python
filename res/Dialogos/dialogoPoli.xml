@@ -2,19 +2,15 @@
 <data>
     <dialog id="1" obj="None">
         <phrase content="Que tal la investigacion detective,% ha encontrado ya al culpable?%">
-        	<response content="1 - Creo que se quien es, necesito comprobar una cosa%%" next="1"></response>
+        	<response content="1 - Mi amigo invisible esta algo perdido% y necesita ayuda,% pero no me apetece darsela a mi%%" next="1"></response>
 			<response content="2 - Claro que conozco al culpable,% soy Vicent Badass al fin y al cabo!%" next="2"></response>
 			<response content="3 - No me interrumpas en mi investigacion, notavo%" next="3"></response>
 		</phrase>
-		<phrase content="A quien quiere que investiguemos?">
-			<response content="1 - A Espeonza" next="4"></response>
-			<response content="2 - A Bolio" next="4"></response>
-			<response content="3 - A Rateos" next="4"></response>
-			<response content="4 - A Cervero" next="4"></response>
-			<response content="5 - A Charles" next="4"></response>
-			<response content="6 - A ti" next="4"></response>
-			<response content="7 - A mi" next="4"></response>
-			<response content="8 - A nadie, deja de presionarme,% voy a tomarme un cafe" next="4"></response>
+		<phrase content="Lo comprendo,% el gran Vicent Badass% no puede perder su tiempo explicando eso.% Si se quiere resolver este caso% tiene que moverse, % yo empezaria hablando con los sospechosos% e investigando las habitaciones,% presentandoles objetos si fuese necesario%">
+			<response content="1 - Moverse?" next="5"></response>
+			<response content="2 - Preguntar a sospechosos?" next="6"></response>
+			<response content="3 - Investigar habitaciones?" next="7"></response>
+			<response content="4 - Usar objetos?" next="8"></response>
 		</phrase>
         <phrase content="El culpable ya?% Por fin podre ver a Vicent Badass en accion!% Y quien es el culpable?">
 			<response content="1 - Espeonza" next="4"></response>
@@ -30,6 +26,18 @@
 			<result obj="None" move="None" event ="None" state ="0"></result>
 		</phrase>
 		<phrase content="Procedamos con la investigacion entonces">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+		<phrase content="Para moverse utilice las flechas de direccion.% Puede desplazarse por toda la casa siempre que pueda,% no tiene restricciones, usted es la ley.">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+		<phrase content="Puede interaccionar con el resto de personas% simplemente usando la barra espaciadora a su lado,% despues usar los numeros para seleccionar respuestas,% aunque esto deberias saberlo ya, no?">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+		<phrase content="El difunto Mraga no gastaba una casa pequeña,% y al ser usted un investigador puede recorrerla entera% (salvo que otros polis se pongan tontos,% en ese caso apartelos de una patada)% Recorra toda la casa y busque todas las pistas.% Confiamos en usted.">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+		<phrase content="Si pulsa la tecla i abrira el inventario y podra ver que tiene%, si esta al lado de algun sitio interactuable% (objetos o personas) puedes usarlo seleccionandolo,% quien sabe si el usar un objeto hara a alguien confesar% o a algun objeto dar pistas.">
 			<result obj="None" move="None" event ="None" state ="0"></result>
 		</phrase>
     </dialog>
