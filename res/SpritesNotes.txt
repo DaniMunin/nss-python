@@ -1,0 +1,7 @@
+The following sprites need to be fixed:
+
+Cultist.png
+esperanza.png
+rateos.png
+scien.png
+
