@@ -12,8 +12,9 @@ class Evento(pygame.sprite.Sprite):
             xmldoc = minidom.parse(self.fullname)
             self.itemlist = xmldoc.getElementsByTagName('dialog') 
         self.estado = 0
-        self.image = pygame.image.load("../res/Sprites/ball.png")
+        self.image = pygame.image.load("../res/Sprites/sprite_invisible.png")
         self.mask = pygame.mask.from_surface(self.image)
+        self.mask.fill()
         self.posicion = posicion
         self.rect = self.image.get_rect() 
         self.rect.center = self.posicion
@@ -24,34 +25,19 @@ class Evento(pygame.sprite.Sprite):
         pass
     
     def cambiarEstado(self, object=None, estado=None):
-        self.estado = estado
+        if estado != None:
+            if estado == -1:
+                for item in self.itemlist:
+                    if item.attributes['id'].value == "final":
+                        self.estado = self.itemlist.index(item)
+            else:
+                self.estado = estado
         return True
-    
-class EventoDesaparicion(Evento):
-    
-    def __init__(self, posicion, nombre, sprite, grupo, mascara):
-        Evento.__init__(self, posicion, nombre)
-        self.sprite = sprite
-        self.grupo = grupo
-        self.mascara = mascara
-
-    def onEvent(self):
-        self.grupo.remove(self.sprite)
-        self.mascara.erase(self.sprite.mask, (self.sprite.rect.center[0]-20, self.sprite.rect.center[1]-30))
-        
-class EventoAparicion(Evento):
-    
-    def __init__(self, posicion, nombre, xml, sprite, grupo, mascara):
-        Evento.__init__(self, posicion, nombre, xml)
-        self.sprite = sprite
-        self.grupo = grupo
-        self.mascara = mascara
-
-    def onEvent(self):
-        self.grupo.add(self.sprite)
-        self.mascara.draw(self.sprite.mask, (self.sprite.rect.center[0]-20, self.sprite.rect.center[1]-30))
         
     def continuar(self, respuesta, object = None):
+        print "respuesta - "
+        print respuesta
+        print len(self.itemlist)
         phrase_list = self.itemlist[self.estado].getElementsByTagName("phrase")
         phrase = phrase_list[respuesta].attributes['content'].value
         response_list=[];
@@ -66,3 +52,58 @@ class EventoAparicion(Evento):
             result_list.append(results[0].attributes["state"].value)
         return phrase, response_list, result_list
     
+class EventoDesaparicion(Evento):
+    
+    def __init__(self, posicion, nombre, xml, sprite, grupo, mascara):
+        Evento.__init__(self, posicion, nombre,xml)
+        self.sprite = sprite
+        self.grupo = grupo
+        self.mascara = mascara
+
+    def onEvent(self):
+        self.grupo.remove(self.sprite)
+        self.mascara.erase(self.sprite.mask, (self.sprite.rect.center[0]-20, self.sprite.rect.center[1]-30))
+        
+class EventoAparicion(Evento):
+    
+    def __init__(self, posicion, nombre, xml, sprite, grupo, mascara , drawMask = True):
+        Evento.__init__(self, posicion, nombre, xml)
+        self.sprite = sprite
+        self.grupo = grupo
+        self.mascara = mascara
+        self.drawMask = drawMask
+
+    def onEvent(self):
+        self.grupo.add(self.sprite)
+        if self.drawMask :
+            self.mascara.draw(self.sprite.mask, (self.sprite.rect.center[0]-20, self.sprite.rect.center[1]-30))
+ 
+class EventoActivaItems(Evento):
+    
+    def __init__(self, posicion, nombre, itemsActivados, grupo, sonido = None):
+        Evento.__init__(self, posicion, nombre, "evVacio.xml")
+        self.itemsActivados = itemsActivados
+        self.grupo = grupo
+        self.sonido = sonido
+        
+    def onEvent(self):
+        if self.sonido != None:
+            self.sonido = pygame.mixer.Sound(self.sonido)
+            canal = self.sonido.play()
+        for i in self.itemsActivados:
+            self.grupo.add(i)
+            
+class EventoCambioEstado(Evento):
+    
+    def __init__(self, posicion, nombre, objeto, estadoN, sonido = None):
+        Evento.__init__(self, posicion, nombre, "evVacio2.xml")
+        self.objeto = objeto
+        self.estadoN = estadoN
+        self.sonido = sonido
+        
+    def onEvent(self):
+        if self.sonido != None:
+            self.sonido = pygame.mixer.Sound(self.sonido)
+            canal = self.sonido.play()
+        self.objeto.cambiarEstado(None,self.estadoN)          
+            

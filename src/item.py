@@ -4,15 +4,15 @@ from xml.dom import minidom
 
 class Item(pygame.sprite.Sprite):
     
-    def __init__(self, id, xml):
+    def __init__(self, id, xml,imagen, pos):
         self.itemId = id
         pygame.sprite.Sprite.__init__(self)
-        fullname = os.path.join('', "../res/Sprites/ball.png")
+        fullname = os.path.join('', imagen)
         self.image = pygame.image.load(fullname)
         self.rect = self.image.get_rect() 
+        self.rect.center = pos
         screen = pygame.display.get_surface()
         self.area = screen.get_rect()
-        self.mask = pygame.mask.from_surface(pygame.image.load(fullname))
         #Tratamiento de dialogos XML
         self.fullname = os.path.join('', "../res/Dialogos/"+xml)
         xmldoc = minidom.parse(self.fullname)
@@ -45,7 +45,6 @@ class Item(pygame.sprite.Sprite):
     
     def continuar(self, respuesta, object = None):
         if object != None and self.itemlist[self.estado].attributes['id'].value != "final":
-            print object
             self.cambiarEstado(object)
         phrase_list = self.itemlist[self.estado].getElementsByTagName("phrase")
         phrase = phrase_list[respuesta].attributes['content'].value
@@ -66,7 +65,7 @@ class Item(pygame.sprite.Sprite):
             if object in self.obj:
                 self.estado = self.obj.index(object)
             else:
-                self.estado = len(self.obj)-1
+                self.estado = len(self.obj)-1-self.estado
         if estado != None:
             if estado == -1:
                 for item in self.itemlist:
@@ -75,3 +74,16 @@ class Item(pygame.sprite.Sprite):
             else:
                 self.estado = estado
         return False
+    
+class ItemVisible(Item):   
+    def __init__(self, id, xml, imagen, pos): 
+        Item.__init__(self, id, xml,imagen, pos);
+        self.mask = pygame.mask.from_surface(pygame.image.load(os.path.join('', imagen)))
+        
+
+class ItemInvisible(Item): 
+    def __init__(self, id, xml, pos):
+        Item.__init__(self,id,xml, "../res/Sprites/sprite_invisible.png", pos);
+        self.mask = pygame.mask.from_surface(pygame.image.load(os.path.join('', "../res/Sprites/sprite_invisible.png")))
+        self.mask.fill()
+        
