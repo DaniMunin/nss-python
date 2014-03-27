@@ -335,7 +335,7 @@ class FaseInvestigacion(EscenaPygame):
             self.tiempoDial = TIEMPODIALOGO*2
             if not self.mostrar:
                 self.opcion = True
-            j = len(self.player.objetos) + 50
+            j = len(self.player.objetos) - 4
             self.text.render(surface,"Inventario:", (0,0,0), (self.player.rect.topleft[0], self.player.rect.topleft[1] - (j+1)*30))
             for i in range(len(self.player.objetos)):
                 self.text.render(surface,self.player.objetos[i], (0,0,0), (self.player.rect.topleft[0], self.player.rect.topleft[1] - j*30))
