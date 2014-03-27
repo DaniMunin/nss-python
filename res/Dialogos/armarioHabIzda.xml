@@ -1,6 +1,6 @@
 <data>
     <dialog id="0" obj="None">
-        <phrase content="Esta cerrado...">
+        <phrase content="Este debe ser% el armario de Espeonza.% Esta cerrado...">
 			<response content="1 - Mira a traves de las puertas" next="1"></response>
 			<response content="2 - Intenta abrirla" next="2"></response>
 		</phrase>
@@ -18,11 +18,11 @@
 			<response content="3 - Quizá este mejor cerrado...%" next="2"></response>
 			<response content="4 - Vale, tengo miedo, nos vamos %y aqui no ha pasado nada ¿ok?" next="2"></response>
 		</phrase>
-        <phrase content="Esta lleno de ropa de hombre">
-			<result obj="None" move="None" event = "None" state ="-1"></result>
+        <phrase content="Solo esta lleno de ropa de hombre">
+			<result obj="Ropa" move="None" event = "None" state ="-1"></result>
 		</phrase>
         <phrase content="No! Soy Vicent Badass!% No tengo miedo!% (traga)% Solo hay ropa de hombre...% Me esperaba un cadaver...">
-			<result obj="None" move="None" event ="fantasmaAp" state ="-1"></result>
+			<result obj="Ropa" move="None" event ="None" state ="-1"></result>
 		</phrase>
     </dialog>
     <dialog id="final" obj="None">
