@@ -112,7 +112,7 @@ class FaseInvestigacion(EscenaPygame):
         
         
         #Eventos para descubrir a Cervero
-        self.eventoHabCuadro = EventoActivaItems((993,2015),"HabCuadro", self.eventosActivos, list([self.relojCuadro, self.chimCuadro]), self.grupoObj,"../res/Sounds/secret.wav")
+        self.eventoHabCuadro = EventoActivaItems((993,2015),"HabCuadro", list([self.relojCuadro, self.chimCuadro]), self.grupoObj,"../res/Sounds/secret.wav")
         self.eventoAbreCuadro = EventoCambioEstado((3051, 1505),"abreCuadro", self.Cuadro, 1,"../res/Sounds/door.wav")
         
         self.eventos.append(self.eventoHabCuadro)
@@ -120,7 +120,7 @@ class FaseInvestigacion(EscenaPygame):
         ####################################
         
         #Eventos para descubrir a Charles
-        self.eventoBar = EventoActivaItems((214,1555),"Bar", self.eventosActivos, list([self.armarioBarIzda, self.mesaCircBar]), self.grupoObj,"../res/Sounds/secret.wav")
+        self.eventoBar = EventoActivaItems((214,1555),"Bar", list([self.armarioBarIzda, self.mesaCircBar]), self.grupoObj,"../res/Sounds/secret.wav")
         self.fantasma = NoJugador("../res/Sprites/poli_rudeQ.png","../res/PoliEstorboCoordJugador.txt", (2713,892), 1.5, "dialogoPoliEstorbo.xml", (0,0,255))
         self.eventoFantasmaAp = EventoAparicion((2733,848),"fantasmaAp", "fantasmaAp.xml", self.fantasma, self.grupoNPCDelante,self.level.mask)
         self.eventoBadassDes = EventoDesaparicion((2733,848),"badassDes", "badassDes.xml", self.player, self.grupoJugador,self.level.mask)

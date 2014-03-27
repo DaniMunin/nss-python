@@ -80,9 +80,8 @@ class EventoAparicion(Evento):
  
 class EventoActivaItems(Evento):
     
-    def __init__(self, posicion, nombre, eventosActivos, itemsActivados, grupo, sonido = None):
+    def __init__(self, posicion, nombre, itemsActivados, grupo, sonido = None):
         Evento.__init__(self, posicion, nombre, "evVacio.xml")
-        self.eventosActivos = eventosActivos
         self.itemsActivados = itemsActivados
         self.grupo = grupo
         self.sonido = sonido
