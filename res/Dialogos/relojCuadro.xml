@@ -1,0 +1,47 @@
+<data>
+    <dialog id="0" obj="None">
+        <phrase content="Es un reloj antiguo">
+			<response content="1 - Que hora es?" next="1"></response>
+			<response content="2 - Hipnotizate con el pendulo" next="2"></response>
+			<response content="3 - Abrelo" next="3"></response>
+		</phrase>
+        <phrase content="La hora de BADASS!!">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+        <phrase content="Como si lo fuera a hacer%Un momento, parece que hay algo dentro.">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+        <phrase content="Esta atascado">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+    </dialog>
+    <dialog id="0" obj="Bastón">
+        <phrase content="Que quieres hacer?">
+			<response content="1 - Golpear el cristal" next="1"></response>
+			<response content="2 - Hacer palanca" next="2"></response>
+			<response content="3 - Imitar el movimiento del pendulo" next="3"></response>
+		</phrase>
+        <phrase content="Bruto!%Es una pieza de artesania%Seria un delito">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+        <phrase content="(Esta muy duro, ni de broma lo abro)">
+			<response content="(Eh, un botón, disimula..)" next="4"></response>
+		</phrase>
+        <phrase content="Es mas dificil de lo que parece!">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+        <phrase content="Ha funcionado!%Todo gracias a mi fuerza!% Hay una barra de metal dentro">
+			<result obj="BarraMetal" move="None" event ="None" state ="-1"></result>
+		</phrase>
+    </dialog>
+    <dialog id="final" obj="None">
+        <phrase content="Es la hora de BADASS!">
+			<result obj="None" move="None" event ="None" state ="-1"></result>
+		</phrase>
+    </dialog>
+    <dialog id="4" obj="None">
+        <phrase content="Claro, muy útil...">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+    </dialog>
+</data>

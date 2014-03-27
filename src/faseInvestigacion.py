@@ -16,8 +16,15 @@ from evento import *
 
 OPT_KEYS = {pygame.K_1 : 1,
                pygame.K_2 : 2,
-               pygame.K_3: 3,
-               pygame.K_4 : 4}
+               pygame.K_3 : 3,
+               pygame.K_4 : 4,
+               pygame.K_5 : 5,
+               pygame.K_6 : 6,
+               pygame.K_7 : 7,
+               pygame.K_8 : 8,
+               pygame.K_9 : 9,
+               pygame.K_0 : 10}
+TIEMPODIALOGO = 1000
 
 class FaseInvestigacion(EscenaPygame):
     def __init__(self, director, jugador1):
@@ -30,11 +37,12 @@ class FaseInvestigacion(EscenaPygame):
         """Initialize things; create a Player; create a Level."""
         self.screen = pygame.display.get_surface()
         self.screen_rect = self.screen.get_rect()
-        self.clock = pygame.time.Clock()
-        self.fps = 60.0
+#         self.clock = pygame.time.Clock()
+#         self.fps = 60.0
         self.keys = pygame.key.get_pressed()
         self.done = False
         self.player = jugador1
+        self.grupoJugador = pygame.sprite.Group( self.player)
         fondo = pygame.image.load("../res/maps/mapa2.png")
         #cambiar el rect.copy para poner posicion inicial
         posInicialMapa = self.screen_rect.copy()
@@ -49,18 +57,19 @@ class FaseInvestigacion(EscenaPygame):
         self.accion = False
         self.inventario = False
         self.mostrar = True
-        self.primerDia = True
+        
+        self.cambiarDia = False
         self.numRes = 0
         self.eventoAct = False
         
         self.accionO = None
         self.accionT = None
-        self.accionR = None
+        self.accionR = []
         self.accionResult = None
         
         self.text = Text()
         
-        self.bolio = NoJugador("../res/Sprites/bolio2.png","../res/BolioCoordJugador.txt", (244,1990), 1, "dialogoBolio.xml", (184,134,11))
+        self.bolio = NoJugador("../res/Sprites/bolio2.png","../res/BolioCoordJugador.txt", (244,2000), 1, "dialogoBolio.xml", (184,134,11))
         self.espeonza = NoJugador("../res/Sprites/esperanza2.png","../res/EspeonzaCoordJugador.txt", (223,1748), 1, "dialogoEspeonza.xml", (199,21,133))
         self.charles = NoJugador("../res/Sprites/charles.png","../res/CharlesCoordJugador.txt", (190,1514), 1.5, "dialogoCharles.xml", (200,20,20))
         self.cervero = NoJugador("../res/Sprites/scien2.png","../res/ScienceCoordJugador.txt", (993,1984), 1, "dialogoCervero.xml", (50,205,50))
@@ -75,10 +84,13 @@ class FaseInvestigacion(EscenaPygame):
         self.grupoNPCDelante = pygame.sprite.Group( self.rateos, self.bolio, self.poliEstorbo1 )
 
         self.ball = ItemVisible(10, "pokeball.xml","../res/Sprites/ball.png", (630,1780))
-#         self.ball.rect.center = (630,1780)
         self.chim1 = ItemInvisible(10, "pokeball.xml", (756,1446))
-#         self.chim1.rect.center = (756,1446)
-        self.grupoObj = pygame.sprite.Group(self.ball, self.chim1)
+        self.armarioBarIzda = ItemInvisible(10, "armarioBarIzda.xml", (2607, 799))
+        self.mesaCircBar = ItemInvisible(10, "mesaCircBar.xml", (2940, 1117))
+        self.chimCuadro = ItemInvisible(10, "chimCuadro.xml", (3051, 1505))
+        self.relojCuadro = ItemInvisible(10, "relojCuadro.xml", (2792, 1505))
+        self.Cuadro = ItemInvisible(10, "Cuadro.xml", (2925, 1505))
+        self.grupoObj = pygame.sprite.Group(self.ball, self.chim1, self.Cuadro)
         
         self.level.mask.draw(self.ball.mask, (self.ball.rect.center[0]-5, self.ball.rect.center[1]-5))
         self.level.mask.draw(self.poli.mask, (self.poli.rect.center[0]-16, self.poli.rect.center[1]-30))
@@ -87,15 +99,40 @@ class FaseInvestigacion(EscenaPygame):
         self.level.mask.draw(self.cervero.mask, (self.cervero.rect.center[0]-20, self.cervero.rect.center[1]-30))
         self.level.mask.draw(self.rateos.mask, (self.rateos.rect.center[0]-16, self.rateos.rect.center[1]-30))
         self.level.mask.draw(self.bolio.mask, (self.bolio.rect.center[0]-20, self.bolio.rect.center[1]-30))
-        self.level.mask.draw(self.poliEstorbo1.mask, (self.poliEstorbo1.rect.center[0]-20, self.poliEstorbo1.rect.center[1]-30))
-        self.level.mask.draw(self.poliEstorbo2.mask, (self.poliEstorbo2.rect.center[0]-20, self.poliEstorbo2.rect.center[1]-30))
-        self.level.mask.draw(self.poliEstorbo3.mask, (self.poliEstorbo3.rect.center[0]-20, self.poliEstorbo3.rect.center[1]-30))
+#         self.level.mask.draw(self.poliEstorbo1.mask, (self.poliEstorbo1.rect.center[0]-20, self.poliEstorbo1.rect.center[1]-30))
+#         self.level.mask.draw(self.poliEstorbo2.mask, (self.poliEstorbo2.rect.center[0]-20, self.poliEstorbo2.rect.center[1]-30))
+#         self.level.mask.draw(self.poliEstorbo3.mask, (self.poliEstorbo3.rect.center[0]-20, self.poliEstorbo3.rect.center[1]-30))
         
         self.evPrueba = EventoAparicion((586,1600),"evPrueba", "dialogoEventoPrueba.xml", self.espeonza, self.grupoNPCDetras,self.level.mask)
+        
         self.eventos = []
         self.eventosActivos = []
         self.eventos.append(self.evPrueba)
 #         self.eventosActivos.append(evPrueba)
+        
+        
+        #Eventos para descubrir a Cervero
+        self.eventoHabCuadro = EventoActivaItems((993,2015),"HabCuadro", self.eventosActivos, list([self.relojCuadro, self.chimCuadro]), self.grupoObj,"../res/Sounds/secret.wav")
+        self.eventoAbreCuadro = EventoCambioEstado((3051, 1505),"abreCuadro", self.Cuadro, 1,"../res/Sounds/door.wav")
+        
+        self.eventos.append(self.eventoHabCuadro)
+        self.eventos.append(self.eventoAbreCuadro)
+        ####################################
+        
+        #Eventos para descubrir a Charles
+        self.eventoBar = EventoActivaItems((214,1555),"Bar", self.eventosActivos, list([self.armarioBarIzda, self.mesaCircBar]), self.grupoObj,"../res/Sounds/secret.wav")
+        self.fantasma = NoJugador("../res/Sprites/poli_rudeQ.png","../res/PoliEstorboCoordJugador.txt", (2713,892), 1.5, "dialogoPoliEstorbo.xml", (0,0,255))
+        self.eventoFantasmaAp = EventoAparicion((2733,848),"fantasmaAp", "fantasmaAp.xml", self.fantasma, self.grupoNPCDelante,self.level.mask)
+        self.eventoBadassDes = EventoDesaparicion((2733,848),"badassDes", "badassDes.xml", self.player, self.grupoJugador,self.level.mask)
+        self.eventoBadassAp = EventoAparicion((2733,848),"badassAp", "badassAp.xml", self.player, self.grupoJugador,self.level.mask, False)
+        self.eventoFantasmaDes = EventoDesaparicion((2733,848),"fantasmaDes", "fantasmaDes.xml", self.fantasma, self.grupoNPCDelante,self.level.mask)
+        
+        self.eventos.append(self.eventoBar)
+        self.eventos.append(self.eventoFantasmaAp)
+        self.eventos.append(self.eventoFantasmaDes)
+        self.eventos.append(self.eventoBadassDes)
+        self.eventos.append(self.eventoBadassAp)
+        ####################################
         
                 
     # Se actualiza el decorado, realizando las siguientes acciones:
@@ -108,13 +145,18 @@ class FaseInvestigacion(EscenaPygame):
 #         self.screen.fill(pygame.Color("black"))
         if (self.accion):
             self.tiempoDial += tiempo
-            if ~self.primerDia:
+            print self.tiempoDial
+            print self.cambiarDia
+            if self.cambiarDia:
+                print self.numRes
                 self.accionT, self.accionR, self.accionResult = self.continuarAccion(self.accionO, self.numRes) 
+                self.cambiarDia = False
+                self.tiempoDial = 0
         elif (self.inventario):
             if self.optEl != 0:
                 self.inventario = False
                 if not self.mostrar:
-                    self.primerDia = True
+                    self.cambiarDia = False
                     self.numRes = 0
                     self.accionO = pygame.sprite.spritecollideany(self.player, self.grupoObj)
                     self.accionT, self.accionR, self.accionResult = self.empezarAccion(self.accionO, self.player.objetos[self.optEl - 1])
@@ -140,7 +182,7 @@ class FaseInvestigacion(EscenaPygame):
 #         s.blit(self.poli.image, self.poli.posicion)
 #         s.blit(self.espeonza.image, self.espeonza.posicion)
 #         s.blit(self.charles.image, self.charles.posicion)
-        self.player.draw(s)
+        self.grupoJugador.draw(s)
         self.grupoNPCDelante.draw(s)
 #         s.blit(self.bolio.image, self.bolio.posicion)
 #         s.blit(self.cervero.image, self.cervero.posicion)
@@ -160,21 +202,25 @@ class FaseInvestigacion(EscenaPygame):
         if self.opcion:
             for key in OPT_KEYS:
                 if self.keys[key]:
-                    self.optEl = OPT_KEYS[key]
-                    self.opcion = False
-                    if self.accionR != None and self.accionR != []:
-                        self.numRes = self.accionR[self.optEl - 1][1]
-                        self.optEl = 0
-                        self.tiempoDial = 0
+                    if (self.accionR == [] and len(self.player.objetos) >= OPT_KEYS[key]):
+                        self.optEl = OPT_KEYS[key]
+                        self.opcion = False
+                    elif OPT_KEYS[key] <= len(self.accionR):
+                        self.optEl = OPT_KEYS[key]
+                        self.opcion = False
+                        if self.accionR != None and self.accionR != []:
+                            self.numRes = self.accionR[self.optEl - 1][1]
+                            self.optEl = 0
+                            self.cambiarDia = True
         #Interactuar con npc/objeto sin utilizar nada
         if self.keys[K_SPACE] and (not self.accion) and (not self.inventario):
             if (pygame.sprite.spritecollideany(self.player, self.grupoNPC) != None):
-                self.primerDia = True
+                self.cambiarDia = False
                 self.numRes = 0
                 self.accionO = pygame.sprite.spritecollideany(self.player, self.grupoNPC)
                 self.accionT, self.accionR, self.accionResult = self.empezarAccion(self.accionO)
             if (pygame.sprite.spritecollideany(self.player, self.grupoObj) != None):
-                self.primerDia = True
+                self.cambiarDia = False
                 self.numRes = 0
                 self.accionO = pygame.sprite.spritecollideany(self.player, self.grupoObj)
                 self.accionT, self.accionR, self.accionResult = self.empezarAccion(self.accionO)
@@ -186,10 +232,16 @@ class FaseInvestigacion(EscenaPygame):
             else: 
                 self.mostrar = True
             self.inventario = True
+        #Cerrar el inventario en caso de estar solo mostrandolo
+        if self.inventario and self.mostrar:
+            if self.keys[K_u]:
+                self.optEl = 1
             
+        if self.keys[K_q] and self.accion:
+            self.tiempoDial = TIEMPODIALOGO
 #             PRUEBAS EVENTOS....
         if self.keys[K_d]:
-            evPrueba = EventoDesaparicion((586,1700), "",self.espeonza, self.grupoNPCDetras,self.level.mask)
+            evPrueba = EventoDesaparicion((586,1700), "", None, self.espeonza, self.grupoNPCDetras,self.level.mask)
             evPrueba.onEvent()
         if self.keys[K_a]:
             evPrueba = EventoAparicion((586,1600), "", "dialogoEventoPrueba.xml", self.espeonza, self.grupoNPCDetras,self.level.mask)
@@ -202,14 +254,11 @@ class FaseInvestigacion(EscenaPygame):
 #                 print ev.posicion
                 if pygame.sprite.collide_mask(self.player, ev):
                     ev.onEvent()
-                    self.primerDia = True
+                    self.cambiarDia = False
                     self.numRes = 0
+                    self.tiempoDial = 0
                     self.accionO = ev
                     self.accionT, self.accionR, self.accionResult = self.empezarAccion(self.accionO)
-        #Cerrar el inventario en caso de estar solo mostrandolo
-        if self.inventario and self.mostrar:
-            if self.keys[K_u]:
-                self.optEl = 1
         #Esto de aqui no deberÃ­a funcionar asÃ­, si no que deberÃ­a cerrar el programa sin mÃ¡s, no llevarnos a la fase siguiente
         if event.type == pygame.QUIT or (self.keys[K_t] and self.keys[K_r]):
              print "Hola"
@@ -217,12 +266,11 @@ class FaseInvestigacion(EscenaPygame):
              self.director.cambiarEscena(escenaSig)
             
     def interact(self, tiempo, surface):
-        if tiempo < 1000:
+        if tiempo < TIEMPODIALOGO:
             self.text.render(surface,self.accionT, self.accionO.color, (self.accionO.rect.topleft[0], self.accionO.rect.topleft[1]))
-        elif len(self.accionR) == 1:
-            if tiempo < 2000:
-                self.text.render(surface,self.accionR[0][0], (0,0,0), (self.player.rect.topleft[0], self.player.rect.topleft[1]))
-                self.numRes = self.accionR[0][1] 
+        elif len(self.accionR) == 1 and tiempo < TIEMPODIALOGO*2:
+            self.text.render(surface,self.accionR[0][0], (0,0,0), (self.player.rect.topleft[0], self.player.rect.topleft[1]))
+            self.numRes = self.accionR[0][1] 
         elif len(self.accionR) == 0:
             #Objetos recibidos
             if self.accionResult[0] != "None":
@@ -241,21 +289,22 @@ class FaseInvestigacion(EscenaPygame):
             if self.accionResult[1] != "None":
                 pass
             self.accion = False
-        elif self.optEl == 0:
-            self.tiempoDial = 2000
+        elif len(self.accionR) > 1 and self.optEl == 0:
+            self.tiempoDial = TIEMPODIALOGO*2
             self.opcion = True
             j = len(self.accionR)
             for i in range(len(self.accionR)):
                 self.text.render(surface,self.accionR[i][0], (0,0,0), (self.player.rect.topleft[0], self.player.rect.topleft[1] - j*30))
                 j -= 1
         else:
-            self.primerDia = False
+            self.cambiarDia = True
     
     #Muestra el inventario hasta pulsar la tecla u o seleccionar un objeto
     def mostrarInv(self, surface):
         if self.optEl == 0:
-            self.tiempoDial = 2000
-            self.opcion = True
+            self.tiempoDial = TIEMPODIALOGO*2
+            if not self.mostrar:
+                self.opcion = True
             j = len(self.player.objetos)
             self.text.render(surface,"Inventario:", (0,0,0), (self.player.rect.topleft[0], self.player.rect.topleft[1] - (j+1)*30))
             for i in range(len(self.player.objetos)):

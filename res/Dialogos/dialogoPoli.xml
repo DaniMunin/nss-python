@@ -31,13 +31,13 @@
 		<phrase content="Para moverse utilice las flechas de direccion.% Puede desplazarse por toda la casa siempre que pueda,% no tiene restricciones, usted es la ley.">
 			<result obj="None" move="None" event ="None" state ="0"></result>
 		</phrase>
-		<phrase content="Puede interaccionar con el resto de personas% simplemente usando la barra espaciadora a su lado,% despues usar los numeros para seleccionar respuestas,% aunque esto deberias saberlo ya, no?">
+		<phrase content="Puede interaccionar con el resto de personas% simplemente usando la barra espaciadora a su lado,% despues usar los numeros para seleccionar respuestas,% si te cansas de escucharles pulsa q para que se callen%aunque esto deberias saberlo ya, no?">
 			<result obj="None" move="None" event ="None" state ="0"></result>
 		</phrase>
 		<phrase content="El difunto Mraga no gastaba una casa pequeña,% y al ser usted un investigador puede recorrerla entera% (salvo que otros polis se pongan tontos,% en ese caso apartelos de una patada)% Recorra toda la casa y busque todas las pistas.% Confiamos en usted.">
 			<result obj="None" move="None" event ="None" state ="0"></result>
 		</phrase>
-		<phrase content="Si pulsa la tecla i abrira el inventario y podra ver que tiene%, si esta al lado de algun sitio interactuable% (objetos o personas) puedes usarlo seleccionandolo,% quien sabe si el usar un objeto hara a alguien confesar% o a algun objeto dar pistas.">
+		<phrase content="Si pulsa la tecla i abrira el inventario y podra ver que tiene% y cerrarlo con la letra u%, si esta al lado de algun sitio interactuable% (objetos o personas) puedes usarlo seleccionandolo,% quien sabe si el usar un objeto hara a alguien confesar% o a algun objeto dar pistas.">
 			<result obj="None" move="None" event ="None" state ="0"></result>
 		</phrase>
     </dialog>

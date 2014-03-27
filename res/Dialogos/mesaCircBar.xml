@@ -1,0 +1,35 @@
+<data>
+    <dialog id="1" obj="None">
+        <phrase content="Me gusta esta mesa,% me recuerda a la de mi club de striptease">
+			<response content="1 - Siéntate un rato" next="1"></response>
+			<response content="2 - Sube encima de la mesa y baila!" next="2"></response>
+			<response content="3 - ¿Acabas de decir MI club de striptease?" next="3"></response>
+		</phrase>
+        <phrase content="Ufff.. por fin!% Un momento, ¿que es eso debajo de la mesa?">
+			<response content="1 - Agachate para mirar" next="4"></response>
+			<response content="2 - Para una vez que descanso me quedo aqui" next="5"></response>
+		</phrase>
+        <phrase content="Ni harto de licor cafe!">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+        <phrase content="Titirititi...">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+        <phrase content="Es una llave!">
+			<result obj="LlaveBar" move="None" event ="None" state ="-1"></result>
+		</phrase>
+        <phrase content="Ya toca levantarse..">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+    </dialog>
+    <dialog id="final" obj="None">
+        <phrase content="Despues de descansar un rato mas,% te levantas con energias renovadas!">
+			<result obj="None" move="None" event ="None" state ="-1"></result>
+		</phrase>
+    </dialog>
+    <dialog id="4" obj="None">
+        <phrase content="Claro, muy útil...">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+    </dialog>
+</data>
