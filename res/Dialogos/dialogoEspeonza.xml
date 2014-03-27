@@ -13,7 +13,7 @@
 			<result obj="None" move="None" event ="evPrueba" state ="0"></result>
 			</phrase>
         <phrase content="Pero mi papa dice% que si lo digo me encerraran.% Y yo estuve de compras% cuando el señor Mraga murio">
-			<result obj="None" move="None" event ="None" state ="0"></result>
+			<result obj="None" move="None" event ="RelojEntrada" state ="0"></result>
 		</phrase>
         <phrase content="Hasta luego señor detective">
 			<result obj="None" move="None" event ="None" state ="0"></result>

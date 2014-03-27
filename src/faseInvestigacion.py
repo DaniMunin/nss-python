@@ -90,6 +90,9 @@ class FaseInvestigacion(EscenaPygame):
         self.chimCuadro = ItemInvisible(10, "chimCuadro.xml", (3051, 1505))
         self.relojCuadro = ItemInvisible(10, "relojCuadro.xml", (2792, 1505))
         self.Cuadro = ItemInvisible(10, "Cuadro.xml", (2925, 1505))
+        self.armarioHabIzda = ItemInvisible(10, "ArmarioHabIzda.xml", (1247, 673))
+        self.relojEntrada = ItemInvisible(10, "relojEntrada.xml", (1788, 2173))
+        self.llave = ItemVisible(10, "llave.xml", "../res/Sprites/key.png", (1712, 2283))
         self.grupoObj = pygame.sprite.Group(self.ball, self.chim1, self.Cuadro)
         
         self.level.mask.draw(self.ball.mask, (self.ball.rect.center[0]-5, self.ball.rect.center[1]-5))
@@ -110,6 +113,14 @@ class FaseInvestigacion(EscenaPygame):
         self.eventos.append(self.evPrueba)
 #         self.eventosActivos.append(evPrueba)
         
+        #Eventos para descubrir a Espeonza
+        self.eventoRelojEntrada = EventoActivaItems((223,1748), "RelojEntrada", list([self.relojEntrada, self.armarioHabIzda]) , self.grupoObj, "..res/Sounds/secret.wav")
+        self.eventoLlaveEntrada = EventoAparicion((1788, 2173), "LlaveEntrada", "evVacio2.xml", self.llave, self.grupoObj, self.level.mask)
+        self.eventoDesLlaveEntrada = EventoDesaparicion((1712, 2283), "desaparecerLlave", "evVacio2.xml", self.llave, self.grupoObj, self.level.mask)
+        
+        self.eventos.append(self.eventoRelojEntrada)
+        self.eventos.append(self.eventoLlaveEntrada)
+        self.eventos.append(self.eventoDesLlaveEntrada)
         
         #Eventos para descubrir a Cervero
         self.eventoHabCuadro = EventoActivaItems((993,2015),"HabCuadro", list([self.relojCuadro, self.chimCuadro]), self.grupoObj,"../res/Sounds/secret.wav")
@@ -179,6 +190,7 @@ class FaseInvestigacion(EscenaPygame):
         s = self.level.draw(self.screen)
         s.blit(self.ball.image, self.ball.rect)
         self.grupoNPCDetras.draw(s)
+        self.grupoObj.draw(s)
 #         s.blit(self.poli.image, self.poli.posicion)
 #         s.blit(self.espeonza.image, self.espeonza.posicion)
 #         s.blit(self.charles.image, self.charles.posicion)

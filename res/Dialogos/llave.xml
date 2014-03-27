@@ -1,0 +1,7 @@
+<data>
+    <dialog id="1" obj="None">
+        <phrase content="Has encontrado una llave!">
+			<result obj="LlaveArmario" move="None" event ="desaparecerLlave" state ="0"></result>
+		</phrase>
+    </dialog>
+</data>
