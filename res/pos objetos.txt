@@ -33,4 +33,6 @@ libreria/armario bar izda 2607 799
 libreria/armario bar dcha 2810 799
 puertaRaraBar 2733 818
 
+bibDerechaComedor 2715, 177
+sillaComedor 2306, 332
 

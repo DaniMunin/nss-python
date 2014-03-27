@@ -1,0 +1,36 @@
+<data>
+    <dialog id="0" obj="None">
+        <phrase content="Es un armario de herramientas.">
+			<response content="1 - Que hay en el?" next="1"></response>
+			<response content="2 - Intenta abrirlo" next="2"></response>
+		</phrase>
+        <phrase content="Lo mas interesante parece esa linterna">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+        <phrase content="Tiene un pestillo por dentro,% necesitaria algo fino para abrirlo">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+    </dialog>
+    <dialog id="0" obj="Placa">
+        <phrase content="Podria funcionar.">
+			<response content="1 - Forzar el pestillo" next="1"></response>
+			<response content="2 - Enseñale la placa amenazadoramente." next="2"></response>
+		</phrase>
+        <phrase content="Funciona! Has cogido la linterna.% Una linterna,% debajo de la cama esta oscuro%mmmmmm.">
+			<result obj="Linterna" move="None" event = "None" state ="-1"></result>
+		</phrase>
+        <phrase content="A pesar de la imponencia de tu movimiento% el armario te ignora.">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+    </dialog>
+    <dialog id="final" obj="None">
+        <phrase content="No hay nada interesante.%Solo herramientas viejas.">
+			<result obj="None" move="None" event ="None" state ="-1"></result>
+		</phrase>
+    </dialog>
+    <dialog id="4" obj="None">
+        <phrase content="Claro, veo que piensas las cosas antes de hacerlas...">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+    </dialog>
+</data>

@@ -1,0 +1,24 @@
+<data>
+    <dialog id="0" obj="None">
+        <phrase content="Una bonita silla para sentarse, hay un periodico encima">
+			<response content="1 - Vamos a leerlo" next="1"></response>
+			<response content="2 - Sientate igual" next="2"></response>
+		</phrase>
+        <phrase content="Parece tener algunas paginas arrancadas%Que raro">
+			<result obj="None" move="None" event ="PeriodicoCom" state ="-1"></result>
+		</phrase>
+        <phrase content="Ahora tenemos un periodico arrugado">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+    </dialog>
+    <dialog id="final" obj="None">
+        <phrase content="Deja el periodico tranquilo!">
+			<result obj="None" move="None" event ="None" state ="-1"></result>
+		</phrase>
+    </dialog>
+    <dialog id="4" obj="None">
+        <phrase content="Que quieres hacerle a la silla?">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+    </dialog>
+</data>

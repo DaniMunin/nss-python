@@ -93,6 +93,10 @@ class FaseInvestigacion(EscenaPygame):
         self.armarioHabIzda = ItemInvisible(10, "ArmarioHabIzda.xml", (1247, 673))
         self.relojEntrada = ItemInvisible(10, "relojEntrada.xml", (1788, 2173))
         self.llave = ItemVisible(10, "llave.xml", "../res/Sprites/key.png", (1712, 2283))
+        self.armarioHabDcha = ItemInvisible(10, "armarioHabDcha.xml", (1303, 673))
+        self.CamaHab = ItemInvisible(10, "camaHab.xml", (1142, 739))
+        self.bibDchaComedor = ItemInvisible(10, "bibDchaComedor.xml", (2715, 177))
+        self.sillaComedor = ItemInvisible(10, "sillaComedor.xml", (2306, 332))
         self.grupoObj = pygame.sprite.Group(self.ball, self.chim1, self.Cuadro)
         
         self.level.mask.draw(self.ball.mask, (self.ball.rect.center[0]-5, self.ball.rect.center[1]-5))
@@ -112,6 +116,20 @@ class FaseInvestigacion(EscenaPygame):
         self.eventosActivos = []
         self.eventos.append(self.evPrueba)
 #         self.eventosActivos.append(evPrueba)
+        
+        #Eventos para descubrir a Bolio
+        self.eventoDormitorioAct = EventoActivaItems((244,2000),"DormitorioAct", list([self.armarioHabDcha, self.CamaHab]), self.grupoObj,"../res/Sounds/secret.wav")
+        
+        self.eventos.append(self.eventoDormitorioAct)
+        ####################################
+        
+        #Eventos para descubrir a Rateos
+        self.eventoComedorAct = EventoActivaItems((244,2000),"ComedorAct", list([self.bibDchaComedor, self.sillaComedor]), self.grupoObj,"../res/Sounds/secret.wav")
+        self.eventoPeriodicoCom = EventoCambioEstado((2306, 332),"PeriodicoCom", self.bibDchaComedor, 1,"../res/Sounds/door.wav")
+        
+        self.eventos.append(self.eventoComedorAct)
+        self.eventos.append(self.eventoPeriodicoCom)
+        ####################################
         
         #Eventos para descubrir a Espeonza
         self.eventoRelojEntrada = EventoActivaItems((223,1748), "RelojEntrada", list([self.relojEntrada, self.armarioHabIzda]) , self.grupoObj, "..res/Sounds/secret.wav")
@@ -317,7 +335,7 @@ class FaseInvestigacion(EscenaPygame):
             self.tiempoDial = TIEMPODIALOGO*2
             if not self.mostrar:
                 self.opcion = True
-            j = len(self.player.objetos)
+            j = len(self.player.objetos) + 50
             self.text.render(surface,"Inventario:", (0,0,0), (self.player.rect.topleft[0], self.player.rect.topleft[1] - (j+1)*30))
             for i in range(len(self.player.objetos)):
                 self.text.render(surface,self.player.objetos[i], (0,0,0), (self.player.rect.topleft[0], self.player.rect.topleft[1] - j*30))

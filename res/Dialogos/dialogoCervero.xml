@@ -5,6 +5,7 @@
         	<response content="1 - Uno que evitara que te inculpasen?" next="1"></response>
 			<response content="2 - Uno que convirtiera el agua en cafe?" next="2"></response>
 			<response content="3 - Uno que devolviera la vida?" next="6"></response>
+			<response content="4 - Me gustaria hablarle sobre.." next="7"></response>
 		</phrase>
 		<phrase content="Inculpar en que?% Yo estaba trabajando en tintes% para billetes del señor Mitin% cuando el viejo murio.">
 			<response content="1 - Tinta para billetes?% Pasame unos cuantos% cuando lo logres%%" next="3"></response>
@@ -24,6 +25,28 @@
 			<result obj="None" move="None" event ="HabCuadro" state ="0"></result>
 		</phrase>
         <phrase content="Ese es mi gran deseo...">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+		<phrase content="Sobre que quiere %que le hable?">
+			<response content="1 - Sobre Bolio" next="8"></response>
+			<response content="2 - Sobre Espeonza" next="9"></response>
+			<response content="3 - Sobre Charles" next="10"></response>
+			<response content="4 - Sobre Chema" next="11"></response>
+			<response content="5 - Sobre Fanuel" next="12"></response>
+		</phrase>
+        <phrase content="Es un gran mecenas para mi.%Ya te dije que trabajo%mucho para el.">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+        <phrase content="No me cae mal,% me da dinero por cremas%y yo la uso para probar cosas.">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+        <phrase content="No me habia dado cuenta%de su existencia hasta hoy,%no tengo nada que decir.">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+        <phrase content="Tiene una familia muy abundante%Muchos sujetos experimentales.%Me cae bien.">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+        <phrase content="Un gran hombre.%Me ayudo con todas mis investigaciones%hasta las mas oscuras...">
 			<result obj="None" move="None" event ="None" state ="0"></result>
 		</phrase>
     </dialog>

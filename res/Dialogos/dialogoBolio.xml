@@ -4,6 +4,7 @@
         <phrase content="Buenos dias detective.% Quiere unas acciones?% Las vendo baratas">
         	<response content="1 - Acciones... %Buen plan, pongame dos% y una confesion de asesinato%" next="1"></response>
 			<response content="2 - Deja de pensar en dinero por un momento" next="2"></response>
+			<response content="3 - Prefiero una declaracion gratis" next="5"></response>
 		</phrase>
 		<phrase content="Son buenas y bonitas,% se las envuelvo para regalo?">
 			<response content="1 - No me interesan las acciones,% quiero la confesion%%" next="3"></response>
@@ -13,9 +14,31 @@
 			<result obj="None" move="None" event ="None" state ="0"></result>
 			</phrase>
         <phrase content="Yo no he sido.% Cuando Mraga murio estaba dandome% mi tradicional baño de dinero% en la habitacion">
-			<result obj="None" move="None" event ="None" state ="0"></result>
+			<result obj="None" move="None" event ="DormitorioAct" state ="0"></result>
 		</phrase>
         <phrase content="No soporto su sarcasmo detective">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+		<phrase content="Sobre que quiere %que le hable?">
+			<response content="1 - Sobre Charles" next="6"></response>
+			<response content="2 - Sobre Espeonza" next="7"></response>
+			<response content="3 - Sobre Cervero" next="8"></response>
+			<response content="4 - Sobre Chema" next="9"></response>
+			<response content="5 - Sobre Fanuel" next="10"></response>
+		</phrase>
+        <phrase content="Quien es?%Cual es su capital?">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+        <phrase content="Es muy manejable%Se pueden hacer grandes negocios%(para mi)% con ella.">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+        <phrase content="No confio en el.%Pide mucho y%aun no ha dado beneficios.">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+        <phrase content="Un gran socio.%Sin ir muy lejos,%acabo de comprar una gran cantidad%de acciones de su empresa.%Espero resultados pronto">
+			<result obj="None" move="None" event ="ComedorAct" state ="0"></result>
+		</phrase>
+        <phrase content="Estabamos en muchos negocios juntos.%Una gran perdida%Era un lider.">
 			<result obj="None" move="None" event ="None" state ="0"></result>
 		</phrase>
     </dialog>
