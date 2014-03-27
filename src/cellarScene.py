@@ -4,6 +4,7 @@ import pygame, escena
 from escena import *
 from personajes import *
 from pygame.locals import *
+from FinalScene import *
 
 class CellarScene(EscenaPygame):
     def __init__(self, director, jugador1):
@@ -48,6 +49,10 @@ class CellarScene(EscenaPygame):
         # Indicamos la acción a realizar segun la tecla pulsada para cada jugador
         
         self.keys = pygame.key.get_pressed()
+         #Esto de aqui no deberÃ­a funcionar asÃ­, si no que deberÃ­a cerrar el programa sin mÃ¡s, no llevarnos a la fase siguiente
+        if event.type == pygame.QUIT or (self.keys[K_t] and self.keys[K_r]):
+             escenaSig = FinalScene(self.director, self.player)
+             self.director.cambiarEscena(escenaSig)
             
     
 class Level(object):
