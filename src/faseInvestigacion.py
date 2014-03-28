@@ -141,6 +141,7 @@ class FaseInvestigacion(EscenaPygame):
         self.eventos.append(self.eventoPeriodicoCom)
         self.eventos.append(self.eventoCulpableChema)
         ####################################
+
         
         #Eventos para descubrir a Espeonza
         self.eventoRelojEntrada = EventoActivaItems((223,1748), "RelojEntrada", list([self.relojEntrada, self.armarioHabIzda]) , self.grupoObj, self.secretoSon)
@@ -323,7 +324,7 @@ class FaseInvestigacion(EscenaPygame):
             self.player.cogerObjeto("Libro satanico")
         #Esto de aqui no deberÃ­a funcionar asÃ­, si no que deberÃ­a cerrar el programa sin mÃ¡s, no llevarnos a la fase siguiente
         if event.type == pygame.QUIT or (self.keys[K_t] and self.keys[K_r]):
-             print "Hola"
+             #print "Hola"
              escenaSig = CellarScene(self.director, self.player)
              self.director.cambiarEscena(escenaSig)
             

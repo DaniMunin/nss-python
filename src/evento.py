@@ -134,24 +134,24 @@ class EventoCulpable(Evento):
         canal = self.sonido.play()
         if self.culpable == "Bolio":
             if "Chema" in self.culpables:
-                self.poli.cambiarEstado(None, 3)
+                self.poli.cambiarEstado(None, 2)
+                self.eventosAct.append(self.eventoN)
+            else:
+                self.poli.cambiarEstado(None, 0)
+        elif self.culpable == "Chema":
+            if "Bolio" in self.culpables:
+                self.poli.cambiarEstado(None, 2)
                 self.eventosAct.append(self.eventoN)
             else:
                 self.poli.cambiarEstado(None, 1)
-        elif self.culpable == "Chema":
-            if "Bolio" in self.culpables:
-                self.poli.cambiarEstado(None, 3)
-                self.eventosAct.append(self.eventoN)
-            else:
-                self.poli.cambiarEstado(None, 2)
         elif self.culpable == "Espeonza":
-            self.poli.cambiarEstado(None, 4)
+            self.poli.cambiarEstado(None, 3)
             self.eventosAct.append(self.eventoN)
         elif self.culpable == "Cervero":
-            self.poli.cambiarEstado(None, 5)
+            self.poli.cambiarEstado(None, 4)
             self.eventosAct.append(self.eventoN)
         elif self.culpable == "Charles":
-            self.poli.cambiarEstado(None, 6)
+            self.poli.cambiarEstado(None, 5)
         self.culpables.append(self.culpable)
         if self.objeto != None:
             if self.objeto in self.inventario:
