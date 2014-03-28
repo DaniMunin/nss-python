@@ -1,0 +1,55 @@
+<data>
+    <dialog id="1" obj="None">
+        <phrase content="Me gusta la otra mesa!">
+			<response content="1 - Que uso le ves?" next="1"></response>
+			<response content="2 - Sube encima de la mesa y baila!" next="2"></response>
+		</phrase>
+        <phrase content="Parece diseñada para el%consumo de cafe profesional">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+        <phrase content="No se bailar...">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+    </dialog>
+    <dialog id="0" obj="Taza de Cafe">
+        <phrase content="Es verdad que parece un buen sitio para ello">
+			<response content="1 - Bebe el cafe" next="2"></response>
+			<response content="2 - Bah, odio el cafe" next="1"></response>
+		</phrase>
+        <phrase content="Vamonos!">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+        <phrase content="Pero odio el cafe! No quiero!">
+			<response content="1 - He dicho que lo bebas!" next="3"></response>
+			<response content="2 - Es verdad, odio el cafe" next="1"></response>
+		</phrase>
+        <phrase content="Pero odio el cafe! No quiero!">
+			<response content="1 - Bebe o no te doy una sorpresa!" next="4"></response>
+			<response content="2 - Es verdad, odio el cafe" next="1"></response>
+		</phrase>
+        <phrase content="A mi no me engañas!">
+			<response content="1 - BEBE!!!!" next="5"></response>
+			<response content="2 - Es verdad, odio el cafe" next="1"></response>
+		</phrase>
+        <phrase content="No acepto ordenes!">
+			<response content="1 - Esta bien...%Solo un sorbito....%Hazlo por mama..." next="6"></response>
+			<response content="2 - Es verdad, odio el cafe" next="1"></response>
+		</phrase>
+        <phrase content="Bueno...%Pero solo por ella!%Ahi voy!% GLUP% ">
+			<response content="Que asco!%Un momento..." next="7"></response>
+		</phrase>
+        <phrase content="Me siento mal...">
+			<result obj="None" move="None" event ="MuerteCafe" state ="-1"></result>
+		</phrase>
+    </dialog>
+    <dialog id="final" obj="None">
+        <phrase content="No vale para nada">
+			<result obj="None" move="None" event ="None" state ="-1"></result>
+		</phrase>
+    </dialog>
+    <dialog id="4" obj="None">
+        <phrase content="Vamos a posar cosas en la mesa! Biennn!">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+    </dialog>
+</data>

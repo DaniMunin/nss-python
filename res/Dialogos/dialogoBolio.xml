@@ -2,7 +2,7 @@
 <data>
     <dialog id="1" obj="None">
         <phrase content="Buenos dias detective.% Quiere unas acciones?% Las vendo baratas">
-        	<response content="1 - Acciones... %Buen plan, pongame dos% y una confesion de asesinato%" next="1"></response>
+        	<response content="1 - Acciones... %Buen plan, pongame dos% y una confesion de asesinato" next="1"></response>
 			<response content="2 - Deja de pensar en dinero por un momento" next="2"></response>
 			<response content="3 - Prefiero una declaracion gratis" next="5"></response>
 		</phrase>

@@ -82,14 +82,13 @@ class EventoAparicion(Evento):
 class EventoActivaItems(Evento):
     
     def __init__(self, posicion, nombre, itemsActivados, grupo, sonido = None):
-        Evento.__init__(self, posicion, nombre, "evVacio.xml")
+        Evento.__init__(self, posicion, nombre, "evPista.xml")
         self.itemsActivados = itemsActivados
         self.grupo = grupo
         self.sonido = sonido
         
     def onEvent(self):
         if self.sonido != None:
-            self.sonido = pygame.mixer.Sound(self.sonido)
             canal = self.sonido.play()
         for i in self.itemsActivados:
             self.grupo.add(i)
@@ -104,13 +103,23 @@ class EventoCambioEstado(Evento):
         
     def onEvent(self):
         if self.sonido != None:
-            self.sonido = pygame.mixer.Sound(self.sonido)
             canal = self.sonido.play()
         self.objeto.cambiarEstado(None,self.estadoN)          
   
+class EventoFinal(Evento):
+    
+    def __init__(self, posicion, nombre, fase, final):
+        Evento.__init__(self, posicion, nombre, "evVacio.xml")
+        self.fase = fase
+        self.final = final
+        
+    def onEvent(self):
+        self.fase.finFase(self.final)
+        
+        
 class EventoCulpable(Evento):
     
-    def __init__(self, posicion, nombre, culpable, culpables, poli, eventosAct, eventoN, sonido):
+    def __init__(self, posicion, nombre, culpable, culpables, poli, eventosAct, eventoN, sonido, inventario, objeto=None):
         Evento.__init__(self, posicion, nombre, "evVacio2.xml")
         self.culpable = culpable
         self.culpables = culpables
@@ -118,6 +127,8 @@ class EventoCulpable(Evento):
         self.eventosAct = eventosAct
         self.eventoN = eventoN
         self.sonido = sonido
+        self.objeto = objeto
+        self.inventario = inventario
         
     def onEvent(self):
         canal = self.sonido.play()
@@ -141,7 +152,9 @@ class EventoCulpable(Evento):
             self.eventosAct.append(self.eventoN)
         elif self.culpable == "Charles":
             self.poli.cambiarEstado(None, 6)
-            self.eventosAct.append(self.eventoN)
         self.culpables.append(self.culpable)
+        if self.objeto != None:
+            if self.objeto in self.inventario:
+                self.inventario.remove(self.objeto) 
             
                  

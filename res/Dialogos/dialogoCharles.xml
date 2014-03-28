@@ -62,15 +62,15 @@
         <phrase content="Pues no sabe usted%lo que se pierde% Tome una.">
 			<result obj="Taza de Cafe" move="None" event ="None" state ="0"></result>
 		</phrase>
-		<phrase content="Y a quien le importa donde%estuviera el pobre mayordomo?%El Sr. Mraga era el unico que me respetaba!%Porque iba a matarlo??%El me acogio y%me trato como a un hijo%cuando estaba destinado%a morir en la calle!">
-			<response content="1 - Se me a metido algo en el ojo.%(no voy a llorar!!)%%%%" next="4"></response>
-			<response content="2 - Deberian hacer un juego%con su historia!!%%%%" next="5"></response>
-			<response content="3 - Sin embargo,% el resto de sospechosos%parecen no conocerle.%" next="6"></response>
+		<phrase content="Y a quien le importa donde%estuviera el pobre mayordomo?%El Sr. Mraga era el%unico que me respetaba!%Porque iba a matarlo??%El me acogio y%me trato como a un hijo%cuando estaba destinado%a morir en la calle!">
+			<response content="1 - Se me a metido algo en el ojo.%(no voy a llorar!!)%%%" next="4"></response>
+			<response content="2 - Deberian hacer un juego%con su historia!!%%" next="5"></response>
+			<response content="3 - Sin embargo,% el resto de sospechosos%parecen no conocerle." next="6"></response>
 		</phrase>
-        <phrase content="Deberia ir a un espejo...(Mariquita...)">
+        <phrase content="Deberia ir a un espejo...%(Mariquita...)">
 			<result obj="None" move="None" event ="None" state ="0"></result>
 		</phrase>
-        <phrase content="Tiene razon!%Ya he vendido la historia%Estara hecho en 3D con el motor Unity%Una gente muy maja lo programa.">
+        <phrase content="Tiene razon!%Ya he vendido la historia%Estara hecho en 3D%con el motor Unity%Una gente muy maja%lo programa.">
 			<result obj="None" move="None" event ="None" state ="0"></result>
 		</phrase>
         <phrase content="Esos egocentricos no%conocen ni a su propia madre!%">
@@ -87,13 +87,13 @@
 			<response content="2 - Tienes razon!%Llegare al fondo del asunto!" next="10"></response>
 		</phrase>
         <phrase content="Eso ya es decision suya!">
-			<result obj="None" move="None" event ="CharlesCulpable" state ="-1"></result>
+			<result obj="None" move="None" event ="CulpableCharles" state ="-1"></result>
 		</phrase>
     </dialog>
     
     <dialog id="final" obj="None">
         <phrase content="Le he dicho todo lo que se%el resto es cosa suya">
-			<response content="1 - Dame un cafe tontorron!" next="1"></response>
+			<response content="1 - Dame un cafe tontorron!%%" next="1"></response>
 			<response content="2 - Tiene razon!%Es la hora de BADASS!%Elegire a un culpable" next="2"></response>
 		</phrase>
         <phrase content="Ya vera como este le gusta.">

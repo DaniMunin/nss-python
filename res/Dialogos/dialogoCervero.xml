@@ -60,28 +60,28 @@
 			<result obj="None" move="None" event ="None" state ="0"></result>
 		</phrase>
         <phrase content="Ya le dije que estaba investigando% en el momento del crimen%Cual es el problema?">
-			<response content="1 - Quiza el Sr. Mraga no estaba%de acuerdo con estas practicas!" next="3"></response>
-			<response content="2 - Vale, visto asi, me ha pillado" next="4"></response>
-			<response content="3 - Seguro que alguno de sus experimentos salio mal! y entonces..%una probeta menos en su laboratorio!" next="7"></response>
+			<response content="1 - Quiza el Sr. Mraga no estaba%de acuerdo con estas practicas!%" next="3"></response>
+			<response content="2 - Vale, visto asi, me ha pillado%" next="4"></response>
+			<response content="%3 - Seguro que alguno de sus experimentos salio mal! y entonces..%una probeta menos en su laboratorio!" next="7"></response>
 		</phrase>
 		<phrase content="De acuerdo?%EL me pidio que estudiara estas cosas!">
-			<response content="1 - Vale, eso lo explica todo" next="4"></response>
-			<response content="2 - Eso no quiere decir que el no%lo amenazara con contarselo al mundo%y hundir su reputacion!%Por eso lo mato!" next="5"></response>
+			<response content="1 - Vale, eso lo explica todo%%%%%" next="4"></response>
+			<response content="2 - Eso no quiere decir que el no%lo amenazara con contarselo al mundo%y hundir su reputacion!%Por eso lo mato!%%" next="5"></response>
 			<response content="3 - Entonces el se prestaria para los experimentos% algo salio mal y... PUM% un sujeto de experimento menos!" next="7"></response>
 		</phrase>
         <phrase content="Me alegra que piense en voz alta pero...%podria dejarme en paz?">
 			<result obj="None" move="None" event ="None" state ="0"></result>
 		</phrase>
         <phrase content="Reputacion?%Sr. Badass deje usted de decir tonterias...">
-			<response content="1 - Aja! asi que es cierto!" next="6"></response>
+			<response content="1 - Aja! asi que es cierto!%%" next="6"></response>
 			<response content="2 - En el fondo de su corazon%bajo la fachada de cientifico alejado de la comunidad%solo quiere que le reconozcan, verdad?" next="4"></response>
 		</phrase>
         <phrase content="Yo no tengo reputacion Sr.Badass%sigue usted un interesante razonamiento,%sin embargo, erroneo.">
 			<result obj="None" move="None" event ="None" state ="0"></result>
 		</phrase>
 		<phrase content="Me alegro de que empiece a ver las cosas como yo%sin embargo, mis experimentos nunca fallan.">
-			<response content="1 - Lo siento, oh gran Doctor Anchoa" next="8"></response>
-			<response content="2 - Eso no puede ser cierto!%siempre hay una piedra en el camino!%Una piedra en forma de hombre." next="9"></response>
+			<response content="1 - Lo siento, oh gran Doctor Anchoa%%%" next="8"></response>
+			<response content="2 - Eso no puede ser cierto!%siempre hay una piedra en el camino!%Una piedra en forma de hombre.%" next="9"></response>
 			<response content="3 - Puede que no fallara,%que el Sr. Mraga fuera el punto central de un sacrificio!" next="10"></response>
 		</phrase>
         <phrase content="Asi me gusta%buen chico!%Quieres ser mi proximo sujeto de experimento?">
@@ -90,11 +90,11 @@
         <phrase content="Tonterias!%los sujetos de experimento son muy valiosos y escasos%No tengo margen para cometer errores!">
 			<result obj="None" move="None" event ="None" state ="0"></result>
 		</phrase>
-        <phrase content="Esta bien, usted gana.%Me gusta su capacidad cognitiva%Reconozco que utilice al Sr.Mraga en ese tipo de experimentos.">
+        <phrase content="Esta bien, usted gana.%Me gusta su capacidad cognitiva%Reconozco que utilice al Sr.Mraga%en ese tipo de experimentos.">
 			<response content="Asi que usted lo mato!" next="11"></response>
 		</phrase>
-        <phrase content="Yo no he dicho eso.%Le dejo una pregunta.%Por que sacrificar al Sr. Mraga, si teniamos un hermoso mayordomo %huerfano y sustituible en la casa?">
-			<result obj="None" move="None" event ="CerveroCulpable" state ="-1"></result>
+        <phrase content="Yo no he dicho eso.%Le dejo una pregunta.%Por que sacrificar al Sr. Mraga,%si teniamos un hermoso mayordomo %huerfano y sustituible en la casa?">
+			<result obj="None" move="None" event ="CulpableCervero" state ="-1"></result>
 		</phrase>
     </dialog>
     
@@ -113,7 +113,7 @@
 			<response content="1 - Rinoceronte?" next="4"></response>
 			<response content="2 - Aguila imperial?" next="4"></response>
 			<response content="3 - El cuervo compepiedras?" next="4"></response>
-			<response content="4 - Esta claro! Es un....bicho%....volador%.....comepiedras?" next="5"></response>
+			<response content="4 - Esta claro! Es un....bicho....volador.....comepiedras?" next="5"></response>
 			<response content="5 - No lo se..." next="4"></response>
 			<response content="6 - Pikachu?" next="4"></response>
 		</phrase>
@@ -126,16 +126,16 @@
         <phrase content="Está bien, tiene usted razon. Deme otra oportunidad.">
 			<response content="Vale..." next="7"></response>
 		</phrase>
-        <phrase content="Que ocurre (cientificamente hablando) si usted tira una piedra al aire?">
-			<response content="1 - Que podrás calcular la fuerza con la que la lanzaste, %y mediante las leyes de Newton cogerla %antes de que te caiga en la cabeza?" next="8"></response>
+        <phrase content="Que ocurre (cientificamente hablando)%si usted tira una piedra al aire?">
+			<response content="1 - Que podras calcular la fuerza con la que la lanzaste, %y mediante las leyes de Newton cogerla %antes de que te caiga en la cabeza?%" next="8"></response>
 			<response content="2 - La gravedad empieza a actuar, volviendo la piedra contra ti!?%MALDITAAAAA!" next="8"></response>
 			<response content="3 - Yo es que soy de letras..." next="8"></response>
 		</phrase>
         <phrase content="No es nada de eso! lo que pasa es que...">
-			<response content="!!!!" next="3"></response>
+			<response content="!!!!" next="9"></response>
 		</phrase>
         <phrase content="Se la come el bicho volador comepiedras!!">
-			<response content="..." next="3"></response>
+			<response content="..." next="10"></response>
 		</phrase>
         <phrase content="Jajaja, nunca me cansare de ese chiste!">
 			<result obj="Bicho Volador Comepiedras" move="None" event ="None" state ="-1"></result>

@@ -212,7 +212,8 @@ class Jugador(Personaje):
         Personaje.__init__(self,'../res/Sprites/badassSprites.png','../res/BadassCoordJugador.txt', [6, 6, 6, 1], VELOCIDAD_JUGADOR, VELOCIDAD_SALTO_JUGADOR, RETARDO_ANIMACION_JUGADOR,(0,0),1);
         self.mask = pygame.mask.from_surface(self.image)
         self.mask2 = pygame.mask.from_surface(load_image("../res/Sprites/badassmask.png"))
-        self.speed = 7
+#         self.speed = 7
+        self.speed = 14
         self.objetos = ["Bastón", "Placa"]
 
     def mover(self, teclasPulsadas):
