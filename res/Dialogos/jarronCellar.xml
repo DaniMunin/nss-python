@@ -1,0 +1,12 @@
+﻿<data>
+    <dialog id="0" obj="None">
+        <phrase content="El típico jarrón que nadie querría en su casa.% Está viejo y lleno de polvo,% el mayordomo no debe de hacer muy bien su trabajo,% yo creo que ahí dentro debe% de haber hasta vida... ¡meteré la mano a ver!%¡AH! m****** me corté con una hoja de papel.. %hay 2, me las guardaré, parecen armas eficaces.">
+			<result obj="hoja2" move="None" event ="None" state ="1"></result>
+		</phrase>
+    </dialog>
+    <dialog id="1" obj="None">
+         <phrase content="El típico jarrón que nadie querría en su casa.% Está viejo y lleno de polvo, el mayordomo% no debe de hacer muy bien su trabajo">
+			<result obj="None" move="None" event ="None" state ="1"></result>
+		</phrase>
+    </dialog>
+</data>

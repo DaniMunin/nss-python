@@ -1,4 +1,4 @@
-<data>
+﻿<data>
     <dialog id="0" obj="None">
         <phrase content="No pienso volver sin resolver el caso">
 			<result obj="None" move="None" event ="None" state ="1"></result>
@@ -10,13 +10,25 @@
 		</phrase>
     </dialog>
     <dialog id="2" obj="None">
-        <phrase content="La puerta tiene un sistema de contraseña, hay 7 huecos para frases, ¿quieres probar?.">
+        <phrase content="La puerta tiene un sistema de contraseña,% hay 7 huecos para frases, es demasiado para ti.">
 			<result obj="None" move="None" event ="None" state ="2"></result>
 		</phrase>
     </dialog>
     <dialog id="3" obj="None">
         <phrase content="La puerta se ha abierto">
 			<result obj="None" move="None" event ="None" state ="2"></result>
+		</phrase>
+    </dialog>
+   <dialog id="4" obj="None">
+        <phrase content="La puerta tiene un sistema de contraseña,% hay 7 huecos para frases, ¿quieres probar?.">
+			<response content="1 - He tenido dias mejores...%%" next="1"></response>
+			<response content="2 - He tenido dias mejores...%%" next="1"></response>
+		</phrase>
+	<phrase content="Es tu tiempo...">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+	<phrase content="Veamos de que eres capaz">
+			<result obj="None" move="None" event ="Puzzle" state ="0"></result>
 		</phrase>
     </dialog>
 </data>

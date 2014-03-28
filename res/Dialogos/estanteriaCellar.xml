@@ -1,0 +1,12 @@
+﻿<data>
+    <dialog id="0" obj="None">
+        <phrase content="Una estantería veja y hasta arriba de libros.% Está todo estoicamente ordenado,% excepto por ese par de ojas sueltas.. será mejor que me las quede.">
+			<result obj="hoja3" move="None" event ="None" state ="1"></result>
+		</phrase>
+    </dialog>
+    <dialog id="1" obj="None">
+         <phrase content="Una estantería veja y hasta arriba de libros.% Está todo estoicamente ordenado, que gran trabajo he hecho">
+			<result obj="None" move="None" event ="None" state ="1"></result>
+		</phrase>
+    </dialog>
+</data>

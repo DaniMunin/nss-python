@@ -130,6 +130,12 @@ class EventoFinal(Evento):
         elif self.nombre == "FinalTodos":
             self.fase.finFase(CellarScene(self.fase.director, self.fase.player))
         
+class EventoPuzzle(Evento):
+    def __init__(self, nombre, fase):
+        self.fase = fase
+    def onEvent(self):
+        self.fase.director.puzzle
+      
         
 class EventoCulpable(Evento):
     
