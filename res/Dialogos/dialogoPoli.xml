@@ -111,7 +111,7 @@
 			<response content="2 - Tengo que seguir investigando..." next="16"></response>
 		</phrase>
 		<phrase content="Procedamos con la detencion.">
-			<result obj="None" move="None" event ="None" state ="1"></result>
+			<result obj="None" move="None" event ="FinalChema" state ="1"></result>
 		</phrase>
 		<phrase content="Meditelo bien,% solo tiene una oportunidad,% no ande jugando con temas tan delicados">
 			<result obj="None" move="None" event ="None" state ="1"></result>
@@ -176,7 +176,7 @@
 			<response content="2 - Tengo que seguir investigando..." next="16"></response>
 		</phrase>
 		<phrase content="Procedamos con la detencion.">
-			<result obj="None" move="None" event ="None" state ="2"></result>
+			<result obj="None" move="None" event ="FinalChema" state ="2"></result>
 		</phrase>
 		<phrase content="Meditelo bien,% solo tiene una oportunidad,% no ande jugando con temas tan delicados">
 			<result obj="None" move="None" event ="None" state ="2"></result>
@@ -186,7 +186,7 @@
 			<response content="2 - Tengo que seguir investigando..." next="19"></response>
 		</phrase>
 		<phrase content="Procedamos con la detencion.">
-			<result obj="None" move="None" event ="None" state ="2"></result>
+			<result obj="None" move="None" event ="FinalBolio" state ="2"></result>
 		</phrase>
 		<phrase content="Meditelo bien,% solo tiene una oportunidad,% no ande jugando con temas tan delicados">
 			<result obj="None" move="None" event ="None" state ="2"></result>
@@ -252,7 +252,7 @@
 			<response content="2 - Tengo que seguir investigando..." next="16"></response>
 		</phrase>
 		<phrase content="Procedamos con la detencion.">
-			<result obj="None" move="None" event ="None" state ="3"></result>
+			<result obj="None" move="None" event ="FinalChema" state ="3"></result>
 		</phrase>
 		<phrase content="Meditelo bien,% solo tiene una oportunidad,% no ande jugando con temas tan delicados">
 			<result obj="None" move="None" event ="None" state ="3"></result>
@@ -262,7 +262,7 @@
 			<response content="2 - Tengo que seguir investigando..." next="19"></response>
 		</phrase>
 		<phrase content="Procedamos con la detencion.">
-			<result obj="None" move="None" event ="None" state ="3"></result>
+			<result obj="None" move="None" event ="FinalBolio" state ="3"></result>
 		</phrase>
 		<phrase content="Meditelo bien,% solo tiene una oportunidad,% no ande jugando con temas tan delicados">
 			<result obj="None" move="None" event ="None" state ="3"></result>
@@ -272,7 +272,7 @@
 			<response content="2 - Tengo que seguir investigando..." next="22"></response>
 		</phrase>
 		<phrase content="Procedamos con la detencion.">
-			<result obj="None" move="None" event ="None" state ="3"></result>
+			<result obj="None" move="None" event ="FinalEspeonza" state ="3"></result>
 		</phrase>
 		<phrase content="Meditelo bien,% solo tiene una oportunidad,% no ande jugando con temas tan delicados">
 			<result obj="None" move="None" event ="None" state ="3"></result>
@@ -339,7 +339,7 @@
 			<response content="2 - Tengo que seguir investigando..." next="16"></response>
 		</phrase>
 		<phrase content="Procedamos con la detencion.">
-			<result obj="None" move="None" event ="None" state ="4"></result>
+			<result obj="None" move="None" event ="FinalChema" state ="4"></result>
 		</phrase>
 		<phrase content="Meditelo bien,% solo tiene una oportunidad,% no ande jugando con temas tan delicados">
 			<result obj="None" move="None" event ="None" state ="4"></result>
@@ -349,7 +349,7 @@
 			<response content="2 - Tengo que seguir investigando..." next="19"></response>
 		</phrase>
 		<phrase content="Procedamos con la detencion.">
-			<result obj="None" move="None" event ="None" state ="4"></result>
+			<result obj="None" move="None" event ="FinalBolio" state ="4"></result>
 		</phrase>
 		<phrase content="Meditelo bien,% solo tiene una oportunidad,% no ande jugando con temas tan delicados">
 			<result obj="None" move="None" event ="None" state ="4"></result>
@@ -359,7 +359,7 @@
 			<response content="2 - Tengo que seguir investigando..." next="22"></response>
 		</phrase>
 		<phrase content="Procedamos con la detencion.">
-			<result obj="None" move="None" event ="None" state ="4"></result>
+			<result obj="None" move="None" event ="FinalEspeonza" state ="4"></result>
 		</phrase>
 		<phrase content="Meditelo bien,% solo tiene una oportunidad,% no ande jugando con temas tan delicados">
 			<result obj="None" move="None" event ="None" state ="4"></result>
@@ -369,7 +369,7 @@
 			<response content="2 - Tengo que seguir investigando..." next="22"></response>
 		</phrase>
 		<phrase content="Procedamos con la detencion.">
-			<result obj="None" move="None" event ="None" state ="4"></result>
+			<result obj="None" move="None" event ="FinalCervero" state ="4"></result>
 		</phrase>
 		<phrase content="Meditelo bien,% solo tiene una oportunidad,% no ande jugando con temas tan delicados">
 			<result obj="None" move="None" event ="None" state ="4"></result>
@@ -395,7 +395,7 @@
         	<response content="5 - Charles%" next="26"></response>
 			<response content="6 - Tú!%" next="4"></response>
 			<response content="7 - Yo!%" next="9"></response>
-        	<response content="8 - Todos!!!!" next="29"></response>
+        	<response content="8 - Todos!!!!%" next="29"></response>
 			<response content="9 - Nadie, deja de presionarme,% voy a tomar otro cafe" next="3"></response>
 			</phrase>
         <phrase content="Hasta luego detective">
@@ -438,7 +438,7 @@
 			<response content="2 - Tengo que seguir investigando..." next="16"></response>
 		</phrase>
 		<phrase content="Procedamos con la detencion.">
-			<result obj="None" move="None" event ="None" state ="5"></result>
+			<result obj="None" move="None" event ="FinalChema" state ="5"></result>
 		</phrase>
 		<phrase content="Meditelo bien,% solo tiene una oportunidad,% no ande jugando con temas tan delicados">
 			<result obj="None" move="None" event ="None" state ="5"></result>
@@ -448,7 +448,7 @@
 			<response content="2 - Tengo que seguir investigando..." next="19"></response>
 		</phrase>
 		<phrase content="Procedamos con la detencion.">
-			<result obj="None" move="None" event ="None" state ="5"></result>
+			<result obj="None" move="None" event ="FinalBolio" state ="5"></result>
 		</phrase>
 		<phrase content="Meditelo bien,% solo tiene una oportunidad,% no ande jugando con temas tan delicados">
 			<result obj="None" move="None" event ="None" state ="5"></result>
@@ -458,7 +458,7 @@
 			<response content="2 - Tengo que seguir investigando..." next="22"></response>
 		</phrase>
 		<phrase content="Procedamos con la detencion.">
-			<result obj="None" move="None" event ="None" state ="5"></result>
+			<result obj="None" move="None" event ="FinalEspeonza" state ="5"></result>
 		</phrase>
 		<phrase content="Meditelo bien,% solo tiene una oportunidad,% no ande jugando con temas tan delicados">
 			<result obj="None" move="None" event ="None" state ="5"></result>
@@ -468,7 +468,7 @@
 			<response content="2 - Tengo que seguir investigando..." next="25"></response>
 		</phrase>
 		<phrase content="Procedamos con la detencion.">
-			<result obj="None" move="None" event ="None" state ="5"></result>
+			<result obj="None" move="None" event ="FinalCervero" state ="5"></result>
 		</phrase>
 		<phrase content="Meditelo bien,% solo tiene una oportunidad,% no ande jugando con temas tan delicados">
 			<result obj="None" move="None" event ="None" state ="5"></result>
@@ -478,7 +478,7 @@
 			<response content="2 - Tengo que seguir investigando..." next="28"></response>
 		</phrase>
 		<phrase content="Procedamos con la detencion.">
-			<result obj="None" move="None" event ="None" state ="5"></result>
+			<result obj="None" move="None" event ="FinalCharles" state ="5"></result>
 		</phrase>
 		<phrase content="Meditelo bien,% solo tiene una oportunidad,% no ande jugando con temas tan delicados">
 			<result obj="None" move="None" event ="None" state ="5"></result>
