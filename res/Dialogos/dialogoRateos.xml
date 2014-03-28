@@ -42,4 +42,16 @@
 			<result obj="None" move="None" event ="None" state ="0"></result>
 		</phrase>
     </dialog>
+    
+    <dialog id="final" obj="None">
+        <phrase content="Dejeme en paz!% Usted tambien deberia alejarse de mi!%No soy culpable%Solo le digo que ese maldito mayordomo%no estaba antes aqui!">
+			<result obj="None" move="None" event ="None" state ="-1"></result>
+		</phrase>
+	</dialog>
+	
+    <dialog id="4" obj="None">
+        <phrase content="Eso seguro que le asusta mucho, oh Sherlock!">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+    </dialog>
 </data>

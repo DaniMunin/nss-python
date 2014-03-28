@@ -2,6 +2,7 @@ import pygame, sys, os
 from pygame.locals import *
 from xml.dom import minidom
 
+
 class Evento(pygame.sprite.Sprite):
     
     def __init__(self, posicion, nombre, xml = None, activo = 0, pasado = False ):
@@ -106,4 +107,41 @@ class EventoCambioEstado(Evento):
             self.sonido = pygame.mixer.Sound(self.sonido)
             canal = self.sonido.play()
         self.objeto.cambiarEstado(None,self.estadoN)          
+  
+class EventoCulpable(Evento):
+    
+    def __init__(self, posicion, nombre, culpable, culpables, poli, eventosAct, eventoN, sonido):
+        Evento.__init__(self, posicion, nombre, "evVacio2.xml")
+        self.culpable = culpable
+        self.culpables = culpables
+        self.poli = poli
+        self.eventosAct = eventosAct
+        self.eventoN = eventoN
+        self.sonido = sonido
+        
+    def onEvent(self):
+        canal = self.sonido.play()
+        if self.culpable == "Bolio":
+            if "Chema" in self.culpables:
+                self.poli.cambiarEstado(None, 3)
+                self.eventosAct.append(self.eventoN)
+            else:
+                self.poli.cambiarEstado(None, 1)
+        elif self.culpable == "Chema":
+            if "Bolio" in self.culpables:
+                self.poli.cambiarEstado(None, 3)
+                self.eventosAct.append(self.eventoN)
+            else:
+                self.poli.cambiarEstado(None, 2)
+        elif self.culpable == "Espeonza":
+            self.poli.cambiarEstado(None, 4)
+            self.eventosAct.append(self.eventoN)
+        elif self.culpable == "Cervero":
+            self.poli.cambiarEstado(None, 5)
+            self.eventosAct.append(self.eventoN)
+        elif self.culpable == "Charles":
+            self.poli.cambiarEstado(None, 6)
+            self.eventosAct.append(self.eventoN)
+        self.culpables.append(self.culpable)
             
+                 

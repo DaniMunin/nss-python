@@ -37,7 +37,7 @@
 		</phrase>
     </dialog>
     <dialog id="4" obj="None">
-        <phrase content="Claro, muy útil...">
+        <phrase content="Que pretendes hacerle%a esta bella mujer?">
 			<result obj="None" move="None" event ="None" state ="0"></result>
 		</phrase>
     </dialog>

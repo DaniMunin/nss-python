@@ -25,7 +25,7 @@
 			<response content="Eso servirá.." next="8"></response>
 		</phrase>
         <phrase content="Un momento! Aqui hay un saco de cafe!%(Espero que ya no haya nada)">
-			<result obj="saco de Cafe" move="None" event ="fantasmaDes" state ="0"></result>
+			<result obj="Saco de Cafe" move="None" event ="fantasmaDes" state ="0"></result>
 		</phrase>
     </dialog>
 </data>

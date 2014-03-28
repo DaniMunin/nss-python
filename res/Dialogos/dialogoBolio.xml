@@ -42,4 +42,67 @@
 			<result obj="None" move="None" event ="None" state ="0"></result>
 		</phrase>
     </dialog>
+    
+    <dialog id="0" obj="Tarjeta de credito">
+        <phrase content="Encantado de verle% otra vez Sr. Badass,% Quiere renovar su tarjeta?">
+			<response content="1 - No, solo queria sacar dinero%" next="1"></response>
+			<response content="2 - Querria si fuera mia,% pero aqui pone su nombre" next="2"></response>
+		</phrase>
+        <phrase content="Estoy de acuerdo, es la mejor manera%de llevar efectivo encima,%yo ahora solo uso tarjeta,%pero, disculpe mi atrevimiento...%me ve usted cara de cajero?">
+			<response content="1 - Como osas! % cuanto atrevimiento por favor...%" next="4"></response>
+			<response content="2 - Sabia que caerias en este burdo truco!% Donde se han ido sus billetes!" next="3"></response>
+		</phrase>
+        <phrase content="Muchas gracias por encontrarla!% Me la devolvera cuando salga de aqui verdad?">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+		<phrase content="Yo...Yo... era dinero figurado% No creera que yo haría algo así!%No me reporta beneficios!!">
+			<response content="1 - Me parece que ha caido en%mi trampa Sr Mitin. Luego %decidire sobre usted Pero%tiene muchas papeletas%%%" next="5"></response>
+			<response content="2 - Eso es cierto% lo tendre en cuenta en mi investigacion% Tendre mil ojos sobre usted% Ande con cuidado." next="5"></response>
+		</phrase>
+        <phrase content="Disculpeme usted entonces">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+        <phrase content="No tiene nada contra mi!% Puedo comprar a usted y a su familia!">
+			<result obj="None" move="None" event ="CulpableBolio" state ="0"></result>
+		</phrase>
+    </dialog>
+    
+    <dialog id="0" obj="Periodico financiero">
+        <phrase content="Maldita sea!% Que quiere decir esto?">
+			<response content="1 - Noticias al azar, antes vi una%del nacimiento de un bebe%grande y gordo jejeje%" next="2"></response>
+			<response content="2 - Creo que su capital ha %descendido un poco Sr. Mitin" next="1"></response>
+		</phrase>
+        <phrase content="Maldito Rateos!!% VEN AQUI!!% EXPLICAME ESTO!">
+			<response content="1 - No parece que se mueva% mas bien parece hacerse el sueco%" next="3"></response>
+			<response content="2 - Mira aqui viene,%Ah no, corre en direccion contraria.." next="3"></response>
+		</phrase>
+        <phrase content="Deben de ser periodicos de broma,% tiene usted razon!">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+		<phrase content="Sabes que puedo decir cosas sobre ti!%Conozco todos tus secretos!">
+			<response content="1 - Mmmmm Secretos% Cuente cuente.%" next="4"></response>
+			<response content="2 - Mi mama dice que no se%deben contar secretos ajenos!" next="4"></response>
+		</phrase>
+        <phrase content="Ahora no puedo callarme!%Te lo diré todo!">
+			<response content="Ok, espera que saco una libreta" next="5"></response>
+		</phrase>
+        <phrase content="Su familia le odia!%el unico que iria a una%comida suya seria su perro!%Y necesitaria atarlo%y llevarle un solomillo!!">
+			<response content="Bien, eso desmonta su coartada" next="6"></response>
+		</phrase>
+        <phrase content="Exacto!%No se fie de el!% Es un mentiroso!">
+			<result obj="None" move="None" event ="CulpableChema" state ="0"></result>
+		</phrase>
+    </dialog>
+    
+    <dialog id="final" obj="None">
+        <phrase content="No tengo nada mas que decirle!% Ya me ha hundido bastante!%Investigue al mayordomo que ninguno conocemos!%">
+			<result obj="None" move="None" event ="None" state ="-1"></result>
+		</phrase>
+	</dialog>
+	
+    <dialog id="4" obj="None">
+        <phrase content="(Tras 5 minutos sosteniendo el objeto delante del Sr. Mitin,%desisto y me voy)">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+    </dialog>
 </data>

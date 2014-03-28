@@ -23,8 +23,8 @@
         <phrase content="Me da mal rollo.">
 			<result obj="None" move="None" event = "None" state ="0"></result>
 		</phrase>
-        <phrase content="Hay un objeto debajo%Es una tarjeta de crédito%Sospechoso, que me dira Bolio sobre esto.">
-			<result obj="Tarjeta credito" move="None" event ="None" state ="-1"></result>
+        <phrase content="Hay un objeto debajo%Es una tarjeta de crédito%Sospechoso, que me dira Bolio sobre esto.%Has conseguido Tarjeta de credito">
+			<result obj="Tarjeta de credito" move="None" event ="None" state ="-1"></result>
 		</phrase>
     </dialog>
     <dialog id="final" obj="None">

@@ -1,0 +1,7 @@
+<data>
+    <dialog id="1" obj="None">
+        <phrase content="Por fin han acabado los forenses%en una de las habitaciones!">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+    </dialog>
+</data>

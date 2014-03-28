@@ -49,6 +49,9 @@ class FaseInvestigacion(EscenaPygame):
         posInicialMapa.topleft = (posInicialMapa.topleft[0]-100,posInicialMapa.topleft[1]+100)
         self.level = Level(fondo, posInicialMapa, self.player)
         self.grupoJugadores = pygame.sprite.Group(jugador1)
+        
+        self.secretoSon = pygame.mixer.Sound("../res/Sounds/secret.wav")
+        
         self.dialogo = 6
         self.opcion = False
         self.optEl = 0
@@ -112,40 +115,52 @@ class FaseInvestigacion(EscenaPygame):
         
         self.evPrueba = EventoAparicion((586,1600),"evPrueba", "dialogoEventoPrueba.xml", self.espeonza, self.grupoNPCDetras,self.level.mask)
         
+        self.culpables = []
         self.eventos = []
         self.eventosActivos = []
         self.eventos.append(self.evPrueba)
 #         self.eventosActivos.append(evPrueba)
+        self.eventoEstorbo1Des = EventoDesaparicion((586,1650),"estorbo1Des", "estorboDes.xml", self.poliEstorbo1, self.grupoNPCDelante,self.level.mask)
+        self.eventoEstorbo2Des = EventoDesaparicion((586,1650),"estorbo2Des", "estorboDes.xml", self.poliEstorbo2, self.grupoNPCDetras,self.level.mask)
+        self.eventoEstorbo3Des = EventoDesaparicion((586,1650),"estorbo3Des", "estorboDes.xml", self.poliEstorbo3, self.grupoNPCDetras,self.level.mask)
         
         #Eventos para descubrir a Bolio
         self.eventoDormitorioAct = EventoActivaItems((244,2000),"DormitorioAct", list([self.armarioHabDcha, self.CamaHab]), self.grupoObj,"../res/Sounds/secret.wav")
+        self.eventoCulpableBolio = EventoCulpable((244,2000),"CulpableBolio", "Bolio", self.culpables,self.poli,self.eventosActivos, self.eventoEstorbo1Des, self.secretoSon)
         
         self.eventos.append(self.eventoDormitorioAct)
+        self.eventos.append(self.eventoCulpableBolio)
         ####################################
         
         #Eventos para descubrir a Rateos
         self.eventoComedorAct = EventoActivaItems((244,2000),"ComedorAct", list([self.bibDchaComedor, self.sillaComedor]), self.grupoObj,"../res/Sounds/secret.wav")
         self.eventoPeriodicoCom = EventoCambioEstado((2306, 332),"PeriodicoCom", self.bibDchaComedor, 1,"../res/Sounds/door.wav")
+        self.eventoCulpableChema = EventoCulpable((244,2000),"CulpableChema", "Chema", self.culpables,self.poli,self.eventosActivos, self.eventoEstorbo1Des, self.secretoSon)
         
         self.eventos.append(self.eventoComedorAct)
         self.eventos.append(self.eventoPeriodicoCom)
+        self.eventos.append(self.eventoCulpableChema)
         ####################################
         
         #Eventos para descubrir a Espeonza
         self.eventoRelojEntrada = EventoActivaItems((223,1748), "RelojEntrada", list([self.relojEntrada, self.armarioHabIzda]) , self.grupoObj, "..res/Sounds/secret.wav")
         self.eventoLlaveEntrada = EventoAparicion((1788, 2173), "LlaveEntrada", "evVacio2.xml", self.llave, self.grupoObj, self.level.mask)
         self.eventoDesLlaveEntrada = EventoDesaparicion((1712, 2283), "desaparecerLlave", "evVacio2.xml", self.llave, self.grupoObj, self.level.mask)
+        self.eventoCulpableEspeonza = EventoCulpable((223,1748),"CulpableEspeonza", "Espeonza", self.culpables,self.poli,self.eventosActivos, self.eventoEstorbo2Des, self.secretoSon)
         
         self.eventos.append(self.eventoRelojEntrada)
         self.eventos.append(self.eventoLlaveEntrada)
         self.eventos.append(self.eventoDesLlaveEntrada)
+        self.eventos.append(self.eventoCulpableEspeonza)
         
         #Eventos para descubrir a Cervero
         self.eventoHabCuadro = EventoActivaItems((993,2015),"HabCuadro", list([self.relojCuadro, self.chimCuadro]), self.grupoObj,"../res/Sounds/secret.wav")
         self.eventoAbreCuadro = EventoCambioEstado((3051, 1505),"abreCuadro", self.Cuadro, 1,"../res/Sounds/door.wav")
+        self.eventoCulpableCervero = EventoCulpable((993,2015),"CulpableCervero", "Cervero", self.culpables,self.poli,self.eventosActivos, self.eventoEstorbo3Des, self.secretoSon)
         
         self.eventos.append(self.eventoHabCuadro)
         self.eventos.append(self.eventoAbreCuadro)
+        self.eventos.append(self.eventoCulpableCervero)
         ####################################
         
         #Eventos para descubrir a Charles
@@ -155,12 +170,14 @@ class FaseInvestigacion(EscenaPygame):
         self.eventoBadassDes = EventoDesaparicion((2733,848),"badassDes", "badassDes.xml", self.player, self.grupoJugador,self.level.mask)
         self.eventoBadassAp = EventoAparicion((2733,848),"badassAp", "badassAp.xml", self.player, self.grupoJugador,self.level.mask, False)
         self.eventoFantasmaDes = EventoDesaparicion((2733,848),"fantasmaDes", "fantasmaDes.xml", self.fantasma, self.grupoNPCDelante,self.level.mask)
+        self.eventoCulpableCharles = EventoCulpable((244,2000),"CulpableCharles", "Charles", self.culpables,self.poli,self.eventosActivos, None, self.secretoSon)
         
         self.eventos.append(self.eventoBar)
         self.eventos.append(self.eventoFantasmaAp)
         self.eventos.append(self.eventoFantasmaDes)
         self.eventos.append(self.eventoBadassDes)
         self.eventos.append(self.eventoBadassAp)
+        self.eventos.append(self.eventoCulpableCharles)
         ####################################
         
                 
@@ -172,12 +189,14 @@ class FaseInvestigacion(EscenaPygame):
     #  Se actualiza el scroll del decorado y los objetos en el
     def update(self, tiempo):
 #         self.screen.fill(pygame.Color("black"))
+        print self.eventosActivos
+        print self.eventos
         if (self.accion):
             self.tiempoDial += tiempo
-            print self.tiempoDial
-            print self.cambiarDia
+#             print self.tiempoDial
+#             print self.cambiarDia
             if self.cambiarDia:
-                print self.numRes
+#                 print self.numRes
                 self.accionT, self.accionR, self.accionResult = self.continuarAccion(self.accionO, self.numRes) 
                 self.cambiarDia = False
                 self.tiempoDial = 0
@@ -187,14 +206,13 @@ class FaseInvestigacion(EscenaPygame):
                 if not self.mostrar:
                     self.cambiarDia = False
                     self.numRes = 0
-                    self.accionO = pygame.sprite.spritecollideany(self.player, self.grupoObj)
                     self.accionT, self.accionR, self.accionResult = self.empezarAccion(self.accionO, self.player.objetos[self.optEl - 1])
                 self.optEl = 0
 #         elif (self.eventoAct):
 #             self.accionT, self.accionR, self.accionResult = self.continuarAccion(self.accionO, self.numRes) 
         else:   
             self.level.update(self.keys)
-            print self.player.rect
+#             print self.player.rect
 #         print self.rateos.rect
 #         print self.player.rect
 #         print self.poli.rect
@@ -244,7 +262,7 @@ class FaseInvestigacion(EscenaPygame):
                             self.cambiarDia = True
         #Interactuar con npc/objeto sin utilizar nada
         if self.keys[K_SPACE] and (not self.accion) and (not self.inventario):
-            if (pygame.sprite.spritecollideany(self.player, self.grupoNPC) != None):
+            if (pygame.sprite.spritecollideany(self.player, self.grupoNPCDetras) != None) or (pygame.sprite.spritecollideany(self.player, self.grupoNPCDelante) != None):
                 self.cambiarDia = False
                 self.numRes = 0
                 self.accionO = pygame.sprite.spritecollideany(self.player, self.grupoNPC)
@@ -258,6 +276,10 @@ class FaseInvestigacion(EscenaPygame):
         if (self.keys[K_i]) and (not self.accion) and (not self.inventario):
             #Interactuar con npc/objeto utilizando un objeto
             if (pygame.sprite.spritecollideany(self.player, self.grupoObj) != None):
+                self.accionO = pygame.sprite.spritecollideany(self.player, self.grupoObj)
+                self.mostrar = False
+            elif (pygame.sprite.spritecollideany(self.player, self.grupoNPCDetras) != None) or (pygame.sprite.spritecollideany(self.player, self.grupoNPCDelante) != None):
+                self.accionO = pygame.sprite.spritecollideany(self.player, self.grupoNPC)
                 self.mostrar = False
             else: 
                 self.mostrar = True
@@ -289,6 +311,12 @@ class FaseInvestigacion(EscenaPygame):
                     self.tiempoDial = 0
                     self.accionO = ev
                     self.accionT, self.accionR, self.accionResult = self.empezarAccion(self.accionO)
+        if (self.keys[K_r] and self.keys[K_e]):
+            self.player.cogerObjeto("Tarjeta de credito")
+            self.player.cogerObjeto("Saco de Cafe")
+            self.player.cogerObjeto("Periodico financiero")
+            self.player.cogerObjeto("Ropa")
+            self.player.cogerObjeto("Libro satanico")
         #Esto de aqui no deberÃ­a funcionar asÃ­, si no que deberÃ­a cerrar el programa sin mÃ¡s, no llevarnos a la fase siguiente
         if event.type == pygame.QUIT or (self.keys[K_t] and self.keys[K_r]):
              print "Hola"
@@ -307,6 +335,7 @@ class FaseInvestigacion(EscenaPygame):
                 self.player.objetos.append(self.accionResult[0])
             #Nuevo estado del objeto/npc
             elimEvento = self.accionO.cambiarEstado(None, int(self.accionResult[3]))
+            print elimEvento
             if elimEvento:
                 self.eventosActivos.remove(self.accionO)
             #Eventos generados

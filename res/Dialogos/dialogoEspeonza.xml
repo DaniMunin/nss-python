@@ -58,19 +58,19 @@
     </dialog>
     <dialog id="0" obj="Ropa">
         <phrase content="Buenos dias detective.% Bonita ropa,% la ha comprado ultimamente?">
-			<response content="1 - He ido a su armario% y es lo unico que habia%" next="1"></response>
+			<response content="1 - He ido a su armario% y es lo unico que habia%%" next="1"></response>
 			<response content="2 - La he encontrado por ahi,% creo que me sienta bien%" next="2"></response>
 		</phrase>
         <phrase content="Si...% Porque...% Me gusta ir vestida de hombre.% Por eso compro esa ropa">
-			<response content="1 - Yo creo que no,% y que su coartada ha caido,% en realidad pudo haber asesinado a Mraga%" next="3"></response>
-			<response content="2 - Entonces como no va vestida de hombre ahora?% Vicent Badass gana de nuevo!%" next="3"></response>
+			<response content="1 - Yo creo que no, y que%su coartada ha caido, en realidad%pudo haber asesinado a Mraga%%%" next="3"></response>
+			<response content="2 - Entonces como no va %vestida de hombre ahora?% Vicent Badass gana de nuevo!%" next="3"></response>
 		</phrase>
-		<phrase content="Le queda supergenial detective. Me encantaria tener a mi ropa asi">
-			<response content="1 - Pues en realidad esta es su ropa!% La que dijo que habia comprado,% asi que se queda sin coartada señorita.%" next="3"></response>
+		<phrase content="Le queda supergenial detective.%Me encantaria tener a mi ropa asi">
+			<response content="1 - Pues en realidad esta es su ropa!% La que dijo que habia comprado,% asi que se queda sin coartada senorita.%%%" next="3"></response>
 			<response content="2 - Todo le sienta bien a Vicent Badass!% Incluso la ropa que dijo que era suya!% Lo que significa que no tiene coartada.%" next="3"></response>
 		</phrase>
         <phrase content="Yo no soy culpable% (sollozo)% yo no hice nada% (sollozo)% yo soy buena% (sollozo)">
-			<result obj="None" move="None" event ="None" state ="-1"></result>
+			<result obj="None" move="None" event ="CulpableEspeonza" state ="-1"></result>
 		</phrase>
     </dialog>
     <dialog id="final" obj="None">
@@ -79,7 +79,7 @@
 		</phrase>
 	</dialog>
     <dialog id="4" obj="None">
-        <phrase content="Claro, muy útil...">
+        <phrase content="Que es eso detective?%la nueva moda de Paris??">
 			<result obj="None" move="None" event ="None" state ="0"></result>
 		</phrase>
     </dialog>

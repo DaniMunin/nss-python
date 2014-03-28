@@ -231,7 +231,12 @@ class Jugador(Personaje):
         x,y = self.check_collisions(move, level_mask)
         self.actualizarPostura(x, y)
 #         print self.mask.centroid()
-        
+
+    def cogerObjeto(self,objeto):
+        if not (objeto in self.objetos):
+            self.objetos.append(objeto)
+#         elif objeto == "Taza de Cafe":
+#             self.objetos
 # -------------------------------------------------
 # Clase NoJugador
 class NoJugador(Personaje):
@@ -324,7 +329,6 @@ until clear.
     
     def continuar(self, respuesta, object = None):
         if object != None and self.itemlist[self.estado].attributes['id'].value != "final":
-            print object
             self.cambiarEstado(object)
         phrase_list = self.itemlist[self.estado].getElementsByTagName("phrase")
         phrase = phrase_list[respuesta].attributes['content'].value

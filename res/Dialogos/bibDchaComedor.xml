@@ -19,7 +19,7 @@
         <phrase content="No hay nada en ese dia.">
 			<result obj="None" move="None" event ="None" state ="1"></result>
 		</phrase>
-        <phrase content="Aqui dice que las acciones de Muiz-Rateos son una ruina%No creo que le guste a Bolio">
+        <phrase content="Aqui dice que las acciones de Muiz-Rateos son una ruina%No creo que le guste a Bolio%Has conseguido Periodico financiero">
 			<result obj="Periodico financiero" move="None" event ="None" state ="-1"></result>
 		</phrase>
     </dialog>
