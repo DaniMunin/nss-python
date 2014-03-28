@@ -2,8 +2,7 @@
 # Importar modulos
 import director
 import fase
-from director import *
-from intro import *
+from director import *
 from EscenaMenu import *
 from animacion import *
 
