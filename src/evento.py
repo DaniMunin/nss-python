@@ -1,6 +1,8 @@
 import pygame, sys, os
 from pygame.locals import *
 from xml.dom import minidom
+from animacionFinalMalo import *
+from cellarScene import *
 
 
 class Evento(pygame.sprite.Sprite):
@@ -108,13 +110,25 @@ class EventoCambioEstado(Evento):
   
 class EventoFinal(Evento):
     
-    def __init__(self, posicion, nombre, fase, final):
+    def __init__(self, posicion, nombre, fase):
         Evento.__init__(self, posicion, nombre, "evVacio.xml")
         self.fase = fase
-        self.final = final
         
     def onEvent(self):
-        self.fase.finFase(self.final)
+        if self.nombre == "MuerteCafe":
+            self.fase.finFase(EscenaAnimacionFinalMalo(self.fase.director, "animacionFinalMaloCafe.xml"))
+        elif self.nombre == "FinalBolio":
+            self.fase.finFase(EscenaAnimacionFinalMalo(self.fase.director, "animacionFinalMaloBolio.xml"))
+        elif self.nombre == "FinalChema":
+            self.fase.finFase(EscenaAnimacionFinalMalo(self.fase.director, "animacionFinalMaloChema.xml"))
+        elif self.nombre == "FinalEspeonza":
+            self.fase.finFase(EscenaAnimacionFinalMalo(self.fase.director, "animacionFinalMaloEspeonza.xml"))
+        elif self.nombre == "FinalCervero":
+            self.fase.finFase(EscenaAnimacionFinalMalo(self.fase.director, "animacionFinalMaloCervero.xml"))
+        elif self.nombre == "FinalCharles":
+            self.fase.finFase(EscenaAnimacionFinalMalo(self.fase.director, "animacionFinalMaloCharles.xml"))
+        elif self.nombre == "FinalTodos":
+            self.fase.finFase(CellarScene(self.fase.director, self.fase.player))
         
         
 class EventoCulpable(Evento):

@@ -395,7 +395,8 @@
         	<response content="5 - Charles%" next="26"></response>
 			<response content="6 - Tú!%" next="4"></response>
 			<response content="7 - Yo!%" next="9"></response>
-			<response content="8 - Nadie, deja de presionarme,% voy a tomar otro cafe" next="3"></response>
+        	<response content="8 - Todos!!!!" next="29"></response>
+			<response content="9 - Nadie, deja de presionarme,% voy a tomar otro cafe" next="3"></response>
 			</phrase>
         <phrase content="Hasta luego detective">
 			<result obj="None" move="None" event ="None" state ="5"></result>
@@ -473,11 +474,21 @@
 			<result obj="None" move="None" event ="None" state ="5"></result>
 		</phrase>
 		<phrase content="Esta seguro?% El culpable es Charles, el mayordomo?">
-			<response content="1 - El gran Vicent Badass nunca se equivoca!" next="24"></response>
-			<response content="2 - Tengo que seguir investigando..." next="25"></response>
+			<response content="1 - El gran Vicent Badass nunca se equivoca!" next="27"></response>
+			<response content="2 - Tengo que seguir investigando..." next="28"></response>
 		</phrase>
 		<phrase content="Procedamos con la detencion.">
 			<result obj="None" move="None" event ="None" state ="5"></result>
+		</phrase>
+		<phrase content="Meditelo bien,% solo tiene una oportunidad,% no ande jugando con temas tan delicados">
+			<result obj="None" move="None" event ="None" state ="5"></result>
+		</phrase>
+		<phrase content="Esta seguro?% Es otro de los milagros Badass?">
+			<response content="1 - Exacto! Es tiempo de BADASS" next="30"></response>
+			<response content="2 - Tengo que seguir investigando..." next="31"></response>
+		</phrase>
+		<phrase content="Procedamos con la detencion.">
+			<result obj="None" move="None" event ="FinalTodos" state ="5"></result>
 		</phrase>
 		<phrase content="Meditelo bien,% solo tiene una oportunidad,% no ande jugando con temas tan delicados">
 			<result obj="None" move="None" event ="None" state ="5"></result>

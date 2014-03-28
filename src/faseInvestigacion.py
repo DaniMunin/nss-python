@@ -181,10 +181,22 @@ class FaseInvestigacion(EscenaPygame):
         self.eventos.append(self.eventoCulpableCharles)
         ####################################
         
-        #Eventos varios
-        self.eventoMuerteCafe = EventoFinal((2707, 1006), "MuerteCafe", self, "finalCafe")
+        #Eventos de finales diferentes
+        self.eventoMuerteCafe = EventoFinal((2707, 1006), "MuerteCafe", self)
+        self.eventoFinalBolio = EventoFinal((586,1400), "FinalBolio", self)
+        self.eventoFinalChema = EventoFinal((586,1400), "FinalChema", self)
+        self.eventoFinalEspeonza = EventoFinal((586,1400), "FinalEspeonza", self)
+        self.eventoFinalCervero = EventoFinal((586,1400), "FinalCervero", self)
+        self.eventoFinalCharles = EventoFinal((586,1400), "FinalCharles", self)
+        self.eventoFinalTodos = EventoFinal((586,1400), "FinalTodos", self)
         
         self.eventos.append(self.eventoMuerteCafe)
+        self.eventos.append(self.eventoFinalBolio)
+        self.eventos.append(self.eventoFinalChema)
+        self.eventos.append(self.eventoFinalEspeonza)
+        self.eventos.append(self.eventoFinalCervero)
+        self.eventos.append(self.eventoFinalCharles)
+        self.eventos.append(self.eventoFinalTodos)
         ####################################
         
         
@@ -388,7 +400,7 @@ class FaseInvestigacion(EscenaPygame):
         return texto,respuesta,resultado
     
     def finFase(self, final):
-        pass
+        self.director.cambiarEscena(final)
     
     
 class Level(object):
