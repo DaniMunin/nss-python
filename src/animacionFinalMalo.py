@@ -180,12 +180,11 @@ class EscenaAnimacionFinalMalo(EscenaPyglet, pyglet.window.Window):
     def on_mouse_press(self, x, y, button, modifiers):
         # Si se pulsa el boton izquierdo
         if (pyglet.window.mouse.LEFT == button):
-            self.salirEscena()
+            self.director.salirEscena()
         return
 
     def salirEscena(self):
-        escenaSig = AnimacionSalon(self.director)
-        self.director.cambiarEscena(escenaSig)    
+        self.director.salirEscena()  
         
     def close(self):
         # Restablecemos la duracion de cada frame del tanque
