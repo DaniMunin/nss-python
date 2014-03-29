@@ -16,6 +16,7 @@ class Director():
         # Flag que nos indica cuando quieren salir de la escena o del programa
         self.salir_escena = False
         self.salir_programa = False
+        self.salir_pygame = False
         self.quiere_salir_escena = False
         self.quiere_cambiar_escena = None
         self.quiere_apilar_escena = None
@@ -24,11 +25,11 @@ class Director():
         self.reloj = pygame.time.Clock()
 
     def ejecutar(self):
-        while not self.salir_programa:
-            # Si la escena es de juego, la ejecutamos como un bucle
-            if isinstance(self.escena, EscenaPygame):
-              
-                
+
+        # Si la escena es de juego, la ejecutamos como un bucle
+        if isinstance(self.escena, EscenaPygame):
+            self.salir_pygame = False
+            while (not self.salir_programa) and (not self.salir_pygame) :
                 tiempo_pasado = 0
                 self.salir_escena = False;
                 # El bucle del juego, las acciones que se realicen se harán en cada escena
@@ -62,26 +63,25 @@ class Director():
                     #Comprobamos si quiere cambiar de escena
                     if(self.quiere_apilar_escena != None):
                         self.ejecutarApilarEscena()
-                        
                 #Comprobamos si quiere cambiar de escena
                 if(self.quiere_cambiar_escena != None):
                     self.ejecutarCambiarEscena()
                 if self.escena == None:
                     self.salir_programa = True
             
-                # Si hemos salido del bucle, finalizamos pygame
-                pygame.quit()
-                
-            # Si no, si la escena es de animacion con pyglet, la ejecutamos de esa manera
-            elif isinstance(self.escena, EscenaPyglet):
-                # Registramos que se actualice segun la frecuencia de frames por segundo
-                pyglet.clock.schedule_interval(self.escena.update, 1/float(FPS))
-    
-                # Ejecutamos la aplicacion de pyglet
-                pyglet.app.run()
-            else:
-                self.escena = None
-                raise Exception('No se que tipo de escena es')
+            # Si hemos salido del bucle, finalizamos pygame
+            pygame.quit()
+            
+        # Si no, si la escena es de animacion con pyglet, la ejecutamos de esa manera
+        elif isinstance(self.escena, EscenaPyglet):
+            # Registramos que se actualice segun la frecuencia de frames por segundo
+            pyglet.clock.schedule_interval(self.escena.update, 1/float(FPS))
+
+            # Ejecutamos la aplicacion de pyglet
+            pyglet.app.run()
+        else:
+            self.escena = None
+            raise Exception('No se que tipo de escena es')
         
         # Al final se devuelve si se quiere salir del programa, ademas de salir de la escena
         return self.salir_programa
@@ -108,6 +108,8 @@ class Director():
         
     def ejecutarCambiarEscena(self):  
         self.escena = self.quiere_cambiar_escena
+        if isinstance(self.escena, EscenaPyglet):
+                self.salir_pygame = True
         self.quiere_cambiar_escena = None
 
     def apilarEscena(self, escena):
@@ -122,6 +124,8 @@ class Director():
             pyglet.app.exit()
             self.pilaEscenas.append(self.escena)
             self.escena = escena
+            if isinstance(self.escena, EscenaPyglet):
+                self.salir_pygame = True
             self.ejecutar()
         else:
             self.quiere_apilar_escena = escena
@@ -155,6 +159,8 @@ class Director():
             self.escena = None
         else:
             self.escena = self.pilaEscenas.pop()
+            if isinstance(self.escena, EscenaPyglet):
+                self.salir_pygame = True
 
     def salirPrograma(self):
         self.salirEscena()

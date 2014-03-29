@@ -1,16 +1,16 @@
 ﻿<data>
     <dialog id="0" obj="None">
-        <phrase content="Un libro... %'Al viejo diablo le encanta el cafe'.% Parece literatura de calidad.%¡Oh! Una extraña hoja suelta con texto inintelegible.% Me lo quedaré, nucna sabes cuando te puede hacer falta">
+        <phrase content="Un libro... %'Al viejo diablo le encanta el cafe'.% Parece literatura de calidad.%Oh! Una extraña hoja suelta con texto inintelegible.% Me lo quedare, nucna sabes cuando te puede hacer falta">
 			<result obj="hoja4" move="None" event ="None" state ="4"></result>
 		</phrase>
     </dialog>
     <dialog id="1" obj="None">
-        <phrase content="Un libro...% 'Marcas famosas y otros acrosticos obvios'.% Buf, demasiado denso como para pensarle atencion.% ¡Espera!%Hay 2 hojas sueltas con textos extraños.% Me las quedaré.">
+        <phrase content="Un libro...% 'Marcas famosas y otros acrosticos obvios'.% Buf, demasiado denso como para pensarle atencion.% Espera!%Hay 2 hojas sueltas con textos extraños.% Me las quedare.">
 			<result obj="hoja1" move="None" event ="None" state ="3"></result>
 		</phrase>
     </dialog>
     <dialog id="2" obj="None">
-        <phrase content="¡El Necrocomiccon!% Siempre pensé que sería un mito..% pero parece que le han arrancado páginas.% ¿Por qué harían algo así?">
+        <phrase content="El Necrocomiccon!% Siempre pense que seria un mito..% pero parece que le han arrancado paginas.% Por que harian algo asi?">
 			<result obj="None" move="None" event ="None" state ="2"></result>
 		</phrase>
     </dialog>

@@ -6,6 +6,7 @@ from personajes import *
 from pygame.locals import *
 from FinalScene import *
 from item import *
+from evento import *
 
 OPT_KEYS = {pygame.K_1 : 1,
                pygame.K_2 : 2,
@@ -75,8 +76,6 @@ class CellarScene(EscenaPygame):
         self.libreria = Item(10, "estanteriaCellar.xml",  "../res/Sprites/libroinvisible.png", (68, 77))
         self.grupoObj = pygame.sprite.Group(self.libro0,self.libro1,self.libro2, self.pizarra, self.jarron, self.puerta, self.libreria, self.puertaEntrada)
         
-        #Bloque de definición de eventos
-        self.eventoMuerteCafe = EventoPuzzle(self)
         
     def update(self, tiempo):
         if (self.accion):
@@ -102,13 +101,7 @@ class CellarScene(EscenaPygame):
             self.level.update(self.keys)
         
         
-        
-        
-        
-        #self.screen.fill(pygame.Color("black"))
-        #self.level.update(self.keys)
-        #self.level.draw(self.screen)
-        #print(self.player.rect)
+    
         
     def dibujar(self):
         s = self.level.draw(self.screen)
@@ -234,10 +227,13 @@ class CellarScene(EscenaPygame):
                 self.eventosActivos.remove(self.accionO)
             #Eventos generados
             if self.accionResult[2] != "None":
-                for e in self.eventos:
-                    if e.nombre==self.accionResult[2]:
-                        self.eventosActivos.append(e)
-                        self.eventos.remove(e)
+                if (self.accionResult[2] == "puzzle"):
+                    self.puzzle(self.level.draw(self.screen))
+                else:
+                    for e in self.eventos:
+                        if e.nombre==self.accionResult[2]:
+                            self.eventosActivos.append(e)
+                            self.eventos.remove(e)
             #Movimiento de algun personaje
             if self.accionResult[1] != "None":
                 pass
@@ -267,12 +263,18 @@ class CellarScene(EscenaPygame):
     def finFase(self, final):
         pass
     
-    def puzzle(self):
-        x = 100
-        y = 100
+    def puzzle(self, surface):
+        pygame.font.init()
+        self.font = pygame.font.Font('../res/XFILES.ttf', 30)
+        x = 743
+        y = 268
+        texto = ""
         for i in self.hojas:
-            surface.blit(self.font.render(i, 1, color, (255,255,255)), (posx, posy))
-            y += 20
+            texto= texto+i+"%"
+        print texto
+        self.text.render(surface, texto, (0,0,0), (x,y), self.screen_rect[3])
+
+
     
 class Level(object):
     """
