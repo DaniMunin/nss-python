@@ -263,7 +263,7 @@ class CellarScene(EscenaPygame):
     def finFase(self, final):
         pass
     
-    def puzzle(self, surface):
+    def puzzle2(self, surface):
         pygame.font.init()
         self.font = pygame.font.Font('../res/XFILES.ttf', 30)
         x = 743
@@ -273,7 +273,17 @@ class CellarScene(EscenaPygame):
             texto= texto+i+"%"
         print texto
         self.text.render(surface, texto, (0,0,0), (x,y), self.screen_rect[3])
-
+        
+    def puzzle(self, surface):
+        if self.optEl == 0:
+            self.tiempoDial = TIEMPODIALOGO*2
+            if not self.mostrar:
+                self.opcion = True
+            j = len(self.player.objetos) - 4
+            self.text.render(surface,"Inventario:", (0,0,0), (self.player.rect.topleft[0], self.player.rect.topleft[1] - (j+1)*30), self.screen_rect[3])
+            for i in range(len(self.player.objetos)):
+                self.text.render(surface,self.player.objetos[i], (0,0,0), (self.player.rect.topleft[0], self.player.rect.topleft[1] - j*30), self.screen_rect[3])
+                j -= 1
 
     
 class Level(object):
