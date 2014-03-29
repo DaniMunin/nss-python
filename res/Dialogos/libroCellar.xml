@@ -10,7 +10,7 @@
 		</phrase>
     </dialog>
     <dialog id="2" obj="None">
-        <phrase content="El Necrocomiccon!% Siempre pense que seria un mito..% pero parece que le han arrancado paginas.% Por que harian algo asi?">
+        <phrase content="El Necrocomicon!% Siempre pense que seria un mito..% pero parece que le han arrancado paginas.% Por que harian algo asi?">
 			<result obj="None" move="None" event ="None" state ="2"></result>
 		</phrase>
     </dialog>

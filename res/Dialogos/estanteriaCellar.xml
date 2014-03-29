@@ -1,11 +1,11 @@
 ﻿<data>
     <dialog id="0" obj="None">
-        <phrase content="Una estanteria veja y hasta arriba de libros.% Esta todo estoicamente ordenado,% excepto por ese par de ojas sueltas.. sera mejor que me las quede.">
+        <phrase content="Una estanteria vieja y hasta arriba de libros.% Esta todo estoicamente ordenado,% excepto por ese par de hojas sueltas.. sera mejor que me las quede.">
 			<result obj="hoja3" move="None" event ="None" state ="1"></result>
 		</phrase>
     </dialog>
     <dialog id="1" obj="None">
-         <phrase content="Una estanteria veja y hasta arriba de libros.% Esta todo estoicamente ordenado, que gran trabajo he hecho">
+         <phrase content="Una estanteria vieja y hasta arriba de libros.% Esta todo estoicamente ordenado, que gran trabajo he hecho">
 			<result obj="None" move="None" event ="None" state ="1"></result>
 		</phrase>
     </dialog>
