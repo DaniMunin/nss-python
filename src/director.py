@@ -25,7 +25,7 @@ class Director():
         self.reloj = pygame.time.Clock()
 
     def ejecutar(self):
-
+        print "patata"
         # Si la escena es de juego, la ejecutamos como un bucle
         if isinstance(self.escena, EscenaPygame):
             self.salir_pygame = False
@@ -84,7 +84,10 @@ class Director():
             raise Exception('No se que tipo de escena es')
         
         # Al final se devuelve si se quiere salir del programa, ademas de salir de la escena
-        return self.salir_programa
+        if self.salir_programa:
+            return self.salir_programa
+        else:
+            self.ejecutar()
 
     def cambiarEscena(self, escena):
         if self.escena == None:
