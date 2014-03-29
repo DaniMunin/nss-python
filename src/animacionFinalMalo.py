@@ -5,7 +5,7 @@ from escena import *
 import random
 from animacionSalon import *
 from xml.dom import minidom
-
+import os
 
 # Funcion auxiliar que crea una animacion a partir de una imagen que contiene la animacion
 #  dividida en filas y columnas
@@ -49,7 +49,7 @@ class EscenaAnimacionFinalMalo(EscenaPyglet, pyglet.window.Window):
         #carga del fichero de textos
         self.fullname = os.path.join('', xml)
         # La imagen de fondo
-        self.imagen = pyglet.image.load('../res/maps/finalmaloescena.png')
+        self.imagen = pyglet.resource.image('finalmaloescena.png')
         self.imagen = pyglet.sprite.Sprite(self.imagen)
         self.imagen.set_position(100, -120)
 #         self.imagen.scale = float(ANCHO_PANTALLA) / self.imagen.width
@@ -100,7 +100,7 @@ class EscenaAnimacionFinalMalo(EscenaPyglet, pyglet.window.Window):
         
         # Esta animacion aparecera cada tiempo determinado
         #=======================================================================
-        pyglet.clock.schedule_interval(self.aparecerRayo, 20.5)
+#         pyglet.clock.schedule_interval(self.aparecerRayo, 20.5)
         pyglet.clock.schedule_interval(self.sonidoLluvia, 6.0)
         pyglet.clock.schedule_interval(self.sonidoSoga, 6.0)
         #=======================================================================
@@ -109,8 +109,8 @@ class EscenaAnimacionFinalMalo(EscenaPyglet, pyglet.window.Window):
         self.textList = xmldoc.getElementsByTagName('phrase') 
         self.text = pyglet.text.Label(self.textList[0].attributes['content'].value,
                       font_name='X-Files', multiline=True,
-                      font_size=26, color=(255, 255, 255, 255), width = ANCHO_PANTALLA/2 - 20, 
-                      x=ANCHO_PANTALLA/4, y=ALTO_PANTALLA/2, batch = self.batch,
+                      font_size=26, color=(255, 255, 255, 255), width = ANCHO_PANTALLA/2, 
+                      x=ANCHO_PANTALLA/2, y=ALTO_PANTALLA/2, batch = self.batch,
                       anchor_x='center', anchor_y='center',
                       group = self.grupoDelante)
         self.text.draw()
@@ -180,12 +180,11 @@ class EscenaAnimacionFinalMalo(EscenaPyglet, pyglet.window.Window):
     def on_mouse_press(self, x, y, button, modifiers):
         # Si se pulsa el boton izquierdo
         if (pyglet.window.mouse.LEFT == button):
-            self.salirEscena()
+            self.director.salirEscena()
         return
 
     def salirEscena(self):
-        escenaSig = AnimacionSalon(self.director)
-        self.director.cambiarEscena(escenaSig)    
+        self.director.salirEscena()  
         
     def close(self):
         # Restablecemos la duracion de cada frame del tanque
@@ -212,16 +211,18 @@ class EscenaAnimacionFinalMalo(EscenaPyglet, pyglet.window.Window):
             self.text.delete()
             self.text = pyglet.text.Label(self.textList[1].attributes['content'].value,
                   font_name='X-Files', multiline=True,
-                  font_size=26, color=(255, 255, 255, 255), width = ANCHO_PANTALLA/2 - 20, 
-                  x=ANCHO_PANTALLA/4, y=ALTO_PANTALLA/2, batch = self.batch,
+                  font_size=26, color=(255, 255, 255, 255), width = ANCHO_PANTALLA/2 - 20,  
+                  x=ANCHO_PANTALLA/2, y=ALTO_PANTALLA/2, batch = self.batch,
                   anchor_x='center', anchor_y='center',
                   group = self.grupoDelante)
             self.text.draw()
-        elif self.tiempoTrans < 15 and self.tiempoTrans > 10:  
+        elif self.tiempoTrans < 15 and self.tiempoTrans > 10: 
+                if self.tiempoTrans < 10.04 and self.tiempoTrans > 10:
+                    self.playerR = self.rayoSon.play() 
                 self.text.delete()
                 self.text = pyglet.text.Label(self.textList[2].attributes['content'].value,
                       font_name='X-Files', multiline=True,
-                      font_size=26, color=(255, 255, 255, 255), width = ANCHO_PANTALLA/2 - 20, 
+                      font_size=26, color=(255, 255, 255, 255), width = ANCHO_PANTALLA/2, 
                       x=ANCHO_PANTALLA/4, y=ALTO_PANTALLA/2, batch = self.batch,
                       anchor_x='center', anchor_y='center',
                       group = self.grupoDelante)
