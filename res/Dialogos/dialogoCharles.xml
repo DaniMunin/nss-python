@@ -1,21 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
 <data>
     <dialog id="1" obj="None">
-        <phrase content="Buenos dias señor detective. %Quiere una taza de cafe?">
-        	<response content="1 - Nadie dice que no a un cafe%%%%" next="2"></response>
-			<response content="2 - No quiero cafe, gracias.% A todo esto, me encantan% las novelas de asesinatos,% conoces quien es% siempre el culpable?" next="1"></response>
+        <phrase content="Buenos dias señor detective. %Ahora le sirvo una taza de cafe">
+        	<response content="1 - Odio el cafe!%%%%%" next="2"></response>
+			<response content="2 - No quiero cafe, gracias.% A todo esto, me encantan% las novelas de asesinatos,% conoces quien es% siempre el culpable?%" next="1"></response>
+        	<response content="3 - Le voy a hacer %unas preguntas" next="7"></response>
 		</phrase>
 		<phrase content="El mayordomo, por supuesto.% Espere... %cree que he asesinado %al señor Mraga?">
 			<response content="1 - Yo no he dicho nada,% todo lo has dicho tu%" next="3"></response>
 			<response content="2 - La historia y el instinto% me dice que fue usted" next="4"></response>
 		</phrase>
-        <phrase content="Sirvase usted mismo.% Es de la mejor cosecha del mundo.">
-			<result obj="None" move="None" event ="None" state ="0"></result>
+        <phrase content="Aqui tiene.% Es de la mejor cosecha del mundo.">
+			<result obj="Taza de Cafe" move="None" event ="None" state ="0"></result>
 			</phrase>
         <phrase content="Yo no he podido ser,% no he participado% en ningun rito raro ni nada,% yo solo se hacer cafe">
-			<result obj="None" move="None" event ="None" state ="0"></result>
+			<response content="1 - RITO??" next="5"></response>
+			<response content="2 - Si me lo dices asi..." next="6"></response>
 		</phrase>
         <phrase content="Pero es imposible señor,% debe ser un error,% yo soy un simple empleado% que se dedica a hacer cafe">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+        <phrase content="Quiero decir que estaba %en mi rito,que es ir %a comprar cafe.Siempre se% me acaba no se porque,%tome un taza!">
+			<result obj="Taza de Cafe" move="None" event ="Bar" state ="0"></result>
+		</phrase>
+        <phrase content="Gracias por su confianza!%Tome una taza de cafe!">
+			<result obj="Taza de Cafe" move="None" event ="None" state ="0"></result>
+		</phrase>
+		<phrase content="Sobre que quiere %que le hable?">
+			<response content="1 - Sobre Bolio" next="8"></response>
+			<response content="2 - Sobre Espeonza" next="9"></response>
+			<response content="3 - Sobre Cervero" next="10"></response>
+			<response content="4 - Sobre Chema" next="11"></response>
+			<response content="5 - Sobre Fanuel" next="12"></response>
+		</phrase>
+        <phrase content="El Sr. Mitin solo %piensa en dinero %Yo creo que no se ha dado %cuenta ni de que %existo hasta hoy.">
+			<result obj="Taza de Cafe" move="None" event ="None" state ="0"></result>
+		</phrase>
+        <phrase content="La Srta. Aguilar es %una nena de papa,% me ve como armario %con ruedas">
+			<result obj="Taza de Cafe" move="None" event ="None" state ="0"></result>
+		</phrase>
+        <phrase content="El Sr. Anchoa esta loco,%no se fija en las personas %sino en como puede %experimentar con ellas.">
+			<result obj="Taza de Cafe" move="None" event ="None" state ="0"></result>
+		</phrase>
+        <phrase content="El Sr. Muiz-Rateos es %muy egocentrico. %Creo que jamas me ha dirigido% la palabra.">
+			<result obj="Taza de Cafe" move="None" event ="None" state ="0"></result>
+		</phrase>
+        <phrase content="El Sr. Mraga era %como un padre para mi.% El unico de esta banda% de egocentricos que me %trataba como un ser humano.">
+			<result obj="Taza de Cafe" move="None" event ="None" state ="0"></result>
+		</phrase>
+    </dialog>
+    
+    <dialog id="0" obj="Saco de Cafe">
+        <phrase content="Buena cosecha,%es justo el que compro yo!">
+			<response content="1 - Exactamente!%y la encontre en tu despensa!%" next="1"></response>
+			<response content="2 - Me da igual,% odio el cafe!" next="2"></response>
+		</phrase>
+        <phrase content="Oh, es usted un gran detective!%Mi marca favorita%en mi despensa! Bien!">
+			<response content="1 - Sin embargo habia suficiente%cafe para no tener%que comprar en años...%" next="3"></response>
+			<response content="2 - Me da igual, odio el cafe!%(me ha pillado...)" next="2"></response>
+		</phrase>
+        <phrase content="Pues no sabe usted%lo que se pierde% Tome una.">
+			<result obj="Taza de Cafe" move="None" event ="None" state ="0"></result>
+		</phrase>
+		<phrase content="Y a quien le importa donde%estuviera el pobre mayordomo?%El Sr. Mraga era el%unico que me respetaba!%Porque iba a matarlo??%El me acogio y%me trato como a un hijo%cuando estaba destinado%a morir en la calle!">
+			<response content="1 - Se me a metido algo en el ojo.%(no voy a llorar!!)%%%" next="4"></response>
+			<response content="2 - Deberian hacer un juego%con su historia!!%%" next="5"></response>
+			<response content="3 - Sin embargo,% el resto de sospechosos%parecen no conocerle." next="6"></response>
+		</phrase>
+        <phrase content="Deberia ir a un espejo...%(Mariquita...)">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+        <phrase content="Tiene razon!%Ya he vendido la historia%Estara hecho en 3D%con el motor Unity%Una gente muy maja%lo programa.">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+        <phrase content="Esos egocentricos no%conocen ni a su propia madre!%">
+			<response content="Ahi podria darle la razon..." next="7"></response>
+		</phrase>
+        <phrase content="Les ha preguntado%por sus maravillosos ritos?%Por sus intentos de%traer al demonio al mundo?">
+			<response content="Algo me dijeron..%pero cuenta cuenta" next="8"></response>
+		</phrase>
+        <phrase content="Tienen un altar%escondido en algun lugar%Yo queria ir con ellos%Solo queria dejar de hacer cafe!%Pero me ignoraron!">
+			<response content="Aja! Cafe... continua" next="9"></response>
+		</phrase>
+        <phrase content="Tendra que ponerles%a todos contra las cuerdas%si quiere la verdad!">
+			<response content="1 - Ritos,demonios,cafe...%Creo que te inventas todo %esto para salvarte!%" next="10"></response>
+			<response content="2 - Tienes razon!%Llegare al fondo del asunto!" next="10"></response>
+		</phrase>
+        <phrase content="Eso ya es decision suya!">
+			<result obj="None" move="None" event ="CulpableCharles" state ="-1"></result>
+		</phrase>
+    </dialog>
+    
+    <dialog id="final" obj="None">
+        <phrase content="Le he dicho todo lo que se%el resto es cosa suya">
+			<response content="1 - Dame un cafe tontorron!%%" next="1"></response>
+			<response content="2 - Tiene razon!%Es la hora de BADASS!%Elegire a un culpable" next="2"></response>
+		</phrase>
+        <phrase content="Ya vera como este le gusta.">
+			<result obj="Taza de Cafe" move="None" event ="None" state ="-1"></result>
+		</phrase>
+        <phrase content="(Que tio mas raro...)">
+			<result obj="None" move="None" event ="None" state ="-1"></result>
+		</phrase>
+	</dialog>
+	
+    <dialog id="4" obj="None">
+        <phrase content="Si con eso no se puede hacer mas cafe,%vayase por favor!">
 			<result obj="None" move="None" event ="None" state ="0"></result>
 		</phrase>
     </dialog>

@@ -1,0 +1,7 @@
+<data>
+    <dialog id="1" obj="None">
+        <phrase content="Nuevos datos en la investigacion">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+    </dialog>
+</data>

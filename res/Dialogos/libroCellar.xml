@@ -1,0 +1,17 @@
+<data>
+    <dialog id="0" obj="None">
+        <phrase content="Un libro... 'Al viejo diablo le encanta el cafe'. Parece literatura de calidad.">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+    </dialog>
+    <dialog id="1" obj="None">
+        <phrase content="Un libro... 'Marcas famosas y otros acrosticos obvios'. Buf, demasiado denso como para pensarle atencion.">
+			<result obj="None" move="None" event ="None" state ="1"></result>
+		</phrase>
+    </dialog>
+    <dialog id="2" obj="None">
+        <phrase content="¡El Necrocomiccon! Siempre pensé que sería un mito.. pero parece que le han arrancado páginas. ¿Por qué harían algo así?">
+			<result obj="None" move="None" event ="None" state ="2"></result>
+		</phrase>
+    </dialog>
+</data>

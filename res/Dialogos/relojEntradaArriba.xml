@@ -1,0 +1,48 @@
+<data>
+    <dialog id="0" obj="None">
+        <phrase content="Es un reloj muy antiguo">
+			<response content="1 - Que hora es?" next="1"></response>
+			<response content="2 - Observa su interior" next="2"></response>
+			<response content="3 - Abrelo" next="2"></response>
+		</phrase>
+        <phrase content="La hora de BADASS!!%Aunque no funciona">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+        <phrase content="Hay una piedra que evita su funcionamiento">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+    </dialog>
+    <dialog id="0" obj="Bicho Volador Comepiedras">
+        <phrase content="Parece que babea con la piedra del reloj">
+			<response content="1 - En la vida hay que enseñarle%que no se puede tener todo" next="1"></response>
+			<response content="2 - Dejalo que juegue con ella" next="2"></response>
+		</phrase>
+        <phrase content="Te ha mordido el dedo!">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+        <phrase content="La piedra ha desaparecido de un bocado.%Hay una pokeball detras!% ¿Que hago con ella?">
+			<response content="Dale una patada" next="3"></response>
+			<response content="Intenta abrirla" next="4"></response>
+			<response content="Háblale cariñosamente" next="5"></response>
+		</phrase>
+        <phrase content="Ahora te duele el pie...(y la piedra ha vuelto??)">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+        <phrase content="Imposible, está atada con un nudo doble!(y la piedra ha vuelto??)">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+        <phrase content="Como si eso fuera a servir, un momento...%Has conseguido Pikachu">
+			<result obj="Pikachu" move="None" event ="None" state ="-1"></result>
+		</phrase>
+    </dialog>
+    <dialog id="final" obj="None">
+        <phrase content="Es la hora de BADASS!(No queda nada dentro)">
+			<result obj="None" move="None" event ="None" state ="-1"></result>
+		</phrase>
+    </dialog>
+    <dialog id="4" obj="None">
+        <phrase content="Como las piedras se rompen facil...">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+    </dialog>
+</data>

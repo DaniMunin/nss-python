@@ -1,0 +1,38 @@
+bibAzulGranSalon 471 1432
+bibMarronPoli 688 1439
+relojCharles 266 1683
+fregAbajoSalon 133 1654
+pimCocina 119 1514
+botSalon 163 1950
+cuadroSalon 864 1657
+bib1Cer 937 1844
+bib2Cer 1007 1844
+bib3Cer 937 1967
+bibArriba 940 1346
+
+chimEntr 1709 1486
+relojEntr 1863 1342
+cuadroEntr 1674 2187
+relojEntrAb 1788 2173
+estVinPlato 1595 1981
+est1Entr 2127 1540
+est2Entr 2274 1540
+est3Entr 2428 1540
+est4Entr 2582 1540
+
+
+dormCama 1142 739
+dormArm1 1247 673
+dormArm2 1303 673
+
+
+mesaBar 2707 1006
+mesaguayBar 2940 1117
+cuadroBar 2767
+libreria/armario bar izda 2607 799
+libreria/armario bar dcha 2810 799
+puertaRaraBar 2733 818
+
+bibDerechaComedor 2715, 177
+sillaComedor 2306, 332
+

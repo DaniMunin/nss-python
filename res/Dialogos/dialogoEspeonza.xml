@@ -2,8 +2,9 @@
 <data>
     <dialog id="1" obj="None">
         <phrase content="Buenos dias detective.% ¿Como va la investigacion?">
-        	<response content="1 - He tenido dias mejores...%" next="1"></response>
-			<response content="2 - Es un dia maravilloso en el mundo,% no me ves sonriendo?" next="2"></response>
+        	<response content="1 - He tenido dias mejores...%%" next="1"></response>
+			<response content="2 - Es un dia maravilloso en el mundo,% no me ves sonriendo?%" next="2"></response>
+			<response content="3 - Le voy a hacer %unas preguntas" next="5"></response>
 		</phrase>
 		<phrase content="Pobre detective,% necesita que le ayude en algo?">
 			<response content="1 - Puedes decir que eres culpable% y asi puedo largarme de aqui" next="3"></response>
@@ -12,10 +13,73 @@
         <phrase content="El mundo es maravilloso% y lo mejor es estar siempre sonriendo.">
 			<result obj="None" move="None" event ="evPrueba" state ="0"></result>
 			</phrase>
-        <phrase content="Pero mi papa dice% que si lo digo me encerraran.% Y yo estuve de compras% cuando el señor Mraga murio">
-			<result obj="None" move="None" event ="None" state ="0"></result>
+		<phrase content="Pero mi papa dice% que si lo digo me encerraran.% Y yo estuve de compras% cuando el señor Mraga murio">
+			<response content="1 - Entiendo... y encerrarte estaria mal" next="11"></response>
+			<response content="2 - De compras, que compraste?" next="12"></response>
 		</phrase>
         <phrase content="Hasta luego señor detective">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+		<phrase content="Sobre que quiere %que le hable?">
+			<response content="1 - Sobre Bolio" next="6"></response>
+			<response content="2 - Sobre Charles" next="7"></response>
+			<response content="3 - Sobre Cervero" next="8"></response>
+			<response content="4 - Sobre Chema" next="9"></response>
+			<response content="5 - Sobre Fanuel" next="10"></response>
+		</phrase>
+		 <phrase content="El señor Mitin es bueno,% A veces me da dinero% para comprar cosas% Y le dejo venir a mi habitacion% a bañarnos en billetes.%">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+		<phrase content="Charles es muy buen mayordomo,% siempre me trae las cosas% cuando se las pido.% Incluso a veces viene de compras conmigo.">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+		<phrase content="Cervero me da algo de miedo,% siempre esta con experimentos raros,% en ocasiones se escuchan% gritos de alli,% no me gusta acercarme">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+		<phrase content="El señor Rateos% no me cae demasiado bien.% Tambien me trae muchos regalos,% pero tiene costumbre de mentirme.">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+		<phrase content="El señor Mraga era muy buena persona,% nos dejaba estar aqui a todos,% e incluso hacia fiestas muchas veces.% Lo echare de menos.">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+		<phrase content="Si. A mi no me gustaria% que me encerraran, yo soy un ser libre">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+		<phrase content="Compre mucha ropa bonita,% toda para mi, y la guarde% en el armario de mi habitacion">
+			<response content="1 - Debe ser una ropa muy bonita" next="13"></response>
+			<response content="2 - Tu habitacion?" next="14"></response>
+		</phrase>
+		<phrase content="Es ropa preciosa, pronto la estrenare.">
+			<result obj="None" move="None" event ="RelojEntrada" state ="0"></result>
+		</phrase>
+		<phrase content="El señor Mraga% me deja usar una habitacion% para guardar mis cosas.% Aunque de vez en cuando% el señor Mitin la usa tambien.">
+			<result obj="None" move="None" event ="RelojEntrada" state ="0"></result>
+		</phrase>
+    </dialog>
+    <dialog id="0" obj="Ropa">
+        <phrase content="Buenos dias detective.% Bonita ropa,% la ha comprado ultimamente?">
+			<response content="1 - He ido a su armario% y es lo unico que habia%%" next="1"></response>
+			<response content="2 - La he encontrado por ahi,% creo que me sienta bien%" next="2"></response>
+		</phrase>
+        <phrase content="Si...% Porque...% Me gusta ir vestida de hombre.% Por eso compro esa ropa">
+			<response content="1 - Yo creo que no, y que%su coartada ha caido, en realidad%pudo haber asesinado a Mraga%%%" next="3"></response>
+			<response content="2 - Entonces como no va %vestida de hombre ahora?% Vicent Badass gana de nuevo!%" next="3"></response>
+		</phrase>
+		<phrase content="Le queda supergenial detective.%Me encantaria tener a mi ropa asi">
+			<response content="1 - Pues en realidad esta es su ropa!% La que dijo que habia comprado,% asi que se queda sin coartada senorita.%%%" next="3"></response>
+			<response content="2 - Todo le sienta bien a Vicent Badass!% Incluso la ropa que dijo que era suya!% Lo que significa que no tiene coartada.%" next="3"></response>
+		</phrase>
+        <phrase content="Yo no soy culpable% (sollozo)% yo no hice nada% (sollozo)% yo soy buena% (sollozo)">
+			<result obj="None" move="None" event ="CulpableEspeonza" state ="-1"></result>
+		</phrase>
+    </dialog>
+    <dialog id="final" obj="None">
+        <phrase content="Esta llorando desconsoladamente.% Mejor la dejo por ahora.%">
+			<result obj="None" move="None" event ="None" state ="-1"></result>
+		</phrase>
+	</dialog>
+    <dialog id="4" obj="None">
+        <phrase content="Que es eso detective?%la nueva moda de Paris??">
 			<result obj="None" move="None" event ="None" state ="0"></result>
 		</phrase>
     </dialog>

@@ -45,7 +45,6 @@ class Item(pygame.sprite.Sprite):
     
     def continuar(self, respuesta, object = None):
         if object != None and self.itemlist[self.estado].attributes['id'].value != "final":
-            print object
             self.cambiarEstado(object)
         phrase_list = self.itemlist[self.estado].getElementsByTagName("phrase")
         phrase = phrase_list[respuesta].attributes['content'].value
@@ -66,7 +65,7 @@ class Item(pygame.sprite.Sprite):
             if object in self.obj:
                 self.estado = self.obj.index(object)
             else:
-                self.estado = len(self.obj)-1
+                self.estado = len(self.obj)-1-self.estado
         if estado != None:
             if estado == -1:
                 for item in self.itemlist:

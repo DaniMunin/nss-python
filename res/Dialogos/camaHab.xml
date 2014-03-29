@@ -1,0 +1,40 @@
+<data>
+    <dialog id="0" obj="None">
+        <phrase content="Parece comoda.">
+			<response content="1 - A dormir!" next="1"></response>
+			<response content="2 - Mira debajo" next="2"></response>
+			<response content="3 - Mira bajo el colchon" next="2"></response>
+		</phrase>
+        <phrase content="No quiero mama!! Aun es pronto!">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+        <phrase content="Esta demasiado oscuro">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+        <phrase content="Pesa mucho, ni lo sueñes">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+    </dialog>
+    <dialog id="0" obj="Linterna">
+        <phrase content="Buen descubrimiento!">
+			<response content="1 - Juega a los fantasmas con la sabana" next="1"></response>
+			<response content="2 - Mira debajo de la cama" next="2"></response>
+		</phrase>
+        <phrase content="Me da mal rollo.">
+			<result obj="None" move="None" event = "None" state ="0"></result>
+		</phrase>
+        <phrase content="Hay un objeto debajo%Es una tarjeta de crédito%Sospechoso, que me dira Bolio sobre esto.%Has conseguido Tarjeta de credito">
+			<result obj="Tarjeta de credito" move="None" event ="None" state ="-1"></result>
+		</phrase>
+    </dialog>
+    <dialog id="final" obj="None">
+        <phrase content="Parece comoda, pero no es el momento!">
+			<result obj="None" move="None" event ="None" state ="-1"></result>
+		</phrase>
+    </dialog>
+    <dialog id="4" obj="None">
+        <phrase content="Claro, los objetos tambien tienen sueño...">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+    </dialog>
+</data>

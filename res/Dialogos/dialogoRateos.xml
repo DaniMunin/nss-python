@@ -2,11 +2,12 @@
 <data>
     <dialog id="1" obj="None">
         <phrase content="Hermoso dia para que venga% a molestarme detective.">
-        	<response content="1 - Ten cuidado,% no desbordes tanta amabilidad% que puedes hacerte daño%%" next="1"></response>
-			<response content="2 - Hermoso dia para cometer un asesinato,% no señor Rateos?" next="2"></response>
+        	<response content="1 - Ten cuidado,% no desbordes tanta amabilidad% que puedes hacerte dano%%" next="1"></response>
+			<response content="2 - Hermoso dia para cometer un asesinato,% no señor Rateos?%" next="2"></response>
+			<response content="3 - Paso,%Tengo unas preguntas para ti." next="5"></response>
 		</phrase>
 		<phrase content="Solo soy amable con la gente que vale la pena">
-			<response content="1 - Oh, disculpe entonces,% me voy de nuevo a mi cuchitril% y no lo molesto señor%%" next="3"></response>
+			<response content="1 - Oh, disculpe entonces,% me voy de nuevo a mi cuchitril% y no lo molesto senor" next="3"></response>
 			<response content="2 - Entonces no te hablas a ti mismo?" next="4"></response>
 		</phrase>
         <phrase content="Yo no he sido el culpable,% estaba en un acto social, %tengo 50 testigos y no pienso hablar mas,% pregunteles a ellos si no">
@@ -16,6 +17,64 @@
 			<result obj="None" move="None" event ="None" state ="0"></result>
 		</phrase>
         <phrase content="No tengo por que aguantar tus impertinencias.% Dejame en paz">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+		<phrase content="Sobre que quiere %que le hable?">
+			<response content="1 - Sobre Charles" next="6"></response>
+			<response content="2 - Sobre Espeonza" next="7"></response>
+			<response content="3 - Sobre Cervero" next="8"></response>
+			<response content="4 - Sobre Bolio" next="9"></response>
+			<response content="5 - Sobre Fanuel" next="10"></response>
+		</phrase>
+        <phrase content="Charles?%Que tiene que ver mi primogenito con esto?%O te refieres a mi tercer nieto?% Quiza mi sobrino?">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+        <phrase content="Me encanta cuando me firma%cheques sin leerlos siquiera!">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+        <phrase content="Bah, poco interesante.%Solo esta aqui porque se llevaba bien con Fanuel%No tiene mucho dinero..">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+        <phrase content="Un gran socio.% Me acaba de comprar gran cantidad de acciones% Seguro que sale todo bien jejeje.">
+			<result obj="None" move="None" event ="ComedorAct" state ="0"></result>
+		</phrase>
+        <phrase content="El se encargaba de proporcionarme -ventajas- politicas%Era un gran hombre.">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+    </dialog>
+    
+    <dialog id="0" obj="Periodico financiero">
+        <phrase content="Rayos!! De donde has sacado eso?">
+			<response content="1 - No se, queria hacer un avion y volaaaaar!" next="2"></response>
+			<response content="2 - Esto no puede ser bueno para Bolio, verdad?" next="1"></response>
+		</phrase>
+        <phrase content="Tsss callate! que nos va a escuchar!">
+			<response content="1 - Mas te vale confesar si no quieres que se lo diga!" next="3"></response>
+			<response content="2 - Vale perdona, no queria meterme en tus cosas" next="2"></response>
+		</phrase>
+        <phrase content="Jejeje eso eso. Tu calladito">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+		<phrase content="Le dire lo que quiera!">
+			<response content="1 - Esa coartada suya...%" next="4"></response>
+			<response content="2 - Confiese que lo mato usted! %Iba a dejar de darle beneficios, verdad?" next="4"></response>
+		</phrase>
+        <phrase content="Yo no lo mate! Es verdad, mi coartada es falsa%Pero no soy culpable tiene que creerme!">
+			<response content="Eso lo decidire mas adelante" next="5"></response>
+		</phrase>
+        <phrase content="Se lo prometo por uno de mis hijos!">
+			<result obj="None" move="None" event ="CulpableChema" state ="-1"></result>
+		</phrase>
+    </dialog>
+    
+    <dialog id="final" obj="None">
+        <phrase content="Dejeme en paz!% Usted tambien deberia alejarse de mi!%No soy culpable%Solo le digo que ese maldito mayordomo%no estaba antes aqui!">
+			<result obj="None" move="None" event ="None" state ="-1"></result>
+		</phrase>
+	</dialog>
+	
+    <dialog id="4" obj="None">
+        <phrase content="Eso seguro que le asusta mucho, oh Sherlock!">
 			<result obj="None" move="None" event ="None" state ="0"></result>
 		</phrase>
     </dialog>

@@ -212,7 +212,8 @@ class Jugador(Personaje):
         Personaje.__init__(self,'../res/Sprites/badassSprites.png','../res/BadassCoordJugador.txt', [6, 6, 6, 1], VELOCIDAD_JUGADOR, VELOCIDAD_SALTO_JUGADOR, RETARDO_ANIMACION_JUGADOR,(0,0),1);
         self.mask = pygame.mask.from_surface(self.image)
         self.mask2 = pygame.mask.from_surface(load_image("../res/Sprites/badassmask.png"))
-        self.speed = 7
+#         self.speed = 7
+        self.speed = 14
         self.objetos = ["Bastón", "Placa"]
 
     def mover(self, teclasPulsadas):
@@ -231,7 +232,12 @@ class Jugador(Personaje):
         x,y = self.check_collisions(move, level_mask)
         self.actualizarPostura(x, y)
 #         print self.mask.centroid()
-        
+
+    def cogerObjeto(self,objeto):
+        if not (objeto in self.objetos):
+            self.objetos.append(objeto)
+#         elif objeto == "Taza de Cafe":
+#             self.objetos
 # -------------------------------------------------
 # Clase NoJugador
 class NoJugador(Personaje):
@@ -324,7 +330,6 @@ until clear.
     
     def continuar(self, respuesta, object = None):
         if object != None and self.itemlist[self.estado].attributes['id'].value != "final":
-            print object
             self.cambiarEstado(object)
         phrase_list = self.itemlist[self.estado].getElementsByTagName("phrase")
         phrase = phrase_list[respuesta].attributes['content'].value

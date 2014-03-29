@@ -24,11 +24,11 @@ class Director():
         self.reloj = pygame.time.Clock()
 
     def ejecutar(self):
-
-        # Si la escena es de juego, la ejecutamos como un bucle
-        if isinstance(self.escena, EscenaPygame):
-          
-            while not self.salir_programa:
+        while not self.salir_programa:
+            # Si la escena es de juego, la ejecutamos como un bucle
+            if isinstance(self.escena, EscenaPygame):
+              
+                
                 tiempo_pasado = 0
                 self.salir_escena = False;
                 # El bucle del juego, las acciones que se realicen se harán en cada escena
@@ -62,25 +62,26 @@ class Director():
                     #Comprobamos si quiere cambiar de escena
                     if(self.quiere_apilar_escena != None):
                         self.ejecutarApilarEscena()
+                        
                 #Comprobamos si quiere cambiar de escena
                 if(self.quiere_cambiar_escena != None):
                     self.ejecutarCambiarEscena()
                 if self.escena == None:
                     self.salir_programa = True
             
-            # Si hemos salido del bucle, finalizamos pygame
-            pygame.quit()
-            
-        # Si no, si la escena es de animacion con pyglet, la ejecutamos de esa manera
-        elif isinstance(self.escena, EscenaPyglet):
-            # Registramos que se actualice segun la frecuencia de frames por segundo
-            pyglet.clock.schedule_interval(self.escena.update, 1/float(FPS))
-
-            # Ejecutamos la aplicacion de pyglet
-            pyglet.app.run()
-        else:
-            self.escena = None
-            raise Exception('No se que tipo de escena es')
+                # Si hemos salido del bucle, finalizamos pygame
+                pygame.quit()
+                
+            # Si no, si la escena es de animacion con pyglet, la ejecutamos de esa manera
+            elif isinstance(self.escena, EscenaPyglet):
+                # Registramos que se actualice segun la frecuencia de frames por segundo
+                pyglet.clock.schedule_interval(self.escena.update, 1/float(FPS))
+    
+                # Ejecutamos la aplicacion de pyglet
+                pyglet.app.run()
+            else:
+                self.escena = None
+                raise Exception('No se que tipo de escena es')
         
         # Al final se devuelve si se quiere salir del programa, ademas de salir de la escena
         return self.salir_programa

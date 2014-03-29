@@ -1,0 +1,44 @@
+<data>
+    <dialog id="0" obj="None">
+        <phrase content="Es un intrigante retrato %de una bella mujer">
+			<response content="1 - Besala!%" next="1"></response>
+			<response content="2 - En que epoca artistica%lo enmarcarias?" next="2"></response>
+		</phrase>
+        <phrase content="No estoy tan desesperado! (O si...)">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+        <phrase content="Es claramente una%obra renacentista flamenca% de finales del siglo XVI% de la tendencia de los reaccionarios%(Pensabas que no sabia nada eh) ">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+    </dialog>
+    <dialog id="1" obj="None">
+        <phrase content="Parece que hay algo detrás">
+			<response content="1 - Abrir cuadro%" next="1"></response>
+			<response content="2 - Dejalo como esta y besala!%" next="2"></response>
+		</phrase>
+        <phrase content="Es un libro de investigaciones%con un pentagrama en la portada!">
+			<response content="Habla sobre ritos satanicos,%convocar demonios,%vida eterna..." next="3"></response>
+		</phrase>
+        <phrase content="Sigo sin estar tan desesperado.">
+			<result obj="None" move="None" event ="None" state ="1"></result>
+		</phrase>
+        <phrase content="Son tonterias pero podría servir">
+			<result obj="Libro satanico" move="None" event ="None" state ="-1"></result>
+		</phrase>
+    </dialog>
+    <dialog id="final" obj="None">
+        <phrase content="Ya no queda nada.% A no ser que hayas vuelto para besarlo!">
+			<result obj="None" move="None" event ="None" state ="-1"></result>
+		</phrase>
+    </dialog>
+    <dialog id="3" obj="None">
+        <phrase content="Ya está abierto!% Que pretendes?">
+			<result obj="None" move="None" event ="None" state ="1"></result>
+		</phrase>
+    </dialog>
+    <dialog id="4" obj="None">
+        <phrase content="Que pretendes hacerle%a esta bella mujer?">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+    </dialog>
+</data>

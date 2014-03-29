@@ -1,0 +1,31 @@
+<data>
+    <dialog id="1" obj="None">
+        <phrase content="Menos mal que habia aqui un W.C.">
+			<response content="¿Por el fantasma?% ¿Que fantasma?" next="1"></response>
+		</phrase>
+        <phrase content="¿Por que crees que me llaman Badass?% Problemas digestivos..">
+			<response content="Creo que ahora investigaré este sitio cerrado" next="2"></response>
+		</phrase>
+        <phrase content="Es una despensa!">
+			<response content="Ahhh! Ratas!" next="3"></response>
+		</phrase>
+        <phrase content="Usar baston">
+			<response content="Usar baston con" next="4"></response>
+		</phrase>
+        <phrase content="Usar baston con rata">
+			<response content="Usar" next="5"></response>
+		</phrase>
+        <phrase content="Usar baston">
+			<response content="Usar baston con otra ratas" next="6"></response>
+		</phrase>
+        <phrase content="Usar baston">
+			<response content="Usar baston con" next="7"></response>
+		</phrase>
+        <phrase content="Usar baston con monton de ratas">
+			<response content="Eso servirá.." next="8"></response>
+		</phrase>
+        <phrase content="Un momento! Aqui hay un saco de cafe!%(Espero que ya no haya nada)">
+			<result obj="Saco de Cafe" move="None" event ="fantasmaDes" state ="0"></result>
+		</phrase>
+    </dialog>
+</data>

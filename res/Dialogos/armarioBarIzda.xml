@@ -1,0 +1,38 @@
+<data>
+    <dialog id="0" obj="None">
+        <phrase content="Esta cerrado...">
+			<response content="1 - Mira a traves de las puertas" next="1"></response>
+			<response content="2 - Intenta abrirla" next="2"></response>
+		</phrase>
+        <phrase content="Hay....%un....%CADAVER!% Es broma miedica! %No se ve nada.">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+        <phrase content="Imposible, esta cerrada con un candado.">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+    </dialog>
+    <dialog id="0" obj="LlaveBar">
+        <phrase content="Parece que encaja">
+			<response content="1 - Abrir armario%" next="1"></response>
+			<response content="2 - No creo que haya nada importante, dejalo%" next="2"></response>
+			<response content="3 - Quizá este mejor cerrado...%" next="2"></response>
+			<response content="4 - Vale, tengo miedo, nos vamos %y aqui no ha pasado nada ¿ok?" next="2"></response>
+		</phrase>
+        <phrase content="El armario esta lleno de cajas de cereales, nada importante">
+			<result obj="None" move="None" event ="fantasmaAp" state ="-1"></result>
+		</phrase>
+        <phrase content="Bah, has abierto el armario. % Esta lleno de cajas de cereales % No era para tanto...">
+			<result obj="None" move="None" event ="fantasmaAp" state ="-1"></result>
+		</phrase>
+    </dialog>
+    <dialog id="final" obj="None">
+        <phrase content="Lleno de inservibles cajas de cereales..">
+			<result obj="None" move="None" event ="None" state ="-1"></result>
+		</phrase>
+    </dialog>
+    <dialog id="4" obj="None">
+        <phrase content="No puedo guardar cosas, esta cerrado!">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+    </dialog>
+</data>
