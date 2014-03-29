@@ -18,6 +18,16 @@ OPT_KEYS = {pygame.K_1 : 1,
                pygame.K_8 : 8,
                pygame.K_9 : 9,
                pygame.K_0 : 10}
+OPT_KEYS_PUZZLE = {pygame.K_1 : 0,
+               pygame.K_2 : 1,
+               pygame.K_3 : 2,
+               pygame.K_4 : 3,
+               pygame.K_5 : 4,
+               pygame.K_6 : 5,
+               pygame.K_7 : 6,
+               pygame.K_8 : 7,
+               pygame.K_9 : 8,
+               pygame.K_0 : 9}
 TIEMPODIALOGO = 10000
 class CellarScene(EscenaPygame):
     def __init__(self, director, jugador1):
@@ -34,10 +44,12 @@ class CellarScene(EscenaPygame):
         self.keys = pygame.key.get_pressed()
         self.done = False
         self.player = jugador1
+        self.player.speed = 7
         fondo = pygame.image.load("../res/maps/first.png")
         self.level = Level(fondo, self.screen_rect.copy(), self.player)
         self.grupoJugadores = pygame.sprite.Group(jugador1)
         self.hojas =[]
+        self.pared =[]
         
         self.dialogo = 6
         self.opcion = False
@@ -75,7 +87,12 @@ class CellarScene(EscenaPygame):
         self.puertaEntrada = Item(10, "puertaCellar.xml",  "../res/Sprites/libroinvisible.png", (521, 471))
         self.libreria = Item(10, "estanteriaCellar.xml",  "../res/Sprites/libroinvisible.png", (68, 77))
         self.grupoObj = pygame.sprite.Group(self.libro0,self.libro1,self.libro2, self.pizarra, self.jarron, self.puerta, self.libreria, self.puertaEntrada)
+        self.puzzleAct = False
+        self.puzzleFin = False
+        self.opcionPuz = False
         
+        self.eventoFinalScene = EventoFinal((0,0), "FinalScene", self)
+        self.eventos.append(self.eventoFinalScene)
         
     def update(self, tiempo):
         if (self.accion):
@@ -95,6 +112,12 @@ class CellarScene(EscenaPygame):
                     self.numRes = 0
                     self.accionT, self.accionR, self.accionResult = self.empezarAccion(self.accionO, self.player.objetos[self.optEl - 1])
                 self.optEl = 0
+        elif (self.puzzleAct):
+            if self.puzzleFin:
+                self.puzzleAct = False
+                self.puzzleFin = False
+                self.numRes = 0
+                self.accionT, self.accionR, self.accionResult = self.empezarAccion(self.accionO, self.player.objetos[self.optEl - 1])
 #         elif (self.eventoAct):
 #             self.accionT, self.accionR, self.accionResult = self.continuarAccion(self.accionO, self.numRes) 
         else:   
@@ -111,6 +134,8 @@ class CellarScene(EscenaPygame):
            self.interact(self.tiempoDial, s)   
         if self.inventario:
             self.mostrarInv(s)
+        if self.puzzleAct:
+            self.puzzle(s)
         
         self.screen.blit(s, (0,0), self.level.viewport)
 
@@ -130,6 +155,26 @@ class CellarScene(EscenaPygame):
                             self.numRes = self.accionR[self.optEl - 1][1]
                             self.optEl = 0
                             self.cambiarDia = True
+                            
+        if self.opcionPuz:
+            if len(self.hojas) == 0:
+                self.comprobarPuzzle(self.pared)
+                self.opcionPuz = False
+                self.puzzleFin = True
+            for key in OPT_KEYS_PUZZLE:
+                if self.keys[key] and len(self.hojas) > OPT_KEYS_PUZZLE[key]:
+                    hoja = self.hojas.pop(int(OPT_KEYS_PUZZLE[key]))
+                    self.pared.append(hoja)
+#                     if (self.accionR == [] and len(self.player.objetos) >= OPT_KEYS[key]):
+#                         self.optEl = OPT_KEYS[key]
+#                         self.opcion = False
+#                     elif OPT_KEYS[key] <= len(self.accionR):
+#                         self.optEl = OPT_KEYS[key]
+#                         self.opcion = False
+#                         if self.accionR != None and self.accionR != []:
+#                             self.numRes = self.accionR[self.optEl - 1][1]
+#                             self.optEl = 0
+#                             self.cambiarDia = True
         #Interactuar con npc/objeto sin utilizar nada
         if self.keys[K_SPACE] and (not self.accion) and (not self.inventario):
             if (pygame.sprite.spritecollideany(self.player, self.grupoObj) != None):
@@ -140,11 +185,11 @@ class CellarScene(EscenaPygame):
         #Abrir el inventario
         if (self.keys[K_i]) and (not self.accion) and (not self.inventario):
             #Interactuar con npc/objeto utilizando un objeto
-            if (pygame.sprite.spritecollideany(self.player, self.grupoObj) != None):
-                self.accionO = pygame.sprite.spritecollideany(self.player, self.grupoObj)
-                self.mostrar = False
-            else: 
-                self.mostrar = True
+#             if (pygame.sprite.spritecollideany(self.player, self.grupoObj) != None):
+#                 self.accionO = pygame.sprite.spritecollideany(self.player, self.grupoObj)
+#                 self.mostrar = False
+#             else: 
+            self.mostrar = True
             self.inventario = True
         #Cerrar el inventario en caso de estar solo mostrandolo
         if self.inventario and self.mostrar:
@@ -153,6 +198,22 @@ class CellarScene(EscenaPygame):
             
         if self.keys[K_q] and self.accion:
             self.tiempoDial = TIEMPODIALOGO
+        if self.keys[K_h]  :  
+            self.player.objetos.append("esoasdlngrgudfpabsdiuasdpo")
+            self.player.objetos.append("emergycbjkqworghbfxgcpsefñjak")
+            self.hojas.append("esoasdlngrgudfpabsdiuasdpo")
+            self.hojas.append("emergycbjkqworghbfxgcpsefñjak")
+            self.player.objetos.append("nknpvwkfbopfwowbfldfowb")
+            self.player.objetos.append("aefbjiophzqgmifzrt")
+            self.hojas.append("nknpvwkfbopfwowbfldfowb")
+            self.hojas.append("aefbjiophzqgmifzrt")
+            self.player.objetos.append("sopqzydhhjennqmn")
+            self.player.objetos.append("fiuyhnmbvewqdghnbvgyu")
+            self.hojas.append("sopqzydhhjennqmn")
+            self.hojas.append("fiuyhnmbvewqdghnbvgyu")
+            self.player.objetos.append("cpojgkwgmwotrbmzasdkplwn")
+            self.hojas.append("cpojgkwgmwotrbmzasdkplwn")
+            self.puerta.cambiarEstado(None,4)
 #             PRUEBAS EVENTOS....
         ########################################
         #Captar eventos
@@ -167,27 +228,10 @@ class CellarScene(EscenaPygame):
                     self.tiempoDial = 0
                     self.accionO = ev
                     self.accionT, self.accionR, self.accionResult = self.empezarAccion(self.accionO)
-        if (self.keys[K_r] and self.keys[K_e]):
-            self.player.cogerObjeto("Tarjeta de credito")
-            self.player.cogerObjeto("Saco de Cafe")
-            self.player.cogerObjeto("Periodico financiero")
-            self.player.cogerObjeto("Ropa")
-            self.player.cogerObjeto("Libro satanico")
         #Esto de aqui no deberÃ­a funcionar asÃ­, si no que deberÃ­a cerrar el programa sin mÃ¡s, no llevarnos a la fase siguiente
         if event.type == pygame.QUIT or (self.keys[K_t] and self.keys[K_r]):
              escenaSig = CellarScene(self.director, self.player)
              self.director.cambiarEscena(escenaSig)
-    #Muestra el inventario hasta pulsar la tecla u o seleccionar un objeto
-    def mostrarInv(self, surface):
-        if self.optEl == 0:
-            self.tiempoDial = TIEMPODIALOGO*2
-            if not self.mostrar:
-                self.opcion = True
-            j = len(self.player.objetos) - 4
-            self.text.render(surface,"Inventario:", (0,0,0), (self.player.rect.topleft[0], self.player.rect.topleft[1] - (j+1)*30), self.screen_rect[3])
-            for i in range(len(self.player.objetos)):
-                self.text.render(surface,self.player.objetos[i], (0,0,0), (self.player.rect.topleft[0], self.player.rect.topleft[1] - j*30), self.screen_rect[3])
-                j -= 1
             
             
     def interact(self, tiempo, surface):
@@ -228,7 +272,8 @@ class CellarScene(EscenaPygame):
             #Eventos generados
             if self.accionResult[2] != "None":
                 if (self.accionResult[2] == "puzzle"):
-                    self.puzzle(self.level.draw(self.screen))
+#                     self.puzzle(self.level.draw(self.screen))
+                    self.puzzleAct = True
                 else:
                     for e in self.eventos:
                         if e.nombre==self.accionResult[2]:
@@ -252,7 +297,7 @@ class CellarScene(EscenaPygame):
         self.accion = True
         self.tiempoDial = 0
         self.primerDia = True
-        texto,respuesta,resultado = objeto.continuar(0,usar)
+        texto,respuesta,resultado = objeto.continuar(0,None)
         return texto,respuesta,resultado
     
     def continuarAccion(self, objeto, respuesta):
@@ -274,7 +319,59 @@ class CellarScene(EscenaPygame):
         print texto
         self.text.render(surface, texto, (0,0,0), (x,y), self.screen_rect[3])
         
+    def comprobarPuzzle(self, pared):
+        self.opcion = False
+        self.puerta.cambiarEstado(None,4)
+        for h in range(0,7):
+            print h
+            if h == 0:
+                hojaAct = "nknpvwkfbopfwowbfldfowb"
+            elif h== 1:
+                hojaAct = "emergycbjkqworghbfxgcpsefñjak"
+            elif h== 2:
+                hojaAct = "sopqzydhhjennqmn"
+            elif h== 3:
+                hojaAct = "cpojgkwgmwotrbmzasdkplwn"
+            elif h== 4:
+                hojaAct = "aefbjiophzqgmifzrt"
+            elif h== 5:
+                hojaAct = "fiuyhnmbvewqdghnbvgyu"
+            elif h== 6:
+                hojaAct = "esoasdlngrgudfpabsdiuasdpo"
+            else:
+                hojaAct = "nknpvwkfbopfwowbfldfowb"
+            if self.pared != [] and self.pared.pop(0)[0] == hojaAct[0]:
+                print "Bien"
+            else:
+                self.hojas.append("esoasdlngrgudfpabsdiuasdpo")
+                self.hojas.append("emergycbjkqworghbfxgcpsefñjak")
+                self.hojas.append("nknpvwkfbopfwowbfldfowb")
+                self.hojas.append("aefbjiophzqgmifzrt")
+                self.hojas.append("sopqzydhhjennqmn")
+                self.hojas.append("fiuyhnmbvewqdghnbvgyu")
+                self.hojas.append("cpojgkwgmwotrbmzasdkplwn")
+                self.pared = []
+                return None
+        self.eventosActivos.append(self.eventoFinalScene)
+            
+    
     def puzzle(self, surface):
+        if self.optEl == 0:
+            self.tiempoDial = TIEMPODIALOGO*2
+            self.opcionPuz = True
+            j = len(self.hojas) - 4
+            self.text.render(surface,"Hojas", (0,0,0), (50, 20), self.screen_rect[3])
+            for i in range(len(self.hojas)):
+                self.text.render(surface,self.hojas[i], (0,0,0), (50, 200 - j*30), self.screen_rect[3])
+                j -= 1
+            j = len(self.pared) - 4
+            self.text.render(surface,"Pared", (0,0,0), (750, 20), self.screen_rect[3])
+            for i in range(len(self.pared)):
+                self.text.render(surface,self.pared[i], (0,0,0), (750, 200 - j*30), self.screen_rect[3])
+                j -= 1
+
+    #Muestra el inventario hasta pulsar la tecla u o seleccionar un objeto
+    def mostrarInv(self, surface):
         if self.optEl == 0:
             self.tiempoDial = TIEMPODIALOGO*2
             if not self.mostrar:
@@ -284,7 +381,9 @@ class CellarScene(EscenaPygame):
             for i in range(len(self.player.objetos)):
                 self.text.render(surface,self.player.objetos[i], (0,0,0), (self.player.rect.topleft[0], self.player.rect.topleft[1] - j*30), self.screen_rect[3])
                 j -= 1
-
+    
+    def finFase(self, final):
+        self.director.cambiarEscena(final)
     
 class Level(object):
     """

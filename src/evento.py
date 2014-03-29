@@ -3,6 +3,7 @@ from pygame.locals import *
 from xml.dom import minidom
 from animacionFinalMalo import *
 from cellarScene import *
+from FinalScene import *
 
 
 class Evento(pygame.sprite.Sprite):
@@ -131,6 +132,8 @@ class EventoFinal(Evento):
             self.fase.finFase(EscenaAnimacionFinalMalo(self.fase.director, "../res/Dialogos/animacionFinalMaloCharles.xml"))
         elif self.nombre == "FinalTodos":
             self.fase.finFase(CellarScene(self.fase.director, self.fase.player))
+        elif self.nombre == "FinalScene":
+            self.fase.finFase(FinalScene(self.fase.director, self.fase.player))
         
         
 class EventoCulpable(Evento):
