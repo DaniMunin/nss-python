@@ -100,7 +100,7 @@ class EscenaAnimacionFinalMalo(EscenaPyglet, pyglet.window.Window):
         
         # Esta animacion aparecera cada tiempo determinado
         #=======================================================================
-        pyglet.clock.schedule_interval(self.aparecerRayo, 20.5)
+#         pyglet.clock.schedule_interval(self.aparecerRayo, 20.5)
         pyglet.clock.schedule_interval(self.sonidoLluvia, 6.0)
         pyglet.clock.schedule_interval(self.sonidoSoga, 6.0)
         #=======================================================================
@@ -109,8 +109,8 @@ class EscenaAnimacionFinalMalo(EscenaPyglet, pyglet.window.Window):
         self.textList = xmldoc.getElementsByTagName('phrase') 
         self.text = pyglet.text.Label(self.textList[0].attributes['content'].value,
                       font_name='X-Files', multiline=True,
-                      font_size=26, color=(255, 255, 255, 255), width = ANCHO_PANTALLA/2 - 20, 
-                      x=ANCHO_PANTALLA/4, y=ALTO_PANTALLA/2, batch = self.batch,
+                      font_size=26, color=(255, 255, 255, 255), width = ANCHO_PANTALLA/2, 
+                      x=ANCHO_PANTALLA/2, y=ALTO_PANTALLA/2, batch = self.batch,
                       anchor_x='center', anchor_y='center',
                       group = self.grupoDelante)
         self.text.draw()
@@ -211,16 +211,18 @@ class EscenaAnimacionFinalMalo(EscenaPyglet, pyglet.window.Window):
             self.text.delete()
             self.text = pyglet.text.Label(self.textList[1].attributes['content'].value,
                   font_name='X-Files', multiline=True,
-                  font_size=26, color=(255, 255, 255, 255), width = ANCHO_PANTALLA/2 - 20, 
-                  x=ANCHO_PANTALLA/4, y=ALTO_PANTALLA/2, batch = self.batch,
+                  font_size=26, color=(255, 255, 255, 255), width = ANCHO_PANTALLA/2 - 20,  
+                  x=ANCHO_PANTALLA/2, y=ALTO_PANTALLA/2, batch = self.batch,
                   anchor_x='center', anchor_y='center',
                   group = self.grupoDelante)
             self.text.draw()
-        elif self.tiempoTrans < 15 and self.tiempoTrans > 10:  
+        elif self.tiempoTrans < 15 and self.tiempoTrans > 10: 
+                if self.tiempoTrans < 10.04 and self.tiempoTrans > 10:
+                    self.playerR = self.rayoSon.play() 
                 self.text.delete()
                 self.text = pyglet.text.Label(self.textList[2].attributes['content'].value,
                       font_name='X-Files', multiline=True,
-                      font_size=26, color=(255, 255, 255, 255), width = ANCHO_PANTALLA/2 - 20, 
+                      font_size=26, color=(255, 255, 255, 255), width = ANCHO_PANTALLA/2, 
                       x=ANCHO_PANTALLA/4, y=ALTO_PANTALLA/2, batch = self.batch,
                       anchor_x='center', anchor_y='center',
                       group = self.grupoDelante)
