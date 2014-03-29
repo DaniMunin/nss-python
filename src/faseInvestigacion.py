@@ -101,7 +101,8 @@ class FaseInvestigacion(EscenaPygame):
         self.sillaComedor = ItemInvisible(10, "sillaComedor.xml", (2306, 332))
         self.relojEntradaArriba = ItemInvisible(10, "relojEntradaArriba.xml", (1863, 1342))
         self.mesaNormBar = ItemInvisible(10, "mesaNormBar.xml", (2707, 1006))
-        self.grupoObj = pygame.sprite.Group(self.chim1, self.Cuadro, self.mesaNormBar, self.relojEntradaArriba)
+        self.fanuel = ItemVisible(11, "fanuel.xml", "../res/Sprites/fanuel.png", (426,1540))
+        self.grupoObj = pygame.sprite.Group(self.chim1, self.Cuadro, self.mesaNormBar, self.relojEntradaArriba, self.fanuel)
         
         self.level.mask.draw(self.poli.mask, (self.poli.rect.center[0]-16, self.poli.rect.center[1]-30))
         self.level.mask.draw(self.espeonza.mask, (self.espeonza.rect.center[0]-20, self.espeonza.rect.center[1]-30))
@@ -109,9 +110,10 @@ class FaseInvestigacion(EscenaPygame):
         self.level.mask.draw(self.cervero.mask, (self.cervero.rect.center[0]-20, self.cervero.rect.center[1]-30))
         self.level.mask.draw(self.rateos.mask, (self.rateos.rect.center[0]-16, self.rateos.rect.center[1]-30))
         self.level.mask.draw(self.bolio.mask, (self.bolio.rect.center[0]-20, self.bolio.rect.center[1]-30))
-        self.level.mask.draw(self.poliEstorbo1.mask, (self.poliEstorbo1.rect.center[0]-20, self.poliEstorbo1.rect.center[1]-30))
-        self.level.mask.draw(self.poliEstorbo2.mask, (self.poliEstorbo2.rect.center[0]-20, self.poliEstorbo2.rect.center[1]-30))
-        self.level.mask.draw(self.poliEstorbo3.mask, (self.poliEstorbo3.rect.center[0]-20, self.poliEstorbo3.rect.center[1]-30))
+#         self.level.mask.draw(self.poliEstorbo1.mask, (self.poliEstorbo1.rect.center[0]-20, self.poliEstorbo1.rect.center[1]-30))
+#         self.level.mask.draw(self.poliEstorbo2.mask, (self.poliEstorbo2.rect.center[0]-20, self.poliEstorbo2.rect.center[1]-30))
+#         self.level.mask.draw(self.poliEstorbo3.mask, (self.poliEstorbo3.rect.center[0]-20, self.poliEstorbo3.rect.center[1]-30))
+        self.level.mask.draw(self.fanuel.mask, (self.fanuel.rect.center[0]-35, self.fanuel.rect.center[1]-35))
         
         self.evPrueba = EventoAparicion((586,1600),"evPrueba", "dialogoEventoPrueba.xml", self.espeonza, self.grupoNPCDetras,self.level.mask)
         
@@ -120,22 +122,22 @@ class FaseInvestigacion(EscenaPygame):
         self.eventosActivos = []
         self.eventos.append(self.evPrueba)
 #         self.eventosActivos.append(evPrueba)
-        self.eventoEstorbo1Des = EventoDesaparicion((586,1650),"estorbo1Des", "estorboDes.xml", self.poliEstorbo1, self.grupoNPCDelante,self.level.mask)
-        self.eventoEstorbo2Des = EventoDesaparicion((586,1650),"estorbo2Des", "estorboDes.xml", self.poliEstorbo2, self.grupoNPCDetras,self.level.mask)
-        self.eventoEstorbo3Des = EventoDesaparicion((586,1650),"estorbo3Des", "estorboDes.xml", self.poliEstorbo3, self.grupoNPCDetras,self.level.mask)
+        self.eventoEstorbo1Des = EventoDesaparicion((545,1610),"estorbo1Des", "estorboDes.xml", self.poliEstorbo1, self.grupoNPCDelante,self.level.mask)
+        self.eventoEstorbo2Des = EventoDesaparicion((545,1610),"estorbo2Des", "estorboDes.xml", self.poliEstorbo2, self.grupoNPCDetras,self.level.mask)
+        self.eventoEstorbo3Des = EventoDesaparicion((545,1610),"estorbo3Des", "estorboDes.xml", self.poliEstorbo3, self.grupoNPCDetras,self.level.mask)
         
         #Eventos para descubrir a Bolio
-        self.eventoDormitorioAct = EventoActivaItems((244,2000),"DormitorioAct", list([self.armarioHabDcha, self.CamaHab]), self.grupoObj, self.secretoSon)
-        self.eventoCulpableBolio = EventoCulpable((244,2000),"CulpableBolio", "Bolio", self.culpables,self.poli,self.eventosActivos, self.eventoEstorbo1Des, self.secretoSon, self.player.objetos, "Linterna")
+        self.eventoDormitorioAct = EventoActivaItems((100,1314),"DormitorioAct", list([self.armarioHabDcha, self.CamaHab]), self.grupoObj, self.secretoSon)
+        self.eventoCulpableBolio = EventoCulpable((100,1314),"CulpableBolio", "Bolio", self.culpables,self.poli,self.eventosActivos, self.eventoEstorbo1Des, self.secretoSon, self.player.objetos, "Linterna")
         
         self.eventos.append(self.eventoDormitorioAct)
         self.eventos.append(self.eventoCulpableBolio)
         ####################################
         
         #Eventos para descubrir a Rateos
-        self.eventoComedorAct = EventoActivaItems((244,2000),"ComedorAct", list([self.bibDchaComedor, self.sillaComedor]), self.grupoObj, self.secretoSon)
-        self.eventoPeriodicoCom = EventoCambioEstado((2306, 332),"PeriodicoCom", self.bibDchaComedor, 1, self.secretoSon)
-        self.eventoCulpableChema = EventoCulpable((244,2000),"CulpableChema", "Chema", self.culpables,self.poli,self.eventosActivos, self.eventoEstorbo1Des, self.secretoSon, self.player.objetos, None)
+        self.eventoComedorAct = EventoActivaItems((100,1314),"ComedorAct", list([self.bibDchaComedor, self.sillaComedor]), self.grupoObj, self.secretoSon)
+        self.eventoPeriodicoCom = EventoCambioEstado((2197, 149),"PeriodicoCom", self.bibDchaComedor, 1, "evDesc.xml", self.secretoSon)
+        self.eventoCulpableChema = EventoCulpable((100,1314),"CulpableChema", "Chema", self.culpables,self.poli,self.eventosActivos, self.eventoEstorbo1Des, self.secretoSon, self.player.objetos, None)
         
         self.eventos.append(self.eventoComedorAct)
         self.eventos.append(self.eventoPeriodicoCom)
@@ -144,10 +146,10 @@ class FaseInvestigacion(EscenaPygame):
 
         
         #Eventos para descubrir a Espeonza
-        self.eventoRelojEntrada = EventoActivaItems((223,1748), "RelojEntrada", list([self.relojEntrada, self.armarioHabIzda]) , self.grupoObj, self.secretoSon)
-        self.eventoLlaveEntrada = EventoAparicion((1788, 2173), "LlaveEntrada", "evVacio2.xml", self.llave, self.grupoObj, self.level.mask)
-        self.eventoDesLlaveEntrada = EventoDesaparicion((1712, 2283), "desaparecerLlave", "evVacio2.xml", self.llave, self.grupoObj, self.level.mask)
-        self.eventoCulpableEspeonza = EventoCulpable((223,1748),"CulpableEspeonza", "Espeonza", self.culpables,self.poli,self.eventosActivos, self.eventoEstorbo2Des, self.secretoSon, self.player.objetos, "LlaveArmario")
+        self.eventoRelojEntrada = EventoActivaItems((100,1314), "RelojEntrada", list([self.relojEntrada, self.armarioHabIzda]) , self.grupoObj, self.secretoSon)
+        self.eventoLlaveEntrada = EventoAparicion((1553, 2020), "LlaveEntrada", "evVacio2.xml", self.llave, self.grupoObj, self.level.mask)
+        self.eventoDesLlaveEntrada = EventoDesaparicion((1553, 2020), "desaparecerLlave", "evVacio2.xml", self.llave, self.grupoObj, self.level.mask)
+        self.eventoCulpableEspeonza = EventoCulpable((100,1314),"CulpableEspeonza", "Espeonza", self.culpables,self.poli,self.eventosActivos, self.eventoEstorbo2Des, self.secretoSon, self.player.objetos, "LlaveArmario")
         
         self.eventos.append(self.eventoRelojEntrada)
         self.eventos.append(self.eventoLlaveEntrada)
@@ -155,9 +157,9 @@ class FaseInvestigacion(EscenaPygame):
         self.eventos.append(self.eventoCulpableEspeonza)
         
         #Eventos para descubrir a Cervero
-        self.eventoHabCuadro = EventoActivaItems((993,2015),"HabCuadro", list([self.relojCuadro, self.chimCuadro]), self.grupoObj, self.secretoSon)
-        self.eventoAbreCuadro = EventoCambioEstado((3051, 1505),"abreCuadro", self.Cuadro, 1, self.secretoSon)
-        self.eventoCulpableCervero = EventoCulpable((993,2015),"CulpableCervero", "Cervero", self.culpables,self.poli,self.eventosActivos, self.eventoEstorbo3Des, self.secretoSon, self.player.objetos, "BarraMetal")
+        self.eventoHabCuadro = EventoActivaItems((100,1314),"HabCuadro", list([self.relojCuadro, self.chimCuadro]), self.grupoObj, self.secretoSon)
+        self.eventoAbreCuadro = EventoCambioEstado((2947, 1448),"abreCuadro", self.Cuadro, 1, "evAbrir.xml", self.secretoSon)
+        self.eventoCulpableCervero = EventoCulpable((100,1314),"CulpableCervero", "Cervero", self.culpables,self.poli,self.eventosActivos, self.eventoEstorbo3Des, self.secretoSon, self.player.objetos, "BarraMetal")
         
         self.eventos.append(self.eventoHabCuadro)
         self.eventos.append(self.eventoAbreCuadro)
@@ -165,13 +167,13 @@ class FaseInvestigacion(EscenaPygame):
         ####################################
         
         #Eventos para descubrir a Charles
-        self.eventoBar = EventoActivaItems((214,1555),"Bar", list([self.armarioBarIzda, self.mesaCircBar]), self.grupoObj, self.secretoSon)
+        self.eventoBar = EventoActivaItems((100,1314),"Bar", list([self.armarioBarIzda, self.mesaCircBar]), self.grupoObj, self.secretoSon)
         self.fantasma = NoJugador("../res/Sprites/poli_rudeQ.png","../res/PoliEstorboCoordJugador.txt", (2713,892), 1.5, "dialogoPoliEstorbo.xml", (0,0,255))
-        self.eventoFantasmaAp = EventoAparicion((2733,848),"fantasmaAp", "fantasmaAp.xml", self.fantasma, self.grupoNPCDelante,self.level.mask)
-        self.eventoBadassDes = EventoDesaparicion((2733,848),"badassDes", "badassDes.xml", self.player, self.grupoJugador,self.level.mask)
-        self.eventoBadassAp = EventoAparicion((2733,848),"badassAp", "badassAp.xml", self.player, self.grupoJugador,self.level.mask, False)
-        self.eventoFantasmaDes = EventoDesaparicion((2733,848),"fantasmaDes", "fantasmaDes.xml", self.fantasma, self.grupoNPCDelante,self.level.mask)
-        self.eventoCulpableCharles = EventoCulpable((214,1555),"CulpableCharles", "Charles", self.culpables,self.poli,self.eventosActivos, None, self.secretoSon, self.player.objetos, "LlaveBar")
+        self.eventoFantasmaAp = EventoAparicion((2706,774),"fantasmaAp", "fantasmaAp.xml", self.fantasma, self.grupoNPCDelante,self.level.mask)
+        self.eventoBadassDes = EventoDesaparicion((2706,774),"badassDes", "badassDes.xml", self.player, self.grupoJugador,self.level.mask)
+        self.eventoBadassAp = EventoAparicion((2706,774),"badassAp", "badassAp.xml", self.player, self.grupoJugador,self.level.mask, False)
+        self.eventoFantasmaDes = EventoDesaparicion((2706,774),"fantasmaDes", "fantasmaDes.xml", self.fantasma, self.grupoNPCDelante,self.level.mask)
+        self.eventoCulpableCharles = EventoCulpable((100,1314),"CulpableCharles", "Charles", self.culpables,self.poli,self.eventosActivos, None, self.secretoSon, self.player.objetos, "LlaveBar")
         
         self.eventos.append(self.eventoBar)
         self.eventos.append(self.eventoFantasmaAp)
@@ -182,13 +184,13 @@ class FaseInvestigacion(EscenaPygame):
         ####################################
         
         #Eventos de finales diferentes
-        self.eventoMuerteCafe = EventoFinal((2707, 1006), "MuerteCafe", self)
-        self.eventoFinalBolio = EventoFinal((586,1400), "FinalBolio", self)
-        self.eventoFinalChema = EventoFinal((586,1400), "FinalChema", self)
-        self.eventoFinalEspeonza = EventoFinal((586,1400), "FinalEspeonza", self)
-        self.eventoFinalCervero = EventoFinal((586,1400), "FinalCervero", self)
-        self.eventoFinalCharles = EventoFinal((586,1400), "FinalCharles", self)
-        self.eventoFinalTodos = EventoFinal((586,1400), "FinalTodos", self)
+        self.eventoMuerteCafe = EventoFinal((2597, 864), "MuerteCafe", self)
+        self.eventoFinalBolio = EventoFinal((100,1314), "FinalBolio", self)
+        self.eventoFinalChema = EventoFinal((100,1314), "FinalChema", self)
+        self.eventoFinalEspeonza = EventoFinal((100,1314), "FinalEspeonza", self)
+        self.eventoFinalCervero = EventoFinal((100,1314), "FinalCervero", self)
+        self.eventoFinalCharles = EventoFinal((100,1314), "FinalCharles", self)
+        self.eventoFinalTodos = EventoFinal((100,1314), "FinalTodos", self)
         
         self.eventos.append(self.eventoMuerteCafe)
         self.eventos.append(self.eventoFinalBolio)
@@ -230,7 +232,7 @@ class FaseInvestigacion(EscenaPygame):
 #             self.accionT, self.accionR, self.accionResult = self.continuarAccion(self.accionO, self.numRes) 
         else:   
             self.level.update(self.keys)
-#             print self.player.rect
+            print self.player.rect
 #         print self.rateos.rect
 #         print self.player.rect
 #         print self.poli.rect
@@ -327,6 +329,7 @@ class FaseInvestigacion(EscenaPygame):
                     self.numRes = 0
                     self.tiempoDial = 0
                     self.accionO = ev
+                    self.accionO.rect = self.player.rect
                     self.accionT, self.accionR, self.accionResult = self.empezarAccion(self.accionO)
         if (self.keys[K_r] and self.keys[K_e]):
             self.player.cogerObjeto("Tarjeta de credito")

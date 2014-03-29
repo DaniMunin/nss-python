@@ -16,7 +16,7 @@ class Evento(pygame.sprite.Sprite):
             self.itemlist = xmldoc.getElementsByTagName('dialog') 
         self.estado = 0
         self.image = pygame.image.load("../res/Sprites/sprite_invisible.png")
-        self.mask = pygame.mask.from_surface(self.image)
+        self.mask = pygame.mask.from_surface(pygame.image.load("../res/Sprites/maskEventGen.png"))
         self.mask.fill()
         self.posicion = posicion
         self.rect = self.image.get_rect() 
@@ -97,8 +97,8 @@ class EventoActivaItems(Evento):
             
 class EventoCambioEstado(Evento):
     
-    def __init__(self, posicion, nombre, objeto, estadoN, sonido = None):
-        Evento.__init__(self, posicion, nombre, "evVacio2.xml")
+    def __init__(self, posicion, nombre, objeto, estadoN, xml, sonido = None):
+        Evento.__init__(self, posicion, nombre, xml)
         self.objeto = objeto
         self.estadoN = estadoN
         self.sonido = sonido
@@ -134,7 +134,7 @@ class EventoFinal(Evento):
 class EventoCulpable(Evento):
     
     def __init__(self, posicion, nombre, culpable, culpables, poli, eventosAct, eventoN, sonido, inventario, objeto=None):
-        Evento.__init__(self, posicion, nombre, "evVacio2.xml")
+        Evento.__init__(self, posicion, nombre, "evCulp.xml")
         self.culpable = culpable
         self.culpables = culpables
         self.poli = poli
@@ -148,24 +148,24 @@ class EventoCulpable(Evento):
         canal = self.sonido.play()
         if self.culpable == "Bolio":
             if "Chema" in self.culpables:
-                self.poli.cambiarEstado(None, 2)
-                self.eventosAct.append(self.eventoN)
-            else:
-                self.poli.cambiarEstado(None, 0)
-        elif self.culpable == "Chema":
-            if "Bolio" in self.culpables:
-                self.poli.cambiarEstado(None, 2)
+                self.poli.cambiarEstado(None, 3)
                 self.eventosAct.append(self.eventoN)
             else:
                 self.poli.cambiarEstado(None, 1)
+        elif self.culpable == "Chema":
+            if "Bolio" in self.culpables:
+                self.poli.cambiarEstado(None, 3)
+                self.eventosAct.append(self.eventoN)
+            else:
+                self.poli.cambiarEstado(None, 2)
         elif self.culpable == "Espeonza":
-            self.poli.cambiarEstado(None, 3)
-            self.eventosAct.append(self.eventoN)
-        elif self.culpable == "Cervero":
             self.poli.cambiarEstado(None, 4)
             self.eventosAct.append(self.eventoN)
-        elif self.culpable == "Charles":
+        elif self.culpable == "Cervero":
             self.poli.cambiarEstado(None, 5)
+            self.eventosAct.append(self.eventoN)
+        elif self.culpable == "Charles":
+            self.poli.cambiarEstado(None, 6)
         self.culpables.append(self.culpable)
         if self.objeto != None:
             if self.objeto in self.inventario:

@@ -9,6 +9,8 @@ class Item(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         fullname = os.path.join('', imagen)
         self.image = pygame.image.load(fullname)
+        if id == 11:
+            self.image = pygame.transform.scale(self.image, (int(80), int(80)))
         self.rect = self.image.get_rect() 
         self.rect.center = pos
         screen = pygame.display.get_surface()
@@ -78,8 +80,9 @@ class Item(pygame.sprite.Sprite):
 class ItemVisible(Item):   
     def __init__(self, id, xml, imagen, pos): 
         Item.__init__(self, id, xml,imagen, pos);
-        self.mask = pygame.mask.from_surface(pygame.image.load(os.path.join('', imagen)))
-        
+        self.mask = pygame.mask.from_surface(self.image)
+        if id == 11:
+            self.mask.fill()
 
 class ItemInvisible(Item): 
     def __init__(self, id, xml, pos):
