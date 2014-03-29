@@ -334,6 +334,10 @@ class FaseInvestigacion(EscenaPygame):
             self.player.cogerObjeto("Periodico financiero")
             self.player.cogerObjeto("Ropa")
             self.player.cogerObjeto("Libro satanico")
+        if (self.keys[K_p] and self.keys[K_f]):
+             #print "Hola"
+            escenaSig = EscenaAnimacionFinalMalo(self.director, "../res/Dialogos/animacionFinalMaloCafe.xml")
+            self.director.cambiarEscena(escenaSig)
         #Esto de aqui no deberÃ­a funcionar asÃ­, si no que deberÃ­a cerrar el programa sin mÃ¡s, no llevarnos a la fase siguiente
         if event.type == pygame.QUIT or (self.keys[K_t] and self.keys[K_r]):
              #print "Hola"

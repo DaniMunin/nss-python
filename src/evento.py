@@ -116,17 +116,17 @@ class EventoFinal(Evento):
         
     def onEvent(self):
         if self.nombre == "MuerteCafe":
-            self.fase.finFase(EscenaAnimacionFinalMalo(self.fase.director, "animacionFinalMaloCafe.xml"))
+            self.fase.finFase(EscenaAnimacionFinalMalo(self.fase.director, "../res/Dialogos/animacionFinalMaloCafe.xml"))
         elif self.nombre == "FinalBolio":
-            self.fase.finFase(EscenaAnimacionFinalMalo(self.fase.director, "animacionFinalMaloBolio.xml"))
+            self.fase.finFase(EscenaAnimacionFinalMalo(self.fase.director, "../res/Dialogos/animacionFinalMaloBolio.xml"))
         elif self.nombre == "FinalChema":
-            self.fase.finFase(EscenaAnimacionFinalMalo(self.fase.director, "animacionFinalMaloChema.xml"))
+            self.fase.finFase(EscenaAnimacionFinalMalo(self.fase.director, "../res/Dialogos/animacionFinalMaloChema.xml"))
         elif self.nombre == "FinalEspeonza":
-            self.fase.finFase(EscenaAnimacionFinalMalo(self.fase.director, "animacionFinalMaloEspeonza.xml"))
+            self.fase.finFase(EscenaAnimacionFinalMalo(self.fase.director, "../res/Dialogos/animacionFinalMaloEspeonza.xml"))
         elif self.nombre == "FinalCervero":
-            self.fase.finFase(EscenaAnimacionFinalMalo(self.fase.director, "animacionFinalMaloCervero.xml"))
+            self.fase.finFase(EscenaAnimacionFinalMalo(self.fase.director, "../res/Dialogos/animacionFinalMaloCervero.xml"))
         elif self.nombre == "FinalCharles":
-            self.fase.finFase(EscenaAnimacionFinalMalo(self.fase.director, "animacionFinalMaloCharles.xml"))
+            self.fase.finFase(EscenaAnimacionFinalMalo(self.fase.director, "../res/Dialogos/animacionFinalMaloCharles.xml"))
         elif self.nombre == "FinalTodos":
             self.fase.finFase(CellarScene(self.fase.director, self.fase.player))
         

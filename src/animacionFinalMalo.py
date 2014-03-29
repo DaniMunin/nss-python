@@ -5,7 +5,7 @@ from escena import *
 import random
 from animacionSalon import *
 from xml.dom import minidom
-
+import os
 
 # Funcion auxiliar que crea una animacion a partir de una imagen que contiene la animacion
 #  dividida en filas y columnas
@@ -49,7 +49,7 @@ class EscenaAnimacionFinalMalo(EscenaPyglet, pyglet.window.Window):
         #carga del fichero de textos
         self.fullname = os.path.join('', xml)
         # La imagen de fondo
-        self.imagen = pyglet.image.load('../res/maps/finalmaloescena.png')
+        self.imagen = pyglet.resource.image('finalmaloescena.png')
         self.imagen = pyglet.sprite.Sprite(self.imagen)
         self.imagen.set_position(100, -120)
 #         self.imagen.scale = float(ANCHO_PANTALLA) / self.imagen.width
