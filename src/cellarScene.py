@@ -91,6 +91,9 @@ class CellarScene(EscenaPygame):
         self.puzzleFin = False
         self.opcionPuz = False
         
+        self.eventoInicial = EventoCambioEstado((236, 74),"evInicial", self.puerta, 2, "evCellar.xml", None)
+        self.eventosActivos.append(self.eventoInicial)
+        
         self.eventoFinalScene = EventoFinal((0,0), "FinalScene", self)
         self.eventos.append(self.eventoFinalScene)
         
@@ -323,7 +326,6 @@ class CellarScene(EscenaPygame):
         self.opcion = False
         self.puerta.cambiarEstado(None,4)
         for h in range(0,7):
-            print h
             if h == 0:
                 hojaAct = "nknpvwkfbopfwowbfldfowb"
             elif h== 1:
@@ -341,7 +343,7 @@ class CellarScene(EscenaPygame):
             else:
                 hojaAct = "nknpvwkfbopfwowbfldfowb"
             if self.pared != [] and self.pared.pop(0)[0] == hojaAct[0]:
-                print "Bien"
+                pass
             else:
                 self.hojas.append("esoasdlngrgudfpabsdiuasdpo")
                 self.hojas.append("emergycbjkqworghbfxgcpsefñjak")

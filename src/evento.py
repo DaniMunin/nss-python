@@ -39,9 +39,6 @@ class Evento(pygame.sprite.Sprite):
         return True
         
     def continuar(self, respuesta, object = None):
-        print "respuesta - "
-        print respuesta
-        print len(self.itemlist)
         phrase_list = self.itemlist[self.estado].getElementsByTagName("phrase")
         phrase = phrase_list[respuesta].attributes['content'].value
         response_list=[];
@@ -131,7 +128,7 @@ class EventoFinal(Evento):
         elif self.nombre == "FinalCharles":
             self.fase.finFase(EscenaAnimacionFinalMalo(self.fase.director, "../res/Dialogos/animacionFinalMaloCharles.xml"))
         elif self.nombre == "FinalTodos":
-            self.fase.finFase(CellarScene(self.fase.director, self.fase.player))
+            self.fase.finFase("CellarScene")
         elif self.nombre == "FinalScene":
             self.fase.finFase(FinalScene(self.fase.director, self.fase.player))
         

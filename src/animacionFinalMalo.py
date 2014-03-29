@@ -232,6 +232,6 @@ class EscenaAnimacionFinalMalo(EscenaPyglet, pyglet.window.Window):
 #             self.tiempo += 1
 #             print self.tiempo
         self.tiempoTrans += tiempo
-        print self.tiempoTrans
+#         print self.tiempoTrans
 
 

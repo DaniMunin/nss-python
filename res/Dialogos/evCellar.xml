@@ -1,0 +1,13 @@
+<data>
+    <dialog id="1" obj="None">
+        <phrase content="Que hago aqui?">
+			<response content="Me estaba luciendo y%perdi el conocimiento." next="1"></response>
+		</phrase>
+        <phrase content="En fin, tendre%que salir de aqui">
+			<response content="Esa puerta rara parece la unica salida" next="2"></response>
+		</phrase>
+        <phrase content="Vamos alla!">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+    </dialog>
+</data>

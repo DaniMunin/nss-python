@@ -1,11 +1,11 @@
 ﻿<data>
     <dialog id="0" obj="None">
-        <phrase content="No pienso volver sin resolver el caso">
+        <phrase content="No puedo volver sin resolver el caso">
 			<result obj="None" move="None" event ="None" state ="1"></result>
 		</phrase>
     </dialog>
     <dialog id="1" obj="None">
-        <phrase content="Que no, ostia!">
+        <phrase content="Que no puedo, ostia!">
 			<result obj="None" move="None" event ="None" state ="0"></result>
 		</phrase>
     </dialog>

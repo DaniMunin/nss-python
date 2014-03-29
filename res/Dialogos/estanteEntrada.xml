@@ -37,7 +37,7 @@
         <phrase content="Es anonimo. Poco mas que decir.">
 			<result obj="None" move="None" event ="None" state ="0"></result>
 		</phrase>
-        <phrase content="Que curioso.%Las primeras letras de las frases del libro son las de su autor!">
+        <phrase content="Que curioso.%Las primeras letras de las frases%del libro son las iniciales de su autor!">
 			<result obj="None" move="None" event ="None" state ="0"></result>
 		</phrase>
     </dialog>

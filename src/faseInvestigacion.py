@@ -169,7 +169,7 @@ class FaseInvestigacion(EscenaPygame):
         
         #Eventos para descubrir a Charles
         self.eventoBar = EventoActivaItems((100,1314),"Bar", list([self.armarioBarIzda, self.mesaCircBar]), self.grupoObj, self.secretoSon)
-        self.fantasma = NoJugador("../res/Sprites/poli_rudeQ.png","../res/PoliEstorboCoordJugador.txt", (2713,892), 1.5, "dialogoPoliEstorbo.xml", (0,0,255))
+        self.fantasma = NoJugador("../res/Sprites/deathE.png","../res/PoliEstorboCoordJugador.txt", (2713,892), 1.5, "evVacio.xml", (0,0,255))
         self.eventoFantasmaAp = EventoAparicion((2706,774),"fantasmaAp", "fantasmaAp.xml", self.fantasma, self.grupoNPCDelante,self.level.mask)
         self.eventoBadassDes = EventoDesaparicion((2706,774),"badassDes", "badassDes.xml", self.player, self.grupoJugador,self.level.mask)
         self.eventoBadassAp = EventoAparicion((2706,774),"badassAp", "badassAp.xml", self.player, self.grupoJugador,self.level.mask, False)
@@ -233,7 +233,7 @@ class FaseInvestigacion(EscenaPygame):
 #             self.accionT, self.accionR, self.accionResult = self.continuarAccion(self.accionO, self.numRes) 
         else:   
             self.level.update(self.keys)
-            print self.player.rect
+#             print self.player.rect
 #         print self.rateos.rect
 #         print self.player.rect
 #         print self.poli.rect
@@ -377,7 +377,10 @@ class FaseInvestigacion(EscenaPygame):
             self.opcion = True
             j = len(self.accionR)
             for i in range(len(self.accionR)):
-                self.text.render(surface,self.accionR[i][0], (0,0,0), (self.player.rect.topleft[0], self.player.rect.topleft[1] - j*30))
+                if self.accionO.rect == self.poli.rect:
+                    self.text.render(surface,self.accionR[i][0], (0,0,0), (self.player.rect.topleft[0], self.player.rect.topleft[1] - j*30 + 80))
+                else:
+                    self.text.render(surface,self.accionR[i][0], (0,0,0), (self.player.rect.topleft[0], self.player.rect.topleft[1] - j*30))
                 j -= 1
         else:
             self.cambiarDia = True
@@ -408,7 +411,11 @@ class FaseInvestigacion(EscenaPygame):
         return texto,respuesta,resultado
     
     def finFase(self, final):
-        self.director.cambiarEscena(final)
+        if final == "CellarScene":
+            escenaSig = CellarScene(self.director, self.player)
+            self.director.cambiarEscena(escenaSig)
+        else:
+            self.director.cambiarEscena(final)
     
     
 class Level(object):

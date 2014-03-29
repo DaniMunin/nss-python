@@ -1,6 +1,6 @@
 <data>
     <dialog id="1" obj="None">
-        <phrase content="Me gusta la otra mesa!">
+        <phrase content="Me gustan mas las otras mesa!">
 			<response content="1 - Que uso le ves?" next="1"></response>
 			<response content="2 - Sube encima de la mesa y baila!" next="2"></response>
 		</phrase>

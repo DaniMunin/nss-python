@@ -260,7 +260,7 @@ class NoJugador(Personaje):
         self.mask2 = self.mask
 #         self.mask.fill()
         #quitando esto funcionan colisiones
-        print self.rect
+#         print self.rect
         self.rect = Rect(self.rect.topleft[0] + posicion[0] + 20, self.rect.topleft[1] + posicion[1] + 30, 35, 75)
 
     def mover(self, direccion, cantidad):

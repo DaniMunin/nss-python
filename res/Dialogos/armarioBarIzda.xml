@@ -15,7 +15,7 @@
         <phrase content="Parece que encaja">
 			<response content="1 - Abrir armario%" next="1"></response>
 			<response content="2 - No creo que haya nada importante, dejalo%" next="2"></response>
-			<response content="3 - Quizá este mejor cerrado...%" next="2"></response>
+			<response content="3 - Quiza este mejor cerrado...%" next="2"></response>
 			<response content="4 - Vale, tengo miedo, nos vamos %y aqui no ha pasado nada ¿ok?" next="2"></response>
 		</phrase>
         <phrase content="El armario esta lleno de cajas de cereales, nada importante">

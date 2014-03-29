@@ -40,7 +40,7 @@
 		</phrase>
     </dialog>
     <dialog id="4" obj="None">
-        <phrase content="Claro, muy útil...">
+        <phrase content="Y eso con un reloj...">
 			<result obj="None" move="None" event ="None" state ="0"></result>
 		</phrase>
     </dialog>

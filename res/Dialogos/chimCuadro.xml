@@ -12,7 +12,7 @@
 		</phrase>
     </dialog>
     <dialog id="0" obj="BarraMetal">
-        <phrase content="Con esto podré llegar al fondo">
+        <phrase content="Con esto podre llegar al fondo">
 			<response content="1 - Dejala al fuego un rato %y cogela despues%" next="2"></response>
 			<response content="2 - Golpea el punto rojo.%A saber que pasa." next="1"></response>
 		</phrase>
@@ -24,7 +24,7 @@
 		</phrase>
     </dialog>
     <dialog id="final" obj="None">
-        <phrase content="Dejemoslo%No quiero volver a quemarme ni quemar nada.">
+        <phrase content="Dejemoslo%No quiero volver a%quemarme ni quemar nada.">
 			<result obj="None" move="None" event ="None" state ="-1"></result>
 		</phrase>
     </dialog>

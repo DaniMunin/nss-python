@@ -12,7 +12,7 @@
 		</phrase>
     </dialog>
     <dialog id="1" obj="None">
-        <phrase content="Parece que hay algo detrás">
+        <phrase content="Parece que hay algo detras">
 			<response content="1 - Abrir cuadro%" next="1"></response>
 			<response content="2 - Dejalo como esta y besala!%" next="2"></response>
 		</phrase>
@@ -22,7 +22,7 @@
         <phrase content="Sigo sin estar tan desesperado.">
 			<result obj="None" move="None" event ="None" state ="1"></result>
 		</phrase>
-        <phrase content="Son tonterias pero podría servir">
+        <phrase content="Son tonterias pero podria servir">
 			<result obj="Libro satanico" move="None" event ="None" state ="-1"></result>
 		</phrase>
     </dialog>
@@ -32,7 +32,7 @@
 		</phrase>
     </dialog>
     <dialog id="3" obj="None">
-        <phrase content="Ya está abierto!% Que pretendes?">
+        <phrase content="Ya esta abierto!% Que pretendes?">
 			<result obj="None" move="None" event ="None" state ="1"></result>
 		</phrase>
     </dialog>

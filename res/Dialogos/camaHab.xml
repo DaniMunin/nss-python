@@ -3,7 +3,7 @@
         <phrase content="Parece comoda.">
 			<response content="1 - A dormir!" next="1"></response>
 			<response content="2 - Mira debajo" next="2"></response>
-			<response content="3 - Mira bajo el colchon" next="2"></response>
+			<response content="3 - Mira bajo el colchon" next="3"></response>
 		</phrase>
         <phrase content="No quiero mama!! Aun es pronto!">
 			<result obj="None" move="None" event ="None" state ="0"></result>
