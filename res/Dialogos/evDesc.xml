@@ -1,6 +1,6 @@
 <data>
     <dialog id="1" obj="None">
-        <phrase content="Hora de Badass! Esto ha cambiado mi percepcion sobre otro objeto">
+        <phrase content="Hora de Badass!%Esto ha cambiado mi percepcion sobre otro objeto">
 			<result obj="None" move="None" event ="None" state ="0"></result>
 		</phrase>
     </dialog>

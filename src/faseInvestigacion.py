@@ -148,7 +148,7 @@ class FaseInvestigacion(EscenaPygame):
         #Eventos para descubrir a Espeonza
         self.eventoRelojEntrada = EventoActivaItems((100,1314), "RelojEntrada", list([self.relojEntrada, self.armarioHabIzda]) , self.grupoObj, self.secretoSon)
         self.eventoLlaveEntrada = EventoAparicion((1553, 2020), "LlaveEntrada", "evVacio2.xml", self.llave, self.grupoObj, self.level.mask)
-        self.eventoDesLlaveEntrada = EventoDesaparicion((1553, 2020), "desaparecerLlave", "evVacio2.xml", self.llave, self.grupoObj, self.level.mask)
+        self.eventoDesLlaveEntrada = EventoDesaparicion((1679, 2216), "desaparecerLlave", "evVacio.xml", self.llave, self.grupoObj, self.level.mask)
         self.eventoCulpableEspeonza = EventoCulpable((100,1314),"CulpableEspeonza", "Espeonza", self.culpables,self.poli,self.eventosActivos, self.eventoEstorbo2Des, self.secretoSon, self.player.objetos, "LlaveArmario")
         
         self.eventos.append(self.eventoRelojEntrada)

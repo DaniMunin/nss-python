@@ -62,6 +62,8 @@ class EventoDesaparicion(Evento):
         self.sprite = sprite
         self.grupo = grupo
         self.mascara = mascara
+        self.mask = pygame.mask.from_surface(pygame.image.load("../res/Sprites/maskEventDes.png"))
+        self.mask.fill()
 
     def onEvent(self):
         self.grupo.remove(self.sprite)
@@ -129,6 +131,7 @@ class EventoFinal(Evento):
             self.fase.finFase(EscenaAnimacionFinalMalo(self.fase.director, "../res/Dialogos/animacionFinalMaloCharles.xml"))
         elif self.nombre == "FinalTodos":
             self.fase.finFase(CellarScene(self.fase.director, self.fase.player))
+        
         
 class EventoCulpable(Evento):
     
