@@ -94,6 +94,7 @@ class FaseInvestigacion(EscenaPygame):
         self.Cuadro = ItemInvisible(10, "Cuadro.xml", (2925, 1505))
         self.armarioHabIzda = ItemInvisible(10, "ArmarioHabIzda.xml", (1247, 673))
         self.relojEntrada = ItemInvisible(10, "relojEntrada.xml", (1788, 2173))
+        self.estanteEntrada = ItemInvisible(10, "estanteEntrada.xml", (1595, 1981))
         self.llave = ItemVisible(10, "llave.xml", "../res/Sprites/key.png", (1712, 2283))
         self.armarioHabDcha = ItemInvisible(10, "armarioHabDcha.xml", (1303, 673))
         self.CamaHab = ItemInvisible(10, "camaHab.xml", (1142, 739))
@@ -146,7 +147,7 @@ class FaseInvestigacion(EscenaPygame):
 
         
         #Eventos para descubrir a Espeonza
-        self.eventoRelojEntrada = EventoActivaItems((100,1314), "RelojEntrada", list([self.relojEntrada, self.armarioHabIzda]) , self.grupoObj, self.secretoSon)
+        self.eventoRelojEntrada = EventoActivaItems((100,1314), "RelojEntrada", list([self.relojEntrada, self.armarioHabIzda,self.estanteEntrada]) , self.grupoObj, self.secretoSon)
         self.eventoLlaveEntrada = EventoAparicion((1553, 2020), "LlaveEntrada", "evVacio2.xml", self.llave, self.grupoObj, self.level.mask)
         self.eventoDesLlaveEntrada = EventoDesaparicion((1679, 2216), "desaparecerLlave", "evVacio.xml", self.llave, self.grupoObj, self.level.mask)
         self.eventoCulpableEspeonza = EventoCulpable((100,1314),"CulpableEspeonza", "Espeonza", self.culpables,self.poli,self.eventosActivos, self.eventoEstorbo2Des, self.secretoSon, self.player.objetos, "LlaveArmario")

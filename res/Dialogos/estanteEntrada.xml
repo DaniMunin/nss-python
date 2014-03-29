@@ -1,0 +1,65 @@
+<data>
+    <dialog id="0" obj="None">
+        <phrase content="Es una especie de estanteria">
+			<response content="1 - Especie de?" next="2"></response>
+			<response content="2 - Que libros tiene?" next="6"></response>
+			<response content="3 - Muy interesante..." next="1"></response>
+		</phrase>
+        <phrase content="Tu preguntaste...">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+        <phrase content="Si, tiene un vaso de vino y%un plato con solomillo encima">
+			<response content="1 - A comer!" next="3"></response>
+			<response content="2 - Me interesan mas los libros" next="4"></response>
+			<response content="3 - A beber!" next="5"></response>
+		</phrase>
+        <phrase content="Esta bastante rico%...Estaba">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+        <phrase content="Pues deberias haber elegido la otra opcion antes.">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+        <phrase content="Buena cosecha%Esto es bueno y no el cafe.">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+        <phrase content="Mmmm, Veamos">
+			<response content="1 - Coger El Quimote de la Jancha" next="7"></response>
+			<response content="2 - Que Demonios, coge La Moda de la Realeza" next="8"></response>
+			<response content="3 - Coger El Tamarillo de Lormes" next="9"></response>
+			<response content="4 - Coger Marcas famosas y otros acrosticos obvios" next="10"></response>
+		</phrase>
+        <phrase content="Buf..es muy denso. No me extrana que no quiera acordarse.">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+        <phrase content="Parece que se activa un mecanismo!">
+			<result obj="None" move="None" event ="LlaveEntrada" state ="-1"></result>
+		</phrase>
+        <phrase content="Es anonimo. Poco mas que decir.">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+        <phrase content="Que curioso.%Las primeras letras de las frases del libro son las de su autor!">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+    </dialog>
+    <dialog id="final" obj="None">
+        <phrase content="Mmmm, Veamos">
+			<response content="1 - Coger El Quimote de la Jancha" next="1"></response>
+			<response content="2 - Coger El Tamarillo de Lormes" next="2"></response>
+			<response content="3 - Coger Marcas famosas y otros acrosticos obvios" next="3"></response>
+		</phrase>
+        <phrase content="Buf..es muy denso. No me extrana que no quiera acordarse.">
+			<result obj="None" move="None" event ="None" state ="-1"></result>
+		</phrase>
+        <phrase content="Es anonimo. Poco mas que decir.">
+			<result obj="None" move="None" event ="None" state ="-1"></result>
+		</phrase>
+        <phrase content="Que curioso.%Las primeras letras de las frases del libro son las de su autor!">
+			<result obj="None" move="None" event ="None" state ="-1"></result>
+		</phrase>
+    </dialog>
+    <dialog id="4" obj="None">
+        <phrase content="Claro, muy útil...">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+    </dialog>
+</data>
