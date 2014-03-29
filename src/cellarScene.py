@@ -34,7 +34,7 @@ class CellarScene(EscenaPygame):
         self.keys = pygame.key.get_pressed()
         self.done = False
         self.player = jugador1
-        fondo = pygame.image.load("../res/maps/firstWithDoor.png")
+        fondo = pygame.image.load("../res/maps/first.png")
         self.level = Level(fondo, self.screen_rect.copy(), self.player)
         self.grupoJugadores = pygame.sprite.Group(jugador1)
         self.hojas =[]

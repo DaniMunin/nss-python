@@ -1,0 +1,14 @@
+<data>
+    <dialog id="1" obj="None">
+        <phrase content="Es la marca del cadaver.">
+			<response content="Examinalo a fondo" next="1"></response>
+			<response content="Pintale un bigote" next="2"></response>
+		</phrase>
+        <phrase content="Poco se puede sacar del dibujo...">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+        <phrase content="No tengo tiza!%Digo... que falta de respeto!">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+    </dialog>
+</data>
