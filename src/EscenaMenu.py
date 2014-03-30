@@ -37,7 +37,11 @@ class EscenaMenu(EscenaPyglet, pyglet.window.Window):
         if symbol == pyglet.window.key.ESCAPE:
             self.director.salirPrograma()
 
-
+    def evento(self, *args):
+        pass
+    def dibujar(self):
+        pass
+    
     # el evento que se ejecuta cada vez que hay que dibujar la pantalla
     def on_draw(self):
         # Si la ventana esta visible
