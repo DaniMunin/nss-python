@@ -312,9 +312,6 @@ class CellarScene(EscenaPygame):
         texto,respuesta,resultado = objeto.continuar(respuesta)
         return texto,respuesta,resultado
     
-    def finFase(self, final):
-        pass
-    
     def puzzle2(self, surface):
         pygame.font.init()
         self.font = pygame.font.Font('../res/XFILES.ttf', 30)
@@ -389,7 +386,11 @@ class CellarScene(EscenaPygame):
                 j -= 1
     
     def finFase(self, final):
-        self.director.cambiarEscena(final)
+        if final == "FinalScene":
+            escenaSig = FinalScene(self.director, self.player)
+            self.director.cambiarEscena(escenaSig)
+        else:
+            self.director.cambiarEscena(final)
     
 class Level(object):
     """

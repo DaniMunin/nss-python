@@ -66,7 +66,7 @@ class FinalScene(EscenaPygame):
         self.eventosActivos = []
         self.tiempoDial = 0
         
-        self.eventoInicial = EventoCambioEstado((400, 539),"evInicial", self.altar1, 0, "evFinalScene.xml", None)
+        self.eventoInicial = EventoCambioEstado((400, 939),"evInicial", self.altar1, 0, "evFinalScene.xml", None)
         self.eventosActivos.append(self.eventoInicial)
         
         self.eventoAltar1 = EventoCambioEstado((412, 283),"eventoAltar1", self.altar2, 1, "eventoAltar1.xml", None)
@@ -193,7 +193,7 @@ class FinalScene(EscenaPygame):
                 if self.accionResult[2] == "faseRein":
                     self.reiniciarFase()
                 if self.accionResult[2] == "GameOver":
-                    self.director.cambiarEscena(None)
+                    self.director.salirEscena()
                 for e in self.eventos:
                     if e.nombre==self.accionResult[2]:
                         self.eventosActivos.append(e)
