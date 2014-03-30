@@ -49,6 +49,11 @@ class FinalScene(EscenaPygame):
         self.altar4 = ItemVisible(10, "altar4.xml", "../res/Sprites/altar.png", (203, 459))
         self.altar5 = ItemVisible(10, "altar5.xml", "../res/Sprites/altar.png", (623, 459))
         self.grupoObj = pygame.sprite.Group(self.altar1, self.altar2, self.altar3, self.altar4, self.altar5)
+        self.level.mask.draw(self.altar1.mask, (self.altar1.rect.center[0]-16, self.altar1.rect.center[1]-30))
+        self.level.mask.draw(self.altar2.mask, (self.altar2.rect.center[0]-20, self.altar2.rect.center[1]-30))
+        self.level.mask.draw(self.altar3.mask, (self.altar3.rect.center[0]-20, self.altar3.rect.center[1]-30))
+        self.level.mask.draw(self.altar4.mask, (self.altar4.rect.center[0]-20, self.altar4.rect.center[1]-30))
+        self.level.mask.draw(self.altar5.mask, (self.altar5.rect.center[0]-16, self.altar5.rect.center[1]-30))
         
         self.accion= False
         self.optEl = 0

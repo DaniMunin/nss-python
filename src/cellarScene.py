@@ -92,7 +92,8 @@ class CellarScene(EscenaPygame):
         self.puzzleFin = False
         self.opcionPuz = False
         
-        self.eventoInicial = EventoCambioEstado((236, 74),"evInicial", self.puerta, 2, "evCellar.xml", None)
+        self.punchSon = pygame.mixer.Sound("../res/Sounds/punch.wav")
+        self.eventoInicial = EventoCambioEstado((236, 74),"evInicial", self.puerta, 2, "evCellar.xml", self.punchSon)
         self.eventosActivos.append(self.eventoInicial)
         
         self.eventoFinalScene = EventoFinal((0,0), "FinalScene", self)

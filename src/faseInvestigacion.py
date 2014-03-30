@@ -52,6 +52,7 @@ class FaseInvestigacion(EscenaPygame):
         self.grupoJugadores = pygame.sprite.Group(jugador1)
         
         self.secretoSon = pygame.mixer.Sound("../res/Sounds/secret.wav")
+        self.peleaSon = pygame.mixer.Sound("../res/Sounds/hits.wav")
         
         self.dialogo = 6
         self.opcion = False
@@ -169,7 +170,7 @@ class FaseInvestigacion(EscenaPygame):
         self.eventoBar = EventoActivaItems((100,1314),"Bar", list([self.armarioBarIzda, self.mesaCircBar]), self.grupoObj, self.secretoSon)
         self.fantasma = NoJugador("../res/Sprites/deathE.png","../res/PoliEstorboCoordJugador.txt", (2713,892), 1.5, "evVacio.xml", (0,0,255))
         self.eventoFantasmaAp = EventoAparicion((2706,774),"fantasmaAp", "fantasmaAp.xml", self.fantasma, self.grupoNPCDelante,self.level.mask)
-        self.eventoBadassDes = EventoDesaparicion((2706,774),"badassDes", "badassDes.xml", self.player, self.grupoJugador,self.level.mask)
+        self.eventoBadassDes = EventoDesaparicion((2706,774),"badassDes", "badassDes.xml", self.player, self.grupoJugador,self.level.mask, self.peleaSon)
         self.eventoBadassAp = EventoAparicion((2706,774),"badassAp", "badassAp.xml", self.player, self.grupoJugador,self.level.mask, False)
         self.eventoFantasmaDes = EventoDesaparicion((2706,774),"fantasmaDes", "fantasmaDes.xml", self.fantasma, self.grupoNPCDelante,self.level.mask)
         self.eventoCulpableCharles = EventoCulpable((100,1314),"CulpableCharles", "Charles", self.culpables,self.poli,self.eventosActivos, None, self.secretoSon, self.player.objetos, "LlaveBar")
@@ -315,7 +316,10 @@ class FaseInvestigacion(EscenaPygame):
                 self.mostrar = False
             elif (pygame.sprite.spritecollideany(self.player, self.grupoNPCDetras) != None) or (pygame.sprite.spritecollideany(self.player, self.grupoNPCDelante) != None):
                 self.accionO = pygame.sprite.spritecollideany(self.player, self.grupoNPC)
-                self.mostrar = False
+                if self.accionO == self.poli:
+                    self.mostrar = True
+                else:
+                    self.mostrar = False
             else: 
                 self.mostrar = True
             self.inventario = True
@@ -412,7 +416,10 @@ class FaseInvestigacion(EscenaPygame):
             j = len(self.player.objetos) - 4
             self.text.render(surface,"Inventario:", (0,0,0), (self.player.rect.topleft[0], self.player.rect.topleft[1] - (j+1)*30))
             for i in range(len(self.player.objetos)):
-                self.text.render(surface,self.player.objetos[i], (0,0,0), (self.player.rect.topleft[0], self.player.rect.topleft[1] - j*30))
+                if self.player.objetos[i] =="Bastón":
+                    self.text.render(surface,"Baston", (0,0,0), (self.player.rect.topleft[0], self.player.rect.topleft[1] - j*30))
+                else:
+                    self.text.render(surface,self.player.objetos[i], (0,0,0), (self.player.rect.topleft[0], self.player.rect.topleft[1] - j*30))
                 j -= 1
             
     def empezarAccion(self, objeto, usar = None):

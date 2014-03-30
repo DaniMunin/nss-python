@@ -55,15 +55,18 @@ class Evento(pygame.sprite.Sprite):
     
 class EventoDesaparicion(Evento):
     
-    def __init__(self, posicion, nombre, xml, sprite, grupo, mascara):
+    def __init__(self, posicion, nombre, xml, sprite, grupo, mascara, sonido = None):
         Evento.__init__(self, posicion, nombre,xml)
         self.sprite = sprite
         self.grupo = grupo
         self.mascara = mascara
         self.mask = pygame.mask.from_surface(pygame.image.load("../res/Sprites/maskEventDes.png"))
         self.mask.fill()
+        self.sonido = sonido
 
     def onEvent(self):
+        if self.sonido != None:
+            canal = self.sonido.play()
         self.grupo.remove(self.sprite)
         self.mascara.erase(self.sprite.mask, (self.sprite.rect.center[0]-20, self.sprite.rect.center[1]-30))
         
