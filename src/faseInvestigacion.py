@@ -24,7 +24,7 @@ OPT_KEYS = {pygame.K_1 : 1,
                pygame.K_8 : 8,
                pygame.K_9 : 9,
                pygame.K_0 : 10}
-TIEMPODIALOGO = 1000
+TIEMPODIALOGO = 10000
 
 class FaseInvestigacion(EscenaPygame):
     def __init__(self, director, jugador1):
@@ -39,6 +39,7 @@ class FaseInvestigacion(EscenaPygame):
         self.screen_rect = self.screen.get_rect()
 #         self.clock = pygame.time.Clock()
 #         self.fps = 60.0
+        self.songCount = 1
         self.keys = pygame.key.get_pressed()
         self.done = False
         self.player = jugador1
@@ -199,6 +200,11 @@ class FaseInvestigacion(EscenaPygame):
         self.eventos.append(self.eventoFinalTodos)
         ####################################
         
+         #Cargamos la música        
+        pygame.mixer.music.set_volume(0.2)
+        pygame.mixer.music.load("../res/Sounds/abitofhappiness.ogg")   
+        pygame.mixer.music.play()
+        
         
                 
     # Se actualiza el decorado, realizando las siguientes acciones:
@@ -209,6 +215,18 @@ class FaseInvestigacion(EscenaPygame):
     #  Se actualiza el scroll del decorado y los objetos en el
     def update(self, tiempo):
 #         self.screen.fill(pygame.Color("black"))
+        if(not pygame.mixer.music.get_busy()):
+            if(self.songCount == 1):
+                pygame.mixer.music.load("../res/Sounds/beforedawn.ogg")
+                self.songCount = self.songCount +1
+            elif(self.songCount == 2):
+                pygame.mixer.music.load("../res/Sounds/kiss.ogg")
+                self.songCount= self.songCount +1
+            else:
+                pygame.mixer.music.load("../res/Sounds/abitofhappiness.ogg")
+                self.songCount = 1
+            
+            pygame.mixer.music.play()
         if (self.accion):
             self.tiempoDial += tiempo
 #             print self.tiempoDial

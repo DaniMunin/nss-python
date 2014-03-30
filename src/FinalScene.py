@@ -87,6 +87,10 @@ class FinalScene(EscenaPygame):
         self.eventos.append(self.eventoCharlesAp)
         self.eventos.append(self.finBueno)
         
+        #Cargamos la música        
+        pygame.mixer.music.set_volume(0.2)  
+        pygame.mixer.music.load("../res/Sounds/Escape.mp3")
+        pygame.mixer.music.play(-1)
         
                 
     # Se actualiza el decorado, realizando las siguientes acciones:
