@@ -72,49 +72,49 @@
 			<response content="4 - Nadie, deja de presionarme,% voy a tomar otro cafe" next="3"></response>
 			</phrase>
         <phrase content="Hasta luego detective">
-			<result obj="None" move="None" event ="None" state ="2"></result>
+			<result obj="None" move="None" event ="None" state ="1"></result>
 		</phrase>
 		<phrase content="Señor detective, yo vine con usted, no pude ser yo...">
 			<response content="1 - Eso es lo que dicen los culpables!%%" next="10"></response>
 			<response content="2 - Puede que te de la razon por esta vez,% pero te mantendre vigilado" next="11"></response>
 		</phrase>
 		<phrase content="Para moverse utilice las flechas de direccion.% Puede desplazarse por toda la casa siempre que pueda,% no tiene restricciones, usted es la ley.">
-			<result obj="None" move="None" event ="None" state ="2"></result>
+			<result obj="None" move="None" event ="None" state ="1"></result>
 		</phrase>
 		<phrase content="Puede interaccionar con el resto de personas% simplemente usando la barra espaciadora a su lado,% despues usar los numeros para seleccionar respuestas,% si te cansas de escucharles pulsa q para que se callen%aunque esto deberias saberlo ya, no?">
-			<result obj="None" move="None" event ="None" state ="2"></result>
+			<result obj="None" move="None" event ="None" state ="1"></result>
 		</phrase>
 		<phrase content="El difunto Mraga no gastaba una casa pequeña,% y al ser usted un investigador puede recorrerla entera% (salvo que otros polis se pongan tontos,% en ese caso apartelos de una patada)% Recorra toda la casa y busque todas las pistas.% Confiamos en usted.">
-			<result obj="None" move="None" event ="None" state ="2"></result>
+			<result obj="None" move="None" event ="None" state ="1"></result>
 		</phrase>
 		<phrase content="Si pulsa la tecla i abrira el inventario y podra ver que tiene% y cerrarlo con la letra u%, si esta al lado de algun sitio interactuable% (objetos o personas) puedes usarlo seleccionandolo,% quien sabe si el usar un objeto hara a alguien confesar% o a algun objeto dar pistas.">
-			<result obj="None" move="None" event ="None" state ="2"></result>
+			<result obj="None" move="None" event ="None" state ="1"></result>
 		</phrase>
 		<phrase content="Yo se que usted no fue, lo vi llegar.% No intente bromear conmigo.% Sea serio, esto es un asesinato.">
 			<response content="1 - Estoy siendo serio novato,% soy yo quien se cargo al viejo.%%" next="12"></response>
 			<response content="2 - Bah, yo queria ir a la carcel.% Comida, techo y tatuajes gratis,% eso si es vida..." next="13"></response>
 		</phrase>
 		<phrase content="Que no soy culpable detective.% Vayase a investigar en serio y dejeme,% tengo mucho papeleo.">
-			<result obj="None" move="None" event ="None" state ="2"></result>
+			<result obj="None" move="None" event ="None" state ="1"></result>
 		</phrase>
 		<phrase content="Si... Vigileme...% Soy un criminal peligroso%">
-			<result obj="None" move="None" event ="None" state ="2"></result>
+			<result obj="None" move="None" event ="None" state ="1"></result>
 		</phrase>
 		<phrase content="Y yo fui el que le rompio el barco a Colon... Siga investigando...">
-			<result obj="None" move="None" event ="None" state ="2"></result>
+			<result obj="None" move="None" event ="None" state ="1"></result>
 		</phrase>
 		<phrase content="Le comprendo detective.% Todos querriamos ir a la carcel,% pero no todos pueden.% Y menos si eres rico.">
-			<result obj="None" move="None" event ="None" state ="2"></result>
+			<result obj="None" move="None" event ="None" state ="1"></result>
 		</phrase>
 		<phrase content="Esta seguro?% El culpable es Bolio Mitin?">
 			<response content="1 - El gran Vicent Badass nunca se equivoca!" next="15"></response>
 			<response content="2 - Tengo que seguir investigando..." next="16"></response>
 		</phrase>
 		<phrase content="Procedamos con la detencion.">
-			<result obj="None" move="None" event ="FinalBolio" state ="2"></result>
+			<result obj="None" move="None" event ="FinalBolio" state ="1"></result>
 		</phrase>
 		<phrase content="Meditelo bien,% solo tiene una oportunidad,% no ande jugando con temas tan delicados">
-			<result obj="None" move="None" event ="None" state ="2"></result>
+			<result obj="None" move="None" event ="None" state ="1"></result>
 		</phrase>
 	</dialog>
     <dialog id="2" obj="None">
@@ -136,49 +136,49 @@
 			<response content="4 - Nadie, deja de presionarme,% voy a tomar otro cafe" next="3"></response>
 			</phrase>
         <phrase content="Hasta luego detective">
-			<result obj="None" move="None" event ="None" state ="1"></result>
+			<result obj="None" move="None" event ="None" state ="2"></result>
 		</phrase>
 		<phrase content="Señor detective, yo vine con usted, no pude ser yo...">
 			<response content="1 - Eso es lo que dicen los culpables!%%" next="10"></response>
 			<response content="2 - Puede que te de la razon por esta vez,% pero te mantendre vigilado" next="11"></response>
 		</phrase>
 		<phrase content="Para moverse utilice las flechas de direccion.% Puede desplazarse por toda la casa siempre que pueda,% no tiene restricciones, usted es la ley.">
-			<result obj="None" move="None" event ="None" state ="1"></result>
+			<result obj="None" move="None" event ="None" state ="2"></result>
 		</phrase>
 		<phrase content="Puede interaccionar con el resto de personas% simplemente usando la barra espaciadora a su lado,% despues usar los numeros para seleccionar respuestas,% si te cansas de escucharles pulsa q para que se callen%aunque esto deberias saberlo ya, no?">
-			<result obj="None" move="None" event ="None" state ="1"></result>
+			<result obj="None" move="None" event ="None" state ="2"></result>
 		</phrase>
 		<phrase content="El difunto Mraga no gastaba una casa pequeña,% y al ser usted un investigador puede recorrerla entera% (salvo que otros polis se pongan tontos,% en ese caso apartelos de una patada)% Recorra toda la casa y busque todas las pistas.% Confiamos en usted.">
-			<result obj="None" move="None" event ="None" state ="1"></result>
+			<result obj="None" move="None" event ="None" state ="2"></result>
 		</phrase>
 		<phrase content="Si pulsa la tecla i abrira el inventario y podra ver que tiene% y cerrarlo con la letra u%, si esta al lado de algun sitio interactuable% (objetos o personas) puedes usarlo seleccionandolo,% quien sabe si el usar un objeto hara a alguien confesar% o a algun objeto dar pistas.">
-			<result obj="None" move="None" event ="None" state ="1"></result>
+			<result obj="None" move="None" event ="None" state ="2"></result>
 		</phrase>
 		<phrase content="Yo se que usted no fue, lo vi llegar.% No intente bromear conmigo.% Sea serio, esto es un asesinato.">
 			<response content="1 - Estoy siendo serio novato,% soy yo quien se cargo al viejo.%%" next="12"></response>
 			<response content="2 - Bah, yo queria ir a la carcel.% Comida, techo y tatuajes gratis,% eso si es vida..." next="13"></response>
 		</phrase>
 		<phrase content="Que no soy culpable detective.% Vayase a investigar en serio y dejeme,% tengo mucho papeleo.">
-			<result obj="None" move="None" event ="None" state ="1"></result>
+			<result obj="None" move="None" event ="None" state ="2"></result>
 		</phrase>
 		<phrase content="Si... Vigileme...% Soy un criminal peligroso%">
-			<result obj="None" move="None" event ="None" state ="1"></result>
+			<result obj="None" move="None" event ="None" state ="2"></result>
 		</phrase>
 		<phrase content="Y yo fui el que le rompio el barco a Colon... Siga investigando...">
-			<result obj="None" move="None" event ="None" state ="1"></result>
+			<result obj="None" move="None" event ="None" state ="2"></result>
 		</phrase>
 		<phrase content="Le comprendo detective.% Todos querriamos ir a la carcel,% pero no todos pueden.% Y menos si eres rico.">
-			<result obj="None" move="None" event ="None" state ="1"></result>
+			<result obj="None" move="None" event ="None" state ="2"></result>
 		</phrase>
 		<phrase content="Esta seguro?% El culpable es Chema Muíz Rateos?">
 			<response content="1 - El gran Vicent Badass nunca se equivoca!" next="15"></response>
 			<response content="2 - Tengo que seguir investigando..." next="16"></response>
 		</phrase>
 		<phrase content="Procedamos con la detencion.">
-			<result obj="None" move="None" event ="FinalChema" state ="1"></result>
+			<result obj="None" move="None" event ="FinalChema" state ="2"></result>
 		</phrase>
 		<phrase content="Meditelo bien,% solo tiene una oportunidad,% no ande jugando con temas tan delicados">
-			<result obj="None" move="None" event ="None" state ="1"></result>
+			<result obj="None" move="None" event ="None" state ="2"></result>
 		</phrase>
 	</dialog>
 	<dialog id="3" obj="None">
@@ -199,82 +199,6 @@
 			<response content="3 - Tú!%" next="4"></response>
 			<response content="4 - Yo!%" next="9"></response>
 			<response content="5 - Nadie, deja de presionarme,% voy a tomar otro cafe" next="3"></response>
-			</phrase>
-        <phrase content="Hasta luego detective">
-			<result obj="None" move="None" event ="None" state ="2"></result>
-		</phrase>
-		<phrase content="Señor detective, yo vine con usted, no pude ser yo...">
-			<response content="1 - Eso es lo que dicen los culpables!%%" next="10"></response>
-			<response content="2 - Puede que te de la razon por esta vez,% pero te mantendre vigilado" next="11"></response>
-		</phrase>
-		<phrase content="Para moverse utilice las flechas de direccion.% Puede desplazarse por toda la casa siempre que pueda,% no tiene restricciones, usted es la ley.">
-			<result obj="None" move="None" event ="None" state ="2"></result>
-		</phrase>
-		<phrase content="Puede interaccionar con el resto de personas% simplemente usando la barra espaciadora a su lado,% despues usar los numeros para seleccionar respuestas,% si te cansas de escucharles pulsa q para que se callen%aunque esto deberias saberlo ya, no?">
-			<result obj="None" move="None" event ="None" state ="2"></result>
-		</phrase>
-		<phrase content="El difunto Mraga no gastaba una casa pequeña,% y al ser usted un investigador puede recorrerla entera% (salvo que otros polis se pongan tontos,% en ese caso apartelos de una patada)% Recorra toda la casa y busque todas las pistas.% Confiamos en usted.">
-			<result obj="None" move="None" event ="None" state ="2"></result>
-		</phrase>
-		<phrase content="Si pulsa la tecla i abrira el inventario y podra ver que tiene% y cerrarlo con la letra u%, si esta al lado de algun sitio interactuable% (objetos o personas) puedes usarlo seleccionandolo,% quien sabe si el usar un objeto hara a alguien confesar% o a algun objeto dar pistas.">
-			<result obj="None" move="None" event ="None" state ="2"></result>
-		</phrase>
-		<phrase content="Yo se que usted no fue, lo vi llegar.% No intente bromear conmigo.% Sea serio, esto es un asesinato.">
-			<response content="1 - Estoy siendo serio novato,% soy yo quien se cargo al viejo.%%" next="12"></response>
-			<response content="2 - Bah, yo queria ir a la carcel.% Comida, techo y tatuajes gratis,% eso si es vida..." next="13"></response>
-		</phrase>
-		<phrase content="Que no soy culpable detective.% Vayase a investigar en serio y dejeme,% tengo mucho papeleo.">
-			<result obj="None" move="None" event ="None" state ="2"></result>
-		</phrase>
-		<phrase content="Si... Vigileme...% Soy un criminal peligroso%">
-			<result obj="None" move="None" event ="None" state ="2"></result>
-		</phrase>
-		<phrase content="Y yo fui el que le rompio el barco a Colon... Siga investigando...">
-			<result obj="None" move="None" event ="None" state ="2"></result>
-		</phrase>
-		<phrase content="Le comprendo detective.% Todos querriamos ir a la carcel,% pero no todos pueden.% Y menos si eres rico.">
-			<result obj="None" move="None" event ="None" state ="2"></result>
-		</phrase>
-		<phrase content="Esta seguro?% El culpable es Chema Muiz Rateos?">
-			<response content="1 - El gran Vicent Badass nunca se equivoca!" next="15"></response>
-			<response content="2 - Tengo que seguir investigando..." next="16"></response>
-		</phrase>
-		<phrase content="Procedamos con la detencion.">
-			<result obj="None" move="None" event ="FinalChema" state ="2"></result>
-		</phrase>
-		<phrase content="Meditelo bien,% solo tiene una oportunidad,% no ande jugando con temas tan delicados">
-			<result obj="None" move="None" event ="None" state ="2"></result>
-		</phrase>
-		<phrase content="Esta seguro?% El culpable es Bolio Mitin?">
-			<response content="1 - El gran Vicent Badass nunca se equivoca!" next="18"></response>
-			<response content="2 - Tengo que seguir investigando..." next="19"></response>
-		</phrase>
-		<phrase content="Procedamos con la detencion.">
-			<result obj="None" move="None" event ="FinalBolio" state ="2"></result>
-		</phrase>
-		<phrase content="Meditelo bien,% solo tiene una oportunidad,% no ande jugando con temas tan delicados">
-			<result obj="None" move="None" event ="None" state ="2"></result>
-		</phrase>
-	</dialog>
-	<dialog id="4" obj="None">
-        <phrase content="Que tal la investigacion detective,% ha encontrado ya al culpable?%">
-        	<response content="1 - Mi amigo invisible esta algo perdido% y necesita ayuda,% pero no me apetece darsela a mi%%" next="1"></response>
-			<response content="2 - Claro que conozco al culpable,% soy Vicent Badass al fin y al cabo!%" next="2"></response>
-			<response content="3 - No me interrumpas en mi investigacion, notavo%" next="3"></response>
-		</phrase>
-		<phrase content="Lo comprendo,% el gran Vicent Badass% no puede perder su tiempo explicando eso.% Si se quiere resolver este caso% tiene que moverse, % yo empezaria hablando con los sospechosos% e investigando las habitaciones,% presentandoles objetos si fuese necesario%">
-			<response content="1 - Moverse?" next="5"></response>
-			<response content="2 - Preguntar a sospechosos?" next="6"></response>
-			<response content="3 - Investigar habitaciones?" next="7"></response>
-			<response content="4 - Usar objetos?" next="8"></response>
-		</phrase>
-        <phrase content="El culpable ya?% Por fin podre ver a Vicent Badass en accion!% Y quien es el culpable?">
-        	<response content="1 - Rateos%" next="14"></response>
-        	<response content="2 - Bolio%" next="17"></response>
-        	<response content="3 - Espeonza%" next="20"></response>
-			<response content="4 - Tú!%" next="4"></response>
-			<response content="5 - Yo!%" next="9"></response>
-			<response content="6 - Nadie, deja de presionarme,% voy a tomar otro cafe" next="3"></response>
 			</phrase>
         <phrase content="Hasta luego detective">
 			<result obj="None" move="None" event ="None" state ="3"></result>
@@ -331,18 +255,8 @@
 		<phrase content="Meditelo bien,% solo tiene una oportunidad,% no ande jugando con temas tan delicados">
 			<result obj="None" move="None" event ="None" state ="3"></result>
 		</phrase>
-		<phrase content="Esta seguro?% La culpable es Espeonza Aguilar?">
-			<response content="1 - El gran Vicent Badass nunca se equivoca!" next="21"></response>
-			<response content="2 - Tengo que seguir investigando..." next="22"></response>
-		</phrase>
-		<phrase content="Procedamos con la detencion.">
-			<result obj="None" move="None" event ="FinalEspeonza" state ="3"></result>
-		</phrase>
-		<phrase content="Meditelo bien,% solo tiene una oportunidad,% no ande jugando con temas tan delicados">
-			<result obj="None" move="None" event ="None" state ="3"></result>
-		</phrase>
 	</dialog>
-	<dialog id="5" obj="None">
+	<dialog id="4" obj="None">
         <phrase content="Que tal la investigacion detective,% ha encontrado ya al culpable?%">
         	<response content="1 - Mi amigo invisible esta algo perdido% y necesita ayuda,% pero no me apetece darsela a mi%%" next="1"></response>
 			<response content="2 - Claro que conozco al culpable,% soy Vicent Badass al fin y al cabo!%" next="2"></response>
@@ -358,10 +272,9 @@
         	<response content="1 - Rateos%" next="14"></response>
         	<response content="2 - Bolio%" next="17"></response>
         	<response content="3 - Espeonza%" next="20"></response>
-        	<response content="4 - Cervero%" next="23"></response>
-			<response content="5 - Tú!%" next="4"></response>
-			<response content="6 - Yo!%" next="9"></response>
-			<response content="7 - Nadie, deja de presionarme,% voy a tomar otro cafe" next="3"></response>
+			<response content="4 - Tú!%" next="4"></response>
+			<response content="5 - Yo!%" next="9"></response>
+			<response content="6 - Nadie, deja de presionarme,% voy a tomar otro cafe" next="3"></response>
 			</phrase>
         <phrase content="Hasta luego detective">
 			<result obj="None" move="None" event ="None" state ="4"></result>
@@ -428,18 +341,8 @@
 		<phrase content="Meditelo bien,% solo tiene una oportunidad,% no ande jugando con temas tan delicados">
 			<result obj="None" move="None" event ="None" state ="4"></result>
 		</phrase>
-		<phrase content="Esta seguro?% El culpable es Cervero Anchoa?">
-			<response content="1 - El gran Vicent Badass nunca se equivoca!" next="21"></response>
-			<response content="2 - Tengo que seguir investigando..." next="22"></response>
-		</phrase>
-		<phrase content="Procedamos con la detencion.">
-			<result obj="None" move="None" event ="FinalCervero" state ="4"></result>
-		</phrase>
-		<phrase content="Meditelo bien,% solo tiene una oportunidad,% no ande jugando con temas tan delicados">
-			<result obj="None" move="None" event ="None" state ="4"></result>
-		</phrase>
 	</dialog>
-	<dialog id="6" obj="None">
+	<dialog id="5" obj="None">
         <phrase content="Que tal la investigacion detective,% ha encontrado ya al culpable?%">
         	<response content="1 - Mi amigo invisible esta algo perdido% y necesita ayuda,% pero no me apetece darsela a mi%%" next="1"></response>
 			<response content="2 - Claro que conozco al culpable,% soy Vicent Badass al fin y al cabo!%" next="2"></response>
@@ -456,11 +359,9 @@
         	<response content="2 - Bolio%" next="17"></response>
         	<response content="3 - Espeonza%" next="20"></response>
         	<response content="4 - Cervero%" next="23"></response>
-        	<response content="5 - Charles%" next="26"></response>
-			<response content="6 - Tú!%" next="4"></response>
-			<response content="7 - Yo!%" next="9"></response>
-        	<response content="8 - Todos!!!!%" next="29"></response>
-			<response content="9 - Nadie, deja de presionarme,% voy a tomar otro cafe" next="3"></response>
+			<response content="5 - Tú!%" next="4"></response>
+			<response content="6 - Yo!%" next="9"></response>
+			<response content="7 - Nadie, deja de presionarme,% voy a tomar otro cafe" next="3"></response>
 			</phrase>
         <phrase content="Hasta luego detective">
 			<result obj="None" move="None" event ="None" state ="5"></result>
@@ -528,8 +429,8 @@
 			<result obj="None" move="None" event ="None" state ="5"></result>
 		</phrase>
 		<phrase content="Esta seguro?% El culpable es Cervero Anchoa?">
-			<response content="1 - El gran Vicent Badass nunca se equivoca!" next="24"></response>
-			<response content="2 - Tengo que seguir investigando..." next="25"></response>
+			<response content="1 - El gran Vicent Badass nunca se equivoca!" next="21"></response>
+			<response content="2 - Tengo que seguir investigando..." next="22"></response>
 		</phrase>
 		<phrase content="Procedamos con la detencion.">
 			<result obj="None" move="None" event ="FinalCervero" state ="5"></result>
@@ -537,25 +438,124 @@
 		<phrase content="Meditelo bien,% solo tiene una oportunidad,% no ande jugando con temas tan delicados">
 			<result obj="None" move="None" event ="None" state ="5"></result>
 		</phrase>
+	</dialog>
+	<dialog id="6" obj="None">
+        <phrase content="Que tal la investigacion detective,% ha encontrado ya al culpable?%">
+        	<response content="1 - Mi amigo invisible esta algo perdido% y necesita ayuda,% pero no me apetece darsela a mi%%" next="1"></response>
+			<response content="2 - Claro que conozco al culpable,% soy Vicent Badass al fin y al cabo!%" next="2"></response>
+			<response content="3 - No me interrumpas en mi investigacion, notavo%" next="3"></response>
+		</phrase>
+		<phrase content="Lo comprendo,% el gran Vicent Badass% no puede perder su tiempo explicando eso.% Si se quiere resolver este caso% tiene que moverse, % yo empezaria hablando con los sospechosos% e investigando las habitaciones,% presentandoles objetos si fuese necesario%">
+			<response content="1 - Moverse?" next="5"></response>
+			<response content="2 - Preguntar a sospechosos?" next="6"></response>
+			<response content="3 - Investigar habitaciones?" next="7"></response>
+			<response content="4 - Usar objetos?" next="8"></response>
+		</phrase>
+        <phrase content="El culpable ya?% Por fin podre ver a Vicent Badass en accion!% Y quien es el culpable?">
+        	<response content="1 - Rateos%" next="14"></response>
+        	<response content="2 - Bolio%" next="17"></response>
+        	<response content="3 - Espeonza%" next="20"></response>
+        	<response content="4 - Cervero%" next="23"></response>
+        	<response content="5 - Charles%" next="26"></response>
+			<response content="6 - Tú!%" next="4"></response>
+			<response content="7 - Yo!%" next="9"></response>
+        	<response content="8 - Todos!!!!%" next="29"></response>
+			<response content="9 - Nadie, deja de presionarme,% voy a tomar otro cafe" next="3"></response>
+			</phrase>
+        <phrase content="Hasta luego detective">
+			<result obj="None" move="None" event ="None" state ="6"></result>
+		</phrase>
+		<phrase content="Señor detective, yo vine con usted, no pude ser yo...">
+			<response content="1 - Eso es lo que dicen los culpables!%%" next="10"></response>
+			<response content="2 - Puede que te de la razon por esta vez,% pero te mantendre vigilado" next="11"></response>
+		</phrase>
+		<phrase content="Para moverse utilice las flechas de direccion.% Puede desplazarse por toda la casa siempre que pueda,% no tiene restricciones, usted es la ley.">
+			<result obj="None" move="None" event ="None" state ="6"></result>
+		</phrase>
+		<phrase content="Puede interaccionar con el resto de personas% simplemente usando la barra espaciadora a su lado,% despues usar los numeros para seleccionar respuestas,% si te cansas de escucharles pulsa q para que se callen%aunque esto deberias saberlo ya, no?">
+			<result obj="None" move="None" event ="None" state ="6"></result>
+		</phrase>
+		<phrase content="El difunto Mraga no gastaba una casa pequeña,% y al ser usted un investigador puede recorrerla entera% (salvo que otros polis se pongan tontos,% en ese caso apartelos de una patada)% Recorra toda la casa y busque todas las pistas.% Confiamos en usted.">
+			<result obj="None" move="None" event ="None" state ="6"></result>
+		</phrase>
+		<phrase content="Si pulsa la tecla i abrira el inventario y podra ver que tiene% y cerrarlo con la letra u%, si esta al lado de algun sitio interactuable% (objetos o personas) puedes usarlo seleccionandolo,% quien sabe si el usar un objeto hara a alguien confesar% o a algun objeto dar pistas.">
+			<result obj="None" move="None" event ="None" state ="6"></result>
+		</phrase>
+		<phrase content="Yo se que usted no fue, lo vi llegar.% No intente bromear conmigo.% Sea serio, esto es un asesinato.">
+			<response content="1 - Estoy siendo serio novato,% soy yo quien se cargo al viejo.%%" next="12"></response>
+			<response content="2 - Bah, yo queria ir a la carcel.% Comida, techo y tatuajes gratis,% eso si es vida..." next="13"></response>
+		</phrase>
+		<phrase content="Que no soy culpable detective.% Vayase a investigar en serio y dejeme,% tengo mucho papeleo.">
+			<result obj="None" move="None" event ="None" state ="6"></result>
+		</phrase>
+		<phrase content="Si... Vigileme...% Soy un criminal peligroso%">
+			<result obj="None" move="None" event ="None" state ="6"></result>
+		</phrase>
+		<phrase content="Y yo fui el que le rompio el barco a Colon... Siga investigando...">
+			<result obj="None" move="None" event ="None" state ="6"></result>
+		</phrase>
+		<phrase content="Le comprendo detective.% Todos querriamos ir a la carcel,% pero no todos pueden.% Y menos si eres rico.">
+			<result obj="None" move="None" event ="None" state ="6"></result>
+		</phrase>
+		<phrase content="Esta seguro?% El culpable es Chema Muiz Rateos?">
+			<response content="1 - El gran Vicent Badass nunca se equivoca!" next="15"></response>
+			<response content="2 - Tengo que seguir investigando..." next="16"></response>
+		</phrase>
+		<phrase content="Procedamos con la detencion.">
+			<result obj="None" move="None" event ="FinalChema" state ="6"></result>
+		</phrase>
+		<phrase content="Meditelo bien,% solo tiene una oportunidad,% no ande jugando con temas tan delicados">
+			<result obj="None" move="None" event ="None" state ="6"></result>
+		</phrase>
+		<phrase content="Esta seguro?% El culpable es Bolio Mitin?">
+			<response content="1 - El gran Vicent Badass nunca se equivoca!" next="18"></response>
+			<response content="2 - Tengo que seguir investigando..." next="19"></response>
+		</phrase>
+		<phrase content="Procedamos con la detencion.">
+			<result obj="None" move="None" event ="FinalBolio" state ="6"></result>
+		</phrase>
+		<phrase content="Meditelo bien,% solo tiene una oportunidad,% no ande jugando con temas tan delicados">
+			<result obj="None" move="None" event ="None" state ="6"></result>
+		</phrase>
+		<phrase content="Esta seguro?% La culpable es Espeonza Aguilar?">
+			<response content="1 - El gran Vicent Badass nunca se equivoca!" next="21"></response>
+			<response content="2 - Tengo que seguir investigando..." next="22"></response>
+		</phrase>
+		<phrase content="Procedamos con la detencion.">
+			<result obj="None" move="None" event ="FinalEspeonza" state ="6"></result>
+		</phrase>
+		<phrase content="Meditelo bien,% solo tiene una oportunidad,% no ande jugando con temas tan delicados">
+			<result obj="None" move="None" event ="None" state ="6"></result>
+		</phrase>
+		<phrase content="Esta seguro?% El culpable es Cervero Anchoa?">
+			<response content="1 - El gran Vicent Badass nunca se equivoca!" next="24"></response>
+			<response content="2 - Tengo que seguir investigando..." next="25"></response>
+		</phrase>
+		<phrase content="Procedamos con la detencion.">
+			<result obj="None" move="None" event ="FinalCervero" state ="6"></result>
+		</phrase>
+		<phrase content="Meditelo bien,% solo tiene una oportunidad,% no ande jugando con temas tan delicados">
+			<result obj="None" move="None" event ="None" state ="6"></result>
+		</phrase>
 		<phrase content="Esta seguro?% El culpable es Charles, el mayordomo?">
 			<response content="1 - El gran Vicent Badass nunca se equivoca!" next="27"></response>
 			<response content="2 - Tengo que seguir investigando..." next="28"></response>
 		</phrase>
 		<phrase content="Procedamos con la detencion.">
-			<result obj="None" move="None" event ="FinalCharles" state ="5"></result>
+			<result obj="None" move="None" event ="FinalCharles" state ="6"></result>
 		</phrase>
 		<phrase content="Meditelo bien,% solo tiene una oportunidad,% no ande jugando con temas tan delicados">
-			<result obj="None" move="None" event ="None" state ="5"></result>
+			<result obj="None" move="None" event ="None" state ="6"></result>
 		</phrase>
 		<phrase content="Esta seguro?% Es otro de los milagros Badass?">
 			<response content="1 - Exacto! Es tiempo de BADASS" next="30"></response>
 			<response content="2 - Tengo que seguir investigando..." next="31"></response>
 		</phrase>
 		<phrase content="Procedamos con la detencion.">
-			<result obj="None" move="None" event ="FinalTodos" state ="5"></result>
+			<result obj="None" move="None" event ="FinalTodos" state ="6"></result>
 		</phrase>
 		<phrase content="Meditelo bien,% solo tiene una oportunidad,% no ande jugando con temas tan delicados">
-			<result obj="None" move="None" event ="None" state ="5"></result>
+			<result obj="None" move="None" event ="None" state ="6"></result>
 		</phrase>
 	</dialog>
     <dialog id="7" obj="None">
