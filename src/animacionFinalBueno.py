@@ -5,41 +5,11 @@ from escena import *
 import random
 from animacionSalon import *
 from xml.dom import minidom
+import os
 
-VELOCIDAD_TANQUE = 100 # Pixels por segundo
-VELOCIDAD_ROTACION_TANQUE = 10 # Grados por segundo
-VELOCIDAD_CORREDOR = 50 # Pixels por segundo
-VELOCIDAD_ARRIBA = 30 # Pixels por segundo
+VELOCIDAD_BADASS = 20 # Pixels por segundo
 
-# Funcion auxiliar que crea una animacion a partir de una imagen que contiene la animacion
-#  dividida en filas y columnas
-def crearFramesAnimacion(nombreImagen, filas, columnas):
-    # Cargamos la secuencia de imagenes del archivo
-    secuenciaImagenes = pyglet.image.ImageGrid(pyglet.image.load(nombreImagen), filas, columnas)
-    # Creamos la secuencia de frames
-    secuenciaFrames = []
-    # Para cada fila, del final al principio
-    for fila in range(filas, 0, -1):
-        end = fila * columnas
-        start = end - (columnas -1) -1
-        # Para cada imagen de la fila
-        for imagen in secuenciaImagenes[start:end:1]:
-            # Creamos un frame con esa imagen, indicandole que tendra una duracion de 0.5 segundos
-            frame = pyglet.image.AnimationFrame(imagen, 0.1)
-            #  y la anadimos a la secuencia de frames
-            secuenciaFrames.append(frame)
-
-    # Devolvemos la secuencia de frames
-    return secuenciaFrames
-
-
-
-
-# -------------------------------------------------
-# Clase para las animaciones que solo ocurriran una vez
-#  (sin bucles)
-
-class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
+class EscenaAnimacionFinalBueno(EscenaPyglet, pyglet.window.Window):
     
     
     def __init__(self, director):
@@ -56,11 +26,11 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
         self.imagen = pyglet.image.load('../res/maps/entrada.jpg')
         self.imagen = pyglet.sprite.Sprite(self.imagen)
         self.imagen.scale = float(ANCHO_PANTALLA) / self.imagen.width
+        self.imagen.set_position(0, -200)
 
         # Las animaciones que habra en esta escena
         # No se crean aqui las animaciones en si, porque se empiezan a reproducir cuando se crean
         # Lo que se hace es cargar los frames de disco para que cuando se creen ya esten en memoria
-        
         
 
         # Creamos el batch de las animaciones
@@ -74,10 +44,14 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
         xfiles = pyglet.font.load('X-Files')
         self.lluviaSon = pyglet.resource.media('rain.wav', streaming=False)
         self.rayoSon = pyglet.resource.media("thunder.wav", streaming=False)
+        self.suspSon = pyglet.resource.media('suspense.wav', streaming=False)
         self.playerR = self.rayoSon.play()
         self.playerL = self.lluviaSon.play()
-        self.playerL.stop()
+        self.playerL.pause()
+        self.playerM = self.suspSon.play()
+        self.playerM.pause()
         
+        self.tiempoTrans = 0
 
         # La animacion del rayo
         #=======================================================================
@@ -145,7 +119,7 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
         # La animacion del corredor: hay que leerlo de la hoja de Sprite
 
         # Leemos la hoja del Sprite del fichero
-        hoja = pyglet.image.load('../res/Sprites/badass.png')
+        hoja = pyglet.image.load('../res/Sprites/badassSprites.png')
 
         # Introducimos manualmente el valor del canal alpha:
         #  Aquellos pixels cuyo RGB sea igual al pixel de la posicion (0, 0) no se veran
@@ -170,28 +144,24 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
         datos=pfile.read()
         pfile.close()
         datos = datos.split()
-        corredorFrames = []
-        espaldasFrames = []
+        badassFrames = []
         for coord in range(6):
-            corredorFrames.append(pyglet.image.AnimationFrame(hoja.get_region(int(datos[24 + coord*4]), hoja.height-int(datos[24 + coord*4 + 1])-int(datos[24 + coord*4 + 3]), int(datos[24 + coord*4 + 2]), int(datos[24 + coord*4 + 3])), 0.1))
-        for coord in range(6):
-            espaldasFrames.append(pyglet.image.AnimationFrame(hoja.get_region(int(datos[coord*4]), hoja.height-int(datos[coord*4 + 1])-int(datos[coord*4 + 3]), int(datos[coord*4 + 2]), int(datos[coord*4 + 3])), 0.1))
+            badassFrames.append(pyglet.image.AnimationFrame(hoja.get_region(int(datos[48 + coord*4]), hoja.height-int(datos[48 + coord*4 + 1])-int(datos[48 + coord*4 + 3]), int(datos[48 + coord*4 + 2]), int(datos[48 + coord*4 + 3])), 0.1))
+#         for coord in range(6):
+#             espaldasFrames.append(pyglet.image.AnimationFrame(hoja.get_region(int(datos[coord*4]), hoja.height-int(datos[coord*4 + 1])-int(datos[coord*4 + 3]), int(datos[coord*4 + 2]), int(datos[coord*4 + 3])), 0.1))
         # A partir de los frames, se crea la animacion
-        self.animacionCorredor = pyglet.sprite.Sprite(pyglet.image.Animation(corredorFrames), batch=self.batch, group=self.grupoDetras)
-        self.animacionCorredor.set_position(700,40)
-        self.animacionCorredor.scale = 1
+        self.animacionBadass = pyglet.sprite.Sprite(pyglet.image.Animation(badassFrames), batch=self.batch, group=self.grupoDetras)
+        self.animacionBadass.set_position((ANCHO_PANTALLA/2-22),400)
+        self.animacionBadass.scale = 1
         # Se podria, igual que las anteriores, no haberla creado, sino haberlo hecho
         #  cuando fuese necesario que apareciera, pero en este caso se crea aqui y se
         #  pone como invisible hasta cuandos ea necesario que aparezca
-        self.animacionCorredor.visible = True
-        # A partir de los frames, se crea la animacion
-        self.animacionEspaldas = pyglet.sprite.Sprite(pyglet.image.Animation(espaldasFrames), batch=self.batch, group=self.grupoDetras)
-        self.animacionEspaldas.set_position(ANCHO_PANTALLA/2-20,40)
-        self.animacionEspaldas.scale = 1
-        # Se podria, igual que las anteriores, no haberla creado, sino haberlo hecho
-        #  cuando fuese necesario que apareciera, pero en este caso se crea aqui y se
-        #  pone como invisible hasta cuandos ea necesario que aparezca
-        self.animacionEspaldas.visible = False
+        self.animacionBadass.visible = True
+        
+        diabloBadass = pyglet.resource.image('ryukQ.png')
+        self.diabloBadass = pyglet.sprite.Sprite(diabloBadass, batch=self.batch, group=self.grupoMedio)
+        self.diabloBadass.set_position((ANCHO_PANTALLA/2-22),20)
+        self.diabloBadass.visible = False
         
         xmldoc = minidom.parse(self.fullname)
         self.textList = xmldoc.getElementsByTagName('phrase') 
@@ -202,13 +172,18 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
                       anchor_x='center', anchor_y='center',
                       group = self.grupoDelante)
         self.text.draw()
+        self.text2 = None
+        portada = pyglet.resource.image('portada.png')
+        self.portada = pyglet.sprite.Sprite(portada, batch=self.batch, group=self.grupoDelante)
+        self.portada.set_position(0,0)
+        self.portada.visible = False
 
 
 
-    # Metodo que hace aparecer una animacion de humo en el cielo
+    # Metodo que mueve el mapa
     def moverMapa(self, tiempo):
         #=======================================================================
-        self.imagen.set_position(self.imagen.x, self.imagen.y -7)
+        self.imagen.set_position(self.imagen.x, self.imagen.y +1)
         #=======================================================================
 
     # El metodo para eliminar una animacion determinada
@@ -354,8 +329,7 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
         return
 
     def salirEscena(self):
-        escenaSig = AnimacionSalon(self.director)
-        self.director.cambiarEscena(escenaSig)    
+        self.director.salirEscena()  
         
     def close(self):
         # Restablecemos la duracion de cada frame del tanque
@@ -368,6 +342,7 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
         pyglet.clock.unschedule(self.sonidoLluvia)
         self.playerL.pause()
         self.playerR.pause()
+        self.playerM.pause()
 #         self.player.stop()
 #         stop = time()+6
 #         while time() < stop:
@@ -377,32 +352,14 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
 
     # El evento que sera llamado periodicamente
     def update(self, tiempo):
-        # Moveremos el tanque a la derecha hasta llegar al pixel 800
-#         if self.tanque.x<650:
-#             self.tanque.x = self.tanque.x + tiempo*VELOCIDAD_TANQUE
-#             if self.tanque.x>200 and self.tanque.x<300:
-#                 self.tanque.rotation += VELOCIDAD_ROTACION_TANQUE*tiempo
-#             elif self.tanque.x>=300 and self.tanque.x<=600:
-#                 self.tanque.y = self.tanque.y - tiempo*20
-#         else:
-#             # Si el tanque ya ha pasado ese pixel, paramos la animacion
-#             # Paramos la animacion: le ponemos al frame en el que este una duracion de None
-#             # Como no se sabe en cual esta, se ponen todos
-#             for frame in self.tanque.image.frames:
-#                 frame.duration = None
-
-        # Ademas, si existe la animacion de la explosion, hacemos que de desplace con el tanque
-        #=======================================================================
-        # if self.animacionExplosion!=None:
-        #     self.animacionExplosion.set_position(self.tanque.x-10, self.tanque.y-15)
-        #=======================================================================
-
         # Y si la animacion del corredor es visible, la movemos hacia la izquierda
-        if self.animacionCorredor.visible:
-            self.animacionCorredor.x -= tiempo*VELOCIDAD_CORREDOR
+        if self.animacionBadass.visible:
+            self.animacionBadass.y -= tiempo*VELOCIDAD_BADASS
             # Ademas, si llega al centro cambiamos la animación
-            if (self.animacionCorredor.x<(ANCHO_PANTALLA/2-20))&(self.animacionCorredor.x>(ANCHO_PANTALLA/2)-25):
+            if (self.animacionBadass.y<(ALTO_PANTALLA/2-40))and(self.animacionBadass.y>(ALTO_PANTALLA/2)-45):
                 self.text.delete()
+                if self.text2 != None:
+                    self.text2.delete()
                 self.text = pyglet.text.Label(self.textList[3].attributes['content'].value,
                       font_name='X-Files', multiline=True,
                       font_size=26, color=(255, 255, 255, 255), width = ANCHO_PANTALLA/2 - 50, 
@@ -418,25 +375,47 @@ class EscenaAnimacion(EscenaPyglet, pyglet.window.Window):
                       group = self.grupoDelante)
                 self.text2.draw()
                 pyglet.clock.schedule_interval(self.moverMapa, 0.5)
-                self.animacionCorredor.visible = False
-                self.animacionEspaldas.visible = True
+            if (self.animacionBadass.y>9)and(self.animacionBadass.y<10):
+                self.animacionBadass.visible = False
+                self.diabloBadass.visible = True
+                pyglet.clock.unschedule(self.moverMapa)
             # Ademas, si llega al limite izquierdo terminamos esta escena
 #             if self.animacionCorredor.x<0:
 #                 self.director.salirEscena()
-        if self.animacionEspaldas.visible:
-            self.animacionEspaldas.y += tiempo*VELOCIDAD_ARRIBA
-            if (self.animacionEspaldas.y>(ALTO_PANTALLA/2))&(self.animacionEspaldas.y<(ALTO_PANTALLA/2)+5):
+        elif self.diabloBadass.visible:
+            if self.tiempoTrans < 5: 
                 self.text.delete()
                 self.text2.delete()
                 self.text = pyglet.text.Label(self.textList[5].attributes['content'].value,
                       font_name='X-Files', multiline=True,
-                      font_size=26, color=(255, 255, 255, 255), width = ANCHO_PANTALLA/2 - 50, 
-                      x=3.1*ANCHO_PANTALLA/4, y=ALTO_PANTALLA/2, batch = self.batch,
+                      font_size=26, color=(255, 255, 255, 255), width = ANCHO_PANTALLA/2 - 20,  
+                      x=ANCHO_PANTALLA/2, y=ALTO_PANTALLA/2, batch = self.batch,
                       anchor_x='center', anchor_y='center',
                       group = self.grupoDelante)
                 self.text.draw()
-            if self.animacionEspaldas.y>450:
+                if self.tiempoTrans>1 and self.tiempoTrans <1.05:
+                    print "aaaaaaaaaaaaaa"
+                    pyglet.clock.unschedule(self.aparecerRayo)
+                    pyglet.clock.unschedule(self.aparecerLluvia)
+                    pyglet.clock.unschedule(self.sonidoLluvia)
+                    self.playerL.pause()
+                    self.playerR.pause()
+                    self.playerM = self.suspSon.play()
+            elif self.tiempoTrans <18: 
+                self.portada.visible = True
+                self.text.delete()
+                self.text2.delete()
+                self.text = pyglet.text.Label(self.textList[6].attributes['content'].value+"\n"+self.textList[7].attributes['content'].value+"\n"+self.textList[8].attributes['content'].value+"\n"+self.textList[9].attributes['content'].value+"\n"+self.textList[10].attributes['content'].value+"\n",
+                      font_name='X-Files', multiline=True,
+                      font_size=26, color=(255, 255, 255, 255), width = ANCHO_PANTALLA/2 - 20,  
+                      x=ANCHO_PANTALLA/2, y=ALTO_PANTALLA/4, batch = self.batch,
+                      anchor_x='center', anchor_y='center',
+                      group = self.grupoDelante)
+                self.text.draw()
+            else:
                 self.text.delete()
                 self.salirEscena()
+            self.tiempoTrans += tiempo
+            print self.tiempoTrans
 
 

@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <data>
     <dialog id="1">
-        <phrase content="Es una tarde de tormenta en la ciudad."></phrase>
+        <phrase content="Sigue lloviendo en la ciudad."></phrase>
         <phrase content="Acabo de resolver de nuevo un caso."></phrase>
         <phrase content="No ha sido un caso normal, en un principio pensé que sería fácil y rápido, pero al final ha sido un reto incluso para mi."></phrase>
     	<phrase content="Por un momento pensé que estaba perdido, pero el gran Vicent Badass siempre sale triunfante. "></phrase>
-		<phrase content="Hay cosas ahí fuera que escapan a nuestra imaginación... Pero el gran Vicent Badass hará que se vayan de una patada."></phrase>
-		<phrase content="Al final... Se podría decir con seguridad... Que el diablo estaba en el café... Odio el café..."></phrase>
+		<phrase content="Hay cosas ahí fuera que escapan a nuestra imaginación... Pero el gran Vicent Badass ganará al mismo demonio."></phrase>
+		<phrase content="O quizá no..."></phrase>
+		<phrase content="Creado por:"></phrase>
+		<phrase content="Adrián López"></phrase>
+		<phrase content="Daniel Munín"></phrase>
+		<phrase content="Eros Cebreiro"></phrase>
+		<phrase content="Pablo Fernández"></phrase>
     </dialog>
 </data>

@@ -6,6 +6,7 @@ from personajes import *
 from pygame.locals import *
 from item import *
 from evento import *
+from animacionFinalBueno import *
 
 OPT_KEYS = {pygame.K_1 : 1,
                pygame.K_2 : 2,
@@ -180,8 +181,7 @@ class FinalScene(EscenaPygame):
                 self.tiempoDial = TIEMPODIALOGO
         #Esto de aqui no deberÃ­a funcionar asÃ­, si no que deberÃ­a cerrar el programa sin mÃ¡s, no llevarnos a la fase siguiente
         if event.type == pygame.QUIT or (self.keys[K_t] and self.keys[K_r]):
-             escenaSig = CellarScene(self.director, self.player)
-             self.director.cambiarEscena(escenaSig)   
+             self.finFase(None)   
               
     def interact(self, tiempo, surface):
         if tiempo < TIEMPODIALOGO:
@@ -264,7 +264,7 @@ class FinalScene(EscenaPygame):
         
     def finFase(self, final):
         print"fin"
-        escenaSig = FinalScene(self.director, self.player)
+        escenaSig = EscenaAnimacionFinalBueno(self.director)
         self.director.cambiarEscena(escenaSig)
     
 class Level(object):
