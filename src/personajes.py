@@ -254,7 +254,7 @@ class NoJugador(Personaje):
         self.obj=[]
         for item in self.itemlist:
             self.obj.append(item.attributes['obj'].value)
-        self.speed = 7
+        self.speed = 1
         self.posicion = posicion
         self.mask = pygame.mask.from_surface(self.image)
         self.mask2 = self.mask
@@ -262,22 +262,6 @@ class NoJugador(Personaje):
         #quitando esto funcionan colisiones
 #         print self.rect
         self.rect = Rect(self.rect.topleft[0] + posicion[0] + 20, self.rect.topleft[1] + posicion[1] + 30, 35, 75)
-
-    def mover(self, direccion, cantidad):
-        move = [0, 0]
-        if direccion == 0:
-#             self.posicion = (self.posicion[0] + cantidad, self.posicion[1])
-            move[0] += cantidad
-        elif direccion == 1:
-#             self.posicion = (self.posicion[0] - cantidad, self.posicion[1])
-            move[0] -= cantidad
-        elif direccion == 2:
-#             self.posicion = (self.posicion[0], self.posicion[1] + cantidad)
-            move[1] += cantidad
-        elif direccion == 3:
-#             self.posicion = (self.posicion[0], self.posicion[1] - cantidad)
-            move[1] -= cantidad
-        return move
     
     def check_collisions(self, move, level_mask):
         """
@@ -309,6 +293,8 @@ until clear.
 
     def update(self, level_mask, direccion, cantidad):
         move = self.mover(direccion, cantidad)
+#         print "mascara"
+#         print self.rect
         x,y = self.check_collisions(move, level_mask)
         self.posicion = (self.posicion[0] + x, self.posicion[1] + y)
         self.actualizarPostura(x, y)
@@ -359,3 +345,38 @@ until clear.
             else:
                 self.estado = estado
         return False
+
+    def mover(self, direccion, cantidad):
+        move = [0, 0]
+        if direccion == 0:
+#             self.posicion = (self.posicion[0] + cantidad, self.posicion[1])
+            move[0] += cantidad
+        elif direccion == 1:
+#             self.posicion = (self.posicion[0] - cantidad, self.posicion[1])
+            move[0] -= cantidad
+        elif direccion == 2:
+#             self.posicion = (self.posicion[0], self.posicion[1] + cantidad)
+            move[1] += cantidad
+        elif direccion == 3:
+#             self.posicion = (self.posicion[0], self.posicion[1] - cantidad)
+            move[1] -= cantidad
+        return move
+    
+    def mover_malox(self, jugador):
+        # Por ejemplo, intentara acercarse al jugador mas cercano en el eje x
+        # Y nos movemos andando hacia el
+        if jugador.rect.topleft[0] < self.posicion[0]:
+            return 1, self.speed
+        elif jugador.rect.topleft[0] > self.posicion[0]:
+            return 0, self.speed
+        else:
+            return 0,0
+    def mover_maloy(self, jugador):
+        # Por ejemplo, intentara acercarse al jugador mas cercano en el eje x
+        # Y nos movemos andando hacia el
+        if jugador.rect.topleft[1] < self.posicion[1]:
+            return 3, self.speed
+        elif jugador.rect.topleft[1] > self.posicion[1]:
+            return 2, self.speed
+        else:
+            return 0,0

@@ -32,7 +32,7 @@ class FaseInvestigacion(EscenaPygame):
         EscenaPygame.__init__(self, director)
 
         
-        pygame.display.set_caption("Fase")
+        pygame.display.set_caption("Fase Investigacion")
         pygame.display.set_mode((ANCHO_PANTALLA, ALTO_PANTALLA))
         """Initialize things; create a Player; create a Level."""
         self.screen = pygame.display.get_surface()
@@ -47,7 +47,7 @@ class FaseInvestigacion(EscenaPygame):
         #cambiar el rect.copy para poner posicion inicial
         posInicialMapa = self.screen_rect.copy()
         posInicialMapa.topleft = (posInicialMapa.topleft[0]-100,posInicialMapa.topleft[1]+100)
-        self.level = Level(fondo, posInicialMapa, self.player)
+        self.level = Level(fondo, posInicialMapa, self.player, "../res/maps/mascaramapafinal.png", (630,1480))
         self.grupoJugadores = pygame.sprite.Group(jugador1)
         
         self.secretoSon = pygame.mixer.Sound("../res/Sounds/secret.wav")
@@ -424,7 +424,7 @@ A class for our map. Maps in this implementation are one image; not
 tile based. This makes collision detection simpler but can have performance
 implications.
 """
-    def __init__(self, map_image, viewport, player):
+    def __init__(self, map_image, viewport, player, mascara, playerCenter):
         """
 Takes an image from which to make a mask, a viewport rect, and a
 player instance.
@@ -432,14 +432,14 @@ player instance.
         self.image = map_image
 #         self.image =pygame.image.load("../res/maps/primerinteriormask.png").convert_alpha() 
         self.image = pygame.transform.scale(self.image, (ANCHO_PANTALLA*4, ALTO_PANTALLA*4))
-        mascara = pygame.image.load("../res/maps/mascaramapa.png").convert_alpha()        
+        mascara = pygame.image.load(mascara).convert_alpha()        
         mascara = pygame.transform.scale(mascara, (ANCHO_PANTALLA*4, ALTO_PANTALLA*4))
         self.mask = pygame.mask.from_surface(mascara)
         self.rect = self.image.get_rect()
         self.player = player
 #         self.player.rect.center = self.rect.center
         #posicion inicial
-        self.player.rect.center = (630,1480)
+        self.player.rect.center = playerCenter
         self.viewport = viewport
         
 

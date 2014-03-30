@@ -131,6 +131,8 @@ class EventoFinal(Evento):
             self.fase.finFase("CellarScene")
         elif self.nombre == "FinalScene":
             self.fase.finFase(FinalScene(self.fase.director, self.fase.player))
+        elif self.nombre == "FinalJuego":
+            self.fase.finFase(None)
         
         
 class EventoCulpable(Evento):

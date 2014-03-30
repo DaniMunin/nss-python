@@ -1,0 +1,17 @@
+<data>
+    <dialog id="0" obj="None">
+        <phrase content="Parece que tengo que volver a empezar...">
+			<result obj="None" move="None" event ="eventoRein" state ="0"></result>
+		</phrase>
+    </dialog>
+    <dialog id="1" obj="None">
+        <phrase content="Espero que sea el bueno...">
+			<result obj="None" move="None" event ="eventoAltar2" state ="-1"></result>
+		</phrase>
+    </dialog>
+    <dialog id="final" obj="None">
+        <phrase content="Ya lo he activado!">
+			<result obj="None" move="None" event ="None" state ="-1"></result>
+		</phrase>
+    </dialog>
+</data>

@@ -1,0 +1,14 @@
+<data>
+    <dialog id="0" obj="None">
+        <phrase content="Has muerto...%Que quieres hacer?">
+			<response content="1 - Volvamos a intentarlo" next="1"></response>
+			<response content="2 - Me rindo" next="2"></response>
+		</phrase>
+        <phrase content="Vamos!">
+			<result obj="None" move="None" event ="faseRein" state ="0"></result>
+		</phrase>
+        <phrase content="Game Over....">
+			<result obj="None" move="None" event ="GameOver" state ="0"></result>
+		</phrase>
+    </dialog>
+</data>

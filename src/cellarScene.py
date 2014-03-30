@@ -45,8 +45,9 @@ class CellarScene(EscenaPygame):
         self.done = False
         self.player = jugador1
         self.player.speed = 7
+        self.player.objetos = []
         fondo = pygame.image.load("../res/maps/first.png")
-        self.level = Level(fondo, self.screen_rect.copy(), self.player)
+        self.level = Level(fondo, self.screen_rect.copy(), self.player,"../res/maps/FirstCellarRoomMask.png", (500,400))
         self.grupoJugadores = pygame.sprite.Group(jugador1)
         self.hojas =[]
         self.pared =[]
@@ -236,7 +237,7 @@ class CellarScene(EscenaPygame):
                     self.accionT, self.accionR, self.accionResult = self.empezarAccion(self.accionO)
         #Esto de aqui no deberÃ­a funcionar asÃ­, si no que deberÃ­a cerrar el programa sin mÃ¡s, no llevarnos a la fase siguiente
         if event.type == pygame.QUIT or (self.keys[K_t] and self.keys[K_r]):
-             escenaSig = CellarScene(self.director, self.player)
+             escenaSig = FinalScene(self.director, self.player)
              self.director.cambiarEscena(escenaSig)
             
             
@@ -396,7 +397,7 @@ A class for our map. Maps in this implementation are one image; not
 tile based. This makes collision detection simpler but can have performance
 implications.
 """
-    def __init__(self, map_image, viewport, player):
+    def __init__(self, map_image, viewport, player, mascara, playerCenter):
         """
 Takes an image from which to make a mask, a viewport rect, and a
 player instance.
@@ -404,14 +405,14 @@ player instance.
         self.image = map_image
 #         self.image =pygame.image.load("../res/maps/primerinteriormask.png").convert_alpha() 
         self.image = pygame.transform.scale(self.image, (ANCHO_PANTALLA, ALTO_PANTALLA))
-        mascara = pygame.image.load("../res/maps/FirstCellarRoomMask.png").convert_alpha()        
+        mascara = pygame.image.load(mascara).convert_alpha()        
         mascara = pygame.transform.scale(mascara, (ANCHO_PANTALLA, ALTO_PANTALLA))
         self.mask = pygame.mask.from_surface(mascara)
         self.rect = self.image.get_rect()
         self.player = player
 #         self.player.rect.center = self.rect.center
         #posicion inicial
-        self.player.rect.center = (500,400)
+        self.player.rect.center = playerCenter
         self.viewport = viewport
 
     def update(self, keys):

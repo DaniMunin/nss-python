@@ -1,0 +1,10 @@
+<data>
+    <dialog id="1" obj="None">
+        <phrase content="Que es esto! Me parecio%ver a Charles pero ahora...">
+			<response content="Parece que tendre que esforzarme%para salir de aqui con vida." next="1"></response>
+		</phrase>
+        <phrase content="Quiza esos altares tengan la solucion">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+    </dialog>
+</data>
