@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 # Importar modulos
-import director
-import fase
+import director
 from director import *
 from EscenaMenu import *
 from animacion import *
