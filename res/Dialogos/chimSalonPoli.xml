@@ -1,0 +1,40 @@
+<data>
+    <dialog id="0" obj="None">
+        <phrase content="Esta encendida, es peligroso.">
+			<response content="1 - Acerca la mano%" next="1"></response>
+			<response content="2 - Reflexiona sentado%a su lado" next="2"></response>
+			<response content="3 - Quema las pruebas!" next="3"></response>
+		</phrase>
+        <phrase content="Ahhh!% por que me haces esto?">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+        <phrase content="Pondre mi mejor cara de%investigar mientras descanso un rato,%ese novato no deja de mirarme">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+        <phrase content="Buena idea,%asi no me pillaran jamas!%Eh, que yo no fui!%En todo caso fuiste tu que me controlas">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+    </dialog>
+    <dialog id="0" obj="BarraMetal">
+        <phrase content="Con esto podre llegar al fondo">
+			<response content="1 - Dejala al fuego un rato %y cogela despues%" next="2"></response>
+			<response content="2 - Golpea el punto rojo.%A saber que pasa." next="1"></response>
+		</phrase>
+        <phrase content="Me parece que te has%confundido de chimenea%Por que las haran todas iguales!">
+			<result obj="None" move="None" event ="abreCuadro" state ="0"></result>
+		</phrase>
+        <phrase content="Ahora quema!%Quiza con esto ese%novato deje de mirarme">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+    </dialog>
+    <dialog id="final" obj="None">
+        <phrase content="Dejemoslo%No quiero volver a%quemarme ni quemar nada.">
+			<result obj="None" move="None" event ="None" state ="-1"></result>
+		</phrase>
+    </dialog>
+    <dialog id="4" obj="None">
+        <phrase content="Claro, vamos a quemar %todas mis cosas.%Bien!!%NO.">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+    </dialog>
+</data>

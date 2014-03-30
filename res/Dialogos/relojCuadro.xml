@@ -25,7 +25,7 @@
 			<result obj="None" move="None" event ="None" state ="0"></result>
 		</phrase>
         <phrase content="(Esta muy duro, ni de broma lo abro)">
-			<response content="(Eh, un botón, disimula..)" next="4"></response>
+			<response content="(Eh, un boton, disimula..)" next="4"></response>
 		</phrase>
         <phrase content="Es mas dificil de lo que parece!">
 			<result obj="None" move="None" event ="None" state ="0"></result>

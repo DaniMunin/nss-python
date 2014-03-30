@@ -82,7 +82,7 @@ class CellarScene(EscenaPygame):
         self.libro2.cambiarEstado(None, 2)
         self.pizarra = Item(10, "pizarraCellar.xml",  "../res/Sprites/pizarrainvisible.png", (350, 54))
         self.jarron = Item(10, "jarronCellar.xml",  "../res/Sprites/libroinvisible.png", (236, 74))
-        self.puerta = Item(10, "puertaCellar.xml",  "../res/Sprites/libroinvisible.png", (126, 141))
+        self.puerta = Item(10, "puertaCellar.xml",  "../res/Sprites/cellarSceneDoor.png", (136, 141))
         self.puerta.cambiarEstado(None, 2)
         self.puertaEntrada = Item(10, "puertaCellar.xml",  "../res/Sprites/libroinvisible.png", (521, 471))
         self.libreria = Item(10, "estanteriaCellar.xml",  "../res/Sprites/libroinvisible.png", (68, 77))
@@ -200,7 +200,10 @@ class CellarScene(EscenaPygame):
                 self.optEl = 1
             
         if self.keys[K_q] and self.accion:
-            self.tiempoDial = TIEMPODIALOGO
+            if self.tiempoDial > TIEMPODIALOGO:
+                self.tiempoDial = TIEMPODIALOGO*2
+            else:
+                self.tiempoDial = TIEMPODIALOGO
         if self.keys[K_h]  :  
             self.player.objetos.append("esoasdlngrgudfpabsdiuasdpo")
             self.player.objetos.append("emergycbjkqworghbfxgcpsefñjak")
@@ -247,25 +250,25 @@ class CellarScene(EscenaPygame):
             #Objetos recibidos
             if self.accionResult[0] != "None":
                 if(self.accionResult[0]=="hoja1"):
-                    self.player.objetos.append("esoasdlngrgudfpabsdiuasdpo")
-                    self.player.objetos.append("emergycbjkqworghbfxgcpsefñjak")
+                    self.player.cogerObjeto("esoasdlngrgudfpabsdiuasdpo")
+                    self.player.cogerObjeto("emergycbjkqworghbfxgcpsefñjak")
                     self.hojas.append("esoasdlngrgudfpabsdiuasdpo")
                     self.hojas.append("emergycbjkqworghbfxgcpsefñjak")
                 elif(self.accionResult[0]=="hoja2"):
-                    self.player.objetos.append("nknpvwkfbopfwowbfldfowb")
-                    self.player.objetos.append("aefbjiophzqgmifzrt")
+                    self.player.cogerObjeto("nknpvwkfbopfwowbfldfowb")
+                    self.player.cogerObjeto("aefbjiophzqgmifzrt")
                     self.hojas.append("nknpvwkfbopfwowbfldfowb")
                     self.hojas.append("aefbjiophzqgmifzrt")
                 elif(self.accionResult[0]=="hoja3"):
-                    self.player.objetos.append("sopqzydhhjennqmn")
-                    self.player.objetos.append("fiuyhnmbvewqdghnbvgyu")
+                    self.player.cogerObjeto("sopqzydhhjennqmn")
+                    self.player.cogerObjeto("fiuyhnmbvewqdghnbvgyu")
                     self.hojas.append("sopqzydhhjennqmn")
                     self.hojas.append("fiuyhnmbvewqdghnbvgyu")
                 elif(self.accionResult[0]=="hoja4"):
-                    self.player.objetos.append("cpojgkwgmwotrbmzasdkplwn")
+                    self.player.cogerObjeto("cpojgkwgmwotrbmzasdkplwn")
                     self.hojas.append("cpojgkwgmwotrbmzasdkplwn")
                 else:
-                    self.player.objetos.append(self.accionResult[0])
+                    self.player.cogerObjeto(self.accionResult[0])
                 if(len(self.hojas)==7):
                     self.puerta.cambiarEstado(None,4)
             #Nuevo estado del objeto/npc

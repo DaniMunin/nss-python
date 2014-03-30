@@ -7,12 +7,12 @@
 			<response content="3 - Uno que devolviera la vida?" next="6"></response>
 			<response content="4 - Me gustaria hablarle sobre.." next="7"></response>
 		</phrase>
-		<phrase content="Inculpar en que?% Yo estaba trabajando en tintes% para billetes del señor Mitin% cuando el viejo murio.">
+		<phrase content="Inculpar en que?% Yo estaba trabajando en tintes% para billetes del Sr. Mitin% cuando el viejo murio.">
 			<response content="1 - Tinta para billetes?% Pasame unos cuantos% cuando lo logres%%" next="3"></response>
 			<response content="2 - Hum...% y consideras eso una coartada?%" next="4"></response>
 			<response content="3 - En que lugar de%la casa estabas?" next="5"></response>
 		</phrase>
-        <phrase content="Ojala señor detective...% El mundo daria un paso gigantesco% si descubriera unos polvos% que al echarlos en el agua se crease cafe...% Pero eso es un sueño">
+        <phrase content="Ojala Sr. detective...% El mundo daria un paso gigantesco% si descubriera unos polvos% que al echarlos en el agua se crease cafe...% Pero eso es un sueño">
 			<result obj="None" move="None" event ="None" state ="0"></result>
 		</phrase>
         <phrase content="Tengo que apuntar% en mi libreta ese nuevo termino. El autosoborno">

@@ -4,7 +4,7 @@
 			<response content="1 - Que uso le ves?" next="1"></response>
 			<response content="2 - Sube encima de la mesa y baila!" next="2"></response>
 		</phrase>
-        <phrase content="Parece diseñada para el%consumo de cafe profesional">
+        <phrase content="Parece disenada para el%consumo de cafe profesional">
 			<result obj="None" move="None" event ="None" state ="0"></result>
 		</phrase>
         <phrase content="No se bailar...">

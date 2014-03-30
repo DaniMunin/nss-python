@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <data>
     <dialog id="1" obj="None">
-        <phrase content="Buenos dias señor detective. %Ahora le sirvo una taza de cafe">
+        <phrase content="Buenos dias Sr. detective. %Ahora le sirvo una taza de cafe">
         	<response content="1 - Odio el cafe!%%%%%" next="2"></response>
 			<response content="2 - No quiero cafe, gracias.% A todo esto, me encantan% las novelas de asesinatos,% conoces quien es% siempre el culpable?%" next="1"></response>
         	<response content="3 - Le voy a hacer %unas preguntas" next="7"></response>
 		</phrase>
-		<phrase content="El mayordomo, por supuesto.% Espere... %cree que he asesinado %al señor Mraga?">
+		<phrase content="El mayordomo, por supuesto.% Espere... %cree que he asesinado %al Sr. Mraga?">
 			<response content="1 - Yo no he dicho nada,% todo lo has dicho tu%" next="3"></response>
 			<response content="2 - La historia y el instinto% me dice que fue usted" next="4"></response>
 		</phrase>
@@ -17,7 +17,7 @@
 			<response content="1 - RITO??" next="5"></response>
 			<response content="2 - Si me lo dices asi..." next="6"></response>
 		</phrase>
-        <phrase content="Pero es imposible señor,% debe ser un error,% yo soy un simple empleado% que se dedica a hacer cafe">
+        <phrase content="Pero es imposible Sr.,% debe ser un error,% yo soy un simple empleado% que se dedica a hacer cafe">
 			<result obj="None" move="None" event ="None" state ="0"></result>
 		</phrase>
         <phrase content="Quiero decir que estaba %en mi rito,que es ir %a comprar cafe.Siempre se% me acaba no se porque,%tome un taza!">
@@ -56,7 +56,7 @@
 			<response content="2 - Me da igual,% odio el cafe!" next="2"></response>
 		</phrase>
         <phrase content="Oh, es usted un gran detective!%Mi marca favorita%en mi despensa! Bien!">
-			<response content="1 - Sin embargo habia suficiente%cafe para no tener%que comprar en años...%" next="3"></response>
+			<response content="1 - Sin embargo habia suficiente%cafe para no tener%que comprar en meses...%" next="3"></response>
 			<response content="2 - Me da igual, odio el cafe!%(me ha pillado...)" next="2"></response>
 		</phrase>
         <phrase content="Pues no sabe usted%lo que se pierde% Tome una.">
@@ -105,7 +105,7 @@
 	</dialog>
 	
     <dialog id="4" obj="None">
-        <phrase content="Si con eso no se puede hacer mas cafe,%vayase por favor!">
+        <phrase content="Si con eso no se%puede hacer mas cafe,%vayase por favor!">
 			<result obj="None" move="None" event ="None" state ="0"></result>
 		</phrase>
     </dialog>

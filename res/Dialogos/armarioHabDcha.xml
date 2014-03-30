@@ -14,7 +14,7 @@
     <dialog id="0" obj="Placa">
         <phrase content="Podria funcionar.">
 			<response content="1 - Forzar el pestillo" next="1"></response>
-			<response content="2 - Enseñale la placa amenazadoramente." next="2"></response>
+			<response content="2 - Ensenale la placa amenazadoramente." next="2"></response>
 		</phrase>
         <phrase content="Funciona! Has cogido la linterna.% Una linterna,% debajo de la cama esta oscuro%mmmmmm.">
 			<result obj="Linterna" move="None" event = "None" state ="-1"></result>

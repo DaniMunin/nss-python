@@ -86,7 +86,7 @@ class FaseInvestigacion(EscenaPygame):
         self.grupoNPCDetras = pygame.sprite.Group( self.poli, self.charles, self.espeonza, self.cervero, self.poliEstorbo2, self.poliEstorbo3)
         self.grupoNPCDelante = pygame.sprite.Group( self.rateos, self.bolio, self.poliEstorbo1 )
 
-        self.chim1 = ItemInvisible(10, "pokeball.xml", (756,1446))
+        self.chimSalonPoli = ItemInvisible(10, "chimSalonPoli.xml", (756,1446))
         self.armarioBarIzda = ItemInvisible(10, "armarioBarIzda.xml", (2607, 799))
         self.mesaCircBar = ItemInvisible(10, "mesaCircBar.xml", (2940, 1117))
         self.chimCuadro = ItemInvisible(10, "chimCuadro.xml", (3051, 1505))
@@ -103,7 +103,7 @@ class FaseInvestigacion(EscenaPygame):
         self.relojEntradaArriba = ItemInvisible(10, "relojEntradaArriba.xml", (1863, 1342))
         self.mesaNormBar = ItemInvisible(10, "mesaNormBar.xml", (2707, 1006))
         self.fanuel = ItemVisible(11, "fanuel.xml", "../res/Sprites/fanuel.png", (426,1540))
-        self.grupoObj = pygame.sprite.Group(self.chim1, self.Cuadro, self.mesaNormBar, self.relojEntradaArriba, self.fanuel)
+        self.grupoObj = pygame.sprite.Group(self.chimSalonPoli, self.Cuadro, self.mesaNormBar, self.relojEntradaArriba, self.fanuel)
         
         self.level.mask.draw(self.poli.mask, (self.poli.rect.center[0]-16, self.poli.rect.center[1]-30))
         self.level.mask.draw(self.espeonza.mask, (self.espeonza.rect.center[0]-20, self.espeonza.rect.center[1]-30))
@@ -116,12 +116,9 @@ class FaseInvestigacion(EscenaPygame):
 #         self.level.mask.draw(self.poliEstorbo3.mask, (self.poliEstorbo3.rect.center[0]-20, self.poliEstorbo3.rect.center[1]-30))
         self.level.mask.draw(self.fanuel.mask, (self.fanuel.rect.center[0]-35, self.fanuel.rect.center[1]-35))
         
-        self.evPrueba = EventoAparicion((586,1600),"evPrueba", "dialogoEventoPrueba.xml", self.espeonza, self.grupoNPCDetras,self.level.mask)
-        
         self.culpables = []
         self.eventos = []
         self.eventosActivos = []
-        self.eventos.append(self.evPrueba)
 #         self.eventosActivos.append(evPrueba)
         self.eventoEstorbo1Des = EventoDesaparicion((545,1610),"estorbo1Des", "estorboDes.xml", self.poliEstorbo1, self.grupoNPCDelante,self.level.mask)
         self.eventoEstorbo2Des = EventoDesaparicion((545,1610),"estorbo2Des", "estorboDes.xml", self.poliEstorbo2, self.grupoNPCDetras,self.level.mask)
@@ -310,7 +307,10 @@ class FaseInvestigacion(EscenaPygame):
                 self.optEl = 1
             
         if self.keys[K_q] and self.accion:
-            self.tiempoDial = TIEMPODIALOGO
+            if self.tiempoDial > TIEMPODIALOGO:
+                self.tiempoDial = TIEMPODIALOGO*2
+            else:
+                self.tiempoDial = TIEMPODIALOGO
 #             PRUEBAS EVENTOS....
         if self.keys[K_d]:
             evPrueba = EventoDesaparicion((586,1700), "", None, self.espeonza, self.grupoNPCDetras,self.level.mask)
@@ -357,7 +357,7 @@ class FaseInvestigacion(EscenaPygame):
         elif len(self.accionR) == 0:
             #Objetos recibidos
             if self.accionResult[0] != "None":
-                self.player.objetos.append(self.accionResult[0])
+                self.player.cogerObjeto(self.accionResult[0])
             #Nuevo estado del objeto/npc
             elimEvento = self.accionO.cambiarEstado(None, int(self.accionResult[3]))
             if elimEvento:

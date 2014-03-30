@@ -3,7 +3,7 @@
     <dialog id="1" obj="None">
         <phrase content="Hermoso dia para que venga% a molestarme detective.">
         	<response content="1 - Ten cuidado,% no desbordes tanta amabilidad% que puedes hacerte dano%%" next="1"></response>
-			<response content="2 - Hermoso dia para cometer un asesinato,% no señor Rateos?%" next="2"></response>
+			<response content="2 - Hermoso dia para cometer un asesinato,% no Sr. Rateos?%" next="2"></response>
 			<response content="3 - Paso,%Tengo unas preguntas para ti." next="5"></response>
 		</phrase>
 		<phrase content="Solo soy amable con la gente que vale la pena">

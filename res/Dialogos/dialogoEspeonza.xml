@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <data>
     <dialog id="1" obj="None">
-        <phrase content="Buenos dias detective.% ¿Como va la investigacion?">
+        <phrase content="Buenos dias detective.% Como va la investigacion?">
         	<response content="1 - He tenido dias mejores...%%" next="1"></response>
 			<response content="2 - Es un dia maravilloso en el mundo,% no me ves sonriendo?%" next="2"></response>
 			<response content="3 - Le voy a hacer %unas preguntas" next="5"></response>
@@ -11,13 +11,13 @@
 			<response content="2 - No, no creo que fueses capaz..." next="4"></response>
 		</phrase>
         <phrase content="El mundo es maravilloso% y lo mejor es estar siempre sonriendo.">
-			<result obj="None" move="None" event ="evPrueba" state ="0"></result>
+			<result obj="None" move="None" event ="None" state ="0"></result>
 			</phrase>
-		<phrase content="Pero mi papa dice% que si lo digo me encerraran.% Y yo estuve de compras% cuando el señor Mraga murio">
+		<phrase content="Pero mi papa dice% que si lo digo me encerraran.% Y yo estuve de compras% cuando el Sr. Mraga murio">
 			<response content="1 - Entiendo... y encerrarte estaria mal" next="11"></response>
 			<response content="2 - De compras, que compraste?" next="12"></response>
 		</phrase>
-        <phrase content="Hasta luego señor detective">
+        <phrase content="Hasta luego Sr. detective">
 			<result obj="None" move="None" event ="None" state ="0"></result>
 		</phrase>
 		<phrase content="Sobre que quiere %que le hable?">
@@ -27,19 +27,19 @@
 			<response content="4 - Sobre Chema" next="9"></response>
 			<response content="5 - Sobre Fanuel" next="10"></response>
 		</phrase>
-		 <phrase content="El señor Mitin es bueno,% A veces me da dinero% para comprar cosas% Y le dejo venir a mi habitacion% a bañarnos en billetes.%">
+		 <phrase content="El Sr. Mitin es bueno,% A veces me da dinero% para comprar cosas% Y le dejo venir a mi habitacion% a cubrirnos en billetes.%">
 			<result obj="None" move="None" event ="None" state ="0"></result>
 		</phrase>
-		<phrase content="Charles es muy buen mayordomo,% siempre me trae las cosas% cuando se las pido.% Incluso a veces viene de compras conmigo.">
+		<phrase content="Charles?%Debe ser aquel desconocido%que me mira desde la cocina%Me da miedo%Parece no tener dinero.">
 			<result obj="None" move="None" event ="None" state ="0"></result>
 		</phrase>
 		<phrase content="Cervero me da algo de miedo,% siempre esta con experimentos raros,% en ocasiones se escuchan% gritos de alli,% no me gusta acercarme">
 			<result obj="None" move="None" event ="None" state ="0"></result>
 		</phrase>
-		<phrase content="El señor Rateos% no me cae demasiado bien.% Tambien me trae muchos regalos,% pero tiene costumbre de mentirme.">
+		<phrase content="El Sr. Rateos% no me cae demasiado bien.% Tambien me trae muchos regalos,% pero tiene costumbre de mentirme.">
 			<result obj="None" move="None" event ="None" state ="0"></result>
 		</phrase>
-		<phrase content="El señor Mraga era muy buena persona,% nos dejaba estar aqui a todos,% e incluso hacia fiestas muchas veces.% Lo echare de menos.">
+		<phrase content="El Sr. Mraga era muy buena persona,% nos dejaba estar aqui a todos,% e incluso hacia fiestas muchas veces.% Lo echare de menos.">
 			<result obj="None" move="None" event ="None" state ="0"></result>
 		</phrase>
 		<phrase content="Si. A mi no me gustaria% que me encerraran, yo soy un ser libre">
@@ -52,7 +52,7 @@
 		<phrase content="Es ropa preciosa, pronto la estrenare.">
 			<result obj="None" move="None" event ="RelojEntrada" state ="0"></result>
 		</phrase>
-		<phrase content="El señor Mraga% me deja usar una habitacion% para guardar mis cosas.% Aunque de vez en cuando% el señor Mitin la usa tambien.">
+		<phrase content="El Sr. Mraga% me deja usar una habitacion% para guardar mis cosas.% Aunque de vez en cuando% el Sr. Mitin la usa tambien.">
 			<result obj="None" move="None" event ="RelojEntrada" state ="0"></result>
 		</phrase>
     </dialog>

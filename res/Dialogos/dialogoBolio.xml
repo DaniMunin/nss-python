@@ -13,7 +13,7 @@
         <phrase content="El dinero lo es todo amigo mio,% y si no puedes comprenderlo% puedes marcharte">
 			<result obj="None" move="None" event ="None" state ="0"></result>
 			</phrase>
-        <phrase content="Yo no he sido.% Cuando Mraga murio estaba dandome% mi tradicional baño de dinero% en la habitacion">
+        <phrase content="Yo no he sido.% Cuando Mraga murio estaba dandome% mi tradicional chapuzon en dinero% en la habitacion">
 			<result obj="None" move="None" event ="DormitorioAct" state ="0"></result>
 		</phrase>
         <phrase content="No soporto su sarcasmo detective">
@@ -52,10 +52,10 @@
 			<response content="1 - Como osas! % cuanto atrevimiento por favor...%" next="4"></response>
 			<response content="2 - Sabia que caerias en este burdo truco!% Donde se han ido sus billetes!" next="3"></response>
 		</phrase>
-        <phrase content="Muchas gracias por encontrarla!% Me la devolvera cuando salga de aqui verdad?">
+        <phrase content="Muchas gracias por encontrarla!% Me la devolvera cuando salga%de aqui verdad?">
 			<result obj="None" move="None" event ="None" state ="0"></result>
 		</phrase>
-		<phrase content="Yo...Yo... era dinero figurado% No creera que yo haría algo así!%No me reporta beneficios!!">
+		<phrase content="Yo...Yo... era dinero figurado% No creera que yo haria algo asi!%No me reporta beneficios!!">
 			<response content="1 - Me parece que ha caido en%mi trampa Sr Mitin. Luego %decidire sobre usted Pero%tiene muchas papeletas%%%" next="5"></response>
 			<response content="2 - Eso es cierto% lo tendre en cuenta en mi investigacion% Tendre mil ojos sobre usted% Ande con cuidado." next="5"></response>
 		</phrase>
@@ -83,7 +83,7 @@
 			<response content="1 - Mmmmm Secretos% Cuente cuente.%" next="4"></response>
 			<response content="2 - Mi mama dice que no se%deben contar secretos ajenos!" next="4"></response>
 		</phrase>
-        <phrase content="Ahora no puedo callarme!%Te lo diré todo!">
+        <phrase content="Ahora no puedo callarme!%Te lo dire todo!">
 			<response content="Ok, espera que saco una libreta" next="5"></response>
 		</phrase>
         <phrase content="Su familia le odia!%el unico que iria a una%comida suya seria su perro!%Y necesitaria atarlo%y llevarle un solomillo!!">
@@ -95,13 +95,13 @@
     </dialog>
     
     <dialog id="final" obj="None">
-        <phrase content="No tengo nada mas que decirle!% Ya me ha hundido bastante!%Investigue al mayordomo que ninguno conocemos!%">
+        <phrase content="No tengo nada mas que decirle!!%Investigue al mayordomo que ninguno conocemos!%">
 			<result obj="None" move="None" event ="None" state ="-1"></result>
 		</phrase>
 	</dialog>
 	
     <dialog id="4" obj="None">
-        <phrase content="(Tras 5 minutos sosteniendo el objeto delante del Sr. Mitin,%desisto y me voy)">
+        <phrase content="(Tras 5 minutos sosteniendo el%objeto delante del Sr. Mitin,%desisto y me voy)">
 			<result obj="None" move="None" event ="None" state ="0"></result>
 		</phrase>
     </dialog>
