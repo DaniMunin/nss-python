@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import pygame, escena
+import pygame, escena, pyglet.media.avbin
 from escena import *
 from personajes import *
 from pygame.locals import *
@@ -98,6 +98,16 @@ class CellarScene(EscenaPygame):
         self.eventoFinalScene = EventoFinal((0,0), "FinalScene", self)
         self.eventos.append(self.eventoFinalScene)
         
+        #Cargamos la música           
+        pyglet.resource.path = ['.', '../res', '../res/maps', '../res/Sounds', '../res/Sprites']
+        pyglet.resource.reindex()
+        source = pyglet.resource.media("fear.ogg", streaming = False)
+        player = pyglet.media.Player()
+        player.queue(source)
+        player.play()
+        #musica = pyglet.resource.media("fear.ogg", streaming=False)
+        #musica.play()
+        
     def update(self, tiempo):
         if (self.accion):
             self.tiempoDial += tiempo
@@ -126,8 +136,6 @@ class CellarScene(EscenaPygame):
 #             self.accionT, self.accionR, self.accionResult = self.continuarAccion(self.accionO, self.numRes) 
         else:   
             self.level.update(self.keys)
-        
-        
     
         
     def dibujar(self):
