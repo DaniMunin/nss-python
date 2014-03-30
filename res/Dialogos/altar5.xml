@@ -6,7 +6,7 @@
     </dialog>
     <dialog id="1" obj="None">
         <phrase content="Espero que sea el bueno...">
-			<result obj="None" move="None" event ="FinalJuego" state ="-1"></result>
+			<result obj="None" move="None" event ="eventoAltar5" state ="-1"></result>
 		</phrase>
     </dialog>
     <dialog id="final" obj="None">

@@ -1,0 +1,16 @@
+<data>
+    <dialog id="1" obj="None">
+        <phrase content="Despues de todo%eras tu!">
+			<response content="Poseido pero%eras tu." next="1"></response>
+		</phrase>
+        <phrase content="Vincent Badass siempre%acierta a la primera">
+			<response content="Ni el mismo Diablo%puede pararme" next="2"></response>
+		</phrase>
+        <phrase content="Todo el dia%ofreciendome cafe!">
+			<response content="Ahora por fin%puedo decir:" next="3"></response>
+		</phrase>
+        <phrase content="Al Diablo con el Cafe!">
+			<result obj="None" move="None" event ="FinalJuego" state ="0"></result>
+		</phrase>
+    </dialog>
+</data>

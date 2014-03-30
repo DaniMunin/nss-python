@@ -38,14 +38,15 @@ class FinalScene(EscenaPygame):
         self.level = Level(fondo, self.screen_rect.copy(), self.player, "../res/maps/FinalMapMask.png", (416,986))
         self.grupoJugadores = pygame.sprite.Group(jugador1)
         
-        self.charlesD = NoJugador("../res/Sprites/badassSprites.png","../res/BadassCoordJugador.txt", (410,614), 1, "dialogoCharlesD.xml", (200,20,20))
+        self.charlesD = NoJugador("../res/Sprites/ryuk.png","../res/RyukCoordJugador.txt", (410,614), 1, "dialogoCharlesD.xml", (200,20,20))
         self.grupoEnemigos = pygame.sprite.Group(self.charlesD)
         
-        self.altar1 = ItemVisible(10, "altar1.xml", "../res/Sprites/key.png", (412, 283))
-        self.altar2 = ItemVisible(10, "altar2.xml", "../res/Sprites/key.png", (294, 739))
-        self.altar3 = ItemVisible(10, "altar3.xml", "../res/Sprites/key.png", (532, 739))
-        self.altar4 = ItemVisible(10, "altar4.xml", "../res/Sprites/key.png", (203, 459))
-        self.altar5 = ItemVisible(10, "altar5.xml", "../res/Sprites/key.png", (623, 459))
+        self.charles = ItemVisible(10, "altar1.xml", "../res/Sprites/CharlesT.png", (410, 614))
+        self.altar1 = ItemVisible(10, "altar1.xml", "../res/Sprites/altar.png", (412, 283))
+        self.altar2 = ItemVisible(10, "altar2.xml", "../res/Sprites/altar.png", (294, 739))
+        self.altar3 = ItemVisible(10, "altar3.xml", "../res/Sprites/altar.png", (532, 739))
+        self.altar4 = ItemVisible(10, "altar4.xml", "../res/Sprites/altar.png", (203, 459))
+        self.altar5 = ItemVisible(10, "altar5.xml", "../res/Sprites/altar.png", (623, 459))
         self.grupoObj = pygame.sprite.Group(self.altar1, self.altar2, self.altar3, self.altar4, self.altar5)
         
         self.accion= False
@@ -73,12 +74,19 @@ class FinalScene(EscenaPygame):
         self.eventoAltar2 = EventoCambioEstado((294, 739),"eventoAltar2", self.altar3, 1, "eventoAltar2.xml", None)
         self.eventoAltar3 = EventoCambioEstado((532, 739),"eventoAltar3", self.altar4, 1, "eventoAltar3.xml", None)
         self.eventoAltar4 = EventoCambioEstado((203, 459),"eventoAltar4", self.altar5, 1, "eventoAltar4.xml", None)
-        self.eventoAltar5 = EventoFinal((623, 459), "FinalJuego", self)
+        self.eventoAltar5 = EventoDesaparicion((623, 459),"eventoAltar5", "eventoAltar5.xml", self.charlesD, self.grupoEnemigos, self.level.mask)
+        self.eventoCharlesAp = EventoAparicion((623, 459),"CharlesAp", "CharlesAp.xml", self.charles, self.grupoObj,self.level.mask, False)
+        self.finBueno = EventoFinal((623, 459), "FinalJuego", self)
+        
         self.eventos.append(self.eventoAltar1)
         self.eventos.append(self.eventoAltar2)
         self.eventos.append(self.eventoAltar3)
         self.eventos.append(self.eventoAltar4)
         self.eventos.append(self.eventoAltar5)
+        self.eventos.append(self.eventoCharlesAp)
+        self.eventos.append(self.finBueno)
+        
+        
                 
     # Se actualiza el decorado, realizando las siguientes acciones:
     #  Se actualizan los jugadores con los movimientos a realizar
@@ -99,15 +107,17 @@ class FinalScene(EscenaPygame):
         else:   
             self.level.update(self.keys)
             dir, cant = self.charlesD.mover_malox(self.player)
-            self.charlesD.update(self.level.mask, dir,cant)
+            if cant != 0:
+                self.charlesD.update(self.level.mask, dir,cant)
             dir, cant = self.charlesD.mover_maloy(self.player)
-            self.charlesD.update(self.level.mask, dir,cant)
+            if cant != 0:
+                self.charlesD.update(self.level.mask, dir,cant)
 #             print self.player.rect
 #             print "npc"
-            print self.charlesD.rect
+#             print self.charlesD.rect
             if pygame.sprite.spritecollideany(self.player, self.grupoEnemigos) != None and not self.muerto:
 #                 self.director.salirEscena()
-                print "muerto"
+#                 print "muerto"
                 self.muerto=True
                 self.accion = True
                 self.cambiarDia = False
@@ -118,7 +128,8 @@ class FinalScene(EscenaPygame):
     def dibujar(self):
         s = self.level.draw(self.screen)
         self.grupoObj.draw(s)
-        s.blit(self.charlesD.image, self.charlesD.posicion)
+        if self.charlesD in self.grupoEnemigos:
+            s.blit(self.charlesD.image, self.charlesD.posicion)
         self.grupoJugadores.draw(s)
         if self.accion:
            self.interact(self.tiempoDial, s)
@@ -253,7 +264,8 @@ class FinalScene(EscenaPygame):
         
     def finFase(self, final):
         print"fin"
-        self.director.cambiarEscena(None)
+        escenaSig = FinalScene(self.director, self.player)
+        self.director.cambiarEscena(escenaSig)
     
 class Level(object):
     """

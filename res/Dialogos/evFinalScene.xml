@@ -3,6 +3,9 @@
         <phrase content="Que es esto! Me parecio%ver a Charles pero ahora...">
 			<response content="Parece que tendre que esforzarme%para salir de aqui con vida." next="1"></response>
 		</phrase>
+        <phrase content="Despues de todo%consiguieron invocar al demonio.">
+			<response content="Estoy perdido.%Tengo que pensar algo" next="2"></response>
+		</phrase>
         <phrase content="Quiza esos altares tengan la solucion">
 			<result obj="None" move="None" event ="None" state ="0"></result>
 		</phrase>
