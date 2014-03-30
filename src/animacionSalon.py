@@ -8,13 +8,6 @@ from xml.dom import minidom
 
 VELOCIDAD_BADASS = 30 # Pixels por segundo
 
-
-
-
-# -------------------------------------------------
-# Clase para las animaciones que solo ocurriran una vez
-#  (sin bucles)
-
 class AnimacionSalon(EscenaPyglet, pyglet.window.Window):
     
     
@@ -46,7 +39,6 @@ class AnimacionSalon(EscenaPyglet, pyglet.window.Window):
 
         pyglet.font.add_file('../res/XFILES.TTF')
         xfiles = pyglet.font.load('X-Files')
-#         self.lluviaSon = pyglet.resource.media('rain.wav', streaming=False)
         self.rayoSon = pyglet.resource.media('thunderS.wav', streaming=False)
         self.puertaSon = pyglet.resource.media('door.wav', streaming=False)
         self.focoSon = pyglet.resource.media('foco.wav', streaming=False)
@@ -106,7 +98,7 @@ class AnimacionSalon(EscenaPyglet, pyglet.window.Window):
         self.cervero.set_position(3.5*ANCHO_PANTALLA/4,ALTO_PANTALLA/12)
         self.cervero.scale = 0.9
 
-        # La animacion del corredor: hay que leerlo de la hoja de Sprite
+        # La animacion del protagonista: hay que leerlo de la hoja de Sprite
 
         # Leemos la hoja del Sprite del fichero
         hoja = pyglet.image.load('../res/Sprites/badass.png')
@@ -144,9 +136,6 @@ class AnimacionSalon(EscenaPyglet, pyglet.window.Window):
         self.animacionIzda = pyglet.sprite.Sprite(pyglet.image.Animation(BadassIzdaFrames), batch=self.batch, group=self.grupoMedio)
         self.animacionIzda.set_position(2.5*ANCHO_PANTALLA/4,ALTO_PANTALLA/1.75)
         self.animacionIzda.scale = 1
-        # Se podria, igual que las anteriores, no haberla creado, sino haberlo hecho
-        #  cuando fuese necesario que apareciera, pero en este caso se crea aqui y se
-        #  pone como invisible hasta cuandos ea necesario que aparezca
         self.animacionIzda.visible = True
         # A partir de los frames, se crea la animacion
         self.animacionEspaldas = pyglet.sprite.Sprite(pyglet.image.Animation(espaldasFrames), batch=self.batch, group=self.grupoMedio)
@@ -182,13 +171,6 @@ class AnimacionSalon(EscenaPyglet, pyglet.window.Window):
         self.foco = pyglet.sprite.Sprite(foco, batch=self.batch, group=self.grupoDelante)
         self.foco.scale = 1
         self.foco.visible = False
-#         self.animacionFondoR = [
-#             pyglet.image.AnimationFrame(pyglet.resource.image('primerinteriorR.png'), 1),
-#             pyglet.image.AnimationFrame(pyglet.resource.image('primerinteriorO.png'), 1.5),
-#             pyglet.image.AnimationFrame(pyglet.resource.image('primerinteriorN.png'), 9.5) ]
-#         self.animacionFondoR = pyglet.sprite.Sprite(pyglet.image.Animation(self.animacionFondoR), batch=self.batch, group=self.grupoMedio)
-#         self.animacionFondoR.scale = float(ANCHO_PANTALLA) / 704
-#         self.animacionFondoR.visible = False
 
         self.animacionFondoR = [
             pyglet.image.AnimationFrame(pyglet.resource.image('primerinteriorR.png'), 0.5),
@@ -228,6 +210,7 @@ class AnimacionSalon(EscenaPyglet, pyglet.window.Window):
         self.animacionPuntos6 = pyglet.sprite.Sprite(pyglet.image.Animation(self.animacionPuntos), batch=self.batch, group=self.grupoMedio)
         self.animacionPuntos6.set_position(self.rateos.x, self.rateos.y + 60)
         self.animacionPuntos6.visible = False
+        
         portada = pyglet.resource.image('portada.png')
         self.portada = pyglet.sprite.Sprite(portada, batch=self.batch, group=self.grupoDelante)
         self.portada.set_position(0,0)
@@ -238,22 +221,6 @@ class AnimacionSalon(EscenaPyglet, pyglet.window.Window):
     def eliminarAnimacion(self, tiempo, animacion):
         animacion.delete()
         
-        
-        # Metodo que hace aparecer una animacion de humo en el cielo
-#     def aparecerRayo(self, tiempo):
-#         #=======================================================================
-#         animacionRayo = pyglet.sprite.Sprite(pyglet.image.Animation(self.animacionRayoFrames), batch=self.batch, group=self.grupoDetras)
-#         # La escalamos un factor aleatorio para dar sensacion de profundidad
-#         animacionRayo.scale = 1
-#         animacionRayo.rotation = 45
-#         # Decimos que aparezca en un sitio aleatorio del cielo
-#         animacionRayo.set_position(random.uniform(20, ANCHO_PANTALLA-20), random.uniform(20, ALTO_PANTALLA-20))
-# 
-#         self.rayoSon.play()
-#         # Programamos que se elimine la animacion cuando termine
-#         pyglet.clock.schedule_once(self.eliminarAnimacion, animacionRayo.image.get_duration(), animacionRayo)
-#         #=======================================================================
-    
     # El evento relativo a la pulsacion de una tecla
     def on_key_press(self, symbol, modifiers):
         # Si se pulsa Escape, se sale del programa
@@ -507,11 +474,6 @@ class AnimacionSalon(EscenaPyglet, pyglet.window.Window):
                                                             self.text.delete()
                                                             if self.tiempoTrans > 105 and self.tiempoTrans < 105.04:
                                                                 self.playerR = self.rayoSon.play()
-                            #                                 self.animacionFondoR = [
-                            #                                     pyglet.image.AnimationFrame(pyglet.resource.image('primerinteriorR.png'), 2),
-                            #                                     pyglet.image.AnimationFrame(pyglet.resource.image('primerinteriorN.png'), 29.5) ]
-                            #                                 self.animacionFondoR = pyglet.sprite.Sprite(pyglet.image.Animation(self.animacionFondoR), batch=self.batch, group=self.grupoDelante)
-                            #                                 self.animacionFondoR.scale = float(ANCHO_PANTALLA) / 704
                                                             self.animacionFondoF.visible = True
                                                         else: 
                                                             if self.tiempoTrans < 110.05 and self.tiempoTrans > 110: 
@@ -533,5 +495,4 @@ class AnimacionSalon(EscenaPyglet, pyglet.window.Window):
                                                                     elif self.tiempoTrans > 125: 
                                                                         self.salirEscena()
             self.tiempoTrans += tiempo
-#             print self.tiempoTrans
 

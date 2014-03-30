@@ -558,4 +558,9 @@
 			<result obj="None" move="None" event ="None" state ="5"></result>
 		</phrase>
 	</dialog>
+    <dialog id="7" obj="None">
+        <phrase content="No soy yo con quien%tienes que usar eso, Vincent">
+			<result obj="None" move="None" event ="None" state ="0"></result>
+		</phrase>
+    </dialog>
 </data>

@@ -107,16 +107,8 @@ class EscenaAnimacionFinalBueno(EscenaPyglet, pyglet.window.Window):
         pyglet.clock.schedule_interval(self.aparecerLluvia, 2.0)
         pyglet.clock.schedule_once(self.sonidoLluvia, 0)
         pyglet.clock.schedule_interval(self.sonidoLluvia, 6.0)
-        
 
-        # Registramos que aparezcan animaciones de humo por pantalla cada 0.8 segundos
-        #  para dar la impresion de un bombardeo
-        #=======================================================================
-        # pyglet.clock.schedule_interval(self.aparecerHumoCielo, 0.4)
-        #=======================================================================
-
-
-        # La animacion del corredor: hay que leerlo de la hoja de Sprite
+        # La animacion del protagonista: hay que leerlo de la hoja de Sprite
 
         # Leemos la hoja del Sprite del fichero
         hoja = pyglet.image.load('../res/Sprites/badassSprites.png')
@@ -147,15 +139,10 @@ class EscenaAnimacionFinalBueno(EscenaPyglet, pyglet.window.Window):
         badassFrames = []
         for coord in range(6):
             badassFrames.append(pyglet.image.AnimationFrame(hoja.get_region(int(datos[48 + coord*4]), hoja.height-int(datos[48 + coord*4 + 1])-int(datos[48 + coord*4 + 3]), int(datos[48 + coord*4 + 2]), int(datos[48 + coord*4 + 3])), 0.1))
-#         for coord in range(6):
-#             espaldasFrames.append(pyglet.image.AnimationFrame(hoja.get_region(int(datos[coord*4]), hoja.height-int(datos[coord*4 + 1])-int(datos[coord*4 + 3]), int(datos[coord*4 + 2]), int(datos[coord*4 + 3])), 0.1))
-        # A partir de los frames, se crea la animacion
+
         self.animacionBadass = pyglet.sprite.Sprite(pyglet.image.Animation(badassFrames), batch=self.batch, group=self.grupoDetras)
         self.animacionBadass.set_position((ANCHO_PANTALLA/2-22),400)
         self.animacionBadass.scale = 1
-        # Se podria, igual que las anteriores, no haberla creado, sino haberlo hecho
-        #  cuando fuese necesario que apareciera, pero en este caso se crea aqui y se
-        #  pone como invisible hasta cuandos ea necesario que aparezca
         self.animacionBadass.visible = True
         
         diabloBadass = pyglet.resource.image('ryukQ.png')
@@ -191,7 +178,7 @@ class EscenaAnimacionFinalBueno(EscenaPyglet, pyglet.window.Window):
         animacion.delete()
         
         
-        # Metodo que hace aparecer una animacion de humo en el cielo
+        # Metodo que hace aparecer una animacion de rayo en el cielo
     def aparecerRayo(self, tiempo):
         #=======================================================================
         animacionRayo = pyglet.sprite.Sprite(pyglet.image.Animation(self.animacionRayoFrames), batch=self.batch, group=self.grupoDetras)
@@ -208,7 +195,7 @@ class EscenaAnimacionFinalBueno(EscenaPyglet, pyglet.window.Window):
         #=======================================================================
         
 
-    # Metodo para hacer aparecer la animacion del fuego y del corredor
+    # Metodo para hacer aparecer la animacion de la lluvia
     def aparecerLluvia(self, tiempo):
         # Creamos la animacion del fuego
         #=======================================================================
@@ -352,7 +339,7 @@ class EscenaAnimacionFinalBueno(EscenaPyglet, pyglet.window.Window):
 
     # El evento que sera llamado periodicamente
     def update(self, tiempo):
-        # Y si la animacion del corredor es visible, la movemos hacia la izquierda
+        # Y si la animacion del potagonista es visible, la movemos hacia abajo
         if self.animacionBadass.visible:
             self.animacionBadass.y -= tiempo*VELOCIDAD_BADASS
             # Ademas, si llega al centro cambiamos la animación
@@ -379,9 +366,6 @@ class EscenaAnimacionFinalBueno(EscenaPyglet, pyglet.window.Window):
                 self.animacionBadass.visible = False
                 self.diabloBadass.visible = True
                 pyglet.clock.unschedule(self.moverMapa)
-            # Ademas, si llega al limite izquierdo terminamos esta escena
-#             if self.animacionCorredor.x<0:
-#                 self.director.salirEscena()
         elif self.diabloBadass.visible:
             if self.tiempoTrans < 5: 
                 self.text.delete()

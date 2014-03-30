@@ -111,9 +111,9 @@ class FaseInvestigacion(EscenaPygame):
         self.level.mask.draw(self.cervero.mask, (self.cervero.rect.center[0]-20, self.cervero.rect.center[1]-30))
         self.level.mask.draw(self.rateos.mask, (self.rateos.rect.center[0]-16, self.rateos.rect.center[1]-30))
         self.level.mask.draw(self.bolio.mask, (self.bolio.rect.center[0]-20, self.bolio.rect.center[1]-30))
-#         self.level.mask.draw(self.poliEstorbo1.mask, (self.poliEstorbo1.rect.center[0]-20, self.poliEstorbo1.rect.center[1]-30))
-#         self.level.mask.draw(self.poliEstorbo2.mask, (self.poliEstorbo2.rect.center[0]-20, self.poliEstorbo2.rect.center[1]-30))
-#         self.level.mask.draw(self.poliEstorbo3.mask, (self.poliEstorbo3.rect.center[0]-20, self.poliEstorbo3.rect.center[1]-30))
+        self.level.mask.draw(self.poliEstorbo1.mask, (self.poliEstorbo1.rect.center[0]-20, self.poliEstorbo1.rect.center[1]-30))
+        self.level.mask.draw(self.poliEstorbo2.mask, (self.poliEstorbo2.rect.center[0]-20, self.poliEstorbo2.rect.center[1]-30))
+        self.level.mask.draw(self.poliEstorbo3.mask, (self.poliEstorbo3.rect.center[0]-20, self.poliEstorbo3.rect.center[1]-30))
         self.level.mask.draw(self.fanuel.mask, (self.fanuel.rect.center[0]-35, self.fanuel.rect.center[1]-35))
         
         self.culpables = []

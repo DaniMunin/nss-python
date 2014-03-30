@@ -25,7 +25,6 @@ SPRITE_BAJANDO = 2
 
 # Velocidades de los distintos personajes
 VELOCIDAD_JUGADOR = 0.2 # Pixeles por milisegundo
-VELOCIDAD_SALTO_JUGADOR = 0.3 # Pixeles por milisegundo
 RETARDO_ANIMACION_JUGADOR = 1 / VELOCIDAD_JUGADOR
 
 
@@ -75,7 +74,7 @@ class Personaje(pygame.sprite.Sprite):
     #  Numero de imagenes en cada postura
     #  Velocidad de caminar y de salto
     #  Retardo para mostrar la animacion del personaje
-    def __init__(self, archivoImagen, archivoCoordenadas, numImagenes, velocidad, velocidadSalto, retardoAnimacion,location, escala):
+    def __init__(self, archivoImagen, archivoCoordenadas, numImagenes,location, escala):
         # Primero invocamos al constructor de la clase padre
         pygame.sprite.Sprite.__init__(self);
         # Se carga la hoja
@@ -119,12 +118,11 @@ class Personaje(pygame.sprite.Sprite):
         self.rect.left = 0
         self.rect.bottom = 0
 
-        # Las velocidades de caminar y salto
-        self.velocidad = velocidad
-        self.velocidadSalto = velocidadSalto
+        # Las velocidades de caminar
+        self.velocidad = VELOCIDAD_JUGADOR
 
         # El retardo en la animacion del personaje (podria y deberia ser distinto para cada postura)
-        self.retardoAnimacion = retardoAnimacion
+        self.retardoAnimacion = RETARDO_ANIMACION_JUGADOR
 
         # Y actualizamos la postura del Sprite inicial, llamando al metodo correspondiente
         self.actualizarPostura(0,0)
@@ -209,11 +207,11 @@ class Jugador(Personaje):
     "Cualquier personaje del juego"
     def __init__(self):
         # Invocamos al constructor de la clase padre con la configuracion de este personaje concreto
-        Personaje.__init__(self,'../res/Sprites/badassSprites.png','../res/BadassCoordJugador.txt', [6, 6, 6, 1], VELOCIDAD_JUGADOR, VELOCIDAD_SALTO_JUGADOR, RETARDO_ANIMACION_JUGADOR,(0,0),1);
+        Personaje.__init__(self,'../res/Sprites/badassSprites.png','../res/BadassCoordJugador.txt', [6, 6, 6, 1], (0,0), 1);
         self.mask = pygame.mask.from_surface(self.image)
         self.mask2 = pygame.mask.from_surface(load_image("../res/Sprites/badassmask.png"))
-#         self.speed = 7
-        self.speed = 14
+        self.speed = 7
+#         self.speed = 14
         self.objetos = ["Bastón", "Placa"]
 
     def mover(self, teclasPulsadas):
@@ -244,7 +242,7 @@ class NoJugador(Personaje):
     "Cualquier personaje del juego"
     def __init__(self, imagen, coordenadas, posicion, escala, xml, color):
         # Invocamos al constructor de la clase padre con la configuracion de este personaje concreto
-        Personaje.__init__(self,imagen,coordenadas, [6, 6, 6, 1], VELOCIDAD_JUGADOR, VELOCIDAD_SALTO_JUGADOR, RETARDO_ANIMACION_JUGADOR,(0,0), escala);
+        Personaje.__init__(self,imagen,coordenadas, [6, 6, 6, 1], (0,0), escala);
         self.color = color
         self.estado = 0
         #Tratamiento de dialogos XML
