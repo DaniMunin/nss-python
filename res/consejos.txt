@@ -1,1 +1,0 @@
-Para cargar sprite seguir modelo, en coordJugador los valores son por filas (6,12,6) de la hoja y cada uno marca punto arriba izda (x y) mas el tamaño del sprite (x y)
